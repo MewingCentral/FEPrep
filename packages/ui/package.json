@@ -1,7 +1,7 @@
 {
-  "name": "@acme/ui",
+  "name": "@feprep/ui",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.0",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -34,10 +34,10 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:^0.2.0",
-    "@acme/prettier-config": "workspace:^0.1.0",
-    "@acme/tailwind-config": "workspace:^0.1.0",
-    "@acme/tsconfig": "workspace:^0.1.0",
+    "@feprep/eslint-config": "workspace:*",
+    "@feprep/prettier-config": "workspace:*",
+    "@feprep/tailwind-config": "workspace:*",
+    "@feprep/tsconfig": "workspace:*",
     "@types/react": "^18.2.55",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
@@ -52,9 +52,9 @@
   },
   "eslintConfig": {
     "extends": [
-      "@acme/eslint-config/base",
-      "@acme/eslint-config/react"
+      "@feprep/eslint-config/base",
+      "@feprep/eslint-config/react"
     ]
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@feprep/prettier-config"
 }

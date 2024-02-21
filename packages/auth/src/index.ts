@@ -1,39 +1,27 @@
-import type { DefaultSession } from "next-auth";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import NextAuth from "next-auth";
-import Discord from "next-auth/providers/discord";
+import { Lucia } from "lucia";
 
-import { db, tableCreator } from "@acme/db";
+import type { SelectUser } from "@feprep/db";
+import { adapter } from "@feprep/db";
 
-export type { Session } from "next-auth";
+export const lucia = new Lucia(adapter, {
+  sessionCookie: {
+    attributes: {
+      secure: process.env.NODE_ENV === "production",
+    },
+  },
+  getUserAttributes: (attributes) => {
+    return {
+      username: attributes.username,
+    };
+  },
+});
 
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-    } & DefaultSession["user"];
+declare module "lucia" {
+  interface Register {
+    Lucia: typeof lucia;
+    DatabaseUserAttributes: Omit<SelectUser, "hashedPassword">;
   }
 }
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
-  adapter: DrizzleAdapter(db, tableCreator),
-  providers: [Discord],
-  callbacks: {
-    session: (opts) => {
-      if (!("user" in opts)) throw "unreachable with session strategy";
-
-      return {
-        ...opts.session,
-        user: {
-          ...opts.session.user,
-          id: opts.user.id,
-        },
-      };
-    },
-  },
-});
+export * from "lucia";
+export * from "./validate-request"; 

@@ -1,6 +1,6 @@
 {
-  "name": "@acme/api",
-  "version": "0.1.0",
+  "name": "@feprep/api",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -14,17 +14,21 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@acme/auth": "workspace:^0.1.0",
-    "@acme/db": "workspace:^0.1.0",
-    "@acme/validators": "workspace:^0.1.0",
+    "@cloudflare/workers-types": "^4.20240208.0",
+    "@feprep/auth": "workspace:*",
+    "@feprep/db": "workspace:*",
+    "@feprep/validators": "workspace:*",
+    "@hono/trpc-server": "^0.1.1",
     "@trpc/server": "11.0.0-next-beta.264",
+    "hono": "^4.0.5",
+    "next": "^14.1.0",
     "superjson": "2.2.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:^0.2.0",
-    "@acme/prettier-config": "workspace:^0.1.0",
-    "@acme/tsconfig": "workspace:^0.1.0",
+    "@feprep/eslint-config": "workspace:*",
+    "@feprep/prettier-config": "workspace:*",
+    "@feprep/tsconfig": "workspace:*",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
@@ -32,8 +36,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@acme/eslint-config/base"
+      "@feprep/eslint-config/base"
     ]
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@feprep/prettier-config"
 }
