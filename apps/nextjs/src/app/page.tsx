@@ -6,7 +6,6 @@ export const runtime = "edge";
 export default async function HomePage() {
   return (
     <main>
-      Hello, World!
       <HelloClient />
       <HelloServer />
     </main>
