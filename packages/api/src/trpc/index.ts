@@ -31,7 +31,7 @@ export async function createTRPCContext(opts: { headers: Headers }) {
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
   // TODO: log who is making the request
-  console.log(">>> tRPC Request from", source);
+  console.log(">>> tRPC Request from", source, "by", user?.username);
 
   return {
     db,
