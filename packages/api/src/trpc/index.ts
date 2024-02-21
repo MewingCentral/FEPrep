@@ -10,8 +10,8 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import { db } from "@feprep/db";
 import { uncachedValidateRequest } from "@feprep/auth";
+import { db } from "@feprep/db";
 
 /**
  * 1. CONTEXT
@@ -28,6 +28,11 @@ import { uncachedValidateRequest } from "@feprep/auth";
 
 export async function createTRPCContext(opts: { headers: Headers }) {
   const { session, user } = await uncachedValidateRequest();
+  const source = opts.headers.get("x-trpc-source") ?? "unknown";
+
+  // TODO: log who is making the request
+  console.log(">>> tRPC Request from", source);
+
   return {
     db,
     session,
