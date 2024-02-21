@@ -1,7 +1,7 @@
 {
-  "name": "@acme/validators",
+  "name": "@feprep/validators",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.0",
   "type": "module",
   "exports": {
     ".": "./src/index.ts"
@@ -17,17 +17,17 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:^0.2.0",
-    "@acme/prettier-config": "workspace:^0.1.0",
-    "@acme/tsconfig": "workspace:^0.1.0",
+    "@feprep/eslint-config": "workspace:*",
+    "@feprep/prettier-config": "workspace:*",
+    "@feprep/tsconfig": "workspace:*",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   },
   "eslintConfig": {
     "extends": [
-      "@acme/eslint-config/base"
+      "@feprep/eslint-config/base"
     ]
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@feprep/prettier-config"
 }

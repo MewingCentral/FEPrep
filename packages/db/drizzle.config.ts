@@ -1,20 +1,15 @@
 import type { Config } from "drizzle-kit";
 
-const uri = [
-  "mysql://",
-  process.env.DB_USERNAME,
-  ":",
-  process.env.DB_PASSWORD,
-  "@",
-  process.env.DB_HOST,
-  ":3306/",
-  process.env.DB_NAME,
-  '?ssl={"rejectUnauthorized":true}',
-].join("");
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not set");
+}
 
 export default {
   schema: "./src/schema",
-  driver: "mysql2",
-  dbCredentials: { uri },
+  driver: "turso",
+  dbCredentials: {
+    url: process.env.DATABASE_URL,
+    authToken: process.env.DATABASE_AUTH_TOKEN,
+  },
   tablesFilter: ["t3turbo_*"],
 } satisfies Config;

@@ -1,19 +1,27 @@
-import { connect } from "@planetscale/database";
-import { drizzle } from "drizzle-orm/planetscale-serverless";
+import { createClient } from "@libsql/client";
+import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
+import { drizzle } from "drizzle-orm/libsql";
 
-import * as auth from "./schema/auth";
-import * as post from "./schema/post";
+import * as users from "./schema/users";
 
-export const schema = { ...auth, ...post };
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not set");
+}
 
-export { mySqlTable as tableCreator } from "./schema/_table";
+const schema = { ...users };
 
-export * from "drizzle-orm";
-
-const connection = connect({
-  host: process.env.DB_HOST!,
-  username: process.env.DB_USERNAME!,
-  password: process.env.DB_PASSWORD!,
+const client = createClient({
+  url: process.env.DATABASE_URL,
+  authToken: process.env.DATABASE_AUTH_TOKEN,
 });
 
-export const db = drizzle(connection, { schema });
+export const db = drizzle(client, { schema });
+
+export const adapter = new DrizzleSQLiteAdapter(
+  db,
+  users.sessionTable,
+  users.userTable,
+);
+
+export * from "drizzle-orm";
+export * from "./schema/users";
