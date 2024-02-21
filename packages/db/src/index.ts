@@ -19,8 +19,8 @@ export const db = drizzle(client, { schema });
 
 export const adapter = new DrizzleSQLiteAdapter(
   db,
-  users.sessionTable,
-  users.userTable,
+  users.sessions,
+  users.users,
 );
 
 export * from "drizzle-orm";
