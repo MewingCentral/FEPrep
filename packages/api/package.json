@@ -18,7 +18,6 @@
     "@feprep/auth": "workspace:*",
     "@feprep/db": "workspace:*",
     "@feprep/validators": "workspace:*",
-    "@hono/trpc-server": "^0.1.1",
     "@trpc/server": "11.0.0-next-beta.264",
     "hono": "^4.0.5",
     "next": "^14.1.0",

@@ -241,9 +241,6 @@ importers:
       '@feprep/validators':
         specifier: workspace:*
         version: link:../validators
-      '@hono/trpc-server':
-        specifier: ^0.1.1
-        version: 0.1.1(@trpc/server@11.0.0-next-beta.264)(hono@4.0.5)
       '@trpc/server':
         specifier: 11.0.0-next-beta.264
         version: 11.0.0-next-beta.264
@@ -2967,17 +2964,6 @@ packages:
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
     dependencies:
       '@hapi/hoek': 9.3.0
-    dev: false
-
-  /@hono/trpc-server@0.1.1(@trpc/server@11.0.0-next-beta.264)(hono@4.0.5):
-    resolution: {integrity: sha512-JHfd5s2MKIu+ZT/gTi7ITZtGPhWbGogCxf0FcgQt+6ENnfameKZNXU1BCMJXzDWm5+AzyCvRMXAjYE+JgAktlw==}
-    engines: {node: '>=16.0.0'}
-    peerDependencies:
-      '@trpc/server': ^10.10.0
-      hono: '>=3.*'
-    dependencies:
-      '@trpc/server': 11.0.0-next-beta.264
-      hono: 4.0.5
     dev: false
 
   /@hookform/resolvers@3.3.4(react-hook-form@7.50.1):
