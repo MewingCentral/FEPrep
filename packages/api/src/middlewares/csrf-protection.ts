@@ -1,10 +1,8 @@
-import type { Next } from "hono";
+import type { Context, Next } from "hono";
 
 import { verifyRequestOrigin } from "@feprep/auth";
 
-import type { HonoContext } from "../config";
-
-export async function csrfProtection(c: HonoContext, next: Next) {
+export async function csrfProtection(c: Context, next: Next) {
   // CSRF middleware
   if (c.req.method === "GET") {
     return next();

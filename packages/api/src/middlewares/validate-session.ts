@@ -1,11 +1,9 @@
-import type { Next } from "hono";
+import type { Context, Next } from "hono";
 import { getCookie } from "hono/cookie";
 
 import { lucia } from "@feprep/auth";
 
-import type { HonoContext } from "../config";
-
-export async function validateSession(c: HonoContext, next: Next) {
+export async function validateSession(c: Context, next: Next) {
   const sessionId = getCookie(c, lucia.sessionCookieName) ?? null;
   if (!sessionId) {
     c.set("user", null);
