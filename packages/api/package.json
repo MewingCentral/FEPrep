@@ -18,11 +18,11 @@
     "@feprep/auth": "workspace:*",
     "@feprep/db": "workspace:*",
     "@feprep/validators": "workspace:*",
+    "@hono/zod-validator": "^0.1.11",
     "@trpc/server": "11.0.0-next-beta.264",
     "hono": "^4.0.5",
     "next": "^14.1.0",
-    "superjson": "2.2.1",
-    "zod": "^3.22.4"
+    "superjson": "2.2.1"
   },
   "devDependencies": {
     "@feprep/eslint-config": "workspace:*",
