@@ -2,7 +2,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("user", {
   id: text("id").notNull().primaryKey(),
-  username: text("username").notNull().unique(),
+  email: text("email").notNull().unique(),
   hashedPassword: text("hashed_password").notNull(),
 });
 
