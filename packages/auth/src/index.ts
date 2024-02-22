@@ -11,7 +11,7 @@ export const lucia = new Lucia(adapter, {
   },
   getUserAttributes: (attributes) => {
     return {
-      username: attributes.username,
+      email: attributes.email,
     };
   },
 });
@@ -24,4 +24,4 @@ declare module "lucia" {
 }
 
 export * from "lucia";
-export * from "./validate-request"; 
+export * from "./validate-request";
