@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "turso dev --db-file db.sqlite -p 3002",
+    "dev": "turso dev --db-file db.sqlite -p 3001",
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
@@ -20,8 +20,7 @@
   "dependencies": {
     "@libsql/client": "^0.5.1",
     "@lucia-auth/adapter-drizzle": "^1.0.2",
-    "drizzle-orm": "^0.29.3",
-    "turso": "^0.1.0"
+    "drizzle-orm": "^0.29.3"
   },
   "devDependencies": {
     "@feprep/eslint-config": "workspace:*",
