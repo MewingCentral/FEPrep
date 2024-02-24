@@ -50,8 +50,6 @@ tooling
 
 ## Quick Start
 
-To get started, follow the steps below:
-
 ### 1. Set up dependencies
 
 ```bash
@@ -74,18 +72,12 @@ pnpm db:push
 
 ### 3. Run a workspace
 
-You can use the `pnpm dev --filter=<WORKSPACE>` or `pnpm dev -F <WORKSPACE>` to run a particular workspace.
-
-#### Examples
-
-To run the `nextjs` workspace:
+You can use the `pnpm dev --filter=<WORKSPACE>` or `pnpm dev -F <WORKSPACE>` to run a workspace.
 
 ```bash
+# Run the next.js app
 pnpm dev -F nextjs
-```
 
-To run the `expo` workspace:
-
-```bash
+# Run the expo app
 pnpm dev -F expo
 ```
