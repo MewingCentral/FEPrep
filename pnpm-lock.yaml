@@ -330,9 +330,6 @@ importers:
       drizzle-orm:
         specifier: ^0.29.3
         version: 0.29.3(@libsql/client@0.5.1)
-      turso:
-        specifier: ^0.1.0
-        version: 0.1.0
     devDependencies:
       '@feprep/eslint-config':
         specifier: workspace:*
@@ -12344,10 +12341,6 @@ packages:
       turbo-windows-64: 1.12.3
       turbo-windows-arm64: 1.12.3
     dev: true
-
-  /turso@0.1.0:
-    resolution: {integrity: sha512-gM6zaKIQA35QoujeknL1oNFjgduei9sgVRrKc9XRSG1P+VAUAQzfKJGlLQqcnsHFh+a1kqRV16gI/mCvyEJS1Q==}
-    dev: false
 
   /type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
