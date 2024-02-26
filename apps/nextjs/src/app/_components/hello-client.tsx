@@ -13,5 +13,5 @@ export function HelloClient() {
     return <div>Error</div>;
   }
 
-  return <div>{data}</div>;
+  return <div className="text-red-800">{data}</div>;
 }

@@ -16,7 +16,7 @@ export const questions = sqliteTable("question", {
 
 export const resources = sqliteTable("resource", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  questionId: integer("id")
+  questionId: integer("question_id")
     .notNull()
     .references(() => questions.id),
   link: text("link").notNull(),
@@ -24,7 +24,7 @@ export const resources = sqliteTable("resource", {
 
 export const comments = sqliteTable("comment", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  questionId: integer("id")
+  questionId: integer("question_id")
     .notNull()
     .references(() => questions.id),
   userId: text("user_id")
@@ -43,7 +43,7 @@ export const flashcardPacks = sqliteTable("flashcard_pack", {
 
 export const flashcards = sqliteTable("flashcard", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  packId: text("id")
+  packId: text("flashcard_pack_id")
     .notNull()
     .references(() => flashcardPacks.id),
   front: text("front"),
