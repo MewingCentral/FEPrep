@@ -10,13 +10,22 @@ export const signUp = new Hono().post(
   zValidator("json", SignUpSchema),
   async (c) => {
     const { email, password } = c.req.valid("json");
+
+    // Check if user already exists
+    const existingUser = await db.query.users.findFirst({
+      where: (table, { eq }) => eq(table.email, email),
+    });
+
+    if (existingUser) {
+      return c.json({ error: "Email already in use" }, 400);
+    }
+
     const hashedPassword = await new Scrypt().hash(password);
     const userId = generateId(15);
 
-    // TODO: check if email is already taken
     await db.insert(users).values({
-      email: email,
       id: userId,
+      email: email,
       hashedPassword: hashedPassword,
     });
 
@@ -25,6 +34,6 @@ export const signUp = new Hono().post(
       append: true,
     });
 
-    return c.json({ success: true });
+    return c.json({ session: session.id, userId: userId });
   },
 );
