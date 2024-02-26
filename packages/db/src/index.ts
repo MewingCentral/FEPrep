@@ -23,5 +23,4 @@ export const adapter = new DrizzleSQLiteAdapter(
   users.users,
 );
 
-export * from "drizzle-orm";
 export * from "./schema/users";
