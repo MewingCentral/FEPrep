@@ -14,6 +14,9 @@
     "lint": "eslint .",
     "push": "pnpm with-env drizzle-kit push:sqlite",
     "studio": "pnpm with-env drizzle-kit studio",
+    "generate": "pnpm with-env drizzle-kit generate:sqlite",
+    "migrate": "pnpm with-env npx tsx src/migrate.ts",
+    "drop": "pnpm with-env drizzle-kit drop",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --"
   },
