@@ -25,3 +25,4 @@ export const adapter = new DrizzleSQLiteAdapter(
 );
 
 export * from "./schema/users";
+export * from "./schema/questions";
