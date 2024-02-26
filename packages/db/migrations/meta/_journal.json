@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1708925207247,
+      "tag": "0000_sparkling_white_queen",
+      "breakpoints": true
+    }
+  ]
+}

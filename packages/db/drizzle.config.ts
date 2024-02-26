@@ -5,6 +5,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 export default {
+  out: "./migrations",
   schema: ["./src/schema/questions.ts", "./src/schema/users.ts"],
   driver: "turso",
   dbCredentials: {
