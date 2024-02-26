@@ -5,11 +5,10 @@ if (!process.env.DATABASE_URL) {
 }
 
 export default {
-  schema: "./src/schema",
+  schema: ["./src/schema/questions.ts", "./src/schema/users.ts"],
   driver: "turso",
   dbCredentials: {
     url: process.env.DATABASE_URL,
     authToken: process.env.DATABASE_AUTH_TOKEN,
   },
-  tablesFilter: ["t3turbo_*"],
 } satisfies Config;
