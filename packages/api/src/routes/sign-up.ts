@@ -29,6 +29,13 @@ export const signUp = new Hono().post(
       hashedPassword: hashedPassword,
     });
 
+    // const verificationCode = await generateEmailVerificationCode(userId, email);
+    // await sendMail({
+    //   to: email,
+    //   subject: "Verify your account",
+    //   body: renderVerificationCodeEmail({ code: verificationCode }),
+    // });
+
     const session = await lucia.createSession(userId, {});
     c.header("Set-Cookie", lucia.createSessionCookie(session.id).serialize(), {
       append: true,
