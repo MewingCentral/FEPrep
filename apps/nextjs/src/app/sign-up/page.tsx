@@ -2,6 +2,8 @@
 
 import type { z } from "zod";
 
+import Link from "next/link";
+
 import { Button } from "@feprep/ui/button";
 import {
   Form,
@@ -41,16 +43,16 @@ export default function Page() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full max-w-[300px] space-y-8"
+          className="w-full max-w-[300px] gap-2 flex flex-col"
         >
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>NID</FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" autoComplete="email" {...field} />
+                  <Input placeholder="jd123456" autoComplete="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -74,9 +76,18 @@ export default function Page() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button className="mt-2" type="submit">
+            Submit
+          </Button>
         </form>
       </Form>
+      <p className="font-regular mt-4 text-center text-sm">
+        Already have an account?
+        <Link href="/sign-in" className="font-semibold">
+          {" "}
+          Login
+        </Link>
+      </p>
     </div>
   );
 }

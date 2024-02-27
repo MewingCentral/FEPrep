@@ -1,34 +1,86 @@
 "use client";
 
+import type { z } from "zod";
+
 import Link from "next/link";
 
 import { Button } from "@feprep/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  useForm,
+} from "@feprep/ui/form";
 import { Input } from "@feprep/ui/input";
-import { Label } from "@feprep/ui/label";
+import { SignUpSchema } from "@feprep/validators";
 
 export default function Page() {
+  const form = useForm({
+    schema: SignUpSchema,
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof SignUpSchema>) => {
+    await fetch("/api/sign-up", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(values),
+    });
+  };
+
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
-      <h1 className="mb-4 text-center text-xl font-semibold">Sign in</h1>
-      <form className="grid w-full max-w-[300px] gap-1.5">
-        <Label htmlFor="email">NID</Label>
-        <Input
-          id="email"
-          name="Email"
-          placeholder="jd123456"
-          autoComplete="email"
-          type="email"
-        />
-        <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          autoComplete="current-password"
-        />
-        <Button variant="primary">Sign In</Button>
-      </form>
+      <h1 className="mb-4 text-center text-xl font-semibold">Sign In</h1>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full max-w-[300px] gap-2 flex flex-col"
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>NID</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email" autoComplete="email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Password"
+                    type="password"
+                    autoComplete="current-password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />  
+          <Button className="mt-2" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
       <p className="font-regular mt-4 text-center text-sm">
         Don&apos;t have an account?
         <Link href="/sign-up" className="font-semibold">
