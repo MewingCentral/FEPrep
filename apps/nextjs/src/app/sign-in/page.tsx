@@ -3,17 +3,18 @@
 import { Button } from "@feprep/ui/button";
 import { Input } from "@feprep/ui/input";
 import { Label } from "@feprep/ui/label";
+import Link from "next/link";
 
 export default function Page() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
       <h1 className="mb-4 text-center text-xl font-semibold">Sign in</h1>
       <form className="grid w-full max-w-[300px] gap-1.5">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">NID</Label>
         <Input
           id="email"
-          name="email"
-          placeholder="Email"
+          name="Email"
+          placeholder="jd123456"
           autoComplete="email"
           type="email"
         />
@@ -27,6 +28,9 @@ export default function Page() {
         />
         <Button variant="primary">Sign In</Button>
       </form>
+      <p className="mt-4 text-center text-sm font-regular">Don&apos;t have an account?  
+        <Link href="/sign-up" className="font-semibold"> Register</Link>
+      </p>
     </div>
   );
 }
