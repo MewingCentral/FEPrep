@@ -19,8 +19,8 @@ export const sessions = sqliteTable("session", {
   expiresAt: integer("expires_at").notNull(),
 });
 
-export const emailVerificationTokens = sqliteTable("email_verification_token", {
-  id: text("id").notNull().primaryKey(),
+export const emailVerificationCodes = sqliteTable("email_verification_token", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
