@@ -1,7 +1,6 @@
 "use client";
 
 import type { z } from "zod";
-
 import Link from "next/link";
 
 import { Button } from "@feprep/ui/button";
@@ -43,7 +42,7 @@ export default function Page() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full max-w-[300px] gap-2 flex flex-col"
+          className="flex w-full max-w-[300px] flex-col gap-2"
         >
           <FormField
             control={form.control}
@@ -75,7 +74,7 @@ export default function Page() {
                 <FormMessage />
               </FormItem>
             )}
-          />  
+          />
           <Button className="mt-2" type="submit">
             Submit
           </Button>
