@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
+
 import { Button } from "@feprep/ui/button";
 import { Input } from "@feprep/ui/input";
 import { Label } from "@feprep/ui/label";
-import Link from "next/link";
 
 export default function Page() {
   return (
@@ -28,8 +29,12 @@ export default function Page() {
         />
         <Button variant="primary">Sign In</Button>
       </form>
-      <p className="mt-4 text-center text-sm font-regular">Don&apos;t have an account?  
-        <Link href="/sign-up" className="font-semibold"> Register</Link>
+      <p className="font-regular mt-4 text-center text-sm">
+        Don&apos;t have an account?
+        <Link href="/sign-up" className="font-semibold">
+          {" "}
+          Register
+        </Link>
       </p>
     </div>
   );
