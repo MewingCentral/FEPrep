@@ -92,9 +92,7 @@ export default function Page() {
             </form>
           </Form>
         </CardContent>
-        <CardFooter className="px-6 py-1">
-          {}
-        </CardFooter>
+        <CardFooter className="px-6 py-1">{}</CardFooter>
       </Card>
       <p className="font-regular mt-2 text-center text-sm">
         Already have an account?
