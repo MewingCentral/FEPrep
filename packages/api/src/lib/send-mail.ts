@@ -1,27 +1,20 @@
-import { createTransport } from "nodemailer";
+import { Resend } from "resend";
 
-const transporter = createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  auth: {
-    user: "",
-    pass: "",
-  },
-});
+export const resend = new Resend(process.env.RESEND_API_KEY);
 
-export interface MessageInfo {
+export const sendEmail = async ({
+  to,
+  subject,
+  react,
+}: {
   to: string;
   subject: string;
-  body: string;
-}
-
-export const sendMail = async (message: MessageInfo) => {
-  const { to, subject, body } = message;
-  const mailOptions = {
-    from: "FE Prep",
+  react: string;
+}) => {
+  return resend.emails.send({
+    from: "calebrossr@gmail.com",
     to,
     subject,
-    html: body,
-  };
-  return transporter.sendMail(mailOptions);
+    react,
+  });
 };
