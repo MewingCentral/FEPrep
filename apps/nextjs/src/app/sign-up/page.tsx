@@ -3,7 +3,14 @@
 import type { z } from "zod";
 import Link from "next/link";
 
+import { cn } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@feprep/ui/card";
 import {
   Form,
   FormControl,
@@ -39,55 +46,64 @@ export default function Page() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
       <h1 className="mb-4 text-center text-xl font-semibold">Sign Up</h1>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full max-w-[300px] flex-col gap-2"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>NID</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="jd123456"
-                    autoComplete="email"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button className="mt-2" type="submit">
-            Submit
-          </Button>
-        </form>
-      </Form>
-      <p className="font-regular mt-4 text-center text-sm">
+      <Card>
+        <CardHeader className={cn("w-full max-w-lg md:max-w-xl", "px-6 py-1")}>
+          {/* Optionally, add header content here or leave it empty */}
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="flex w-full flex-col gap-2"
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="jd123456"
+                        autoComplete="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button className="mt-2" type="submit">
+                Submit
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter className="px-6 py-1">
+          {/* Optionally, add footer content here or leave it empty */}
+        </CardFooter>
+      </Card>
+      <p className="font-regular mt-2 text-center text-sm">
         Already have an account?
         <Link href="/sign-in" className="font-semibold">
-          {" "}
           Login
         </Link>
       </p>
