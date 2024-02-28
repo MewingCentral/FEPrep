@@ -10,8 +10,6 @@ export const signIn = new Hono().post(
   zValidator("json", SignInSchema),
   async (c) => {
     const { email, password } = c.req.valid("json");
-    console.log("email", email);
-    console.log("password", password);
 
     // Check if user exists
     const user = await db.query.users.findFirst({
