@@ -11,7 +11,15 @@ export const SignInSchema = z.object({
   password: z.string(),
 });
 
-export const PasswordResetSchema = z.object({
+export const ResetPasswordSchema = z.object({
   token: z.string(),
   password: z.string(),
+});
+
+export const ForgotPasswordSchema = z.object({
+  email: z.string().email("Invalid email address"),
+});
+
+export const VerifyEmailSchema = z.object({
+  code: z.string(),
 });
