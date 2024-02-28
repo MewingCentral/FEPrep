@@ -41,9 +41,7 @@ export default function EmailVerification({ code }: Props) {
   );
 }
 
-export const renderEmailVerification = (code: string) => {
-  return render(<EmailVerification code={code} />);
-};
+
 
 const main = {
   backgroundColor: "#f6f9fc",
