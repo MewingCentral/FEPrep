@@ -40,8 +40,7 @@ export default function Page() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Left Column for Logo */}
-      <div className="flex flex-1 items-center justify-center bg-gray-100">
+      <div className="flex flex-1 items-center justify-center bg-foreground">
         <img
           src="/path/to/logo.png"
           alt="Logo"
@@ -49,7 +48,6 @@ export default function Page() {
         />
       </div>
 
-      {/* Right Column for Form/Card */}
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full max-w-lg">
           <h1 className="mb-4 text-center text-xl font-semibold">Sign In</h1>
