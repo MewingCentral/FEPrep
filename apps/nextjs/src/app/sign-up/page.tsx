@@ -56,7 +56,7 @@ export default function Page() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>NID</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="jd123456"

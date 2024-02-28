@@ -59,7 +59,7 @@ export default function Page() {
                     <FormLabel>NID</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Email"
+                        placeholder="jd123456"
                         autoComplete="email"
                         {...field}
                       />
