@@ -1,7 +1,5 @@
-import React from "react";
 import {
   Body,
-  Button,
   Container,
   Head,
   Html,
@@ -12,34 +10,28 @@ import {
 import { render } from "@react-email/render";
 
 interface Props {
-  link: string;
+  code: string;
 }
 
-export const ResetPasswordEmail = ({ link }: Props) => {
+export const VerificationCodeEmail = ({ code }: Props) => {
   return (
     <Html>
       <Head />
-      <Preview>Reset your password</Preview>
+      <Preview>
+        Verify your email address to complete your FE Prep registration
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           <Section>
             <Text style={title}>FE Prep</Text>
             <Text style={text}>Hi,</Text>
             <Text style={text}>
-              Someone recently requested a password change for your FE Prep{" "}
-              account. If this was you, you can set a new password here:
+              Thank you for registering for an account on FE Prep. To complete
+              your registration, please verify your your account by using the
+              following code:
             </Text>
-            <Button style={button} href={link}>
-              Reset password
-            </Button>
-            <Text style={text}>
-              If you don&apos;t want to change your password or didn&apos;t
-              request this, just ignore and delete this message.
-            </Text>
-            <Text style={text}>
-              To keep your account secure, please don&apos;t forward this email
-              to anyone.
-            </Text>
+            <Text style={codePlaceholder}>{code}</Text>
+
             <Text style={text}>Have a nice day!</Text>
           </Section>
         </Container>
@@ -48,8 +40,8 @@ export const ResetPasswordEmail = ({ link }: Props) => {
   );
 };
 
-export const renderResetPasswordEmail = ({ link }: Props) =>
-  render(<ResetPasswordEmail link={link} />);
+export const renderVerificationCodeEmail = ({ code }: Props) =>
+  render(<VerificationCodeEmail code={code} />);
 
 const main = {
   backgroundColor: "#f6f9fc",
@@ -78,10 +70,11 @@ const title = {
   lineHeight: "32px",
 };
 
-const button = {
-  backgroundColor: "#09090b",
+const codePlaceholder = {
+  backgroundColor: "#fbfbfb",
+  border: "1px solid #f0f0f0",
   borderRadius: "4px",
-  color: "#fafafa",
+  color: "#1c1c1c",
   fontFamily: "'Open Sans', 'Helvetica Neue', Arial",
   fontSize: "15px",
   textDecoration: "none",
