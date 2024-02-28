@@ -43,7 +43,7 @@ export default function Page() {
       <h1 className="mb-4 text-center text-xl font-semibold">Sign Up</h1>
       <Card>
         <CardHeader className={cn("w-full max-w-lg md:max-w-xl", "px-6 py-1")}>
-          {/* Optionally, add header content here or leave it empty */}
+          {}
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -93,12 +93,13 @@ export default function Page() {
           </Form>
         </CardContent>
         <CardFooter className="px-6 py-1">
-          {/* Optionally, add footer content here or leave it empty */}
+          {}
         </CardFooter>
       </Card>
       <p className="font-regular mt-2 text-center text-sm">
         Already have an account?
         <Link href="/sign-in" className="font-semibold">
+          {" "}
           Login
         </Link>
       </p>
