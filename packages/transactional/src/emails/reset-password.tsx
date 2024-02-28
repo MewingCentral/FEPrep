@@ -48,9 +48,7 @@ export default function ResetPassword({ link }: Props) {
   );
 }
 
-export const renderResetPassword = (link: string) => {
-  return render(<ResetPassword link={link} />);
-};
+
 
 const main = {
   backgroundColor: "#f6f9fc",
