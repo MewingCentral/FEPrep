@@ -40,17 +40,23 @@ export default function Page() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Left Column for Logo */}
-      <div className="flex flex-1 items-center justify-center bg-gray-100">
-        <img src="/path/to/logo.png" alt="Logo" className="items-center justify-center" />
+      <div className="flex flex-1 items-center justify-center bg-foreground">
+        <img
+          src="/path/to/logo.png"
+          alt="Logo"
+          className="items-center justify-center"
+        />
       </div>
 
-      {/* Right Column for Form/Card */}
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full max-w-lg">
           <h1 className="mb-4 text-center text-xl font-semibold">Sign Up</h1>
           <Card>
-            <CardHeader className={cn("w-full max-w-lg md:max-w-xl", "px-6 py-1")}>{}</CardHeader>
+            <CardHeader
+              className={cn("w-full max-w-lg md:max-w-xl", "px-6 py-1")}
+            >
+              {}
+            </CardHeader>
             <CardContent>
               <Form {...form}>
                 <form
@@ -102,7 +108,7 @@ export default function Page() {
           </Card>
           <p className="font-regular mt-8 text-center text-sm">
             Already have an account?
-            <Link href="/sign-up" className="font-semibold">
+            <Link href="/sign-in" className="font-semibold">
               {" "}
               Login
             </Link>
