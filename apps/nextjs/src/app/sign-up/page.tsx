@@ -106,7 +106,7 @@ export default function Page() {
             </CardContent>
             <CardFooter className="px-6 py-1">{}</CardFooter>
           </Card>
-          <p className="font-regular mt-8 text-center text-sm">
+          <p className="font-regular mt-4 text-center text-sm">
             Already have an account?
             <Link href="/sign-in" className="font-semibold">
               {" "}
