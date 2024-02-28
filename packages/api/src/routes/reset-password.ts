@@ -1,14 +1,13 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import { createDate, TimeSpan } from "oslo";
 
-import { generateId, lucia, Scrypt } from "@feprep/auth";
+import { lucia, Scrypt } from "@feprep/auth";
 import { db, eq, passwordResetTokens, users } from "@feprep/db";
-import { PasswordResetSchema } from "@feprep/validators";
+import { ResetPasswordSchema } from "@feprep/validators";
 
 export const resetPassword = new Hono().post(
   "/",
-  zValidator("json", PasswordResetSchema),
+  zValidator("json", ResetPasswordSchema),
   async (c) => {
     const { token, password } = c.req.valid("json");
 
@@ -50,18 +49,3 @@ export const resetPassword = new Hono().post(
     return c.json({ session: session.id, userId: passwordResetToken.userId });
   },
 );
-
-export async function generatePasswordResetToken(
-  userId: string,
-): Promise<string> {
-  await db
-    .delete(passwordResetTokens)
-    .where(eq(passwordResetTokens.userId, userId));
-  const tokenId = generateId(40);
-  await db.insert(passwordResetTokens).values({
-    id: tokenId,
-    userId,
-    expiresAt: createDate(new TimeSpan(2, "h")).getSeconds(),
-  });
-  return tokenId;
-}
