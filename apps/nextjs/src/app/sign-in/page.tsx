@@ -5,12 +5,7 @@ import Link from "next/link";
 
 import { cn } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@feprep/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@feprep/ui/card";
 import {
   Form,
   FormControl,
