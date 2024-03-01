@@ -1,48 +1,24 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, Stack } from "expo-router";
 
 export default function HomePage() {
   return (
-    <SafeAreaView style={[styles.container, styles.screenContainer]}>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      {/* Title and subtitle */}
-      <View style={[styles.container, styles.contentContainer]}>
-        <View style={[styles.container, styles.titleContainer]}>
-          <Text style={[styles.text, styles.title]}>FEPrep</Text>
-          <Text style={[styles.text, styles.subtitle]}>
-            A new way to prepare for the Foundation Exam.
-          </Text>
-        </View>
-
-        {/* Buttons */}
-        <View style={[styles.container, styles.buttonsContainer]}>
-          <Link
-            style={[styles.buttons, styles.signUpBtn]}
-            href="/screens/Register"
-            asChild
-          >
-            <Pressable>
-              <Text style={[styles.text, styles.buttonTxt]}>Register</Text>
-            </Pressable>
-          </Link>
-          <Text style={[styles.text]}>or</Text>
-          <Link
-            style={[styles.buttons, styles.dashboardBtn]}
-            href="/dashboard/(tabs)/studySets"
-            asChild
-          >
-            <Pressable>
-              <Text style={[styles.text, styles.buttonTxt]}>
-                Start Practicing
-              </Text>
-            </Pressable>
-          </Link>
+    <SafeAreaView className="bg-background">
+      <View>
+        <Text className="text-center text-4xl font-bold text-primary">
+          FEPrep
+        </Text>
+        <Text className="text-center text-2xl font-bold text-primary">
+          A new way to prepare for the Foundation Exam.
+        </Text>
+        <View className="flex flex-col gap-5">
+          <Button title="Start Practicing" color="#0F172A" 
+            accessibilityLabel="Access the dashboard without logging in.">
+          </Button>
+          <Button title="Create an Account" color="#64748B"
+            accessibilityLabel="Create an account to access all FEPrep features.">
+          </Button>
         </View>
       </View>
     </SafeAreaView>
