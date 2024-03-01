@@ -15,7 +15,7 @@ export const SignInSchema = z.object({
 
 export type SignInInput = z.infer<typeof SignInSchema>;
 
-const ResetPasswordSchema = z.object({
+export const ResetPasswordSchema = z.object({
   token: z.string(),
   password: z.string(),
 });
