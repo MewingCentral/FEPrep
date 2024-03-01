@@ -33,4 +33,3 @@ export const VerifyEmailSchema = z.object({
 });
 
 export type VerifyEmailInput = z.infer<typeof VerifyEmailSchema>;
-
