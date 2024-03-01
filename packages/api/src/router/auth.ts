@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
 import { TRPCError } from "@trpc/server";
+import { createDate } from "oslo";
+import { alphabet, generateRandomString } from "oslo/crypto";
 
 import { generateId, lucia, Scrypt, TimeSpan } from "@feprep/auth";
 import {
@@ -22,9 +24,7 @@ import {
   VerifyEmailSchema,
 } from "@feprep/validators";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "..";
-import { createDate } from "oslo";
-import { alphabet, generateRandomString } from "oslo/crypto";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const authRouter = createTRPCRouter({
   signUp: publicProcedure
@@ -266,6 +266,9 @@ export const authRouter = createTRPCRouter({
   getUser: publicProcedure.query(({ ctx }) => {
     return ctx.user;
   }),
+  signOut: protectedProcedure.mutation(async ({ ctx }) => {
+    await lucia.invalidateUserSessions(ctx.user.id);
+  }),
 });
 
 export async function generatePasswordResetToken(
@@ -299,4 +302,3 @@ export async function generateEmailVerificationCode(
   });
   return code;
 }
-

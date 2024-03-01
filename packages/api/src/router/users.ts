@@ -1,4 +1,4 @@
-import { createTRPCRouter, protectedProcedure } from "..";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 // TODO: make this protected
 export const usersRouter = createTRPCRouter({

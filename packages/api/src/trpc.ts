@@ -27,6 +27,7 @@ import { db } from "@feprep/db";
  */
 
 export async function createTRPCContext(opts: { headers: Headers }) {
+  // Get latest session and user data
   const { session, user } = await uncachedValidateRequest();
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
