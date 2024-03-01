@@ -1,3 +1,8 @@
-export default function page() {
-  return <div>Dashboard</div>;
+import { api } from "~/trpc/server";
+import { Dashboard } from "./dashboard";
+
+export default async function Page() {
+  const user = await api.auth.getUser();
+
+  return <Dashboard user={user} />;
 }
