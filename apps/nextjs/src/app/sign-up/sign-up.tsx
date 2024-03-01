@@ -45,11 +45,7 @@ export default function SignUp() {
   return (
     <div className="flex min-h-screen">
       <div className="flex flex-1 items-center justify-center bg-accent">
-        <img
-          src="/path/to/logo.png"
-          alt="Logo"
-          className="items-center justify-center"
-        />
+        {/* Add logo here */}
       </div>
 
       <div className="flex flex-1 items-center justify-center">
