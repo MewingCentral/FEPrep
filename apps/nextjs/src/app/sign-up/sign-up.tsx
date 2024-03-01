@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import type { SignUpInput } from "@feprep/validators";
 import { cn } from "@feprep/ui";
@@ -21,6 +22,7 @@ import { SignUpSchema } from "@feprep/validators";
 import { api } from "~/trpc/react";
 
 export default function SignUp() {
+  const router = useRouter();
   const form = useForm({
     schema: SignUpSchema,
     defaultValues: {
@@ -32,7 +34,12 @@ export default function SignUp() {
   const { mutateAsync } = api.auth.signUp.useMutation();
 
   const onSubmit = async (values: SignUpInput) => {
-    await mutateAsync(values);
+    try {
+      await mutateAsync(values);
+      router.push("/dashboard");
+    } catch {
+      // noop
+    }
   };
 
   return (
