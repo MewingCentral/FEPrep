@@ -44,11 +44,7 @@ export default function SignIn() {
   return (
     <div className="flex min-h-screen">
       <div className="flex flex-1 items-center justify-center bg-accent">
-        <img
-          src="/Ellipse-3.svg"
-          alt="Logo"
-          className="items-center justify-center"
-        />
+        {/* Add logo here */}
       </div>
 
       <div className="flex flex-1 items-center justify-center">
