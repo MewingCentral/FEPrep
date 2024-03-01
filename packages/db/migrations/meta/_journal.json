@@ -8,6 +8,13 @@
       "when": 1708925207247,
       "tag": "0000_sparkling_white_queen",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709265909001,
+      "tag": "0001_closed_energizer",
+      "breakpoints": true
     }
   ]
 }
