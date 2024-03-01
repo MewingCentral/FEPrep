@@ -27,7 +27,9 @@ function AuthButton({ user }: { user: User | null }) {
           try {
             await mutateAsync();
             router.push("/sign-in");
-          } catch {}
+          } catch {
+            // noop
+          }
         }}
       >
         Sign out
