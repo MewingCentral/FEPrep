@@ -10,6 +10,7 @@ import { api } from "~/trpc/react";
 export function Dashboard({ user }: { user: User | null }) {
   return (
     <main>
+      <img src ="oklol.jpg" alt="icon"></img>
       <div>This is the dashboard</div>
       <AuthButton user={user} />
     </main>
