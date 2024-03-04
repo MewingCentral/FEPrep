@@ -1,17 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { User } from "@feprep/auth";
 import { Button } from "@feprep/ui/button";
 
 import { api } from "~/trpc/react";
+import { Nav } from "./components/Nav";
 
 export function Dashboard({ user }: { user: User | null }) {
   return (
     <main>
-      <div>This is the dashboard</div>
-      <AuthButton user={user} />
+      <Nav />
+      {/* <AuthButton user={user} /> */}
     </main>
   );
 }
