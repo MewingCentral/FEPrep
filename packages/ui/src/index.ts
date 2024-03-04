@@ -7,3 +7,4 @@ function cn(...inputs: CxOptions) {
 }
 
 export { cn };
+export * from "@radix-ui/react-icons";
