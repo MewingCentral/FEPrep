@@ -7,7 +7,7 @@ import { User } from "@feprep/auth";
 import { Button } from "@feprep/ui/button";
 
 import { api } from "~/trpc/react";
-import { Nav } from "./components/Nav";
+import { Nav } from "./components/nav";
 
 export function Dashboard({ user }: { user: User | null }) {
   return (
