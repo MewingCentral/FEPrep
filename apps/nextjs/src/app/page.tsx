@@ -23,12 +23,14 @@ export default async function HomePage() {
           A new way to prepare for the Foundation Exam.
         </h2>
         <div className="flex flex-row gap-5">
-          <Button type="submit">
-            <Link href="/dashboard">Start Practicing</Link>
-          </Button>
-          <Button type="submit" className="bg-slate-500">
-            <Link href="/sign-up">Create Account</Link>
-          </Button>
+          <Link href="/dashboard">
+            <Button type="submit">Start Practicing</Button>
+          </Link>
+          <Link href="/sign-up">
+            <Button type="submit" className="bg-slate-500">
+              Create Account
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
