@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { User } from "@feprep/auth";
+// import { User } from "@feprep/auth";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
