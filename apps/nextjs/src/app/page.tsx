@@ -15,7 +15,7 @@ export default async function HomePage() {
           src="/Ellipse-3.svg"
           width={50}
           height={50}
-          alt="Picture of the author"
+          alt="FEPrep Logo"
           className="mb-8"
         />
         <h1 className="mb-4  text-left text-6xl font-semibold">FEPrep</h1>
