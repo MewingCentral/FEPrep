@@ -17,30 +17,22 @@ export function Nav() {
         <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
         <h1 className="text-left text-xl font-semibold">FEPrep</h1>
         {/* add div line here */}
-        <h1 className="text-slate text-left text-xl font-normal text-slate-500 underline">
+        <h1 className="text-slate text-left text-xl font-normal  underline">
           Topics
         </h1>
-        <ArrowLeftIcon width="25" height="25" className="text-slate-500" />
-        <ArrowRightIcon width="25" height="25" className="text-slate-500" />
-        <ShuffleIcon width="25" height="25" className="text-slate-500" />
+        <ArrowLeftIcon width="25" height="25" />
+        <ArrowRightIcon width="25" height="25" />
+        <ShuffleIcon width="25" height="25" />
       </div>
       <div className="flex grow flex-row justify-center gap-2">
-        <LapTimerIcon width="25" height="25" className="text-slate-500" />
-        <h1 className="text-slate text-left text-xl font-normal text-slate-500">
-          Timer
-        </h1>
-        <RocketIcon width="25" height="25" className="text-slate-700" />
-        <h1 className="text-slate text-left text-xl font-normal text-slate-700">
-          Solution
-        </h1>
+        <LapTimerIcon width="25" height="25" />
+        <h1 className="text-slate text-left text-xl font-normal ">Timer</h1>
+        <RocketIcon width="25" height="25" className="" />
+        <h1 className="text-slate text-left text-xl font-medium ">Solution</h1>
       </div>
       <div className="flex flex-row-reverse items-end gap-3">
-        <h1 className="text-slate text-left text-xl font-normal text-slate-700">
-          NID
-        </h1>
-        <h1 className="text-slate text-left text-xl font-normal text-slate-500">
-          Welcome,
-        </h1>
+        <h1 className="text-slate text-left text-xl font-medium ">NID</h1>
+        <h1 className="text-slate text-left text-xl font-normal ">Welcome,</h1>
       </div>
     </main>
   );
