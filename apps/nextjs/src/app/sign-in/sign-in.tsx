@@ -43,7 +43,7 @@ export default function SignIn() {
 
   return (
     <div className="flex min-h-screen">
-      <div className="flex flex-1 items-center justify-center bg-accent">
+      <div className="hidden items-center justify-center bg-accent lg:flex lg:flex-1">
         {/* Add logo here */}
       </div>
 
