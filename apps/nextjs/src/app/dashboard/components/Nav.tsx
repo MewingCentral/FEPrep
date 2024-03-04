@@ -1,13 +1,7 @@
 import Image from "next/image";
 
 import { User } from "@feprep/auth";
-
-// import { Left } from "@feprep/ui/arrow-left.svg";
-// import { Right } from "@feprep/ui/arrow-right.svg";
-// import Left from "@feprep/ui/arrow-left.svg";
-// import LeftArrow from "./LeftArrow";
-// import RightArrow from "./RightArrow";
-// import {ArrowLeftIcon, ArrowRightIcon} from "@feprep/ui"
+import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "@feprep/ui";
 
 export function Nav() {
   return (
@@ -24,8 +18,9 @@ export function Nav() {
       <h1 className="text-slate text-left text-xl font-normal text-slate-900">
         Solution
       </h1>
-      {/* <LeftArrow /> */}
-      {/* <RightArrow /> */}
+      <ArrowLeftIcon width="25" height="25" className="text-slate-500" />
+      <ArrowRightIcon width="25" height="25" className="text-slate-500" />
+      <ShuffleIcon width="25" height="25" className="text-slate-500" />
     </main>
   );
 }
