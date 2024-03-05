@@ -1,8 +1,6 @@
-import { Text, View, Button, Pressable } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import { Link, Stack } from "expo-router";
-
 
 export default function HomePage() {
   return (
@@ -20,7 +18,7 @@ export default function HomePage() {
             <Link href="/dashboard" asChild className="my-auto">
               <Pressable>
                 <Text className="text-center text-primary">
-                Start Practicing
+                  Start Practicing
                 </Text>
               </Pressable>
             </Link>
@@ -29,7 +27,7 @@ export default function HomePage() {
             <Link href="/dashboard" asChild className="my-auto">
               <Pressable>
                 <Text className="text-center text-primary">
-                Create an Account
+                  Create an Account
                 </Text>
               </Pressable>
             </Link>
