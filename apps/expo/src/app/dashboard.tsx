@@ -5,7 +5,12 @@ import { Link, Stack } from "expo-router";
 export default function Dashboard() {
     return (
         <SafeAreaView className="bg-background">
-            <Stack.Screen />
+            <Stack.Screen 
+                options={{
+                    title: "Dashboard",
+                }}
+            />
+
         </SafeAreaView>
     );
 }

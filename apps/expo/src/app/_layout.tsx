@@ -20,13 +20,14 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#f472b6",
+            backgroundColor: colorScheme == "dark" ? "#1e293b" : "#f1f5f9",
           },
           contentStyle: {
-            backgroundColor: colorScheme == "dark" ? "#09090B" : "#FFFFFF",
+            backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
           },
         }}
-      />
+      >
+      </Stack>
       <StatusBar />
     </TRPCProvider>
   );
