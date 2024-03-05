@@ -1,16 +1,14 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import { Link, Stack } from "expo-router";
+import { Stack } from "expo-router";
 
 export default function Dashboard() {
-    return (
-        <SafeAreaView className="bg-background">
-            <Stack.Screen 
-                options={{
-                    title: "Dashboard",
-                }}
-            />
-
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView className="bg-background">
+      <Stack.Screen
+        options={{
+          title: "Dashboard",
+        }}
+      />
+    </SafeAreaView>
+  );
 }
