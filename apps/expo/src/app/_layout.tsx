@@ -26,8 +26,7 @@ export default function RootLayout() {
             backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
           },
         }}
-      >
-      </Stack>
+      ></Stack>
       <StatusBar />
     </TRPCProvider>
   );
