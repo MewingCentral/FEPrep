@@ -12,11 +12,11 @@ export default async function HomePage() {
     <div className="flex flex-1 flex-col items-start justify-center">
       <div className="ml-12">
         <Image
-          src="/Ellipse-3.svg"
-          width={50}
-          height={50}
+          src="/mew.png"
+          width={120}
+          height={120}
           alt="FEPrep Logo"
-          className="mb-8"
+          className="mb-8 rounded-md shadow-md"
         />
         <h1 className="mb-4  text-left text-6xl font-semibold">FEPrep</h1>
         <h2 className="mb-4  max-w-sm text-left text-3xl font-normal leading-normal">
