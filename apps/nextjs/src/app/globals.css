@@ -48,3 +48,33 @@
     --ring: 224.3 76.3% 48%;
   }
 }
+
+.link-underline {
+  border-bottom-width: 0;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(#fff, #fff);
+  background-size: 0 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s ease-in-out;
+  text-underline-offset: 9px;
+}
+
+.link-underline-black {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(rgb(100 116 139 / 1), rgb(100 116 139 / 1));
+}
+
+.link-underline:hover {
+  background-size: 100% 2px;
+  background-position: 0 100%;
+}
+
+.link-underline-show {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(rgb(100 116 139 / 1), rgb(100 116 139 / 1));
+  background-repeat: no-repeat;
+  text-underline-offset: 9px;
+  background-size: 100% 2px;
+  background-position: 0 100%;
+}
