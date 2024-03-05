@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 // import { User } from "@feprep/auth";
 import {
@@ -15,7 +16,9 @@ export function Nav() {
       {/* left side */}
       <div className="flex flex-row gap-3">
         <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
-        <h1 className="text-left text-xl font-semibold">FEPrep</h1>
+        <Link href="/" className="text-left text-xl font-semibold">
+          FEPrep
+        </Link>
         {/* add div line here */}
         <h1 className="text-slate text-left text-xl font-normal  underline">
           Topics
