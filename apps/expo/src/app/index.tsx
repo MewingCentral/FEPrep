@@ -14,8 +14,8 @@ export default function HomePage() {
           A new way to prepare for the Foundation Exam.
         </Text>
         <View className="mt-4 flex flex-col gap-6">
-          <View>
-            <Link href="/dashboard" asChild>
+          <View className="h-16 bg-foreground">
+            <Link href="/dashboard" asChild className="my-auto">
               <Pressable>
                 <Text className="text-center text-primary">
                 Start Practicing
@@ -23,8 +23,8 @@ export default function HomePage() {
               </Pressable>
             </Link>
           </View>
-          <View>
-            <Link href="/dashboard" asChild>
+          <View className="h-16 bg-foreground">
+            <Link href="/dashboard" asChild className="my-auto">
               <Pressable>
                 <Text className="text-center text-primary">
                 Create an Account
@@ -37,6 +37,3 @@ export default function HomePage() {
     </SafeAreaView>
   );
 }
-
-// style={{flex: 1, borderWidth: 1, borderColor: "yellow"}} 
-
