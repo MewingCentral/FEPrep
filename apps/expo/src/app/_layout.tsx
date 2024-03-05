@@ -22,8 +22,7 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor:
-              colorScheme == "dark" ? Colors.dark_sec : Colors.light_sec,
+            backgroundColor: colorScheme == "dark" ? "#1e293b" : "#f1f5f9",
           },
           contentStyle: {
             backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
@@ -33,7 +32,8 @@ export default function RootLayout() {
               ? Colors.dark_primary_text
               : Colors.light_primary_text,
         }}
-      ></Stack>
+      >
+      </Stack>
       <StatusBar />
     </TRPCProvider>
   );
