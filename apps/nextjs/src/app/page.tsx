@@ -27,7 +27,10 @@ export default async function HomePage() {
             <Button type="submit">Start Practicing</Button>
           </Link>
           <Link href="/sign-up">
-            <Button type="submit" className="bg-slate-500">
+            <Button
+              type="submit"
+              className="rounded-md border border-input bg-background text-accent-foreground transition-colors hover:bg-accent "
+            >
               Create Account
             </Button>
           </Link>
