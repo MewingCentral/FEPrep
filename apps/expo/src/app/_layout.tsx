@@ -32,8 +32,7 @@ export default function RootLayout() {
               ? Colors.dark_primary_text
               : Colors.light_primary_text,
         }}
-      >
-      </Stack>
+      ></Stack>
       <StatusBar />
     </TRPCProvider>
   );
