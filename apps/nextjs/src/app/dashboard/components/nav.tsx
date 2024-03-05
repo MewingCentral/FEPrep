@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { User } from "@feprep/auth";
 import {
@@ -41,26 +40,13 @@ export function Nav({ user }: { user: User | null }) {
   return (
     <main className="flex flex-row justify-start p-6">
       {/* left side */}
-      <div className="mr-5 flex flex-1 flex-row gap-3">
-        <Image
-          src="/Ellipse-3.svg"
-          width={25}
-          height={25}
-          alt="FEPrep Logo"
-          className="hidden md:block"
-        />
-        <Link
-          href="/"
-          className="hidden text-left text-xl font-semibold hover:underline md:block"
-        >
+      <div className="flex flex-row gap-3">
+        <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
+        <Link href="/" className="text-left text-xl font-semibold">
           FEPrep
         </Link>
-        <Separator
-          orientation="vertical"
-          decorative={true}
-          className="hidden w-0.5 bg-foreground md:block"
-        />
-        <h1 className="text-slate hidden text-left text-xl font-normal underline md:block">
+        {/* add div line here */}
+        <h1 className="text-slate text-left text-xl font-normal  underline">
           Topics
         </h1>
         <ArrowLeftIcon width="25" height="25" />
