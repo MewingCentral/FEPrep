@@ -15,7 +15,7 @@ export default async function HomePage() {
           src="/mew.png"
           width={120}
           height={120}
-          alt="FEPrep Logo"
+          alt="FEPrep Logo, :3 doggy"
           className="mb-8 rounded-md shadow-md"
         />
         <h1 className="mb-4  text-left text-6xl font-semibold">FEPrep</h1>
