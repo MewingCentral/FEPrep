@@ -9,6 +9,8 @@
 // import { Nav } from "./components/nav";
 // import { Workbench } from "./components/workbench";
 
+// main function is here comment out for lint
+// export function Dashboard({ user }: { user: User | null }) {
 // main dashboard, commented out because LINT
 // export function Dashboard({ user }: { user: User | null }) {
 //   return (
