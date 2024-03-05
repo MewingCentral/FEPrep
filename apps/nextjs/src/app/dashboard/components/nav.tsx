@@ -42,13 +42,19 @@ export function Nav({ user }: { user: User | null }) {
       {/* left side */}
       <div className="flex flex-row gap-3">
         <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
-        <Link href="/" className="text-left text-xl font-semibold">
+        <Link
+          href="/"
+          className="link link-underline link-underline-black text-left text-xl font-semibold transition-all duration-300 ease-in-out"
+        >
           FEPrep
         </Link>
         {/* add div line here */}
-        <h1 className="text-slate text-left text-xl font-normal  underline">
+        <Link
+          className="text-slate link link-underline-show text-left text-xl font-normal"
+          href="/dashboard"
+        >
           Topics
-        </h1>
+        </Link>
         <ArrowLeftIcon width="25" height="25" />
         <ArrowRightIcon width="25" height="25" />
         <ShuffleIcon width="25" height="25" />
