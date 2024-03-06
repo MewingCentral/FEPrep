@@ -25,17 +25,8 @@
 export function Dashboard() {
   return (
     <main>
-      <div className="container grid grid-cols-2">
-        <div className="left-section rounded-sm border border-white bg-gray-200 text-black">
-          <h1> left side </h1>
-        </div>
-        <div className="right-section rounded-sm border border-white bg-gray-200 text-black">
-          <div className="">
-            <h1>right side</h1>
-          </div>
-          {/* <AuthButton user={user} /> */}
-        </div>
-      </div>
+      <Nav />
+      <Workbench />
     </main>
   );
 }
