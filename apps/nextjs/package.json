@@ -37,14 +37,14 @@
     "@feprep/tailwind-config": "workspace:*",
     "@feprep/tsconfig": "workspace:*",
     "@types/node": "^20.11.13",
-    "@types/react": "^18.2.55",
+    "@types/react": "~18.2.45",
     "@types/react-dom": "^18.2.19",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.56.0",
     "jiti": "^1.21.0",
     "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "tailwindcss": "3.3.2",
+    "typescript": "^5.3.0"
   },
   "eslintConfig": {
     "root": true,
