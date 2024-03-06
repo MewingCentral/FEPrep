@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 // import { User } from "@feprep/auth";
 import {
@@ -48,9 +49,15 @@ export function Nav() {
         >
           Topics
         </button>
-        <ArrowLeftIcon width="25" height="25" />
-        <ArrowRightIcon width="25" height="25" />
-        <ShuffleIcon width="25" height="25" />
+        <motion.button whileHover={{ scale: 1.15 }}>
+          <ArrowLeftIcon width="25" height="25" />
+        </motion.button>
+        <motion.button whileHover={{ scale: 1.15 }}>
+          <ArrowRightIcon width="25" height="25" />
+        </motion.button>
+        <motion.button whileHover={{ scale: 1.15 }}>
+          <ShuffleIcon width="25" height="25" />
+        </motion.button>
       </div>
       <div className="flex grow flex-row justify-center gap-3">
         <LapTimerIcon width="25" height="25" />
