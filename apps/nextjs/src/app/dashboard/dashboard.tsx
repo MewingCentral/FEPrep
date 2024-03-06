@@ -6,34 +6,14 @@
 // import { Button } from "@feprep/ui/button";
 
 // import { api } from "~/trpc/react";
-// import { Nav } from "./components/nav";
-// import { Workbench } from "./components/workbench";
-
-// main dashboard, commented out because LINT
-// export function Dashboard({ user }: { user: User | null }) {
-//   return (
-//     <main>
-//       <Nav />
-//       {/* <AuthButton user={user} /> */}
-//       <Workbench />
-//     </main>
-//   );
-// }
+import { Nav } from "./components/nav";
+import { Workbench } from "./components/workbench";
 
 export function Dashboard() {
   return (
     <main>
-      <div className="container grid grid-cols-2">
-        <div className="left-section rounded-sm border border-white bg-gray-200 text-black">
-          <h1> left side </h1>
-        </div>
-        <div className="right-section rounded-sm border border-white bg-gray-200 text-black">
-          <div className="">
-            <h1>right side</h1>
-          </div>
-          {/* <AuthButton user={user} /> */}
-        </div>
-      </div>
+      <Nav />
+      <Workbench />
     </main>
   );
 }
