@@ -11,7 +11,7 @@ export function Workbench() {
         {/* right panel */}
         <div className="right-section flex flex-col">
           {/* top right */}
-          <div className="top-right-section justify-left flex w-full grow flex-row gap-2 rounded-xl border p-4">
+          <div className="top-right-section justify-left t flex w-full grow flex-row gap-2 rounded-xl border p-4">
             <DotsHorizontalIcon width="25" height="25" />
             <h1 className="text-slate font-small mr-2 text-left text-xl">
               Discussion
