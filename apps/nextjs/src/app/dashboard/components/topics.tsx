@@ -1,7 +1,7 @@
 export default function topics() {
   return (
     <>
-      <div className="hover:bg- transform cursor-pointer bg-border duration-500 hover:bg-muted-foreground">
+      <div className="transform cursor-pointer bg-border duration-500 hover:bg-muted-foreground">
         ALGORITHM ANALYSIS
       </div>
       <div className="transform cursor-pointer bg-border duration-500 hover:bg-muted-foreground">
