@@ -24,6 +24,10 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
+    .link-underline-black {
+      background-image: linear-gradient(transparent, transparent),
+        linear-gradient(hsl(222.2 84% 4.9%), hsl(222.2 84% 4.9%));
+    }
   }
 
   .dark {
@@ -46,6 +50,11 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
+    /* underline is set to same colors as --foreground */
+    .link-underline-black {
+      background-image: linear-gradient(transparent, transparent),
+        linear-gradient(hsl(210 40% 98%), hsl(210 40% 98%));
+    }
   }
 }
 
@@ -56,25 +65,11 @@
   background-size: 0 2px;
   background-position: 0 100%;
   background-repeat: no-repeat;
-  transition: background-size 0.5s ease-in-out;
+  transition: background-size 0.4s ease-in-out;
   text-underline-offset: 9px;
-}
-
-.link-underline-black {
-  background-image: linear-gradient(transparent, transparent),
-    linear-gradient(rgb(100 116 139 / 1), rgb(100 116 139 / 1));
 }
 
 .link-underline:hover {
-  background-size: 100% 2px;
-  background-position: 0 100%;
-}
-
-.link-underline-show {
-  background-image: linear-gradient(transparent, transparent),
-    linear-gradient(rgb(100 116 139 / 1), rgb(100 116 139 / 1));
-  background-repeat: no-repeat;
-  text-underline-offset: 9px;
   background-size: 100% 2px;
   background-position: 0 100%;
 }
