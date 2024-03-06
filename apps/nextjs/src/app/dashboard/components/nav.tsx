@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,9 +12,22 @@ import {
 } from "@feprep/ui";
 import { Separator } from "@feprep/ui/separator";
 
+import Topics from "./topics";
+
 export function Nav() {
+  const [topicsOpen, setTopicsOpen] = useState(false);
+
+  function showTopics() {
+    return (
+      <>
+      {/* to do to do to do */}
+        <Topics />
+      </>
+    );
+  }
   return (
     <main className="flex flex-row justify-start p-10">
+      {topicsOpen ? showTopics() : null}
       {/* left side */}
       <div className="flex flex-row gap-3">
         <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
@@ -28,12 +42,12 @@ export function Nav() {
           decorative={true}
           className="w-0.5 bg-foreground"
         />
-        <Link
+        <button
           className="text-slate link link-underline link-underline-black text-left text-xl font-normal"
-          href="/dashboard"
+          onClick={() => setTopicsOpen(true)}
         >
           Topics
-        </Link>
+        </button>
         <ArrowLeftIcon width="25" height="25" />
         <ArrowRightIcon width="25" height="25" />
         <ShuffleIcon width="25" height="25" />
