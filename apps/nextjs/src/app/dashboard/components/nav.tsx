@@ -20,7 +20,7 @@ export function Nav() {
   function showTopics() {
     return (
       <>
-      {/* to do to do to do */}
+        {/* to do to do to do */}
         <Topics />
       </>
     );
@@ -44,7 +44,7 @@ export function Nav() {
         />
         <button
           className="text-slate link link-underline link-underline-black text-left text-xl font-normal"
-          onClick={() => setTopicsOpen(true)}
+          onClick={() => setTopicsOpen(!topicsOpen)}
         >
           Topics
         </button>
