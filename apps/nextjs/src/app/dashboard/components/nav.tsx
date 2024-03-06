@@ -9,6 +9,7 @@ import {
   RocketIcon,
   ShuffleIcon,
 } from "@feprep/ui";
+import { Separator } from "@feprep/ui/separator";
 
 export function Nav() {
   return (
@@ -18,13 +19,17 @@ export function Nav() {
         <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
         <Link
           href="/"
-          className="link link-underline link-underline-black text-left text-xl font-semibold transition-all duration-300 ease-in-out"
+          className="link link-underline link-underline-black text-left text-xl font-semibold transition-all duration-200 ease-in-out"
         >
           FEPrep
         </Link>
-        {/* add div line here */}
+        <Separator
+          orientation="vertical"
+          decorative={true}
+          className="w-0.5 bg-foreground"
+        />
         <Link
-          className="text-slate link link-underline-show text-left text-xl font-normal"
+          className="text-slate link link-underline link-underline-black text-left text-xl font-normal"
           href="/dashboard"
         >
           Topics
@@ -33,9 +38,14 @@ export function Nav() {
         <ArrowRightIcon width="25" height="25" />
         <ShuffleIcon width="25" height="25" />
       </div>
-      <div className="flex grow flex-row justify-center gap-2">
+      <div className="flex grow flex-row justify-center gap-3">
         <LapTimerIcon width="25" height="25" />
         <h1 className="text-slate text-left text-xl font-normal ">Timer</h1>
+        <Separator
+          orientation="vertical"
+          decorative={true}
+          className="w-0.5 bg-foreground"
+        />
         <RocketIcon width="25" height="25" className="" />
         <h1 className="text-slate text-left text-xl font-medium ">Solution</h1>
       </div>
