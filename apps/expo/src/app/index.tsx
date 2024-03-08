@@ -108,8 +108,4 @@ const styles = StyleSheet.create({
   buttonTxt: {
     color: "#f8fafc",
   },
-  deleteYellowBorder: {
-    borderColor: "yellow",
-    borderWidth: 1,
-  },
 });
