@@ -4,35 +4,44 @@ import { Link, Stack } from "expo-router";
 
 export default function HomePage() {
   return (
-    <SafeAreaView style={[styles.deleteYellowBorder, styles.container, styles.screenContainer]}>
-      <Stack.Screen />
-      <View style={[styles.deleteYellowBorder, styles.container, styles.contentContainer]}>
-        <Text style={[styles.text, styles.title, styles.deleteYellowBorder]}>
-          FEPrep
-        </Text>
-        <Text style={[styles.text, styles.subtitle]}>
-          A new way to prepare for the Foundation Exam.
-        </Text>
-        <View className="mt-4 flex flex-col gap-6">
-          <View className="h-16 bg-foreground bg-yellow 500">
-            <Link href="/dashboard" asChild className="my-auto">
-              <Pressable>
-                <Text className="text-center text-primary">
-                  Start Practicing
-                </Text>
-              </Pressable>
-            </Link>
-          </View>
-          <View className="h-16 bg-foreground">
-            <Link href="/dashboard" asChild className="my-auto">
-              <Pressable>
-                <Text className="text-center text-primary">
-                  Create an Account
-                </Text>
-              </Pressable>
-            </Link>
-          </View>
+    <SafeAreaView style={[styles.container, styles.screenContainer]}>
+      <Stack.Screen 
+        options={{
+          headerShown: false
+        }}/>
+
+      {/* Title and subtitle */}
+      <View style={[styles.container, styles.contentContainer]}>
+        <View style={[styles.container, styles.titleContainer]}>
+          <Text style={[styles.text, styles.title]}>
+            FEPrep
+          </Text>
+          <Text style={[styles.text, styles.subtitle]}>
+            A new way to prepare for the Foundation Exam.
+          </Text>
         </View>
+
+        {/* Buttons */}
+        <View style={[styles.container, styles.buttonsContainer]}>
+          <Link style={[styles.buttons, styles.signUpBtn]} href="/dashboard" asChild>
+            <Pressable>
+              <Text style={[styles.text, styles.buttonTxt]}>
+                Create Account
+              </Text>
+            </Pressable>
+          </Link>
+          <Text style={[styles.text]}>
+            or
+          </Text>
+          <Link style={[styles.buttons, styles.dashboardBtn]} href="/dashboard" asChild>
+            <Pressable>
+              <Text style={[styles.text, styles.buttonTxt]}>
+                Start Practicing
+              </Text>
+            </Pressable>
+          </Link>
+        </View>
+
       </View>
     </SafeAreaView>
   );
@@ -50,22 +59,50 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignSelf: "center", // Also necessary for horizontal alignment??
-    backgroundColor: "#f8fAfC",
+    gap: 50,
+    maxWidth: 305,
+    borderRadius: 6,
+    backgroundColor: "#f8fafa",
   },
   titleContainer: {
-
+    marginTop: 40, // todo consider something more dynamic than a number??
+    marginHorizontal: 20,
+    flexWrap: "nowrap",
+    gap: 10,
+  },
+  buttonsContainer: {
+    alignSelf: "center",
+    marginHorizontal: 20,
+    marginBottom: 40,
+    gap: 10,
   },
   text: {
     color: "#020817",
     textAlign: "center",
-    alignSelf: "center",
+    fontSize: 20,
   },
   title: {
     fontSize: 40,
     fontWeight: "bold",
   },
   subtitle: {
-    fontSize: 15,
+    lineHeight: 30,
+    fontSize: 20,
+  },
+  buttons: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    minWidth: 70,
+    borderRadius: 6,
+  },
+  signUpBtn: {
+    backgroundColor: "#64748b",
+  },
+  dashboardBtn: {
+    backgroundColor: "#0f172a",
+  },
+  buttonTxt: {
+    color: "#f8fafc",
   },
   deleteYellowBorder: {
     borderColor: "yellow",
@@ -74,3 +111,7 @@ const styles = StyleSheet.create({
 });
 
 // className="text-center text-2xl font-bold text-primary"
+// className="mt-4 flex flex-col gap-6"
+
+// Buttons text:
+// className="text-center text-primary"
