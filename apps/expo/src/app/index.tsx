@@ -1,21 +1,20 @@
-import { StyleSheet, Pressable, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, Stack } from "expo-router";
 
 export default function HomePage() {
   return (
     <SafeAreaView style={[styles.container, styles.screenContainer]}>
-      <Stack.Screen 
+      <Stack.Screen
         options={{
-          headerShown: false
-        }}/>
+          headerShown: false,
+        }}
+      />
 
       {/* Title and subtitle */}
       <View style={[styles.container, styles.contentContainer]}>
         <View style={[styles.container, styles.titleContainer]}>
-          <Text style={[styles.text, styles.title]}>
-            FEPrep
-          </Text>
+          <Text style={[styles.text, styles.title]}>FEPrep</Text>
           <Text style={[styles.text, styles.subtitle]}>
             A new way to prepare for the Foundation Exam.
           </Text>
@@ -23,17 +22,23 @@ export default function HomePage() {
 
         {/* Buttons */}
         <View style={[styles.container, styles.buttonsContainer]}>
-          <Link style={[styles.buttons, styles.signUpBtn]} href="/dashboard" asChild>
+          <Link
+            style={[styles.buttons, styles.signUpBtn]}
+            href="/dashboard"
+            asChild
+          >
             <Pressable>
               <Text style={[styles.text, styles.buttonTxt]}>
                 Create Account
               </Text>
             </Pressable>
           </Link>
-          <Text style={[styles.text]}>
-            or
-          </Text>
-          <Link style={[styles.buttons, styles.dashboardBtn]} href="/dashboard" asChild>
+          <Text style={[styles.text]}>or</Text>
+          <Link
+            style={[styles.buttons, styles.dashboardBtn]}
+            href="/dashboard"
+            asChild
+          >
             <Pressable>
               <Text style={[styles.text, styles.buttonTxt]}>
                 Start Practicing
@@ -41,7 +46,6 @@ export default function HomePage() {
             </Pressable>
           </Link>
         </View>
-
       </View>
     </SafeAreaView>
   );
@@ -58,14 +62,14 @@ const styles = StyleSheet.create({
     justifyContent: "center", // Vertical alignment of children
   },
   contentContainer: {
-    alignSelf: "center", // Also necessary for horizontal alignment??
+    alignSelf: "center",
     gap: 50,
     maxWidth: 305,
     borderRadius: 6,
     backgroundColor: "#f8fafa",
   },
   titleContainer: {
-    marginTop: 40, // todo consider something more dynamic than a number??
+    marginTop: 40,
     marginHorizontal: 20,
     flexWrap: "nowrap",
     gap: 10,
@@ -107,11 +111,5 @@ const styles = StyleSheet.create({
   deleteYellowBorder: {
     borderColor: "yellow",
     borderWidth: 1,
-  }
+  },
 });
-
-// className="text-center text-2xl font-bold text-primary"
-// className="mt-4 flex flex-col gap-6"
-
-// Buttons text:
-// className="text-center text-primary"
