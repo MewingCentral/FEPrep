@@ -22,6 +22,7 @@ export default function dashboardLayout() {
               backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
             },
           }}>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false,}} />
         </Stack>
         <StatusBar />
       </TRPCProvider>
