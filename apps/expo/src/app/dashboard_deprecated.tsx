@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 
-import { RowsIcon } from "@feprep/ui";
+// import { RowsIcon } from "@feprep/ui";
 import Colors from "./../utils/colors";
 
 export default function Dashboard() {
@@ -17,7 +17,7 @@ export default function Dashboard() {
       {/* Tabs */}
       <View style={[styles.deleteYellowBorder, styles.container, styles.tabContainer]}>
         <Text style={[styles.deleteYellowBorder, {color: "#ffffff"}]}>TODO: tabs</Text>
-        <RowsIcon />
+        {/* <RowsIcon /> */}
       </View>
 
       {/* Search bar */}

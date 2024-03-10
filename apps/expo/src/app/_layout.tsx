@@ -25,8 +25,9 @@ export default function RootLayout() {
           contentStyle: {
             backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
           },
-        }}
-      ></Stack>
+        }}>
+          {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }}/> */}
+      </Stack>
       <StatusBar />
     </TRPCProvider>
   );
