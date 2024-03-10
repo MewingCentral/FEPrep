@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 
 // import { RowsIcon } from "@feprep/ui";
-import Colors from "./../utils/colors";
+import Colors from "../utils/colors";
 
 export default function Dashboard() {
   return (
