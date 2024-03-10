@@ -19,13 +19,14 @@ export default function Tab() {
             {/* Study sets */}
             <View style={[styles.container, styles.allSetsContainer]}>
                 {/* Create new set button */}
-                <Pressable style={[styles.deleteYellowBorder, ]}>
-
+                <Pressable style={[styles.createSetButton]}>
+                    <Text style={[styles.titleText]}>Create set</Text>
+                    <Text style={[styles.titleText]}>+</Text>
                 </Pressable>
                 {/* Individual study set */}
                 <View style={[styles.container, styles.setContainer]}>
-                    <View>
-                        <Text style={[styles.setText, styles.setTitle]}>Set 1</Text>
+                    <View  style={[styles.setTextContainer]}>
+                        <Text style={[styles.setText, styles.titleText]}>Set 1</Text>
                         <Text style={[styles.setText, styles.setTerms]}>15 terms</Text>
                     </View>
                 </View>
@@ -63,17 +64,31 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 6,
     },
+    setTextContainer: {
+        justifyContent: "space-between",
+        height: 100,
+    },
     input: {
         color: Colors.dark_primary_text,
         borderBottomWidth: 1,
         borderBottomColor: Colors.dark_primary_text,
     },
-    setText: {
-        margin: 10,
+    createSetButton: {
+        height: 60,
+        width: 300,
+        paddingVertical: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        borderColor: Colors.dark_primary_text,
+        borderWidth: 1,
+        borderRadius: 6,
     },
-    setTitle: {
+    titleText: {
         color: Colors.dark_primary_text,
         fontSize: 20,
+    },
+    setText: {
+        margin: 10,
     },
     setTerms: {
         color: Colors.dark_secondary_text,
