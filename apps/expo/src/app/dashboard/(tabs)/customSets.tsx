@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Stack } from "expo-router";
@@ -7,21 +7,27 @@ import Colors from "../../../utils/colors";
 
 export default function Tab() {
     return(
-        <SafeAreaView style={[styles.deleteYellowBorder, styles.container, styles.screenContainer]}>
+        <SafeAreaView style={[styles.container, styles.screenContainer]}>
 
             {/* Search input */}
             <View style={{ flexDirection: "row" }}>
-                <View style={[styles.deleteYellowBorder, styles.container, styles.inputContainer]}>
+                <View style={[styles.container, styles.inputContainer]}>
                     <TextInput style={[styles.input]} placeholder={"Enter set"} placeholderTextColor={Colors.dark_secondary_text} cursorColor={Colors.dark_primary_text}/>
                 </View>
             </View>
 
             {/* Study sets */}
-            <View style={[styles.container]}>
+            <View style={[styles.container, styles.allSetsContainer]}>
+                {/* Create new set button */}
+                <Pressable style={[styles.deleteYellowBorder, ]}>
+
+                </Pressable>
                 {/* Individual study set */}
                 <View style={[styles.container, styles.setContainer]}>
-                    <Text style={[styles.setTitle]}>Set 1</Text>
-                    <Text style={[]}>15 terms</Text>
+                    <View>
+                        <Text style={[styles.setText, styles.setTitle]}>Set 1</Text>
+                        <Text style={[styles.setText, styles.setTerms]}>15 terms</Text>
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
@@ -44,16 +50,16 @@ const styles = StyleSheet.create({
     inputContainer: {
         flex: 1,
         alignContent: "stretch",
-        marginHorizontal: 10,
-        // alignSelf: "stretch",
+        marginHorizontal: 20,
     },
     allSetsContainer: {
+        gap: 20,
     },
     setContainer: {
         height: 100,
         width: 300,
         backgroundColor: Colors.dark_sec,
-        borderColor: "rgba(148, 163, 184, 0.33)",
+        borderColor: "rgba(148, 163, 184, 0.50)",
         borderWidth: 2,
         borderRadius: 6,
     },
@@ -61,12 +67,17 @@ const styles = StyleSheet.create({
         color: Colors.dark_primary_text,
         borderBottomWidth: 1,
         borderBottomColor: Colors.dark_primary_text,
-        marginBottom:4, // delete
+    },
+    setText: {
+        margin: 10,
     },
     setTitle: {
-        margin: 10,
         color: Colors.dark_primary_text,
         fontSize: 20,
+    },
+    setTerms: {
+        color: Colors.dark_secondary_text,
+        fontSize: 16,
     },
     deleteYellowBorder: {
         borderColor: "yellow",
