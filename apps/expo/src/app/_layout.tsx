@@ -6,6 +6,7 @@ import { TRPCProvider } from "~/utils/api";
 import "../styles.css";
 
 import { useColorScheme } from "nativewind";
+import Colors from "../utils/colors";
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
@@ -20,13 +21,13 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor: colorScheme == "dark" ? "#1e293b" : "#f1f5f9",
+            backgroundColor: colorScheme == "dark" ? Colors.dark_sec : Colors.light_sec,
           },
           contentStyle: {
             backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
           },
+          headerTintColor: colorScheme == "dark" ? Colors.dark_primary_text : Colors.light_primary_text,
         }}>
-          {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }}/> */}
       </Stack>
       <StatusBar />
     </TRPCProvider>
