@@ -18,11 +18,18 @@ export default function dashboardLayout() {
             headerStyle: {
               backgroundColor: colorScheme == "dark" ? "#1e293b" : "#f1f5f9",
             },
+            // todo below doesn't work
             contentStyle: {
               backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
             },
           }}>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false,}} />
+            <Stack.Screen name="(tabs)" options={{ 
+              headerShown: false,
+              // todo below doesn't work
+              // contentStyle: {
+              //   backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
+              // }
+            }}/>
         </Stack>
         <StatusBar />
       </TRPCProvider>
