@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 
@@ -9,22 +9,42 @@ export default function Dashboard() {
   return (
     <SafeAreaView style={[styles.container, styles.screenContainer]}>
       <Stack.Screen
-        options={{
-          // headerTitle: (props) => <Header />
-        }}
+        options={
+          {
+            // headerTitle: (props) => <Header />
+          }
+        }
       />
 
       {/* Tabs */}
-      <View style={[styles.deleteYellowBorder, styles.container, styles.tabContainer]}>
-        <Text style={[styles.deleteYellowBorder, {color: "#ffffff"}]}>TODO: tabs</Text>
+      <View
+        style={[
+          styles.deleteYellowBorder,
+          styles.container,
+          styles.tabContainer,
+        ]}
+      >
+        <Text style={[styles.deleteYellowBorder, { color: "#ffffff" }]}>
+          TODO: tabs
+        </Text>
         {/* <RowsIcon /> */}
       </View>
 
       {/* Search bar */}
-      <View style={[styles.deleteYellowBorder, styles.container, styles.inputContainer]}>
-        <TextInput style={[styles.input]} placeholder={"Enter set"} placeholderTextColor={Colors.dark_primary_text} cursorColor={Colors.dark_primary_text}/>
+      <View
+        style={[
+          styles.deleteYellowBorder,
+          styles.container,
+          styles.inputContainer,
+        ]}
+      >
+        <TextInput
+          style={[styles.input]}
+          placeholder={"Enter set"}
+          placeholderTextColor={Colors.dark_primary_text}
+          cursorColor={Colors.dark_primary_text}
+        />
       </View>
-
     </SafeAreaView>
   );
 }
@@ -61,10 +81,10 @@ const styles = StyleSheet.create({
     color: Colors.dark_primary_text,
     borderBottomWidth: 1,
     borderBottomColor: Colors.dark_primary_text,
-    marginBottom:4, // delete
+    marginBottom: 4, // delete
   },
   deleteYellowBorder: {
     borderWidth: 1,
     borderColor: "yellow",
-  }
+  },
 });
