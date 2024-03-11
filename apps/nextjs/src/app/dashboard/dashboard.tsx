@@ -4,11 +4,12 @@
 // import { User } from "@feprep/auth";
 import { useRouter } from "next/navigation";
 
+import { Left } from "./components/left";
 // import { Button } from "@feprep/ui/button";
 
 // import { api } from "~/trpc/react";
 import { Nav } from "./components/nav";
-import { Left } from "./components/left";
+
 // import { Right } from "./components/right"; // for when this is implemented
 
 // export function Dashboard({ user }: { user: User | null }) {
@@ -22,16 +23,17 @@ import { Left } from "./components/left";
 
 export function Dashboard() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex h-screen flex-col">
       <Nav />
-    
+
       {/* <AuthButton user={user} /> */}
       <main className="flex flex-1">
-        <div className="w-1/2 h-full">
+        <div className="h-full w-1/2">
           <Left />
         </div>
-      
-        <div className="w-1/2 h-full bg-gray-200"> {/* Just a placeholder background for visibility */}
+
+        <div className="h-full w-1/2 bg-gray-200">
+          {/* Just a placeholder background for visibility */}
           {/* <Right /> */}
         </div>
       </main>
