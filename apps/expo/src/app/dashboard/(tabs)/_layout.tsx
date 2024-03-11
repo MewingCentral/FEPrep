@@ -12,7 +12,8 @@ export default function TabLayout() {
 
             // Tab colors
             tabBarActiveBackgroundColor: Colors.dark_sec,
-            tabBarInactiveBackgroundColor: Colors.dark_sec,
+            // tabBarInactiveBackgroundColor: Colors.dark_sec,
+            tabBarInactiveBackgroundColor: "#141f31",
             tabBarActiveTintColor: Colors.dark_primary_text,
             tabBarInactiveTintColor: Colors.dark_secondary_text,
 
