@@ -2,9 +2,6 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import { TRPCProvider } from "~/utils/api";
-// import { useColorScheme } from "nativewind";
-import Colors from "~/utils/colors";
-
 
 import "../styles.css";
 
@@ -19,9 +16,9 @@ export default function RootLayout() {
   return (
     <TRPCProvider>
       {/*
-            The Stack component displays the current page.
-            It also allows you to configure your screens 
-          */}
+          The Stack component displays the current page.
+          It also allows you to configure your screens 
+        */}
       <Stack
         screenOptions={{
           headerStyle: {
@@ -29,21 +26,14 @@ export default function RootLayout() {
               colorScheme == "dark" ? Colors.dark_sec : Colors.light_sec,
           },
           contentStyle: {
-            backgroundColor: Colors.dark_bg,
+            backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
           },
           headerTintColor:
             colorScheme == "dark"
               ? Colors.dark_primary_text
               : Colors.light_primary_text,
         }}
-      >
-        <Stack.Screen
-          name="(tabs)"
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack>
+      ></Stack>
       <StatusBar />
     </TRPCProvider>
   );

@@ -108,5 +108,4 @@ const styles = StyleSheet.create({
   buttonTxt: {
     color: "#f8fafc",
   },
-
 });
