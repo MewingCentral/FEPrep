@@ -1,14 +1,11 @@
 import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Stack } from "expo-router";
-
 import Colors from "../../../utils/colors";
 
 export default function Tab() {
     return(
         <SafeAreaView style={[styles.container, styles.screenContainer]}>
-
             {/* Search input */}
             <View style={{ flexDirection: "row" }}>
                 <View style={[styles.container, styles.inputContainer]}>
@@ -94,8 +91,4 @@ const styles = StyleSheet.create({
         color: Colors.dark_secondary_text,
         fontSize: 16,
     },
-    deleteYellowBorder: {
-        borderColor: "yellow",
-        borderWidth: 1,
-    }
 });
