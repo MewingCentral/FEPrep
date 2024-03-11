@@ -14,12 +14,12 @@ export function Dashboard() {
     <main>
       <Nav />
       {/* <AuthButton user={user} /> */}
-      <main className="flex flex-1">
-        <div className="h-full w-1/2">
+      <main className="flex flex-1 gap-6">
+        <div className="flex-1 h-full">
           <Left />
         </div>
 
-        <div className="h-full w-1/2 bg-gray-200">
+        <div className="flex-1 h-full">
           {/* Just a placeholder background for visibility */}
           {/* <Right /> */}
         </div>
