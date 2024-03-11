@@ -7,7 +7,7 @@ import "../styles.css";
 
 import { useColorScheme } from "nativewind";
 
-import Colors from "../utils/colors";
+import Colors from "~/utils/colors";
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
