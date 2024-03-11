@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-// import { User } from "@feprep/auth";
+import { User } from "@feprep/auth";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -9,26 +10,57 @@ import {
   RocketIcon,
   ShuffleIcon,
 } from "@feprep/ui";
+import { Button } from "@feprep/ui/button";
 import { Separator } from "@feprep/ui/separator";
 
-export function Nav() {
+import { api } from "~/trpc/react";
+
+export function Nav({ user }: { user: User | null }) {
+  function AuthButton({ user }: { user: User | null }) {
+    const { mutateAsync } = api.auth.signOut.useMutation();
+    const router = useRouter();
+
+    if (user) {
+      return (
+        <Button
+          onClick={async () => {
+            await mutateAsync();
+            router.push("/sign-in");
+          }}
+        >
+          Sign out
+        </Button>
+      );
+    }
+    return (
+      <h1 className="text-slate hidden text-left text-xl font-normal md:block">
+        Not Signed In
+      </h1>
+    );
+  }
   return (
     <main className="flex flex-row justify-start p-10">
       {/* left side */}
       <div className="flex flex-row gap-3">
-        <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
+        <Image
+          src="/Ellipse-3.svg"
+          width={25}
+          height={25}
+          alt="FEPrep Logo"
+          className="hidden md:block"
+        />
         <Link
           href="/"
-          className="text-left text-xl font-semibold hover:underline"
+          className="hidden text-left text-xl font-semibold hover:underline md:block"
         >
           FEPrep
         </Link>
         <Separator
           orientation="vertical"
           decorative={true}
-          className="w-0.5 bg-foreground"
+          className="hidden w-0.5 bg-foreground md:block"
         />
-        <h1 className="text-slate text-left text-xl font-normal  underline">
+        <h1 className="text-slate hidden text-left text-xl font-normal underline md:block">
           Topics
         </h1>
         <ArrowLeftIcon width="25" height="25" />
@@ -36,19 +68,24 @@ export function Nav() {
         <ShuffleIcon width="25" height="25" />
       </div>
       <div className="flex grow flex-row justify-center gap-2">
-        <LapTimerIcon width="25" height="25" />
-        <h1 className="text-slate text-left text-xl font-normal ">Timer</h1>
+        <LapTimerIcon width="25" height="25" className="hidden md:block" />
+        <h1 className="text-slate hidden text-left text-xl font-normal md:block">
+          Timer
+        </h1>
         <Separator
           orientation="vertical"
           decorative={true}
-          className="w-0.5 bg-foreground"
+          className="hidden w-0.5 bg-foreground md:block"
         />
-        <RocketIcon width="25" height="25" className="" />
-        <h1 className="text-slate text-left text-xl font-medium ">Solution</h1>
+        <RocketIcon width="25" height="25" className="hidden md:block" />
+        <h1 className="text-slate hidden text-left text-xl font-medium md:block">
+          Solution
+        </h1>
       </div>
       <div className="flex flex-row-reverse items-end gap-3">
-        <h1 className="text-slate text-left text-xl font-medium ">NID</h1>
-        <h1 className="text-slate text-left text-xl font-normal ">Welcome,</h1>
+        {/* <h1 className="text-slate text-left text-xl font-medium ">NID</h1>
+        <h1 className="text-slate text-left text-xl font-normal ">Welcome,</h1> */}
+        <AuthButton user={user} />
       </div>
     </main>
   );

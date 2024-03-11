@@ -1,7 +1,8 @@
 "use client";
 
 // import { useRouter } from "next/navigation";
-// import { User } from "@feprep/auth";
+import { User } from "@feprep/auth";
+
 import { Left } from "./components/left";
 // import { Button } from "@feprep/ui/button";
 
@@ -19,10 +20,10 @@ import { Nav } from "./components/nav";
 //   );
 // }
 
-export function Dashboard() {
+export function Dashboard({ user }: { user: User | null }) {
   return (
     <div className="flex h-screen flex-col">
-      <Nav />
+      <Nav user={user} />
 
       {/* <AuthButton user={user} /> */}
       <main className="flex flex-1">
