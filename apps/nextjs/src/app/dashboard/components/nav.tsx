@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+import "./nav.css";
+
 // import { User } from "@feprep/auth";
 import {
   ArrowLeftIcon,
