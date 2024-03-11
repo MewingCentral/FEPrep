@@ -6,29 +6,14 @@
 // import { Button } from "@feprep/ui/button";
 
 // import { api } from "~/trpc/react";
-// import { Nav } from "./components/nav";
-// import { Workbench } from "./components/workbench";
-
-// main function is here comment out for lint
-// export function Dashboard({ user }: { user: User | null }) {
-// main dashboard, commented out because LINT
-// export function Dashboard({ user }: { user: User | null }) {
-//   return (
-//     <main>
-//       <Nav />
-//       {/* <AuthButton user={user} /> */}
-//       <Workbench />
-//     </main>
-//   );
-// }
+import { Nav } from "./components/nav";
 
 export function Dashboard() {
   return (
     <main>
       <Nav />
-      <Workbench />
     </main>
-  );
+  )
 }
 
 // function AuthButton({ user }: { user: User | null }) {
