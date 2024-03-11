@@ -1,9 +1,9 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-// import { useColorScheme } from "nativewind";
-import Colors from "../../utils/colors";
 
 import { TRPCProvider } from "../../utils/api";
+// import { useColorScheme } from "nativewind";
+import Colors from "../../utils/colors";
 
 export default function dashboardLayout() {
   // const { colorScheme } = useColorScheme();
