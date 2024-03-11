@@ -13,7 +13,8 @@ export function Left() {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
-        <CardTitle>Section A: Basic Data Structures</CardTitle>
+        {/* This will need to be dynamic based on question */}
+        <CardTitle>Section A: Basic Data Structures | Spring 2024</CardTitle>
         <CardDescription>10 Points</CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
