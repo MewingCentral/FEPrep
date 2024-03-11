@@ -6,15 +6,41 @@ import Colors from "~/utils/colors";
 export default function cardCreation() {
     return (
         <SafeAreaView style={[styles.screenContainer]}>
-            <Text>card creation page</Text>
             {/* Title input */}
             <View style={{ flexDirection: "row" }}>
-                <View style={[styles.deleteYellowBorder, styles.inputContainer]}>
+                <View style={[styles.container, styles.titleInputContainer]}>
                     <TextInput 
-                        style={[styles.input]} 
+                        style={[styles.titleInput]} 
                         placeholder="Enter set title" 
                         placeholderTextColor={Colors.dark_secondary_text}
                         cursorColor={Colors.dark_primary_text}/>
+                </View>
+            </View>
+
+            {/* Card forms */}
+            <View style={[styles.deleteYellowBorder, styles.container, styles.cardsContainer]}>
+
+                {/* Individual card form */}
+                <View style={[styles.container, styles.cardContainer]}>
+                    <View style={[styles.termInputContainer]}>
+                        <TextInput 
+                            style={[styles.termInput]}
+                            placeholder="term"
+                            placeholderTextColor={Colors.dark_secondary_text}
+                            cursorColor={Colors.dark_primary_text}/>
+                    </View>
+
+                </View>
+
+                {/* Individual card form */}
+                <View style={[styles.container, styles.cardContainer]}>
+                    <View style={[styles.termInputContainer]}>
+                        <TextInput 
+                            style={[styles.termInput]}
+                            placeholder="term"
+                            placeholderTextColor={Colors.dark_secondary_text}
+                            cursorColor={Colors.dark_primary_text}/>
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
@@ -32,12 +58,32 @@ const styles = StyleSheet.create({
         alignContent: "center",
         alignItems: "center",
     },
-    inputContainer: {
+    titleInputContainer: {
         flex: 1,
         alignContent: "stretch",
         marginHorizontal: 20,
     },
-    input: {
+    cardsContainer: {
+        gap: 30,
+    },
+    cardContainer: {
+        alignContent: "stretch",
+        height: 200,
+        width: 300,
+        backgroundColor: Colors.dark_sec,
+        borderColor: "rgba(148, 163, 184, 0.50)",
+        borderWidth: 2,
+        borderRadius: 6,
+    },
+    termInputContainer: {
+        padding: 15,
+    },
+    titleInput: {
+        color: Colors.dark_primary_text,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.dark_primary_text,
+    },
+    termInput: {
         color: Colors.dark_primary_text,
         borderBottomWidth: 1,
         borderBottomColor: Colors.dark_primary_text,
