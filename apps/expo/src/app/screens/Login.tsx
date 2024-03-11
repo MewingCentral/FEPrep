@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
     verticalAlign: "bottom",
     paddingVertical: 20,
     alignSelf: 'center',
+    textAlign: "center",
     letterSpacing: 0.25,
   },
   signUpLink: {
