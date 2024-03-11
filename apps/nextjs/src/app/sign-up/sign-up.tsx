@@ -68,10 +68,10 @@ export default function SignUp() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>NID</FormLabel>
+                        <FormLabel>UCF Email</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="jd123456"
+                            placeholder="jd123456@ucf.edu"
                             autoComplete="email"
                             {...field}
                           />
