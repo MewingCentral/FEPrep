@@ -34,15 +34,16 @@ export default function Login () {
                 style={styles.nidTextField}
                 onChangeText={onChangeUserName}
                 value={username}
-                placeholder='NID'
+                placeholder=''
                 keyboardType="default"
               />
+              
               <Text style={styles.inputIdentifierText}> Password </Text>
               <TextInput
                 style={styles.pswdTextField}
                 onChangeText={onChangePassword}
                 value={password}
-                placeholder="Password"
+                placeholder=""
                 keyboardType="default"
               />
               <Link 
@@ -62,7 +63,7 @@ export default function Login () {
                   style={styles.signUpLink}
                   href="/Register"
                   > 
-                  {"Sign up"} 
+                  {"Register"} 
                 </Link>
               </Text>
             </View>
@@ -74,13 +75,6 @@ export default function Login () {
 }
 
 const styles = StyleSheet.create({
-
-////////////////////  definitely being used  ////////////////////  
-
-/*
- * 3 containers to separate the page & 1 container that 
- * they are all being stored in. all 4 are being used.
- */
   container: {
     flex: 1,
     justifyContent: "center",
@@ -103,85 +97,81 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8fafa",
     padding: 20,
   },
-
-/*
- * TOP CONTAINER: all items are definitely in use.
- */
   topContainerText: {
     fontSize: 22,
     fontWeight: '500',
-    color: "black",
+    color: "#020817",
     alignSelf: "flex-end",
   },
-
-/*
- * WELCOME CONTAINER
- */
   header: {
+    color: "#020817",
     fontSize: 24,
+    fontWeight: '500',
     alignSelf: "center",
     paddingBottom: 20,
   },
   nidTextField: {
+    color: "black",
     height: 40,
     margin: 12,
+    borderColor: "#CBD5E1",
     borderWidth: 1.25,
     borderRadius: 6,
     padding: 10,
-    color: "black",
   },
   pswdTextField: {
+    color: "black",
     height: 40,
     margin: 12,
+    borderColor: "#CBD5E1",
     borderWidth: 1.25,
     borderRadius: 6,
     padding: 10,
-    color: "black",
   },
   inputIdentifierText: {
+    color: "#020817",
     fontSize: 14,
+    fontWeight: '500',
     position: "relative",
     alignSelf: 'flex-start',
     paddingLeft: 8,
     letterSpacing: 0.25,
-    color: 'black'
   },
   forgotPswdLink: {
     textDecorationLine: 'underline',
+    color: "#020817",
     alignSelf: "flex-end",
     paddingRight: 9,
   },
-
-/*
- * LOGIN CONTAINER: all items are definitely in use.
- */
   loginBtn: {
+    backgroundColor: "#0F172A",  
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
     paddingVertical: 10,
     paddingHorizontal: 32,
-    borderRadius: 6,
+    borderRadius: 7,
     width: "75%",
-    backgroundColor: '#0f172a',
   },
   loginBtnText: {
+    color: "#FFFFFF",
     fontSize: 16,
+    fontWeight: '500',
     lineHeight: 21,
-    fontWeight: 'bold',
     letterSpacing: 0.25,
-    color: 'white',
   },
   contentText: {
+    color: "#020817",
     fontSize: 14,
     position: "relative",
     verticalAlign: "bottom",
     paddingVertical: 20,
     alignSelf: 'center',
     letterSpacing: 0.25,
-    color: 'black'
   },
   signUpLink: {
     textDecorationLine: 'underline',
+    color: "#020817",
+    fontWeight: '500',
   },
 });
