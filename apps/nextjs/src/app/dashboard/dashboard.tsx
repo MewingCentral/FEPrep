@@ -2,8 +2,6 @@
 
 // import { useRouter } from "next/navigation";
 // import { User } from "@feprep/auth";
-import { useRouter } from "next/navigation";
-
 import { Left } from "./components/left";
 // import { Button } from "@feprep/ui/button";
 
