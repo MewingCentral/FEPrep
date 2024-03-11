@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dashStyles";
@@ -22,10 +23,13 @@ export default function Tab() {
       {/* Study sets */}
       <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
         {/* Create new set button */}
-        <Pressable style={[styles.createSetButton]}>
-          <Text style={[dashStyles.titleText]}>Create set</Text>
-          <Text style={[dashStyles.titleText]}>+</Text>
-        </Pressable>
+        <Link style={[styles.createSetButton]} href="/cardCreation" asChild>
+          <Pressable>
+            <Text style={[dashStyles.titleText]}>Create set</Text>
+            <Text style={[dashStyles.titleText]}>+</Text>
+          </Pressable>
+        </Link>
+
         {/* Individual study set */}
         <View style={[dashStyles.container, dashStyles.setContainer]}>
           <View style={[dashStyles.setTextContainer]}>
