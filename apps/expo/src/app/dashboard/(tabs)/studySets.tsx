@@ -1,8 +1,6 @@
 import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Stack } from "expo-router";
-
 import Colors from "../../../utils/colors";
 
 export default function Tab() {
@@ -78,9 +76,5 @@ const styles = StyleSheet.create({
     setTerms: {
         color: Colors.dark_secondary_text,
         fontSize: 16,
-    },
-    deleteYellowBorder: {
-        borderColor: "yellow",
-        borderWidth: 1,
     }
 });
