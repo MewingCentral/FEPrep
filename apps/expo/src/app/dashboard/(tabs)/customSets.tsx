@@ -2,15 +2,16 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Colors from "~/utils/colors";
+import dashStyles from "~/utils/dashStyles";
 
 export default function Tab() {
   return (
-    <SafeAreaView style={[styles.container, styles.screenContainer]}>
+    <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       {/* Search input */}
       <View style={{ flexDirection: "row" }}>
-        <View style={[styles.container, styles.inputContainer]}>
+        <View style={[dashStyles.container, dashStyles.inputContainer]}>
           <TextInput
-            style={[styles.input]}
+            style={[dashStyles.input]}
             placeholder={"Enter set"}
             placeholderTextColor={Colors.dark_secondary_text}
             cursorColor={Colors.dark_primary_text}
@@ -19,17 +20,21 @@ export default function Tab() {
       </View>
 
       {/* Study sets */}
-      <View style={[styles.container, styles.allSetsContainer]}>
+      <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
         {/* Create new set button */}
         <Pressable style={[styles.createSetButton]}>
-          <Text style={[styles.titleText]}>Create set</Text>
-          <Text style={[styles.titleText]}>+</Text>
+          <Text style={[dashStyles.titleText]}>Create set</Text>
+          <Text style={[dashStyles.titleText]}>+</Text>
         </Pressable>
         {/* Individual study set */}
-        <View style={[styles.container, styles.setContainer]}>
-          <View style={[styles.setTextContainer]}>
-            <Text style={[styles.setText, styles.titleText]}>Set 1</Text>
-            <Text style={[styles.setText, styles.setTerms]}>15 terms</Text>
+        <View style={[dashStyles.container, dashStyles.setContainer]}>
+          <View style={[dashStyles.setTextContainer]}>
+            <Text style={[dashStyles.setText, dashStyles.titleText]}>
+              Set 1
+            </Text>
+            <Text style={[dashStyles.setText, dashStyles.setTerms]}>
+              15 terms
+            </Text>
           </View>
         </View>
       </View>
@@ -38,43 +43,6 @@ export default function Tab() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "column",
-    flexWrap: "wrap",
-    backgroundColor: Colors.dark_bg,
-  },
-  screenContainer: {
-    flexGrow: 1,
-    gap: 30,
-    alignContent: "center",
-    alignItems: "center",
-    backgroundColor: Colors.dark_bg,
-  },
-  inputContainer: {
-    flex: 1,
-    alignContent: "stretch",
-    marginHorizontal: 20,
-  },
-  allSetsContainer: {
-    gap: 20,
-  },
-  setContainer: {
-    height: 100,
-    width: 300,
-    backgroundColor: Colors.dark_sec,
-    borderColor: "rgba(148, 163, 184, 0.50)",
-    borderWidth: 2,
-    borderRadius: 6,
-  },
-  setTextContainer: {
-    justifyContent: "space-between",
-    height: 100,
-  },
-  input: {
-    color: Colors.dark_primary_text,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.dark_primary_text,
-  },
   createSetButton: {
     height: 60,
     width: 300,
@@ -84,16 +52,5 @@ const styles = StyleSheet.create({
     borderColor: Colors.dark_primary_text,
     borderWidth: 1,
     borderRadius: 6,
-  },
-  titleText: {
-    color: Colors.dark_primary_text,
-    fontSize: 20,
-  },
-  setText: {
-    margin: 10,
-  },
-  setTerms: {
-    color: Colors.dark_secondary_text,
-    fontSize: 16,
   },
 });
