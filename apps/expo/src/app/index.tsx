@@ -28,9 +28,7 @@ export default function HomePage() {
             asChild
           >
             <Pressable>
-              <Text style={[styles.text, styles.buttonTxt]}>
-                Register
-              </Text>
+              <Text style={[styles.text, styles.buttonTxt]}>Register</Text>
             </Pressable>
           </Link>
           <Text style={[styles.text]}>or</Text>
