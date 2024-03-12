@@ -23,7 +23,7 @@ export default function Tab() {
       {/* Study sets */}
       <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
         {/* Create new set button */}
-        <Link style={[styles.createSetButton]} href="/cardCreation" asChild>
+        <Link style={[styles.createSetButton]} href="../../cardCreation/create" asChild>
           <Pressable>
             <Text style={[dashStyles.titleText]}>Create set</Text>
             <Text style={[dashStyles.titleText]}>+</Text>
