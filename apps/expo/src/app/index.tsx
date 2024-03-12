@@ -24,12 +24,12 @@ export default function HomePage() {
         <View style={[styles.container, styles.buttonsContainer]}>
           <Link
             style={[styles.buttons, styles.signUpBtn]}
-            href="/screens/Login"
+            href="/screens/Register"
             asChild
           >
             <Pressable>
               <Text style={[styles.text, styles.buttonTxt]}>
-                Login
+                Register
               </Text>
             </Pressable>
           </Link>
