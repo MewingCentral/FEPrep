@@ -1,80 +1,80 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { View, KeyboardAvoidingView, TextInput, StyleSheet,
-  Text, Platform, TouchableWithoutFeedback, Keyboard, 
-  SafeAreaView, Pressable } from 'react-native';
+import React from "react";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { Link } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
-export default function Login () { 
-  const [username, onChangeUserName] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
+export default function Login() {
+  const [username, onChangeUserName] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
 
-  const [displayPswd, onChangeDisplayPswd] = React.useState(false);
+  // const [displayPswd, onChangeDisplayPswd] = React.useState(false);
 
-  const swapPswdVisibility = () => {
-    onChangeDisplayPswd(!displayPswd);
-  };
-  
+  // const swapPswdVisibility = () => {
+  //   onChangeDisplayPswd(!displayPswd);
+  // };
+
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        
         <SafeAreaView style={styles.container}>
-            <View style={styles.topContainer}>
+          <View style={styles.topContainer}>
+            <Text style={styles.topContainerText}> FEPrep</Text>
+          </View>
 
-              <Text style={styles.topContainerText}> FEPrep</Text>
-            </View>
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.header}>Welcome Back!</Text>
+            <Text style={styles.contentText}>
+              {"Login to begin studying for UCF's Foundation Exam \n"}
+            </Text>
 
-            <View style={styles.welcomeContainer}>
-              <Text style={styles.header}> 
-                Welcome Back! 
-              </Text>
-              <Text style={styles.contentText}>
-                {"Login to begin studying for UCF's Foundation Exam \n"}
-              </Text>
+            <Text style={styles.inputIdentifierText}> NID </Text>
+            <TextInput
+              style={styles.nidTextField}
+              onChangeText={onChangeUserName}
+              value={username}
+              placeholder=""
+              keyboardType="default"
+            />
 
-              <Text style={styles.inputIdentifierText}> NID </Text>
-              <TextInput
-                style={styles.nidTextField}
-                onChangeText={onChangeUserName}
-                value={username}
-                placeholder=''
-                keyboardType="default"
-              />
-              
-              <Text style={styles.inputIdentifierText}> Password </Text>
-                <TextInput
-                  style={styles.pswdTextField}
-                  onChangeText={onChangePassword}
-                  secureTextEntry={!displayPswd}
-                  value={password}
-                  placeholder=""
-                  keyboardType="default"
-                />
-              <Link 
-                  style={styles.forgotPswdLink}
-                  href="/screens/ForgotPswd"
-                  > 
-                  {"Forgot Password?"} 
+            <Text style={styles.inputIdentifierText}> Password </Text>
+            <TextInput
+              style={styles.pswdTextField}
+              onChangeText={onChangePassword}
+              secureTextEntry={!displayPswd}
+              value={password}
+              placeholder=""
+              keyboardType="default"
+            />
+            <Link style={styles.forgotPswdLink} href="/screens/ForgotPswd">
+              {"Forgot Password?"}
+            </Link>
+          </View>
+
+          <View style={styles.bottomContainer}>
+            <Pressable style={styles.loginBtn} onPress={() => null}>
+              <Text style={styles.loginBtnText}> {"Login"} </Text>
+            </Pressable>
+            <Text style={styles.contentText}>
+              {"Don't have an account? "}
+              <Link style={styles.registerLink} href="/screens/Register">
+                {"Register"}
               </Link>
-            </View>
-
-            <View style={styles.bottomContainer}> 
-              <Pressable style={styles.loginBtn} onPress={() => null}>
-                <Text style={styles.loginBtnText}> {"Login"} </Text>
-              </Pressable>
-              <Text style={styles.contentText}>
-                {"Don't have an account? "}
-                <Link 
-                  style={styles.registerLink}
-                  href="/screens/Register"
-                  > 
-                  {"Register"} 
-                </Link>
-              </Text>
-            </View>
+            </Text>
+          </View>
           <StatusBar style="auto" />
         </SafeAreaView>
       </TouchableWithoutFeedback>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8fafa",
   },
   topContainer: {
-    flex:.75,
+    flex: 0.75,
     backgroundColor: "#f8fafa",
     padding: 20,
   },
@@ -107,14 +107,14 @@ const styles = StyleSheet.create({
   },
   topContainerText: {
     fontSize: 22,
-    fontWeight: '500',
+    fontWeight: "500",
     color: "#020817",
     alignSelf: "flex-end",
   },
   header: {
     color: "#020817",
     fontSize: 24,
-    fontWeight: '500',
+    fontWeight: "500",
     alignSelf: "center",
     paddingBottom: 20,
   },
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   pswdInputContainer: {
-
     flex: 1,
     height: 40,
     margin: 12,
@@ -149,23 +148,23 @@ const styles = StyleSheet.create({
   inputIdentifierText: {
     color: "#020817",
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
     position: "relative",
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     paddingLeft: 8,
     letterSpacing: 0.25,
   },
   forgotPswdLink: {
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
     color: "#020817",
     alignSelf: "flex-end",
     paddingRight: 9,
   },
   loginBtn: {
-    backgroundColor: "#0F172A",  
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    backgroundColor: "#0F172A",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
     paddingVertical: 10,
     paddingHorizontal: 32,
     borderRadius: 7,
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
   loginBtnText: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     lineHeight: 21,
     letterSpacing: 0.25,
   },
@@ -184,13 +183,13 @@ const styles = StyleSheet.create({
     position: "relative",
     verticalAlign: "bottom",
     paddingVertical: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
     textAlign: "center",
     letterSpacing: 0.25,
   },
   registerLink: {
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
     color: "#020817",
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });

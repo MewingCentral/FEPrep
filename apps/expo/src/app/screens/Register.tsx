@@ -1,85 +1,88 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { View, KeyboardAvoidingView, TextInput, StyleSheet,
-  Text, Platform, TouchableWithoutFeedback, Keyboard, 
-  SafeAreaView, Pressable } from 'react-native';
+import React from "react";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { Link } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
-export default function Login () { 
-  const [username, onChangeUserName] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-  const [confirmPswd, onChangeConfirmPswd] = React.useState('');
-  
-  const [displayPswd, onChangeDisplayPswd] = React.useState(false);
+export default function Login() {
+  const [username, onChangeUserName] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
+  const [confirmPswd, onChangeConfirmPswd] = React.useState("");
 
-  const swapPswdVisibility = () => {
-    onChangeDisplayPswd(!displayPswd);
-  };
+  // const [displayPswd, onChangeDisplayPswd] = React.useState(false);
+
+  // const swapPswdVisibility = () => {
+  //   onChangeDisplayPswd(!displayPswd);
+  // };
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        
         <SafeAreaView style={styles.container}>
-            <View style={styles.topContainer}>
+          <View style={styles.topContainer}>
+            <Text style={styles.topContainerText}> FEPrep</Text>
+          </View>
 
-              <Text style={styles.topContainerText}> FEPrep</Text>
-            </View>
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.header}>{"Create an Account"}</Text>
+            <Text style={styles.subheaderText}>
+              {"Enter your NID to create your account. \n"}
+            </Text>
 
-            <View style={styles.welcomeContainer}>
-              <Text style={styles.header}> 
-                {"Create an Account"} 
-              </Text>
-              <Text style={styles.subheaderText}>
-                {"Enter your NID to create your account. \n"}
-              </Text>
+            <Text style={styles.inputIdentifierText}> NID </Text>
+            <TextInput
+              style={styles.nidTextField}
+              onChangeText={onChangeUserName}
+              value={username}
+              placeholder=""
+              keyboardType="default"
+            />
 
-              <Text style={styles.inputIdentifierText}> NID </Text>
-              <TextInput
-                style={styles.nidTextField}
-                onChangeText={onChangeUserName}
-                value={username}
-                placeholder=''
-                keyboardType="default"
-              />
-              
-              <Text style={styles.inputIdentifierText}> Password </Text>
-              <TextInput
-                style={styles.pswdTextField}
-                onChangeText={onChangePassword}
-                secureTextEntry={!displayPswd}
-                value={password}
-                placeholder=""
-                keyboardType="default"
-              />
+            <Text style={styles.inputIdentifierText}> Password </Text>
+            <TextInput
+              style={styles.pswdTextField}
+              onChangeText={onChangePassword}
+              secureTextEntry={!displayPswd}
+              value={password}
+              placeholder=""
+              keyboardType="default"
+            />
 
-              <Text style={styles.inputIdentifierText}> Confirm Password </Text>
-              <TextInput
-                style={styles.confirmPswdTextField}
-                onChangeText={onChangeConfirmPswd}
-                secureTextEntry={!displayPswd}
-                value={confirmPswd}
-                placeholder=''
-                keyboardType="default"
-              />
-            </View>
+            <Text style={styles.inputIdentifierText}> Confirm Password </Text>
+            <TextInput
+              style={styles.confirmPswdTextField}
+              onChangeText={onChangeConfirmPswd}
+              secureTextEntry={!displayPswd}
+              value={confirmPswd}
+              placeholder=""
+              keyboardType="default"
+            />
+          </View>
 
-            <View style={styles.bottomContainer}> 
-              <Pressable style={styles.loginBtn} onPress={() => null}>
-                <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
-              </Pressable>
-              <Text style={styles.contentText}>
-                {"Have an account already? "}
-                <Link 
-                  style={styles.signUpLink}
-                  href="/screens/Login"
-                  > 
-                  {"Login"} 
-                </Link>
-              </Text>
-            </View>
+          <View style={styles.bottomContainer}>
+            <Pressable style={styles.loginBtn} onPress={() => null}>
+              <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
+            </Pressable>
+            <Text style={styles.contentText}>
+              {"Have an account already? "}
+              <Link style={styles.signUpLink} href="/screens/Login">
+                {"Login"}
+              </Link>
+            </Text>
+          </View>
           <StatusBar style="auto" />
         </SafeAreaView>
       </TouchableWithoutFeedback>
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8fafa",
   },
   topContainer: {
-    flex:.5,
+    flex: 0.5,
     backgroundColor: "#f8fafa",
     padding: 20,
   },
@@ -112,14 +115,14 @@ const styles = StyleSheet.create({
   },
   topContainerText: {
     fontSize: 22,
-    fontWeight: '500',
+    fontWeight: "500",
     color: "#020817",
     alignSelf: "flex-end",
   },
   header: {
     color: "#020817",
     fontSize: 28,
-    fontWeight: '500',
+    fontWeight: "500",
     alignSelf: "center",
     paddingBottom: 7.5,
   },
@@ -164,18 +167,18 @@ const styles = StyleSheet.create({
   inputIdentifierText: {
     color: "#020817",
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
     position: "relative",
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     paddingLeft: 10,
     paddingTop: 4,
     letterSpacing: 0.25,
   },
   loginBtn: {
-    backgroundColor: "#0F172A",  
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    backgroundColor: "#0F172A",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
     paddingVertical: 10,
     paddingHorizontal: 32,
     borderRadius: 7,
@@ -184,7 +187,7 @@ const styles = StyleSheet.create({
   loginBtnText: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     lineHeight: 21,
     letterSpacing: 0.25,
   },
@@ -197,8 +200,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
   },
   signUpLink: {
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
     color: "#020817",
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });
