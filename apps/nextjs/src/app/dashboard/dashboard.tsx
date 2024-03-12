@@ -4,21 +4,10 @@
 import { User } from "@feprep/auth";
 
 import { Left } from "./components/left";
-// import { Button } from "@feprep/ui/button";
-
 // import { api } from "~/trpc/react";
 import { Nav } from "./components/nav";
 
 // import { Right } from "./components/right"; // for when this is implemented
-
-// export function Dashboard({ user }: { user: User | null }) {
-//   return (
-//     <main>
-//       <Nav />
-//       {/* <AuthButton user={user} /> */}
-//     </main>
-//   );
-// }
 
 export function Dashboard({ user }: { user: User | null }) {
   return (
@@ -39,26 +28,3 @@ export function Dashboard({ user }: { user: User | null }) {
     </div>
   );
 }
-
-// function AuthButton({ user }: { user: User | null }) {
-//   const { mutateAsync } = api.auth.signOut.useMutation();
-//   const router = useRouter();
-
-//   if (user) {
-//     return (
-//       <Button
-//         onClick={async () => {
-//           try {
-//             await mutateAsync();
-//             router.push("/sign-in");
-//           } catch {
-//             // noop
-//           }
-//         }}
-//       >
-//         Sign out
-//       </Button>
-//     );
-//   }
-//   return <div>Not signed in</div>;
-// }
