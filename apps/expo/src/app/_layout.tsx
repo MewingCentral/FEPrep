@@ -33,9 +33,9 @@ export default function RootLayout() {
               : Colors.light_primary_text,
         }}
       >
-        <Stack.Screen name="cardCreation" options={{
-          title: "Custom set: Untitled", // later todo : make this dynamic (custom set title)
-        }} />
+      <Stack.Screen name="cardCreation" options={{
+        headerShown: false,
+      }} />
       </Stack>
       <StatusBar />
     </TRPCProvider>
