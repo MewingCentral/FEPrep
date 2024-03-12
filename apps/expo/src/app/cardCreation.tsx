@@ -1,5 +1,7 @@
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { RadixIcon } from "radix-ui-react-native-icons";
 
 import Colors from "~/utils/colors";
 
@@ -18,7 +20,7 @@ export default function cardCreation() {
             </View>
 
             {/* Card forms */}
-            <View style={[styles.deleteYellowBorder, styles.container, styles.cardsContainer]}>
+            <View style={[styles.container, styles.cardsContainer]}>
 
                 {/* Individual card form */}
                 <View style={[styles.container, styles.cardContainer]}>
@@ -63,6 +65,11 @@ export default function cardCreation() {
                     </View>
                 </View>
             </View>
+
+            {/* Add more button */}
+            <Pressable>
+                <RadixIcon name="plus-circled" size="60" color={Colors.dark_primary_text} />
+            </Pressable>
         </SafeAreaView>
     );
 }
@@ -89,7 +96,7 @@ const styles = StyleSheet.create({
     cardContainer: {
         alignContent: "stretch",
         justifyContent: "space-between",
-        height: 200,
+        minHeight: 180,
         width: 300,
         backgroundColor: Colors.dark_sec,
         borderColor: "rgba(148, 163, 184, 0.50)",
