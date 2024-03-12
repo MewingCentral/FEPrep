@@ -8,9 +8,9 @@ export default function cardCreation() {
         <SafeAreaView style={[styles.screenContainer]}>
             {/* Title input */}
             <View style={{ flexDirection: "row" }}>
-                <View style={[styles.container, styles.titleInputContainer]}>
+                <View style={[styles.container, styles.inputContainer]}>
                     <TextInput 
-                        style={[styles.titleInput]} 
+                        style={[styles.input]} 
                         placeholder="Enter set title" 
                         placeholderTextColor={Colors.dark_secondary_text}
                         cursorColor={Colors.dark_primary_text}/>
@@ -22,24 +22,44 @@ export default function cardCreation() {
 
                 {/* Individual card form */}
                 <View style={[styles.container, styles.cardContainer]}>
-                    <View style={[styles.termInputContainer]}>
+                    <View style={[styles.cardInputContainer]}>
                         <TextInput 
-                            style={[styles.termInput]}
-                            placeholder="term"
+                            style={[styles.input]}
+                            placeholder="Enter term"
                             placeholderTextColor={Colors.dark_secondary_text}
                             cursorColor={Colors.dark_primary_text}/>
+                        <Text style={[styles.cardInputLabel]}>Term</Text>
+                    </View>
+
+                    <View style={[styles.cardInputContainer]}>
+                        <TextInput 
+                            style={[styles.input]}
+                            placeholder="Enter definition"
+                            placeholderTextColor={Colors.dark_secondary_text}
+                            cursorColor={Colors.dark_primary_text}/>
+                        <Text style={[styles.cardInputLabel]}>Definition</Text>
                     </View>
 
                 </View>
 
                 {/* Individual card form */}
                 <View style={[styles.container, styles.cardContainer]}>
-                    <View style={[styles.termInputContainer]}>
+                    <View style={[styles.cardInputContainer]}>
                         <TextInput 
-                            style={[styles.termInput]}
-                            placeholder="term"
+                            style={[styles.input]}
+                            placeholder="Enter term"
                             placeholderTextColor={Colors.dark_secondary_text}
                             cursorColor={Colors.dark_primary_text}/>
+                        <Text style={[styles.cardInputLabel]}>Term</Text>
+                    </View>
+
+                    <View style={[styles.cardInputContainer]}>
+                        <TextInput 
+                            style={[styles.input]}
+                            placeholder="Enter definition"
+                            placeholderTextColor={Colors.dark_secondary_text}
+                            cursorColor={Colors.dark_primary_text}/>
+                        <Text style={[styles.cardInputLabel]}>Definition</Text>
                     </View>
                 </View>
             </View>
@@ -58,7 +78,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
         alignItems: "center",
     },
-    titleInputContainer: {
+    inputContainer: {
         flex: 1,
         alignContent: "stretch",
         marginHorizontal: 20,
@@ -68,6 +88,7 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         alignContent: "stretch",
+        justifyContent: "space-between",
         height: 200,
         width: 300,
         backgroundColor: Colors.dark_sec,
@@ -75,21 +96,21 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 6,
     },
-    termInputContainer: {
+    cardInputContainer: {
         padding: 15,
+        gap: 10,
     },
-    titleInput: {
+    input: {
         color: Colors.dark_primary_text,
         borderBottomWidth: 1,
         borderBottomColor: Colors.dark_primary_text,
     },
-    termInput: {
+    cardInputLabel: {
         color: Colors.dark_primary_text,
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.dark_primary_text,
+        fontSize: 16,
     },
     deleteYellowBorder: {
         borderWidth: 1,
         borderColor: "yellow",
-    }
+    },
 });
