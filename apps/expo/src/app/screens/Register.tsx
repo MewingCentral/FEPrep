@@ -8,13 +8,14 @@ import { Link } from "expo-router";
 export default function Login () { 
   const [username, onChangeUserName] = React.useState('');
   const [password, onChangePassword] = React.useState('');
-
+  const [confirmPswd, onChangeConfirmPswd] = React.useState('');
+  
   const [displayPswd, onChangeDisplayPswd] = React.useState(false);
 
   const swapPswdVisibility = () => {
     onChangeDisplayPswd(!displayPswd);
   };
-  
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -29,10 +30,10 @@ export default function Login () {
 
             <View style={styles.welcomeContainer}>
               <Text style={styles.header}> 
-                Welcome Back! 
+                {"Create an Account"} 
               </Text>
-              <Text style={styles.contentText}>
-                {"Login to begin studying for UCF's Foundation Exam \n"}
+              <Text style={styles.subheaderText}>
+                {"Enter your NID to create your account. \n"}
               </Text>
 
               <Text style={styles.inputIdentifierText}> NID </Text>
@@ -45,33 +46,37 @@ export default function Login () {
               />
               
               <Text style={styles.inputIdentifierText}> Password </Text>
-                <TextInput
-                  style={styles.pswdTextField}
-                  onChangeText={onChangePassword}
-                  secureTextEntry={!displayPswd}
-                  value={password}
-                  placeholder=""
-                  keyboardType="default"
-                />
-              <Link 
-                  style={styles.forgotPswdLink}
-                  href="/screens/ForgotPswd"
-                  > 
-                  {"Forgot Password?"} 
-              </Link>
+              <TextInput
+                style={styles.pswdTextField}
+                onChangeText={onChangePassword}
+                secureTextEntry={!displayPswd}
+                value={password}
+                placeholder=""
+                keyboardType="default"
+              />
+
+              <Text style={styles.inputIdentifierText}> Confirm Password </Text>
+              <TextInput
+                style={styles.confirmPswdTextField}
+                onChangeText={onChangeConfirmPswd}
+                secureTextEntry={!displayPswd}
+                value={confirmPswd}
+                placeholder=''
+                keyboardType="default"
+              />
             </View>
 
             <View style={styles.bottomContainer}> 
               <Pressable style={styles.loginBtn} onPress={() => null}>
-                <Text style={styles.loginBtnText}> {"Login"} </Text>
+                <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
               </Pressable>
               <Text style={styles.contentText}>
-                {"Don't have an account? "}
+                {"Have an account already? "}
                 <Link 
-                  style={styles.registerLink}
-                  href="/screens/Register"
+                  style={styles.signUpLink}
+                  href="/screens/Login"
                   > 
-                  {"Register"} 
+                  {"Login"} 
                 </Link>
               </Text>
             </View>
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8fafa",
   },
   topContainer: {
-    flex:.75,
+    flex:.5,
     backgroundColor: "#f8fafa",
     padding: 20,
   },
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   bottomContainer: {
-    flex: 1.25,
+    flex: 2,
     backgroundColor: "#f8fafa",
     padding: 20,
   },
@@ -113,23 +118,22 @@ const styles = StyleSheet.create({
   },
   header: {
     color: "#020817",
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: '500',
     alignSelf: "center",
+    paddingBottom: 7.5,
+  },
+  subheaderText: {
+    color: "#6E727C",
+    fontSize: 12,
+    position: "relative",
     paddingBottom: 20,
+    alignSelf: "center",
+    letterSpacing: 0.25,
   },
   nidTextField: {
     color: "black",
-    height: 40,
-    margin: 12,
-    borderColor: "#CBD5E1",
-    borderWidth: 1.25,
-    borderRadius: 6,
-    padding: 10,
-  },
-  pswdInputContainer: {
-
-    flex: 1,
+    fontSize: 12,
     height: 40,
     margin: 12,
     borderColor: "#CBD5E1",
@@ -139,6 +143,17 @@ const styles = StyleSheet.create({
   },
   pswdTextField: {
     color: "black",
+    fontSize: 12,
+    height: 40,
+    margin: 12,
+    borderColor: "#CBD5E1",
+    borderWidth: 1.25,
+    borderRadius: 6,
+    padding: 10,
+  },
+  confirmPswdTextField: {
+    color: "black",
+    fontSize: 12,
     height: 40,
     margin: 12,
     borderColor: "#CBD5E1",
@@ -152,14 +167,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     position: "relative",
     alignSelf: 'flex-start',
-    paddingLeft: 8,
+    paddingLeft: 10,
+    paddingTop: 4,
     letterSpacing: 0.25,
-  },
-  forgotPswdLink: {
-    textDecorationLine: 'underline',
-    color: "#020817",
-    alignSelf: "flex-end",
-    paddingRight: 9,
   },
   loginBtn: {
     backgroundColor: "#0F172A",  
@@ -180,15 +190,13 @@ const styles = StyleSheet.create({
   },
   contentText: {
     color: "#020817",
-    fontSize: 14,
+    fontSize: 12,
     position: "relative",
-    verticalAlign: "bottom",
-    paddingVertical: 20,
-    alignSelf: 'center',
-    textAlign: "center",
+    padding: 20,
+    alignSelf: "center",
     letterSpacing: 0.25,
   },
-  registerLink: {
+  signUpLink: {
     textDecorationLine: 'underline',
     color: "#020817",
     fontWeight: '500',
