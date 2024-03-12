@@ -55,7 +55,7 @@ export default function Login() {
             <TextInput
               style={styles.pswdTextField}
               onChangeText={onChangePassword}
-              secureTextEntry={!displayPswd}
+              //secureTextEntry={!displayPswd}
               value={password}
               placeholder=""
               keyboardType="default"
@@ -65,7 +65,7 @@ export default function Login() {
             <TextInput
               style={styles.confirmPswdTextField}
               onChangeText={onChangeConfirmPswd}
-              secureTextEntry={!displayPswd}
+              //secureTextEntry={!displayPswd}
               value={confirmPswd}
               placeholder=""
               keyboardType="default"
