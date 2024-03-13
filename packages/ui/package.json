@@ -17,7 +17,8 @@
     "./badge": "./src/badge.tsx",
     "./scroll-area": "./src/scroll-area.tsx",
     "./table": "./src/table.tsx",
-    "./select": "./src/select.tsx"
+    "./select": "./src/select.tsx",
+    "./data-table": "./src/data-table.tsx"
   },
   "license": "MIT",
   "scripts": {
