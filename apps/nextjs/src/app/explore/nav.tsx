@@ -8,10 +8,7 @@ export function Nav() {
     <nav className="flex h-16 items-center justify-between px-6">
       <div className="mr-5 flex h-8 items-center gap-3">
         <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
-        <Link
-          href="/"
-          className="hidden text-left text-xl font-semibold hover:underline md:block"
-        >
+        <Link href="/" className="text-left text-xl font-semibold">
           FEPrep
         </Link>
         <Separator orientation="vertical" decorative />
