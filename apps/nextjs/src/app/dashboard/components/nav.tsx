@@ -70,23 +70,29 @@ export function Nav({ user }: { user: User | null }) {
       {/* center */}
       <div className="flex grow flex-row justify-center gap-2">
         <LapTimerIcon width="25" height="25" className="hidden md:block" />
-        <h1 className="text-slate hidden text-left text-xl font-normal md:block">
+        {/* Link onclick behavior to be updated once question section is done */}
+        <Link
+          className="text-slate hidden text-left text-xl font-normal md:block"
+          href="/dashboard"
+        >
           Timer
-        </h1>
+        </Link>
         <Separator
           orientation="vertical"
           decorative={true}
           className="hidden w-0.5 bg-foreground md:block"
         />
         <RocketIcon width="25" height="25" className="hidden md:block" />
-        <h1 className="text-slate hidden text-left text-xl font-medium md:block">
+        {/* Link onclick behavior to be updated once question section is done */}
+        <Link
+          className="text-slate hidden text-left text-xl font-medium md:block"
+          href="/dashboard"
+        >
           Solution
-        </h1>
+        </Link>
       </div>
       {/* right */}
       <div className="flex flex-1 flex-row-reverse items-end gap-3">
-        {/* <h1 className="text-slate text-left text-xl font-medium ">NID</h1>
-        <h1 className="text-slate text-left text-xl font-normal ">Welcome,</h1> */}
         <AuthButton user={user} />
       </div>
     </main>
