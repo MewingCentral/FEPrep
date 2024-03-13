@@ -27,6 +27,7 @@ export function Nav({ user }: { user: User | null }) {
             await mutateAsync();
             router.push("/sign-in");
           }}
+          className="hover:underline"
         >
           Sign out
         </Button>
@@ -72,7 +73,7 @@ export function Nav({ user }: { user: User | null }) {
         <LapTimerIcon width="25" height="25" className="hidden md:block" />
         {/* Link onclick behavior to be updated once question section is done */}
         <Link
-          className="text-slate hidden text-left text-xl font-normal md:block"
+          className="text-slate hidden text-left text-xl font-normal hover:underline md:block"
           href="/dashboard"
         >
           Timer
@@ -85,7 +86,7 @@ export function Nav({ user }: { user: User | null }) {
         <RocketIcon width="25" height="25" className="hidden md:block" />
         {/* Link onclick behavior to be updated once question section is done */}
         <Link
-          className="text-slate hidden text-left text-xl font-medium md:block"
+          className="text-slate hidden text-left text-xl font-medium hover:underline md:block"
           href="/dashboard"
         >
           Solution
