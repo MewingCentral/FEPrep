@@ -18,7 +18,8 @@
     "./scroll-area": "./src/scroll-area.tsx",
     "./table": "./src/table.tsx",
     "./select": "./src/select.tsx",
-    "./data-table": "./src/data-table.tsx"
+    "./data-table": "./src/data-table.tsx",
+    "./dropdown-menu": "./src/dropdown-menu.tsx"
   },
   "license": "MIT",
   "scripts": {
