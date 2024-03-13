@@ -13,7 +13,8 @@
     "./toast": "./src/toast.tsx",
     "./card": "./src/card.tsx",
     "./separator": "./src/separator.tsx",
-    "./tabs": "./src/tabs.tsx"
+    "./tabs": "./src/tabs.tsx",
+    "./badge": "./src/badge.tsx"
   },
   "license": "MIT",
   "scripts": {
