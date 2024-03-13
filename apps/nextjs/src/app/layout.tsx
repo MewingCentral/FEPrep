@@ -44,7 +44,12 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           GeistMono.variable,
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <TRPCReactProvider>{props.children}</TRPCReactProvider>
           <div className="fixed bottom-4 right-4">
             <ThemeToggle />
