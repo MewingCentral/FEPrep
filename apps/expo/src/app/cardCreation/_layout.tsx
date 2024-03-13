@@ -1,15 +1,17 @@
 import React from "react";
 import { Stack } from "expo-router";
-
 import { useColorScheme } from "nativewind";
 
-import Colors from "~/utils/colors";
-import headerDefault from "~/utils/headerDefault";
+import headerDefault from "~/utils/header-default";
 
 export default function cardCreationLayout() {
     const { colorScheme } = useColorScheme();
+    
     return (
-        <Stack screenOptions={headerDefault}>
+        <Stack screenOptions={headerDefault(colorScheme)}>
+            <Stack.Screen name="create" options={{
+                title: "Custom set: Untitled",
+            }} />
         </Stack>
     );
 };

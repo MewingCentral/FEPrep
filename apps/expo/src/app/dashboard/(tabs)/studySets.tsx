@@ -2,7 +2,7 @@ import { Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Colors from "~/utils/colors";
-import dashStyles from "~/utils/dashStyles";
+import dashStyles from "~/utils/dash-styles";
 
 export default function Tab() {
   return (
