@@ -34,9 +34,12 @@ export function Nav({ user }: { user: User | null }) {
       );
     }
     return (
-      <h1 className="text-slate hidden text-left text-xl font-normal md:block">
+      <Link
+        className="text-slate hidden text-left text-xl font-normal hover:underline md:block"
+        href="/sign-up"
+      >
         Not Signed In
-      </h1>
+      </Link>
     );
   }
   return (
