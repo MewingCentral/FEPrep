@@ -4,7 +4,7 @@ import { useColorScheme } from "nativewind";
 
 import headerDefault from "~/utils/header-default";
 
-export default function cardCreationLayout() {
+export default function CardCreationLayout() {
     const { colorScheme } = useColorScheme();
 
     return (
@@ -14,4 +14,4 @@ export default function cardCreationLayout() {
             }} />
         </Stack>
     );
-};
+}
