@@ -15,7 +15,8 @@
     "./separator": "./src/separator.tsx",
     "./tabs": "./src/tabs.tsx",
     "./badge": "./src/badge.tsx",
-    "./scroll-area": "./src/scroll-area.tsx"
+    "./scroll-area": "./src/scroll-area.tsx",
+    "./table": "./src/table.tsx"
   },
   "license": "MIT",
   "scripts": {
