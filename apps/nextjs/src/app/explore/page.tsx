@@ -1,5 +1,3 @@
-import { Button } from "@feprep/ui/button";
-import { Input } from "@feprep/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 
 import { Nav } from "./nav";
@@ -8,7 +6,7 @@ import { StudySetsTab } from "./study-sets-tab";
 
 export default function Explore() {
   return (
-    <div className="flex flex-col lg:h-screen">
+    <div className="mx-auto flex h-screen w-full max-w-screen-lg flex-col">
       <Nav />
       <Tabs
         className="flex flex-1 flex-col p-6 lg:min-h-0"
@@ -19,10 +17,6 @@ export default function Explore() {
             <TabsTrigger value="problems">Problems</TabsTrigger>
             <TabsTrigger value="study">Study Sets</TabsTrigger>
           </TabsList>
-          <div className="flex w-full max-w-sm items-center space-x-2">
-            <Input type="text" placeholder="Search" />
-            <Button type="submit">Search</Button>
-          </div>
         </div>
 
         <TabsContent value="problems">
