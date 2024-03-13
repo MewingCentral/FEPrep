@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-import { User } from "@feprep/auth";
+import type { User } from "@feprep/auth";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -39,21 +41,28 @@ export function Nav({ user }: { user: User | null }) {
   return (
     <main className="flex flex-row justify-start p-6">
       {/* left side */}
-      <div className="flex flex-row gap-3">
-        <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
+      <div className="mr-5 flex flex-1 flex-row gap-3">
+        <Image
+          src="/Ellipse-3.svg"
+          width={25}
+          height={25}
+          alt="FEPrep Logo"
+          className="hidden md:block"
+        />
         <Link
           href="/"
-          className="link link-underline link-underline-black text-left text-xl font-semibold transition-all duration-300 ease-in-out"
+          className="hidden text-left text-xl font-semibold hover:underline md:block"
         >
           FEPrep
         </Link>
-        {/* add div line here */}
-        <Link
-          className="text-slate link link-underline-show text-left text-xl font-normal"
-          href="/dashboard"
-        >
+        <Separator
+          orientation="vertical"
+          decorative={true}
+          className="hidden w-0.5 bg-foreground md:block"
+        />
+        <h1 className="text-slate hidden text-left text-xl font-normal underline md:block">
           Topics
-        </Link>
+        </h1>
         <ArrowLeftIcon width="25" height="25" />
         <ArrowRightIcon width="25" height="25" />
         <ShuffleIcon width="25" height="25" />

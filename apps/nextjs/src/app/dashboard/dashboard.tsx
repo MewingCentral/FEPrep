@@ -1,27 +1,29 @@
 "use client";
 
 // import { useRouter } from "next/navigation";
+import type { User } from "@feprep/auth";
 
-// import { User } from "@feprep/auth";
-// import { Button } from "@feprep/ui/button";
-
+import { Left } from "./components/left";
 // import { api } from "~/trpc/react";
 import { Nav } from "./components/nav";
-import { Right } from "./components/right"; // for when this is implemented
+import { Right } from "./components/right";
 
-export function Dashboard() {
+// import { Right } from "./components/right"; // for when this is implemented
+
+export function Dashboard({ user }: { user: User | null }) {
   return (
-    <main>
-      <Nav />
+    <div className="flex h-screen flex-col">
+      <Nav user={user} />
+
       {/* <AuthButton user={user} /> */}
-      <main className="flex flex-1 gap-6">
+      <main className="flex flex-1 gap-4 p-4">
         <div className="h-full flex-1">
           <Left />
         </div>
 
         <div className="h-full flex-1">
           {/* Just a placeholder background for visibility */}
-          {/* <Right /> */}
+          <Right />
         </div>
       </main>
     </div>
