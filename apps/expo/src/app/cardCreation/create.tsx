@@ -5,6 +5,8 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 
 import Colors from "~/utils/colors";
 
+import CardInput from "./components/CardInput";
+
 export default function cardCreation() {
     return (
         <SafeAreaView style={[styles.screenContainer]}>
@@ -41,7 +43,6 @@ export default function cardCreation() {
                             cursorColor={Colors.dark_primary_text}/>
                         <Text style={[styles.cardInputLabel]}>Definition</Text>
                     </View>
-
                 </View>
 
                 {/* Individual card form */}

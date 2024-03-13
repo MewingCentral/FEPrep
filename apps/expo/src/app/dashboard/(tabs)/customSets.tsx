@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 
 import Colors from "~/utils/colors";
-import dashStyles from "~/utils/dashStyles";
+import dashStyles from "~/utils/dash-styles";
 
 export default function Tab() {
   return (
