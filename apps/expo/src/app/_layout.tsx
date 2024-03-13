@@ -7,7 +7,7 @@ import "../styles.css";
 
 import { useColorScheme } from "nativewind";
 
-import Colors from "~/utils/colors";
+import headerDefault from "~/utils/header-default";
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
@@ -20,18 +20,7 @@ export default function RootLayout() {
           It also allows you to configure your screens 
         */}
       <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: colorScheme == "dark" ? "#1e293b" : "#f1f5f9",
-          },
-          contentStyle: {
-            backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
-          },
-          headerTintColor:
-            colorScheme == "dark"
-              ? Colors.dark_primary_text
-              : Colors.light_primary_text,
-        }}
+        screenOptions={headerDefault(colorScheme)}
       >
       <Stack.Screen name="cardCreation" options={{
         headerShown: false,

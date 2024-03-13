@@ -2,11 +2,12 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import { TRPCProvider } from "~/utils/api";
-// import { useColorScheme } from "nativewind";
-import Colors from "~/utils/colors";
+import { useColorScheme } from "nativewind";
+
+import headerDefault from "~/utils/header-default";
 
 export default function dashboardLayout() {
-  // const { colorScheme } = useColorScheme();
+  const { colorScheme } = useColorScheme();
   return (
     <TRPCProvider>
       {/*
@@ -14,14 +15,7 @@ export default function dashboardLayout() {
             It also allows you to configure your screens 
           */}
       <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.dark_sec,
-          },
-          contentStyle: {
-            backgroundColor: Colors.dark_bg,
-          },
-        }}
+        screenOptions={headerDefault(colorScheme)}
       >
         <Stack.Screen
           name="(tabs)"

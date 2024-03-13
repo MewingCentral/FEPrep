@@ -26,7 +26,7 @@ export default function headerDefault(colorScheme) {
             colorScheme == "dark" ? Colors.dark_sec : Colors.light_sec,
         },
         contentStyle: {
-          backgroundColor: colorScheme == "dark" ? "#020817" : "#F8FAFC",
+          backgroundColor: colorScheme == "dark" ? Colors.dark_bg : Colors.light_bg,
         },
         headerTintColor:
           colorScheme == "dark"

@@ -6,7 +6,7 @@ import headerDefault from "~/utils/header-default";
 
 export default function cardCreationLayout() {
     const { colorScheme } = useColorScheme();
-    
+
     return (
         <Stack screenOptions={headerDefault(colorScheme)}>
             <Stack.Screen name="create" options={{
