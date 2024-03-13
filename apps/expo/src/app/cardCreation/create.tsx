@@ -5,8 +5,6 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 
 import Colors from "~/utils/colors";
 
-import CardInput from "./components/CardInput";
-
 export default function cardCreation() {
     return (
         <SafeAreaView style={[styles.screenContainer]}>
@@ -69,7 +67,7 @@ export default function cardCreation() {
 
             {/* Add more button */}
             <Pressable>
-                <RadixIcon name="plus-circled" size="60" color={Colors.dark_primary_text} />
+                <RadixIcon name="plus-circled" size={60} color={Colors.dark_primary_text} />
             </Pressable>
         </SafeAreaView>
     );
