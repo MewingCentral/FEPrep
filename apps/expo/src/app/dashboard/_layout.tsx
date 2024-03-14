@@ -1,9 +1,8 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-
-import { TRPCProvider } from "~/utils/api";
 import { useColorScheme } from "nativewind";
 
+import { TRPCProvider } from "~/utils/api";
 import headerDefault from "~/utils/header-default";
 
 export default function DashboardLayout() {
@@ -14,9 +13,7 @@ export default function DashboardLayout() {
             The Stack component displays the current page.
             It also allows you to configure your screens 
           */}
-      <Stack
-        screenOptions={headerDefault(colorScheme)}
-      >
+      <Stack screenOptions={headerDefault(colorScheme)}>
         <Stack.Screen
           name="(tabs)"
           options={{

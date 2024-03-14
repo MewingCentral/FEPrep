@@ -19,12 +19,13 @@ export default function RootLayout() {
           The Stack component displays the current page.
           It also allows you to configure your screens 
         */}
-      <Stack
-        screenOptions={headerDefault(colorScheme)}
-      >
-      <Stack.Screen name="cardCreation" options={{
-        headerShown: false,
-      }} />
+      <Stack screenOptions={headerDefault(colorScheme)}>
+        <Stack.Screen
+          name="cardCreation"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
       <StatusBar />
     </TRPCProvider>
