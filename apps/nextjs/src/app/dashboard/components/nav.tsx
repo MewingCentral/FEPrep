@@ -57,18 +57,14 @@ export function Nav({ user }: { user: User | null }) {
     <main className="flex flex-row justify-start p-6">
       {/* left side */}
       <div className="mr-5 flex flex-1 flex-row gap-3">
-        <Image
-          src="/Ellipse-3.svg"
-          width={25}
-          height={25}
-          alt="FEPrep Logo"
-          className="hidden md:block"
-        />
-        <Link
-          href="/"
-          className="hidden text-left text-xl font-semibold hover:underline md:block"
-        >
-          FEPrep
+        <Link href="/">
+          <Image
+            src="/Ellipse-3.svg"
+            width={25}
+            height={25}
+            alt="FEPrep Logo"
+            className="hidden transition-transform duration-200 hover:scale-125 md:block"
+          />
         </Link>
         <Separator
           orientation="vertical"
