@@ -34,12 +34,23 @@ export function Nav({ user }: { user: User | null }) {
       );
     }
     return (
-      <Link
-        className="text-slate hidden text-left text-xl font-normal hover:underline md:block"
-        href="/sign-up"
-      >
-        Not Signed In
-      </Link>
+      <div className="flex flex-row gap-2">
+        <Link
+          className="hidden text-left text-lg font-medium text-muted-foreground transition-all duration-200 hover:text-foreground md:block"
+          href="/sign-up"
+        >
+          Register
+        </Link>
+        <p className="hidden text-lg font-normal text-muted-foreground md:block">
+          or
+        </p>
+        <Link
+          className="hidden text-left text-lg font-medium text-muted-foreground transition-all duration-200 hover:text-foreground md:block"
+          href="/sign-in"
+        >
+          Sign in
+        </Link>
+      </div>
     );
   }
   return (
