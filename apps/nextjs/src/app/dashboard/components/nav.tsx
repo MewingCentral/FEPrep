@@ -71,35 +71,51 @@ export function Nav({ user }: { user: User | null }) {
           decorative={true}
           className="hidden w-0.5 bg-foreground md:block"
         />
-        <h1 className="text-slate hidden text-left text-xl font-normal underline md:block">
-          Topics
-        </h1>
-        <ArrowLeftIcon width="25" height="25" />
-        <ArrowRightIcon width="25" height="25" />
-        <ShuffleIcon width="25" height="25" />
-      </div>
-      {/* center */}
-      <div className="flex grow flex-row justify-center gap-2">
-        <LapTimerIcon width="25" height="25" className="hidden md:block" />
-        {/* Link onclick behavior to be updated once question section is done */}
+        {/* Link onclick behavior to be updated once topics component is done */}
         <Link
-          className="text-slate hidden text-left text-xl font-normal hover:underline md:block"
+          className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:text-muted-foreground md:block"
           href="/dashboard"
         >
-          Timer
+          Topics
+        </Link>
+        {/* Icon onclick behavior to be updated once question section is done */}
+        <ArrowLeftIcon
+          width="25"
+          height="25"
+          className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
+        />
+        <ArrowRightIcon
+          width="25"
+          height="25"
+          className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
+        />
+        <ShuffleIcon
+          width="25"
+          height="25"
+          className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
+        />
+      </div>
+      {/* center */}
+      <div className="flex grow flex-row justify-center gap-3">
+        {/* Link onclick behavior to be updated once question section is done */}
+        <Link
+          className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center"
+          href="/dashboard"
+        >
+          <LapTimerIcon width="25" height="25" className="hidden md:block" />{" "}
+          <span>Timer</span>
         </Link>
         <Separator
           orientation="vertical"
           decorative={true}
           className="hidden w-0.5 bg-foreground md:block"
         />
-        <RocketIcon width="25" height="25" className="hidden md:block" />
-        {/* Link onclick behavior to be updated once question section is done */}
         <Link
-          className="text-slate hidden text-left text-xl font-medium hover:underline md:block"
+          className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center"
           href="/dashboard"
         >
-          Solution
+          <RocketIcon width="25" height="25" className="hidden md:block" />{" "}
+          <span>Solution</span>
         </Link>
       </div>
       {/* right */}
