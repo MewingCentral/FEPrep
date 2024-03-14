@@ -5,13 +5,16 @@ import { useColorScheme } from "nativewind";
 import headerDefault from "~/utils/header-default";
 
 export default function CardCreationLayout() {
-    const { colorScheme } = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
-    return (
-        <Stack screenOptions={headerDefault(colorScheme)}>
-            <Stack.Screen name="create" options={{
-                title: "Custom set: Untitled",
-            }} />
-        </Stack>
-    );
+  return (
+    <Stack screenOptions={headerDefault(colorScheme)}>
+      <Stack.Screen
+        name="create"
+        options={{
+          title: "Custom set: Untitled",
+        }}
+      />
+    </Stack>
+  );
 }
