@@ -18,7 +18,7 @@ export function Dashboard({ user }: { user: User | null }) {
         decorative={true}
         className=" w-screen border bg-card"
       />
-      <main className="flex flex-1 gap-4 p-4">
+      <main className="flex flex-1 gap-4 overflow-hidden p-4">
         <div className="h-full flex-1">
           <Left _id=" " />
         </div>
