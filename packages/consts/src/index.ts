@@ -1,6 +1,6 @@
-export const difficulties = ["Easy", "Medium", "Hard"] as const;
+export const DIFFICULTIES = ["Easy", "Medium", "Hard"] as const;
 
-export const semesters = [
+export const SEMESTERS = [
   "Fall 2024",
   "Summer 2024",
   "Spring 2024",
@@ -12,7 +12,7 @@ export const semesters = [
   "Spring 2022",
 ] as const;
 
-export const topics = [
+export const TOPICS = [
   "Algorithm Analysis",
   "AVL Trees",
   "Base Conversion",
