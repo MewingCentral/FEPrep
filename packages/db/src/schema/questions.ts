@@ -15,16 +15,16 @@ export const questions = sqliteTable("question", {
   question: text("question").notNull(),
   solution: text("solution").notNull(),
   averageScore: real("average_score").default(0),
-  easyVotes: integer("easy_votes").default(0),
-  mediumVotes: integer("medium_votes").default(0),
-  hardVotes: integer("hard_votes").default(0),
+  easyVotes: integer("easy_votes").notNull().default(0),
+  mediumVotes: integer("medium_votes").notNull().default(0),
+  hardVotes: integer("hard_votes").notNull().default(0),
   points: integer("points").default(0),
   semester: text("semester", { enum: SEMESTERS }).notNull(),
   topic: text("topic", { enum: TOPICS }).notNull(),
   section: text("section", { enum: SECTIONS }).notNull(),
   questionNumber: integer("question_number").notNull(),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text("updated_at").default(sql`CURRENT_TIM ESTAMP`),
+  updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
 export const resources = sqliteTable("resource", {
