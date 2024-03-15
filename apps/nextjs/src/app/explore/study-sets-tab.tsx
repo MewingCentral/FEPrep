@@ -7,7 +7,7 @@ export function StudySetsTab() {
       <ScrollArea className="rounded-md border p-8 md:flex-1">
         <div className="mb-8">
           <h1 className="mb-4 text-2xl font-semibold">Study your favorites</h1>
-          <div className="relative h-48 rounded-md bg-accent p-4">
+          <div className="relative h-48 w-full rounded-md bg-accent p-4">
             <div className="mb-2 text-xl font-semibold">My Favorites</div>
             <div>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
             <div className="absolute bottom-4 left-4">
@@ -22,7 +22,10 @@ export function StudySetsTab() {
         </div>
         <div className="flex flex-col gap-4">
           {new Array(4).fill(null).map((_, index) => (
-            <div className="relative h-48 rounded-md bg-accent p-4" key={index}>
+            <div
+              className="relative h-48 w-full rounded-md bg-accent p-4"
+              key={index}
+            >
               <div className="mb-2 text-xl font-semibold">
                 Study Set {index + 1}
               </div>
@@ -37,11 +40,14 @@ export function StudySetsTab() {
         </div>
       </ScrollArea>
 
-      <ScrollArea className="rounded-md border p-8 md:flex-[2]">
+      <ScrollArea className="rounded-md border p-8 md:flex-1">
         <h1 className="mb-4 text-2xl font-semibold">Our Sets</h1>
-        <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
+        <div className="flex flex-col gap-4">
           {new Array(8).fill(null).map((_, index) => (
-            <div className="relative h-48 rounded-md bg-accent p-4" key={index}>
+            <div
+              className="relative h-48 w-full rounded-md bg-accent p-4"
+              key={index}
+            >
               <div className="mb-2 text-xl font-semibold">
                 Study Set {index + 1}
               </div>
