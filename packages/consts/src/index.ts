@@ -30,3 +30,9 @@ export const TOPICS = [
   "Summations",
   "Tries",
 ] as const;
+
+export const SECTIONS = [
+  "Section A: Basic Data Structures",
+  "Section B: Advanced Data Structures",
+  "Section C: Algorithm Analysis",
+] as const;
