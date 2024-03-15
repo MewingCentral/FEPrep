@@ -12,12 +12,10 @@ export default function Explore() {
         className="flex flex-1 flex-col p-6 lg:min-h-0"
         defaultValue="problems"
       >
-        <div className="mb-8 flex items-center justify-between">
-          <TabsList className="mr-2">
-            <TabsTrigger value="problems">Problems</TabsTrigger>
-            <TabsTrigger value="study">Study Sets</TabsTrigger>
-          </TabsList>
-        </div>
+        <TabsList className="mb-8 self-start">
+          <TabsTrigger value="problems">Problems</TabsTrigger>
+          <TabsTrigger value="study">Study Sets</TabsTrigger>
+        </TabsList>
 
         <TabsContent value="problems">
           <ProblemsTab />
