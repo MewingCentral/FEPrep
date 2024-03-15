@@ -14,17 +14,17 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@knighthacks/eslint-config": "workspace:*",
-    "@knighthacks/prettier-config": "workspace:*",
-    "@knighthacks/tsconfig": "workspace:*",
+    "@feprep/eslint-config": "workspace:*",
+    "@feprep/prettier-config": "workspace:*",
+    "@feprep/tsconfig": "workspace:*",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   },
   "eslintConfig": {
     "extends": [
-      "@knighthacks/eslint-config/base"
+      "@feprep/eslint-config/base"
     ]
   },
-  "prettier": "@knighthacks/prettier-config"
+  "prettier": "@feprep/prettier-config"
 }
