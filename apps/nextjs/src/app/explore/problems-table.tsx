@@ -1,6 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -10,7 +11,24 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import type { RouterOutputs } from "@feprep/api";
+import { DIFFICULTIES, SEMESTERS, TOPICS } from "@feprep/consts";
+import {
+  ChevronDownIcon,
+  MagnifyingGlassIcon,
+  ReloadIcon,
+  ShuffleIcon,
+} from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@feprep/ui/dropdown-menu";
+import { Input } from "@feprep/ui/input";
 import {
   Table,
   TableBody,
@@ -20,15 +38,13 @@ import {
   TableRow,
 } from "@feprep/ui/table";
 
-interface DataTableProps<Data, Value> {
-  columns: ColumnDef<Data, Value>[];
-  data: Data[];
-}
-
-export function ProblemsTable<Data, Value>({
+export function ProblemsTable({
   columns,
   data,
-}: DataTableProps<Data, Value>) {
+}: {
+  columns: ColumnDef<RouterOutputs["questions"]["all"][number]>[];
+  data: RouterOutputs["questions"]["all"];
+}) {
   const table = useReactTable({
     data,
     columns,
@@ -40,7 +56,23 @@ export function ProblemsTable<Data, Value>({
 
   return (
     <div>
-      <div className="my-4 rounded-md border">
+      {/* Filtering options */}
+      <div className="mb-4 flex items-center gap-2">
+        <TopicsDropdownMenu />
+        <DifficultyDropdownMenu />
+        <SemesterDropdownMenu />
+        <div className="relative flex flex-1 items-center">
+          <MagnifyingGlassIcon className="absolute left-2.5 text-muted-foreground" />
+          <Input className="pl-8" placeholder="Search questions" />
+        </div>
+        <Button>
+          <ShuffleIcon className="mr-2 h-4 w-4" />
+          Pick One
+        </Button>
+      </div>
+
+      {/* List of questions */}
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -90,24 +122,138 @@ export function ProblemsTable<Data, Value>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
     </div>
+  );
+}
+
+export function TopicsDropdownMenu() {
+  const [selectedTopics, setSelectedTopics] = useState<
+    (typeof TOPICS)[number][]
+  >([]);
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button>
+          <span>Topics</span>
+          <ChevronDownIcon className="ml-2 h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {TOPICS.map((topic) => (
+          <DropdownMenuCheckboxItem
+            key={topic}
+            checked={selectedTopics.includes(topic)}
+            onSelect={(e) => e.preventDefault()}
+            onCheckedChange={(checked) => {
+              setSelectedTopics((prev) => {
+                if (checked) {
+                  return [...prev, topic];
+                }
+                return prev.filter((t) => t !== topic);
+              });
+            }}
+          >
+            {topic}
+          </DropdownMenuCheckboxItem>
+        ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onSelect={(e) => e.preventDefault()}
+          onClick={() => setSelectedTopics([])}
+        >
+          <ReloadIcon className="mr-2 h-4 w-4" />
+          <span>Reset</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+export function DifficultyDropdownMenu() {
+  const [selectedDifficulties, setSelectedDifficulties] = useState<
+    (typeof DIFFICULTIES)[number][]
+  >([]);
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button>
+          <span>Difficulties</span>
+          <ChevronDownIcon className="ml-2 h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {DIFFICULTIES.map((difficulty) => (
+          <DropdownMenuCheckboxItem
+            key={difficulty}
+            checked={selectedDifficulties.includes(difficulty)}
+            onSelect={(e) => e.preventDefault()}
+            onCheckedChange={(checked) => {
+              setSelectedDifficulties((prev) => {
+                if (checked) {
+                  return [...prev, difficulty];
+                }
+                return prev.filter((d) => d !== difficulty);
+              });
+            }}
+          >
+            {difficulty}
+          </DropdownMenuCheckboxItem>
+        ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onSelect={(e) => e.preventDefault()}
+          onClick={() => setSelectedDifficulties([])}
+        >
+          <ReloadIcon className="mr-2 h-4 w-4" />
+          <span>Reset</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+export function SemesterDropdownMenu() {
+  const [selectedSemesters, setSelectedSemesters] = useState<
+    (typeof SEMESTERS)[number][]
+  >([]);
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button>
+          <span>Semesters</span>
+          <ChevronDownIcon className="ml-2 h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {SEMESTERS.map((semester) => (
+          <DropdownMenuCheckboxItem
+            key={semester}
+            onSelect={(e) => e.preventDefault()}
+            checked={selectedSemesters.includes(semester)}
+            onCheckedChange={(checked) => {
+              setSelectedSemesters((prev) => {
+                if (checked) {
+                  return [...prev, semester];
+                }
+                return prev?.filter((s) => s !== semester);
+              });
+            }}
+          >
+            {semester}
+          </DropdownMenuCheckboxItem>
+        ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onSelect={(e) => e.preventDefault()}
+          onClick={() => setSelectedSemesters([])}
+        >
+          <ReloadIcon className="mr-2 h-4 w-4" />
+          <span>Reset</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
