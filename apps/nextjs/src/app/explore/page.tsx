@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 
 import { Nav } from "./nav";
-import { ProblemsTab } from "./problems-tab";
+import { QuestionsTab } from "./questions-tab";
 import { StudySetsTab } from "./study-sets-tab";
 
 export default function Explore() {
@@ -10,15 +10,15 @@ export default function Explore() {
       <Nav />
       <Tabs
         className="flex flex-1 flex-col p-6 lg:min-h-0"
-        defaultValue="problems"
+        defaultValue="questions"
       >
         <TabsList className="mb-8 self-start">
-          <TabsTrigger value="problems">Problems</TabsTrigger>
+          <TabsTrigger value="Questions">Questions</TabsTrigger>
           <TabsTrigger value="study">Study Sets</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="problems">
-          <ProblemsTab />
+        <TabsContent value="questions">
+          <QuestionsTab />
         </TabsContent>
         <TabsContent
           className="flex flex-1 flex-col gap-4 md:min-h-0 lg:flex-row"
