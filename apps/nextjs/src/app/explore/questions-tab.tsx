@@ -1,14 +1,14 @@
 "use client";
 
 import { api } from "~/trpc/react";
-import { questionsColumns } from "./problems-columns";
-import { ProblemsTable } from "./problems-table";
+import { questionsColumns } from "./questions-columns";
+import { QuestionsTable } from "./questions-table";
 
-export function ProblemsTab() {
+export function QuestionsTab() {
   const getAllQuestions = api.questions.all.useQuery();
 
   return (
-    <ProblemsTable
+    <QuestionsTable
       data={getAllQuestions.data ?? []}
       columns={questionsColumns}
     />

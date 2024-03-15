@@ -2,7 +2,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import type { RouterOutputs } from "@feprep/api";
 
-export const problemsColumns: ColumnDef<
+export const questionsColumns: ColumnDef<
   RouterOutputs["questions"]["all"][number]
 >[] = [
   {

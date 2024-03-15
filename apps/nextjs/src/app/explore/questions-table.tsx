@@ -38,7 +38,7 @@ import {
   TableRow,
 } from "@feprep/ui/table";
 
-export function ProblemsTable({
+export function QuestionsTable({
   columns,
   data,
 }: {
