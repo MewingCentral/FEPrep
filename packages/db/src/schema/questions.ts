@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-import { SEMESTERS, TOPICS } from "@feprep/consts";
+import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 
 import { users } from "./users";
 
@@ -21,6 +21,8 @@ export const questions = sqliteTable("question", {
   points: integer("points").default(0),
   semester: text("semester", { enum: SEMESTERS }).notNull(),
   topic: text("topic", { enum: TOPICS }).notNull(),
+  section: text("section", { enum: SECTIONS }).notNull(),
+  questionNumber: integer("question_number").notNull(),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").default(sql`CURRENT_TIM ESTAMP`),
 });
