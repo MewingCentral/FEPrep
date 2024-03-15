@@ -15,6 +15,13 @@
       "when": 1709265909001,
       "tag": "0001_closed_energizer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710473896705,
+      "tag": "0002_low_silver_sable",
+      "breakpoints": true
     }
   ]
 }
