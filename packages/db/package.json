@@ -21,6 +21,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@feprep/consts": "workspace:*",
     "@libsql/client": "^0.5.1",
     "@lucia-auth/adapter-drizzle": "^1.0.2",
     "drizzle-orm": "^0.29.3"
