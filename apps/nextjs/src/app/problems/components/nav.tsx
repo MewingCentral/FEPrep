@@ -54,7 +54,7 @@ export function Nav({ user }: { user: User | null }) {
     );
   }
   return (
-    <main className="flex flex-row justify-start p-6">
+    <main className="flex flex-row justify-start px-10 py-6">
       {/* left side */}
       <div className="mr-5 flex flex-1 flex-row gap-3">
         <Link href="/">
