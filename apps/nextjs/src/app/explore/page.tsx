@@ -13,7 +13,7 @@ export default function Explore() {
         defaultValue="questions"
       >
         <TabsList className="mb-8 self-start">
-          <TabsTrigger value="Questions">Questions</TabsTrigger>
+          <TabsTrigger value="questions">Questions</TabsTrigger>
           <TabsTrigger value="study">Study Sets</TabsTrigger>
         </TabsList>
 
