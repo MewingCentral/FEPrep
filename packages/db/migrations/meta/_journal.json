@@ -29,6 +29,13 @@
       "when": 1710476805784,
       "tag": "0003_premium_risque",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1710477499297,
+      "tag": "0004_open_santa_claus",
+      "breakpoints": true
     }
   ]
 }
