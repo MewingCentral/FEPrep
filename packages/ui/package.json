@@ -19,7 +19,8 @@
     "./table": "./src/table.tsx",
     "./select": "./src/select.tsx",
     "./data-table": "./src/data-table.tsx",
-    "./dropdown-menu": "./src/dropdown-menu.tsx"
+    "./dropdown-menu": "./src/dropdown-menu.tsx",
+    "./skeleton": "./src/skeleton.tsx"
   },
   "license": "MIT",
   "scripts": {
