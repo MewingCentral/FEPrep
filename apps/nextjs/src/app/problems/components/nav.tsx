@@ -69,7 +69,7 @@ export function Nav({ user }: { user: User | null }) {
         <Separator
           orientation="vertical"
           decorative={true}
-          className="hidden w-0.5 bg-foreground md:block"
+          className="hidden bg-foreground md:block"
         />
         {/* Link onclick behavior to be updated once topics component is done */}
         <Link
@@ -108,7 +108,7 @@ export function Nav({ user }: { user: User | null }) {
         <Separator
           orientation="vertical"
           decorative={true}
-          className="hidden w-0.5 bg-foreground md:block"
+          className="hidden bg-foreground md:block"
         />
         <Link
           className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center"
