@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { RadixIcon } from "radix-ui-react-native-icons";
 import { Link } from "expo-router";
 
 import Colors from "~/utils/colors";
@@ -9,14 +10,15 @@ export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       {/* Search input */}
-      <View style={{ flexDirection: "row" }}>
+      <View style={[{ flexDirection: "row", alignItems: "stretch", },]}>
         <View style={[dashStyles.container, dashStyles.inputContainer]}>
           <TextInput
-            style={[dashStyles.input]}
+            style={[ dashStyles.input]}
             placeholder={"Enter set"}
             placeholderTextColor={Colors.dark_secondary_text}
             cursorColor={Colors.dark_primary_text}
           />
+          <RadixIcon name="magnifying-glass" color={Colors.dark_primary_text} />
         </View>
       </View>
 
@@ -61,4 +63,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
   },
+  deleteYellowBorder: {
+    borderWidth: 1,
+    borderColor: "yellow",
+  }
 });
