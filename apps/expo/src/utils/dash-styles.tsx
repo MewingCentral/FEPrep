@@ -5,8 +5,6 @@ import Colors from "./colors";
 const dashStyles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    // flexWrap: "wrap",
-    // backgroundColor: Colors.dark_bg,
   },
   screenContainer: {
     flexGrow: 1,
