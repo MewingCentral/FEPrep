@@ -4,6 +4,7 @@ import { useColorScheme } from "nativewind";
 
 import { TRPCProvider } from "~/utils/api";
 import headerDefault from "~/utils/header-default";
+// todo delete above if necessary
 
 export default function DashboardLayout() {
   const { colorScheme } = useColorScheme();
