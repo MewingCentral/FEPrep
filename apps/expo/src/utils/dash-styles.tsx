@@ -5,7 +5,7 @@ import Colors from "./colors";
 const dashStyles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    flexWrap: "wrap",
+    // flexWrap: "wrap",
     // backgroundColor: Colors.dark_bg,
   },
   screenContainer: {
@@ -16,8 +16,11 @@ const dashStyles = StyleSheet.create({
     backgroundColor: Colors.dark_bg,
   },
   inputContainer: {
+    display: "flex",
     flex: 1,
+    flexDirection: "row",
     alignContent: "stretch",
+    justifyContent: "space-between",
     marginHorizontal: 20,
   },
   allSetsContainer: {
@@ -36,6 +39,7 @@ const dashStyles = StyleSheet.create({
     height: 100,
   },
   input: {
+    flexGrow: 1,
     color: Colors.dark_primary_text,
     borderBottomWidth: 1,
     borderBottomColor: Colors.dark_primary_text,

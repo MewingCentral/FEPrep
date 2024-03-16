@@ -1,5 +1,6 @@
 import { Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { RadixIcon } from "radix-ui-react-native-icons";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
@@ -16,6 +17,7 @@ export default function Tab() {
             placeholderTextColor={Colors.dark_secondary_text}
             cursorColor={Colors.dark_primary_text}
           />
+          <RadixIcon name="magnifying-glass" color={Colors.dark_primary_text} />
         </View>
       </View>
 
