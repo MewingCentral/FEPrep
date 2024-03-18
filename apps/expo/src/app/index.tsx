@@ -24,7 +24,7 @@ export default function HomePage() {
         <View style={[styles.container, styles.buttonsContainer]}>
           <Link
             style={[styles.buttons, styles.signUpBtn]}
-            href="/dashboard/(tabs)/studySets"
+            href="/dashboard/(tabs)/study-sets"
             asChild
           >
             <Pressable>
@@ -36,7 +36,7 @@ export default function HomePage() {
           <Text style={[styles.text]}>or</Text>
           <Link
             style={[styles.buttons, styles.dashboardBtn]}
-            href="/dashboard/(tabs)/studySets"
+            href="/dashboard/(tabs)/study-sets"
             asChild
           >
             <Pressable>

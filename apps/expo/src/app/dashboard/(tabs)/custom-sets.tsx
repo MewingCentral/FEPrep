@@ -27,7 +27,7 @@ export default function Tab() {
         {/* Create new set button */}
         <Link
           style={[styles.createSetButton]}
-          href="../../cardCreation/create"
+          href="../../card-creation/create"
           asChild
         >
           <Pressable>

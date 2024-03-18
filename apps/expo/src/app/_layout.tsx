@@ -21,7 +21,7 @@ export default function RootLayout() {
         */}
       <Stack screenOptions={headerDefault(colorScheme)}>
         <Stack.Screen
-          name="cardCreation"
+          name="card-creation"
           options={{
             headerShown: false,
           }}
