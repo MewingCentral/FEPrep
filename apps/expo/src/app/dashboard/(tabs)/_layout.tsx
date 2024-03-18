@@ -26,13 +26,13 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="studySets"
+        name="study-sets"
         options={{
           title: "Study Sets",
         }}
       />
       <Tabs.Screen
-        name="customSets"
+        name="custom-sets"
         options={{
           title: "Custom Sets",
         }}
