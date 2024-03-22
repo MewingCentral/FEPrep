@@ -30,13 +30,13 @@ export default function TabLayout() {
         tabBarIconStyle: {
           display: "none",
         },
-      }} 
+      }}
     >
       <Tabs.Screen
         name="study-sets"
         options={{
           title: "Study Sets",
-        }} 
+        }}
       />
       <Tabs.Screen
         name="custom-sets"
