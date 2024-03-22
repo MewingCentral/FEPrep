@@ -1,5 +1,5 @@
-import { Keyboard, Text, TextInput, View } from "react-native";
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
@@ -10,9 +10,8 @@ export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
-
         {/* Search input */}
-        <View style={{ flexDirection: "row" }}>
+        <KeyboardAvoidingView style={{ flexDirection: "row" }}>
           <View style={[dashStyles.container, dashStyles.inputContainer]}>
             <TextInput
               style={[dashStyles.input]}
@@ -20,9 +19,12 @@ export default function Tab() {
               placeholderTextColor={Colors.dark_secondary_text}
               cursorColor={Colors.dark_primary_text}
             />
-            <RadixIcon name="magnifying-glass" color={Colors.dark_primary_text} />
+            <RadixIcon
+              name="magnifying-glass"
+              color={Colors.dark_primary_text}
+            />
           </View>
-        </View>
+        </KeyboardAvoidingView>
 
         {/* Study sets */}
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
@@ -86,7 +88,6 @@ export default function Tab() {
             </View>
           </View>
         </View>
-
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

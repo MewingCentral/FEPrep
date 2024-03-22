@@ -1,8 +1,15 @@
-import { Pressable, StyleSheet, Text, TextInput, View, KeyboardAvoidingView } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { RadixIcon } from "radix-ui-react-native-icons";
 import { Link } from "expo-router";
+import { RadixIcon } from "radix-ui-react-native-icons";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
@@ -11,19 +18,23 @@ export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       <KeyboardAwareScrollView>
-
         {/* Search input */}
-        <View style={[{ flexDirection: "row", alignItems: "stretch", },]}>
+        <KeyboardAvoidingView
+          style={[{ flexDirection: "row", alignItems: "stretch" }]}
+        >
           <View style={[dashStyles.container, dashStyles.inputContainer]}>
             <TextInput
-              style={[ dashStyles.input]}
+              style={[dashStyles.input]}
               placeholder={"Enter set"}
               placeholderTextColor={Colors.dark_secondary_text}
               cursorColor={Colors.dark_primary_text}
             />
-            <RadixIcon name="magnifying-glass" color={Colors.dark_primary_text} />
+            <RadixIcon
+              name="magnifying-glass"
+              color={Colors.dark_primary_text}
+            />
           </View>
-        </View>
+        </KeyboardAvoidingView>
 
         {/* Study sets */}
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
@@ -50,8 +61,7 @@ export default function Tab() {
               </Text>
             </View>
           </View>
-        </View> 
-
+        </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
@@ -71,5 +81,5 @@ const styles = StyleSheet.create({
   deleteYellowBorder: {
     borderWidth: 1,
     borderColor: "yellow",
-  }
+  },
 });
