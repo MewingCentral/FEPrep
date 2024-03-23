@@ -14,7 +14,7 @@ import {
 import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-export default function Login() {
+export default function Register() {
   const [username, onChangeUserName] = React.useState("");
   const [password, onChangePassword] = React.useState("");
   const [confirmPswd, onChangeConfirmPswd] = React.useState("");
