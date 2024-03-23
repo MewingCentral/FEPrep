@@ -24,12 +24,12 @@ export default function HomePage() {
         <View style={[styles.container, styles.buttonsContainer]}>
           <Link
             style={[styles.buttons, styles.signUpBtn]}
-            href="/dashboard/(tabs)/study-sets"
+            href="/screens/Login"
             asChild
           >
             <Pressable>
               <Text style={[styles.text, styles.buttonTxt]}>
-                Create Account
+                Login
               </Text>
             </Pressable>
           </Link>
