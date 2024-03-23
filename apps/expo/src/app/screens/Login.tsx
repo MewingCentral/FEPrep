@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+//import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
@@ -59,9 +60,10 @@ export default function Login() {
               placeholder=""
               keyboardType="default"
             />
+            
             <Link style={styles.forgotPswdLink} href="/screens/ForgotPswd">
               {"Forgot Password?"}
-            </Link>
+            </Link> 
           </View>
 
           <View style={styles.bottomContainer}>
