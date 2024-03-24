@@ -18,7 +18,7 @@ export default function Layout() {
           headerShown: false,
           headerBackTitleVisible: false,
         }}
-      />   
+      />
       <Stack.Screen
         name="Login"
         options={{

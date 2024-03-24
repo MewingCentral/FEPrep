@@ -15,7 +15,7 @@ import { StatusBar } from "expo-status-bar";
 
 export default function ValidateEmail() {
   const [authCode, onChangeAuthCode] = React.useState("");
-  
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -33,14 +33,15 @@ export default function ValidateEmail() {
           </View>
 
           <View style={styles.welcomeContainer}>
-            <Text style={styles.nestedText}> 
+            <Text style={styles.nestedText}>
               {"An 8 digit verification code was just sent to your "}
               {"UCF email address. Please enter the code below too "}
-              {"verify your student account."}             
+              {"verify your student account."}
             </Text>
 
-            <Text style={styles.verificationIdentifiedText}> 
-            {"Enter Verification Code"} </Text>
+            <Text style={styles.verificationIdentifiedText}>
+              {"Enter Verification Code"}{" "}
+            </Text>
             <TextInput
               style={styles.verificationTextField}
               onChangeText={onChangeAuthCode}

@@ -60,10 +60,10 @@ export default function Login() {
               placeholder=""
               keyboardType="default"
             />
-            
+
             <Link style={styles.forgotPswdLink} href="/screens/ForgotPswd">
               {"Forgot Password?"}
-            </Link> 
+            </Link>
           </View>
 
           <View style={styles.bottomContainer}>
