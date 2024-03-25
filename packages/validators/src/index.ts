@@ -6,6 +6,12 @@ export const SignUpSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
+export const SignUpFormSchema = z.object({
+  nid: z.string().regex(/$[a-z]{2}[0-9]{6}^/),
+  // TODO: also make this more secure
+  password: z.string().min(8, "Password must be at least 8 characters"),
+})
+
 export type SignUpInput = z.infer<typeof SignUpSchema>;
 
 export const SignInSchema = z.object({

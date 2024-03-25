@@ -17,7 +17,8 @@ import { StatusBar } from "expo-status-bar";
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
-import { SignUpSchema, SignUpInput } from "../../../../../packages/validators/src"
+import { SignUpSchema, SignUpInput } from "../../../../../packages/validators/src";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function Login() {
   const {
@@ -25,9 +26,9 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    schema: SignUpSchema
+    resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
-      email: "",
+      nid: "",
       password: "",
     },
   });
@@ -69,8 +70,8 @@ export default function Login() {
             <Text style={styles.inputIdentifierText}> NID </Text>
             <TextInput
               style={styles.nidTextField}
-              onChangeText={onChangeUserName}
-              value={username}
+              // onChangeText={onChangeUserName}
+              // value={username}
               placeholder=""
               keyboardType="default"
             />
@@ -78,9 +79,9 @@ export default function Login() {
             <Text style={styles.inputIdentifierText}> Password </Text>
             <TextInput
               style={styles.pswdTextField}
-              onChangeText={onChangePassword}
+              // onChangeText={onChangePassword}
               //secureTextEntry={!displayPswd}
-              value={password}
+              // value={password}
               placeholder=""
               keyboardType="default"
             />
@@ -88,9 +89,9 @@ export default function Login() {
             <Text style={styles.inputIdentifierText}> Confirm Password </Text>
             <TextInput
               style={styles.confirmPswdTextField}
-              onChangeText={onChangeConfirmPswd}
+              // onChangeText={onChangeConfirmPswd}
               //secureTextEntry={!displayPswd}
-              value={confirmPswd}
+              // value={confirmPswd}
               placeholder=""
               keyboardType="default"
             />

@@ -107,6 +107,9 @@ importers:
       superjson:
         specifier: 2.2.1
         version: 2.2.1
+      zod:
+        specifier: link:@hookform/resolvers/zod
+        version: link:@hookform/resolvers/zod
     devDependencies:
       '@babel/core':
         specifier: ^7.23.9
