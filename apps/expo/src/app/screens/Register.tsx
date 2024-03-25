@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import screenStyles from "~/utils/screen-styles";
