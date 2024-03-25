@@ -17,7 +17,7 @@ import { StatusBar } from "expo-status-bar";
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
-import { SignUpSchema, SignUpInput } from "../../../../../packages/validators/src";
+import { SignUpFormSchema, SignUpInput } from "../../../../../packages/validators/src";
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function Login() {
@@ -68,25 +68,27 @@ export default function Login() {
             </Text>
 
             <Text style={styles.inputIdentifierText}> NID </Text>
-            <TextInput
-              style={styles.nidTextField}
-              // onChangeText={onChangeUserName}
-              // value={username}
-              placeholder=""
-              keyboardType="default"
-            />
+            <Controller control={control} name="nid" 
+              render={() => (
+                <TextInput
+                  style={styles.nidTextField}
+                  placeholder=""
+                  keyboardType="default" />
+              )} />
+            {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
 
             <Text style={styles.inputIdentifierText}> Password </Text>
-            <TextInput
-              style={styles.pswdTextField}
-              // onChangeText={onChangePassword}
-              //secureTextEntry={!displayPswd}
-              // value={password}
-              placeholder=""
-              keyboardType="default"
-            />
+            <Controller control={control} name="password"
+              render={() => (
+                <TextInput 
+                style={styles.pswdTextField}
+                placeholder=""
+                keyboardType="default" />
+              )} />
+            {errors.password?.message && <Text>{errors.password?.message}</Text>}
 
-            <Text style={styles.inputIdentifierText}> Confirm Password </Text>
+            
+            {/* <Text style={styles.inputIdentifierText}> Confirm Password </Text>
             <TextInput
               style={styles.confirmPswdTextField}
               // onChangeText={onChangeConfirmPswd}
@@ -94,11 +96,11 @@ export default function Login() {
               // value={confirmPswd}
               placeholder=""
               keyboardType="default"
-            />
+            /> */}
           </View>
 
           <View style={styles.bottomContainer}>
-            <Pressable style={styles.loginBtn} onPress={handleSubmit(signUp)}>
+            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
               <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={styles.contentText}>
