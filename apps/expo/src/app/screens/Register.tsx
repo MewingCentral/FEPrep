@@ -122,9 +122,9 @@ export default function Login() {
             /> */}
           </View>
 
-          <View style={screenStyles.bottomContainer}>
-            <Pressable style={screenStyles.loginBtn} onPress={() => null}>
-              <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
+          <View style={styles.bottomContainer}>
+            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
+              <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
               {"Have an account already? "}
