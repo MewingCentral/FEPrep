@@ -15,7 +15,33 @@ import { StatusBar } from "expo-status-bar";
 
 import screenStyles from "~/utils/screen-styles";
 
-export default function Register() {
+import { api } from "~/utils/api";
+import * as SecureStore from "expo-secure-store";
+import { useForm, Controller } from "react-hook-form";
+import { } from "../../../../../packages/validators/src"
+
+export default function Login() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+    },
+  });
+  const onSubmit = (data) => console.log(data);
+
+  // Code from Caleb:
+  // const signUp = api.auth.signUp.useMutation({
+  //   onSuccess: (data) => {
+  //     if (!(data instanceof Error)) {
+  //       console.log(data.session);
+  //     }
+  //   },
+  // });
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -58,9 +84,9 @@ export default function Register() {
             /> */}
           </View>
 
-          <View style={screenStyles.bottomContainer}>
-            <Pressable style={screenStyles.loginBtn} onPress={() => null}>
-              <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
+          <View style={styles.bottomContainer}>
+            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
+              <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
               {"Have an account already? "}

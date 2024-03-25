@@ -6,6 +6,7 @@ import { createTRPCReact } from "@trpc/react-query";
 import superjson from "superjson";
 
 import type { AppRouter } from "@feprep/api";
+import * as SecureStore from "expo-secure-store";
 
 /**
  * A set of typesafe hooks for consuming your API.
@@ -44,6 +45,7 @@ const getBaseUrl = () => {
  */
 export function TRPCProvider(props: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
+  // get session id
   const [trpcClient] = useState(() =>
     api.createClient({
       links: [
