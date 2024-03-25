@@ -18,7 +18,7 @@ import screenStyles from "~/utils/screen-styles";
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
-import { SignUpSchema, SignUpInput } from "../../../../../packages/validators/src";
+import { SignUpFormSchema, SignUpInput } from "../../../../../packages/validators/src";
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function Login() {
@@ -68,21 +68,28 @@ export default function Login() {
               {"Enter your NID to create your account. \n"}
             </Text>
 
-            <Text style={screenStyles.inputIdentifierText}> NID </Text>
-            <TextInput
-              style={screenStyles.nidTextField}
-              placeholder=""
-              keyboardType="default"
-            />
+            <Text style={styles.inputIdentifierText}> NID </Text>
+            <Controller control={control} name="nid" 
+              render={() => (
+                <TextInput
+                  style={styles.nidTextField}
+                  placeholder=""
+                  keyboardType="default" />
+              )} />
+            {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
 
-            <Text style={screenStyles.inputIdentifierText}> Password </Text>
-            <TextInput
-              style={screenStyles.pswdTextField}
-              placeholder=""
-              keyboardType="default"
-            />
+            <Text style={styles.inputIdentifierText}> Password </Text>
+            <Controller control={control} name="password"
+              render={() => (
+                <TextInput 
+                style={styles.pswdTextField}
+                placeholder=""
+                keyboardType="default" />
+              )} />
+            {errors.password?.message && <Text>{errors.password?.message}</Text>}
 
-            {/* <Text style={screenStyles.inputIdentifierText}> Confirm Password </Text>
+            
+            {/* <Text style={styles.inputIdentifierText}> Confirm Password </Text>
             <TextInput
               style={screenStyles.confirmPswdTextField}
               onChangeText={onChangeConfirmPswd}
@@ -94,7 +101,7 @@ export default function Login() {
           </View>
 
           <View style={styles.bottomContainer}>
-            <Pressable style={styles.loginBtn} onPress={handleSubmit(signUp)}>
+            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
               <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
