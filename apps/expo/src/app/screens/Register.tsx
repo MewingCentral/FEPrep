@@ -18,7 +18,7 @@ import screenStyles from "~/utils/screen-styles";
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
-import { SignUpSchema, SignUpInput } from "../../../../../packages/validators/src"
+import { } from "../../../../../packages/validators/src"
 
 export default function Login() {
   const {
@@ -26,29 +26,21 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    schema: SignUpSchema
     defaultValues: {
-      email: "",
-      password: "",
+      firstName: "",
+      lastName: "",
     },
   });
+  const onSubmit = (data) => console.log(data);
 
-  const signUp = api.auth.signUp.useMutation({
-    onSuccess: (data) => {
-      if (!(data instanceof Error)) {
-        console.log(data.session);
-      }
-    },
-  });
-
-  const onSubmit = async (values: SignUpInput) => {
-    try {
-      await signUp(values);
-
-    } catch {
-      // hehe
-    }
-  };
+  // Code from Caleb:
+  // const signUp = api.auth.signUp.useMutation({
+  //   onSuccess: (data) => {
+  //     if (!(data instanceof Error)) {
+  //       console.log(data.session);
+  //     }
+  //   },
+  // });
 
   return (
     <KeyboardAvoidingView
@@ -93,7 +85,7 @@ export default function Login() {
           </View>
 
           <View style={styles.bottomContainer}>
-            <Pressable style={styles.loginBtn} onPress={handleSubmit(signUp)}>
+            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
               <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
