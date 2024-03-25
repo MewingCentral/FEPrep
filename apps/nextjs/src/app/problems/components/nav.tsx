@@ -105,12 +105,9 @@ export function Nav({ user }: { user: User | null }) {
         </Link> */}
         <Sheet>
           <SheetTrigger asChild>
-            <Link
-              className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:text-muted-foreground md:block"
-              href="/dashboard"
-            >
+            <span className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:block">
               Questions
-            </Link>
+            </span>
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>
