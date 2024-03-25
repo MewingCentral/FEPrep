@@ -7,7 +7,7 @@ export const SignUpSchema = z.object({
 });
 
 export const SignUpFormSchema = z.object({
-  nid: z.string().regex(/$[a-z]{2}[0-9]{6}^/),
+  nid: z.string().regex(/$[a-z]{2}[0-9]{6}^/, "Invalid NID"),
   // TODO: also make this more secure
   password: z.string().min(8, "Password must be at least 8 characters"),
 })
