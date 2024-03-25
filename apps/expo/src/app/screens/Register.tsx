@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import screenStyles from "~/utils/screen-styles";
@@ -22,6 +22,7 @@ import { SignUpFormSchema, SignUpInput } from "../../../../../packages/validator
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function Login() {
+  const router = useRouter();
   const {
     control,
     handleSubmit,
@@ -34,6 +35,8 @@ export default function Login() {
     },
   });
 
+  console.log(errors);
+
   const signUp = api.auth.signUp.useMutation({
     onSuccess: (data) => {
       if (!(data instanceof Error)) {
@@ -45,7 +48,7 @@ export default function Login() {
   const onSubmit = async (values: SignUpInput) => {
     try {
       await signUp(values);
-
+      router.push("../dashboard/(tabs)/study-sets");
     } catch {
       // hehe
     }
@@ -70,24 +73,29 @@ export default function Login() {
 
             <Text style={styles.inputIdentifierText}> NID </Text>
             <Controller control={control} name="nid" 
-              render={() => (
+              render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.nidTextField}
                   placeholder=""
-                  keyboardType="default" />
+                  keyboardType="default"
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value} />
               )} />
             {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
 
             <Text style={styles.inputIdentifierText}> Password </Text>
             <Controller control={control} name="password"
-              render={() => (
+              render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput 
                 style={styles.pswdTextField}
                 placeholder=""
-                keyboardType="default" />
+                keyboardType="default" 
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value} />
               )} />
             {errors.password?.message && <Text>{errors.password?.message}</Text>}
-
             
             {/* <Text style={styles.inputIdentifierText}> Confirm Password </Text>
             <TextInput
