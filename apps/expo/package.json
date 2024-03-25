@@ -41,7 +41,8 @@
     "react-native-safe-area-context": "~4.8.2",
     "react-native-screens": "~3.29.0",
     "react-native-svg": "^15.1.0",
-    "superjson": "2.2.1"
+    "superjson": "2.2.1",
+    "zod": "link:@hookform/resolvers/zod"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
