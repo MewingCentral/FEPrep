@@ -12,12 +12,11 @@ import {
   ShuffleIcon,
 } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
-import { Input } from "@feprep/ui/input";
-import { Label } from "@feprep/ui/label";
 import { Separator } from "@feprep/ui/separator";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -92,12 +91,6 @@ export function Nav({ user }: { user: User | null }) {
           className="hidden bg-foreground md:block"
         />
         {/* Link onclick behavior to be updated once topics component is done */}
-        {/* <Link
-          className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:text-muted-foreground md:block"
-          href="/dashboard"
-        >
-          Topics
-        </Link> */}
         <Sheet>
           <SheetTrigger asChild>
             <span className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:block">
@@ -105,32 +98,18 @@ export function Nav({ user }: { user: User | null }) {
             </span>
           </SheetTrigger>
           <SheetContent side="left">
-            <SheetHeader>
+            <SheetHeader className="mb-4">
               <SheetTitle>Explore similar questions:</SheetTitle>
-              {/* <SheetDescription>
-                Make changes to your profile here. Click save when you&apos;re
-                done.
-              </SheetDescription> */}
             </SheetHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <Input id="name" value="Pedro Duarte" className="col-span-3" />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                  Username
-                </Label>
-                <Input id="username" value="@peduarte" className="col-span-3" />
-              </div>
-            </div>
-            {/* <SheetFooter>
-              <SheetClose asChild>
-                <Button type="submit">Save changes</Button>
-              </SheetClose>
-            </SheetFooter> */}
+            {questionNames.map((questionName, index) => (
+              <SheetDescription
+                key={index}
+                id={`question-${index}`}
+                className="col-span-3 mb-2"
+              >
+                {questionName}
+              </SheetDescription>
+            ))}
           </SheetContent>
         </Sheet>
         {/* Icon onclick behavior to be updated once question section is done */}
