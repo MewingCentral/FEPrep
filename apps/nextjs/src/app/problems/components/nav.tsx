@@ -1,9 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@FEPrep/ui/table";
 
 import type { User } from "@feprep/auth";
-import { SECTIONS, SEMESTERS } from "@feprep/consts";
+import { DIFFICULTIES, SECTIONS, SEMESTERS } from "@feprep/consts";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -25,12 +33,110 @@ import { api } from "~/trpc/react";
 
 // placeholder content until real question names are available
 const questionNames = new Array(20).fill(null).map((_, i) => {
-  const randomSemester =
-    SEMESTERS[Math.floor(Math.random() * SEMESTERS.length)];
+  // Spring 2024
+  const randomSemester = SEMESTERS[
+    Math.floor(Math.random() * SEMESTERS.length)
+  ]?.replace("20", "'");
+
   const randomSection =
     SECTIONS[Math.floor(Math.random() * SECTIONS.length)]?.split(":")[0];
-  return `${randomSemester}, ${randomSection}, Question ${i + 1}`;
+  const randomDifficulty = DIFFICULTIES[Math.floor(Math.random() * 3)];
+  return `${randomSemester}, ${randomSection}, Question ${i + 1}, ${randomDifficulty}`;
 });
+
+const invoices = [
+  {
+    question: "1",
+    semester: "Spring 2024",
+    section: "Section A",
+    difficulty: "Easy",
+  },
+  {
+    question: "2",
+    semester: "Fall 2023",
+    section: "Section B",
+    difficulty: "Medium",
+  },
+  {
+    question: "3",
+    semester: "Summer 2023",
+    section: "Section C",
+    difficulty: "Hard",
+  },
+  {
+    question: "1",
+    semester: "Spring 2024",
+    section: "Section A",
+    difficulty: "Easy",
+  },
+  {
+    question: "2",
+    semester: "Fall 2023",
+    section: "Section B",
+    difficulty: "Medium",
+  },
+  {
+    question: "3",
+    semester: "Summer 2023",
+    section: "Section C",
+    difficulty: "Hard",
+  },
+  {
+    question: "1",
+    semester: "Spring 2024",
+    section: "Section A",
+    difficulty: "Easy",
+  },
+  {
+    question: "2",
+    semester: "Fall 2023",
+    section: "Section B",
+    difficulty: "Medium",
+  },
+  {
+    question: "3",
+    semester: "Summer 2023",
+    section: "Section C",
+    difficulty: "Hard",
+  },
+  {
+    question: "1",
+    semester: "Spring 2024",
+    section: "Section A",
+    difficulty: "Easy",
+  },
+  {
+    question: "2",
+    semester: "Fall 2023",
+    section: "Section B",
+    difficulty: "Medium",
+  },
+  {
+    question: "3",
+    semester: "Summer 2023",
+    section: "Section C",
+    difficulty: "Hard",
+  },
+  {
+    question: "1",
+    semester: "Spring 2024",
+    section: "Section A",
+    difficulty: "Easy",
+  },
+  {
+    question: "2",
+    semester: "Fall 2023",
+    section: "Section B",
+    difficulty: "Medium",
+  },
+  {
+    question: "3",
+    semester: "Summer 2023",
+    section: "Section C",
+    difficulty: "Hard",
+  },
+  // Add more question objects as needed
+];
 
 export function Nav({ user }: { user: User | null }) {
   function AuthButton({ user }: { user: User | null }) {
@@ -89,26 +195,43 @@ export function Nav({ user }: { user: User | null }) {
           decorative={true}
           className="hidden bg-foreground md:block"
         />
-        {/* Link onclick behavior to be updated once topics component is done */}
         <Sheet>
           <SheetTrigger asChild>
             <span className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:block">
               Questions
             </span>
           </SheetTrigger>
-          <SheetContent side="left" className="max-h-screen overflow-y-scroll">
+          <SheetContent
+            side="left"
+            className="max-h-screen min-w-[40vw] overflow-auto"
+          >
             <SheetHeader className="mb-8">
               <SheetTitle>More Questions:</SheetTitle>
             </SheetHeader>
-            {questionNames.map((questionName, index) => (
-              <Button
-                key={index}
-                id={`question-${index}`}
-                className="col-span-3 mb-2"
-              >
-                {questionName}
-              </Button>
-            ))}
+            <Table>
+              {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[100px]">Semester</TableHead>
+                  <TableHead>Section</TableHead>
+                  <TableHead>Question</TableHead>
+                  <TableHead className="text-right">Difficulty</TableHead>
+                  {/* <TableHead className="text-right">Amount</TableHead> */}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {invoices.map((invoice) => (
+                  <TableRow key={invoice.question}>
+                    <TableCell>{invoice.semester}</TableCell>
+                    <TableCell>{invoice.section}</TableCell>
+                    <TableCell>{invoice.question}</TableCell>
+                    <TableCell className="text-right">
+                      {invoice.difficulty}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </SheetContent>
         </Sheet>
         {/* Icon onclick behavior to be updated once question section is done */}
