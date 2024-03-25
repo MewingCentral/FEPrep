@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+
 export const SignUpSchema = z.object({
   email: z.string().email("Invalid email address"),
   // TODO: make this more secure
@@ -41,3 +43,23 @@ export const VerifyEmailSchema = z.object({
 });
 
 export type VerifyEmailInput = z.infer<typeof VerifyEmailSchema>;
+
+export const CreateQuestionSchema = z.object({
+  userId: z.string(),
+  title: z.string(),
+  question: z.string(),
+  solution: z.string(),
+  averageScore: z.number(),
+  easyVotes: z.number(),
+  mediumVotes: z.number(),
+  hardVotes: z.number(),
+  points: z.number(),
+  semester: z.enum(SEMESTERS),
+  topic: z.enum(TOPICS),
+  section: z.enum(SECTIONS),
+  questionNumber: z.number(),
+});
+
+export const UpdateQuestionSchema = CreateQuestionSchema.extend({
+  questionId: z.number(),
+});
