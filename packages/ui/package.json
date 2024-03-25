@@ -20,7 +20,8 @@
     "./select": "./src/select.tsx",
     "./data-table": "./src/data-table.tsx",
     "./dropdown-menu": "./src/dropdown-menu.tsx",
-    "./skeleton": "./src/skeleton.tsx"
+    "./skeleton": "./src/skeleton.tsx",
+    "./sheet": "./src/sheet.tsx"
   },
   "license": "MIT",
   "scripts": {
