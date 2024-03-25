@@ -13,6 +13,7 @@ export const lucia = new Lucia(adapter, {
     return {
       email: attributes.email,
       emailVerified: attributes.emailVerified,
+      type: attributes.type,
     };
   },
   sessionExpiresIn: new TimeSpan(1, "w"),
