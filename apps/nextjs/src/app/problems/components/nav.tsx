@@ -16,7 +16,6 @@ import { Separator } from "@feprep/ui/separator";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -24,13 +23,13 @@ import {
 
 import { api } from "~/trpc/react";
 
-// shorten right split to Qnum
-// remove "20" from years
-const questionNames = new Array(10).fill(null).map((_, i) => {
+// placeholder content until real question names are available
+const questionNames = new Array(20).fill(null).map((_, i) => {
   const randomSemester =
     SEMESTERS[Math.floor(Math.random() * SEMESTERS.length)];
-  const randomSection = SECTIONS[Math.floor(Math.random() * SECTIONS.length)];
-  return `${randomSemester} ${randomSection} Question ${i + 1}`;
+  const randomSection =
+    SECTIONS[Math.floor(Math.random() * SECTIONS.length)]?.split(":")[0];
+  return `${randomSemester}, ${randomSection}, Question ${i + 1}`;
 });
 
 export function Nav({ user }: { user: User | null }) {
@@ -97,18 +96,18 @@ export function Nav({ user }: { user: User | null }) {
               Questions
             </span>
           </SheetTrigger>
-          <SheetContent side="left">
-            <SheetHeader className="mb-4">
-              <SheetTitle>Explore similar questions:</SheetTitle>
+          <SheetContent side="left" className="max-h-screen overflow-y-scroll">
+            <SheetHeader className="mb-8">
+              <SheetTitle>More Questions:</SheetTitle>
             </SheetHeader>
             {questionNames.map((questionName, index) => (
-              <SheetDescription
+              <Button
                 key={index}
                 id={`question-${index}`}
                 className="col-span-3 mb-2"
               >
                 {questionName}
-              </SheetDescription>
+              </Button>
             ))}
           </SheetContent>
         </Sheet>
