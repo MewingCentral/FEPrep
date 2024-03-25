@@ -14,16 +14,32 @@ import {
 import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-export default function Register() {
-  const [username, onChangeUserName] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
-  const [confirmPswd, onChangeConfirmPswd] = React.useState("");
+import { api } from "~/utils/api";
+import * as SecureStore from "expo-secure-store";
+import { useForm, Controller } from "react-hook-form";
+import { } from "../../../../../packages/validators/src"
 
-  // const [displayPswd, onChangeDisplayPswd] = React.useState(false);
+export default function Login() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+    },
+  });
+  const onSubmit = (data) => console.log(data);
 
-  // const swapPswdVisibility = () => {
-  //   onChangeDisplayPswd(!displayPswd);
-  // };
+  // Code from Caleb:
+  // const signUp = api.auth.signUp.useMutation({
+  //   onSuccess: (data) => {
+  //     if (!(data instanceof Error)) {
+  //       console.log(data.session);
+  //     }
+  //   },
+  // });
 
   return (
     <KeyboardAvoidingView
@@ -73,7 +89,7 @@ export default function Register() {
           </View>
 
           <View style={styles.bottomContainer}>
-            <Pressable style={styles.loginBtn} onPress={() => null}>
+            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
               <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={styles.contentText}>
