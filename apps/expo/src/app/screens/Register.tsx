@@ -18,7 +18,8 @@ import screenStyles from "~/utils/screen-styles";
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
-import { SignUpSchema, SignUpInput } from "../../../../../packages/validators/src"
+import { SignUpSchema, SignUpInput } from "../../../../../packages/validators/src";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function Login() {
   const {
@@ -26,9 +27,9 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    schema: SignUpSchema
+    resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
-      email: "",
+      nid: "",
       password: "",
     },
   });
@@ -86,7 +87,7 @@ export default function Login() {
               style={screenStyles.confirmPswdTextField}
               onChangeText={onChangeConfirmPswd}
               //secureTextEntry={!displayPswd}
-              value={confirmPswd}
+              // value={confirmPswd}
               placeholder=""
               keyboardType="default"
             /> */}
