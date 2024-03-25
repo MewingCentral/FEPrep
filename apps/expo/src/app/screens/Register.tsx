@@ -123,7 +123,7 @@ export default function Login() {
           </View>
 
           <View style={styles.bottomContainer}>
-            <Pressable style={styles.loginBtn} onPress={handleSubmit(signUp)}>
+            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
               <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
