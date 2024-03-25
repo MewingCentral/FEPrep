@@ -1,5 +1,7 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 
 import { users } from "./users";
 
@@ -8,8 +10,19 @@ export const questions = sqliteTable("question", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
+  title: text("title").notNull(),
+  // PDF or markdown content for the question
   question: text("question").notNull(),
-  answer: text("answer").notNull(),
+  solution: text("solution").notNull(),
+  averageScore: real("average_score").default(0),
+  easyVotes: integer("easy_votes").notNull().default(0),
+  mediumVotes: integer("medium_votes").notNull().default(0),
+  hardVotes: integer("hard_votes").notNull().default(0),
+  points: integer("points").default(0),
+  semester: text("semester", { enum: SEMESTERS }).notNull(),
+  topic: text("topic", { enum: TOPICS }).notNull(),
+  section: text("section", { enum: SECTIONS }).notNull(),
+  questionNumber: integer("question_number").notNull(),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
 });
