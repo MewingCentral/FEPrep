@@ -79,7 +79,8 @@ export default function Login() {
                   keyboardType="default"
                   onChange={onChange}
                   onBlur={onBlur}
-                  value={value} />
+                  value={value}
+                   />
               )} />
             {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
 
@@ -87,12 +88,13 @@ export default function Login() {
             <Controller control={control} name="password"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput 
-                style={styles.pswdTextField}
-                placeholder=""
-                keyboardType="default" 
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value} />
+                  style={styles.pswdTextField}
+                  placeholder=""
+                  keyboardType="default" 
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  />
               )} />
             {errors.password?.message && <Text>{errors.password?.message}</Text>}
             
