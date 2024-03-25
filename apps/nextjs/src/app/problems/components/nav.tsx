@@ -17,13 +17,8 @@ import { Label } from "@feprep/ui/label";
 import { Separator } from "@feprep/ui/separator";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
-  SheetOverlay,
-  SheetPortal,
   SheetTitle,
   SheetTrigger,
 } from "@feprep/ui/sheet";
