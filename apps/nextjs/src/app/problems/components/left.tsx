@@ -9,7 +9,9 @@ import {
   CardTitle,
 } from "@feprep/ui/card";
 
-export function Left() {
+// database calls for pdf/markdown
+
+export function Left({ id }: { id: string }) {
   return (
     <Card className="flex h-full flex-col">
       <CardHeader>
