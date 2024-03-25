@@ -23,7 +23,7 @@ export default async function HomePage() {
           A new way to prepare for the Foundation Exam.
         </h2>
         <div className="flex flex-row gap-5">
-          <Link href="/dashboard">
+          <Link href="/problems/page">
             <Button type="submit">Start Practicing</Button>
           </Link>
           <Link href="/sign-up">
