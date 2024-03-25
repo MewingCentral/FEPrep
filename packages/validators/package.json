@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "@feprep/consts": "workspace:*"
   },
   "devDependencies": {
     "@feprep/eslint-config": "workspace:*",
