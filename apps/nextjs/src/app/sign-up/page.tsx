@@ -7,7 +7,7 @@ export default async function Page() {
   const session = await api.auth.getSession();
 
   if (session) {
-    return redirect("/dashboard");
+    return redirect("/problems/page");
   }
 
   return <SignUp />;

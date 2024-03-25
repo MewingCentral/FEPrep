@@ -1,5 +1,5 @@
 import { api } from "~/trpc/server";
-import { Dashboard } from "./dashboard";
+import { Dashboard } from "../dashboard";
 
 export default async function Page() {
   const user = await api.auth.getUser();
