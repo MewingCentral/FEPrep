@@ -16,12 +16,13 @@
   "dependencies": {
     "@feprep/auth": "workspace:*",
     "@feprep/db": "workspace:*",
-    "@feprep/validators": "workspace:*",
     "@feprep/transactional": "workspace:*",
+    "@feprep/validators": "workspace:*",
     "@trpc/server": "11.0.0-next-beta.264",
     "next": "^14.1.0",
     "oslo": "^1.1.3",
-    "superjson": "2.2.1"
+    "superjson": "2.2.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@feprep/eslint-config": "workspace:*",

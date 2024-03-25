@@ -274,6 +274,9 @@ importers:
       superjson:
         specifier: 2.2.1
         version: 2.2.1
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
     devDependencies:
       '@feprep/eslint-config':
         specifier: workspace:*
@@ -519,6 +522,9 @@ importers:
 
   packages/validators:
     dependencies:
+      '@feprep/consts':
+        specifier: workspace:*
+        version: link:../consts
       zod:
         specifier: ^3.22.4
         version: 3.22.4
