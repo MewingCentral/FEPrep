@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { DropdownMenu } from "node_modules/@feprep/ui/src/dropdown-menu";
 
 import type { User } from "@feprep/auth";
 import {
