@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import type { User } from "@feprep/auth";
+import { SECTIONS, SEMESTERS } from "@feprep/consts";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -11,9 +12,32 @@ import {
   ShuffleIcon,
 } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
+import { Input } from "@feprep/ui/input";
+import { Label } from "@feprep/ui/label";
 import { Separator } from "@feprep/ui/separator";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetTitle,
+  SheetTrigger,
+} from "@feprep/ui/sheet";
 
 import { api } from "~/trpc/react";
+
+// shorten right split to Qnum
+// remove "20" from years
+const questionNames = new Array(10).fill(null).map((_, i) => {
+  const randomSemester =
+    SEMESTERS[Math.floor(Math.random() * SEMESTERS.length)];
+  const randomSection = SECTIONS[Math.floor(Math.random() * SECTIONS.length)];
+  return `${randomSemester} ${randomSection} Question ${i + 1}`;
+});
 
 export function Nav({ user }: { user: User | null }) {
   function AuthButton({ user }: { user: User | null }) {
@@ -33,6 +57,7 @@ export function Nav({ user }: { user: User | null }) {
         </Button>
       );
     }
+    console.log(questionNames);
     return (
       <div className="flex flex-row gap-2">
         <Link
@@ -72,12 +97,50 @@ export function Nav({ user }: { user: User | null }) {
           className="hidden bg-foreground md:block"
         />
         {/* Link onclick behavior to be updated once topics component is done */}
-        <Link
+        {/* <Link
           className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:text-muted-foreground md:block"
           href="/dashboard"
         >
           Topics
-        </Link>
+        </Link> */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <Link
+              className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:text-muted-foreground md:block"
+              href="/dashboard"
+            >
+              Questions
+            </Link>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <SheetHeader>
+              <SheetTitle>Explore similar questions:</SheetTitle>
+              {/* <SheetDescription>
+                Make changes to your profile here. Click save when you&apos;re
+                done.
+              </SheetDescription> */}
+            </SheetHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="name" className="text-right">
+                  Name
+                </Label>
+                <Input id="name" value="Pedro Duarte" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="username" className="text-right">
+                  Username
+                </Label>
+                <Input id="username" value="@peduarte" className="col-span-3" />
+              </div>
+            </div>
+            {/* <SheetFooter>
+              <SheetClose asChild>
+                <Button type="submit">Save changes</Button>
+              </SheetClose>
+            </SheetFooter> */}
+          </SheetContent>
+        </Sheet>
         {/* Icon onclick behavior to be updated once question section is done */}
         <ArrowLeftIcon
           width="25"
