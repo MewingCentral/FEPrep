@@ -35,19 +35,19 @@ export default function Login() {
                 {"Login to begin studying for UCF's Foundation Exam \n"}
               </Text>
 
-              <Text style={screenStyles.inputIdentifierText}> NID </Text>
-              <TextInput
-                style={screenStyles.nidTextField}
-                placeholder=""
-                keyboardType="default"
-              />
+                <Text style={screenStyles.inputIdentifierText}> NID </Text>
+                <TextInput
+                  style={screenStyles.nidTextField}
+                  placeholder=""
+                  keyboardType="default"
+                />
 
-              <Text style={screenStyles.inputIdentifierText}> Password </Text>
-              <TextInput
-                style={screenStyles.pswdTextField}
-                placeholder=""
-                keyboardType="default"
-              />
+                <Text style={screenStyles.inputIdentifierText}> Password </Text>
+                <TextInput
+                  style={screenStyles.pswdTextField}
+                  placeholder=""
+                  keyboardType="default"
+                />
 
               <Link
                 style={screenStyles.forgotPswdLink}
