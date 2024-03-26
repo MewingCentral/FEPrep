@@ -14,6 +14,7 @@ const Colors = {
   light_secondary_text: "#64748B",
 
   light_text: "#020817",
+  light_subheader_text: "#6E727C",
   light_btn_text: "#FFFFFF",
 };
 

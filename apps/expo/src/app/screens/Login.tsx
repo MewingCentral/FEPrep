@@ -17,9 +17,7 @@ import { StatusBar } from "expo-status-bar";
 import screenStyles from "~/utils/screen-styles";
 
 export default function Login() {
-  const [username, onChangeUserName] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
-
+  
   return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -41,8 +39,6 @@ export default function Login() {
                 <Text style={screenStyles.inputIdentifierText}> NID </Text>
                 <TextInput
                   style={screenStyles.nidTextField}
-                  onChangeText={onChangeUserName}
-                  value={username}
                   placeholder=""
                   keyboardType="default"
                 />
@@ -50,9 +46,6 @@ export default function Login() {
                 <Text style={screenStyles.inputIdentifierText}> Password </Text>
                 <TextInput
                   style={screenStyles.pswdTextField}
-                  onChangeText={onChangePassword}
-                  //secureTextEntry={!displayPswd}
-                  value={password}
                   placeholder=""
                   keyboardType="default"
                 />
@@ -60,7 +53,6 @@ export default function Login() {
                 <Link style={screenStyles.forgotPswdLink} href="/screens/ForgotPswd">
                   {"Forgot Password?"}
                 </Link>
-              
               </View>
 
               <View style={screenStyles.bottomContainer}>
@@ -69,7 +61,7 @@ export default function Login() {
                 </Pressable>
                 <Text style={screenStyles.contentText}>
                   {"Don't have an account? "}
-                  <Link style={screenStyles.registerLink} href="/screens/Register">
+                  <Link style={screenStyles.hyperlinkText} href="/screens/Register">
                     {"Register"}
                   </Link>
                 </Text>
