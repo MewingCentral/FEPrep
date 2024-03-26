@@ -44,12 +44,20 @@ export default function Login() {
     },
   });
 
+  const onChange = arg => {
+    return {
+      value: arg.nativeEvent.text,
+    };
+  };
+
   const onSubmit = async (values: SignUpInput) => {
     try {
-      await signUp(values);
+      console.log(values);
+      await signUp.mutateAsync(values);
       router.push("../dashboard/(tabs)/study-sets");
     } catch {
       // hehe
+      console.log("oh no");
     }
   };
 
@@ -72,12 +80,16 @@ export default function Login() {
 
             <Text style={styles.inputIdentifierText}> NID </Text>
             <Controller control={control} name="nid" 
+              // rules={{
+              //   required: true,
+              //   pattern: /[a-z]{2}[0-9]{6}/,
+              // }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.nidTextField}
                   placeholder=""
                   keyboardType="default"
-                  onChange={onChange}
+                  onChangeText={value => onChange(value)}
                   onBlur={onBlur}
                   value={value}
                    />
@@ -86,12 +98,16 @@ export default function Login() {
 
             <Text style={styles.inputIdentifierText}> Password </Text>
             <Controller control={control} name="password"
+              // rules={{
+              //   required: true,
+              //   minLength: 8,
+              // }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput 
                   style={styles.pswdTextField}
                   placeholder=""
                   keyboardType="default" 
-                  onChange={onChange}
+                  onChangeText={value => onChange(value)}
                   onBlur={onBlur}
                   value={value}
                   />
