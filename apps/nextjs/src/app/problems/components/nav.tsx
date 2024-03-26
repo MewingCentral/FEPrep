@@ -11,7 +11,6 @@ import {
 } from "@FEPrep/ui/table";
 
 import type { User } from "@feprep/auth";
-import { DIFFICULTIES, SECTIONS, SEMESTERS } from "@feprep/consts";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -30,113 +29,7 @@ import {
 } from "@feprep/ui/sheet";
 
 import { api } from "~/trpc/react";
-
-// placeholder content until real question names are available
-const questionNames = new Array(20).fill(null).map((_, i) => {
-  // Spring 2024
-  const randomSemester = SEMESTERS[
-    Math.floor(Math.random() * SEMESTERS.length)
-  ]?.replace("20", "'");
-
-  const randomSection =
-    SECTIONS[Math.floor(Math.random() * SECTIONS.length)]?.split(":")[0];
-  const randomDifficulty = DIFFICULTIES[Math.floor(Math.random() * 3)];
-  return `${randomSemester}, ${randomSection}, Question ${i + 1}, ${randomDifficulty}`;
-});
-
-const invoices = [
-  {
-    question: "1",
-    semester: "Spring 2024",
-    section: "Section A",
-    difficulty: "Easy",
-  },
-  {
-    question: "2",
-    semester: "Fall 2023",
-    section: "Section B",
-    difficulty: "Medium",
-  },
-  {
-    question: "3",
-    semester: "Summer 2023",
-    section: "Section C",
-    difficulty: "Hard",
-  },
-  {
-    question: "1",
-    semester: "Spring 2024",
-    section: "Section A",
-    difficulty: "Easy",
-  },
-  {
-    question: "2",
-    semester: "Fall 2023",
-    section: "Section B",
-    difficulty: "Medium",
-  },
-  {
-    question: "3",
-    semester: "Summer 2023",
-    section: "Section C",
-    difficulty: "Hard",
-  },
-  {
-    question: "1",
-    semester: "Spring 2024",
-    section: "Section A",
-    difficulty: "Easy",
-  },
-  {
-    question: "2",
-    semester: "Fall 2023",
-    section: "Section B",
-    difficulty: "Medium",
-  },
-  {
-    question: "3",
-    semester: "Summer 2023",
-    section: "Section C",
-    difficulty: "Hard",
-  },
-  {
-    question: "1",
-    semester: "Spring 2024",
-    section: "Section A",
-    difficulty: "Easy",
-  },
-  {
-    question: "2",
-    semester: "Fall 2023",
-    section: "Section B",
-    difficulty: "Medium",
-  },
-  {
-    question: "3",
-    semester: "Summer 2023",
-    section: "Section C",
-    difficulty: "Hard",
-  },
-  {
-    question: "1",
-    semester: "Spring 2024",
-    section: "Section A",
-    difficulty: "Easy",
-  },
-  {
-    question: "2",
-    semester: "Fall 2023",
-    section: "Section B",
-    difficulty: "Medium",
-  },
-  {
-    question: "3",
-    semester: "Summer 2023",
-    section: "Section C",
-    difficulty: "Hard",
-  },
-  // Add more question objects as needed
-];
+import questions from "./questions";
 
 export function Nav({ user }: { user: User | null }) {
   function AuthButton({ user }: { user: User | null }) {
@@ -156,7 +49,6 @@ export function Nav({ user }: { user: User | null }) {
         </Button>
       );
     }
-    console.log(questionNames);
     return (
       <div className="flex flex-row gap-2">
         <Link
@@ -220,13 +112,15 @@ export function Nav({ user }: { user: User | null }) {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {invoices.map((invoice) => (
-                  <TableRow key={invoice.question}>
-                    <TableCell>{invoice.semester}</TableCell>
-                    <TableCell>{invoice.section}</TableCell>
-                    <TableCell>{invoice.question}</TableCell>
-                    <TableCell className="text-right">
-                      {invoice.difficulty}
+                {questions.map((question) => (
+                  <TableRow key={question.question}>
+                    <TableCell>{question.semester}</TableCell>
+                    <TableCell>{question.section}</TableCell>
+                    <TableCell>{question.question}</TableCell>
+                    <TableCell
+                      className={`text-right ${question.difficulty === "Easy" ? "text-green-500" : question.difficulty === "Medium" ? "text-yellow-500" : "text-red-500"}`}
+                    >
+                      {question.difficulty}
                     </TableCell>
                   </TableRow>
                 ))}
