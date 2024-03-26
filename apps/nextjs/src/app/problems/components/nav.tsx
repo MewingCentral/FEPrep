@@ -1,14 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@FEPrep/ui/table";
 
 import type { User } from "@feprep/auth";
 import {
@@ -27,6 +19,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@feprep/ui/sheet";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@feprep/ui/table";
 
 import { api } from "~/trpc/react";
 import questions from "./questions";
