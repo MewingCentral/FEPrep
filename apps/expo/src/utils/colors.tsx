@@ -12,6 +12,9 @@ const Colors = {
   light_accent: "#2563EB",
   light_primary_text: "#0F172A",
   light_secondary_text: "#64748B",
+
+  light_text: "#020817",
+  light_btn_text: "#FFFFFF",
 };
 
 export default Colors;
