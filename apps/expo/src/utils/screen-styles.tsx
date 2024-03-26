@@ -106,10 +106,18 @@ const screenStyles = StyleSheet.create({
     textAlign: "center",
     letterSpacing: 0.25,
   },
-  registerLink: {
+  hyperlinkText: {
     textDecorationLine: "underline",
     color: Colors.light_text,
     fontWeight: "500",
+  },
+  subheaderText: {
+    color: Colors.light_subheader_text,
+    fontSize: 12,
+    position: "relative",
+    paddingBottom: 20,
+    alignSelf: "center",
+    letterSpacing: 0.25,
   },
 });
 
