@@ -16,6 +16,8 @@ import { StatusBar } from "expo-status-bar";
 
 import screenStyles from "~/utils/screen-styles";
 
+import screenStyles from "~/utils/screen-styles";
+
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
@@ -110,9 +112,9 @@ export default function Login() {
             {errors.password?.message && <Text>{errors.password?.message}</Text>}
           </View>
 
-          <View style={styles.bottomContainer}>
-            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
-              <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
+          <View style={screenStyles.bottomContainer}>
+            <Pressable style={screenStyles.loginBtn} onPress={() => null}>
+              <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
               {"Have an account already? "}
