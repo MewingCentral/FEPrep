@@ -20,7 +20,7 @@ export function Dashboard({ user }: { user: User | null }) {
       />
       <main className="flex flex-1 gap-4 p-4">
         <div className="h-full flex-1">
-          <Left id=" " />
+          <Left _id=" " />
         </div>
 
         <div className="h-full flex-1">
