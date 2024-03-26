@@ -11,7 +11,7 @@ import {
 
 // database calls for pdf/markdown
 
-export function Left({ id }: { id: string }) {
+export function Left({ _id }: { _id: string }) {
   return (
     <Card className="flex h-full flex-col">
       <CardHeader>
