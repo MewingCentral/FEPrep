@@ -15,6 +15,8 @@ import { StatusBar } from "expo-status-bar";
 
 import screenStyles from "~/utils/screen-styles";
 
+import screenStyles from "~/utils/screen-styles";
+
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
