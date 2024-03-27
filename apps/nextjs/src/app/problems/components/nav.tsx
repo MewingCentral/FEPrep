@@ -11,6 +11,9 @@ import {
   ShuffleIcon,
 } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
+import { Input } from "@feprep/ui/input";
+import { Label } from "@feprep/ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@feprep/ui/popover";
 import { Separator } from "@feprep/ui/separator";
 import {
   Sheet,
@@ -148,25 +151,66 @@ export function Nav({ user }: { user: User | null }) {
       {/* center */}
       <div className="flex grow flex-row justify-center gap-3">
         {/* Link onclick behavior to be updated once question section is done */}
-        <Link
-          className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center"
-          href="/dashboard"
-        >
+        <Label className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
           <LapTimerIcon width="25" height="25" className="hidden md:block" />{" "}
-          <span>Timer</span>
-        </Link>
+          <Popover>
+            <PopoverTrigger>Timer</PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Dimensions</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Set the timer length.
+                  </p>
+                </div>
+                <div className="grid gap-2">
+                  <div className="grid grid-cols-3 items-center gap-4">
+                    <Label htmlFor="width">Minutes</Label>
+                    <Input
+                      id="width"
+                      defaultValue="5"
+                      className="col-span-2 h-8"
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 items-center gap-4">
+                    <Label htmlFor="maxWidth">Seconds</Label>
+                    <Input
+                      id="maxWidth"
+                      defaultValue="00"
+                      className="col-span-2 h-8"
+                    />
+                  </div>
+                  {/*
+                  <div className="grid grid-cols-3 items-center gap-4">
+                    <Label htmlFor="height">Height</Label>
+                    <Input
+                      id="height"
+                      defaultValue="25px"
+                      className="col-span-2 h-8"
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 items-center gap-4">
+                    <Label htmlFor="maxHeight">Max. height</Label>
+                    <Input
+                      id="maxHeight"
+                      defaultValue="none"
+                      className="col-span-2 h-8"
+                    />
+                  </div> */}
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </Label>
         <Separator
           orientation="vertical"
           decorative={true}
           className="hidden bg-foreground md:block"
         />
-        <Link
-          className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center"
-          href="/dashboard"
-        >
+        <Label className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
           <RocketIcon width="25" height="25" className="hidden md:block" />{" "}
           <span>Solution</span>
-        </Link>
+        </Label>
       </div>
       {/* right */}
       <div className="flex flex-1 flex-row-reverse items-end gap-3">
