@@ -17,10 +17,6 @@ import { StatusBar } from "expo-status-bar";
 import screenStyles from "~/utils/screen-styles";
 
 export default function Login() {
-<<<<<<< HEAD
-=======
-  
->>>>>>> 1429469 (remove style sheet from Register.tsx and implement screen-styles.tsx instead)
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -39,7 +35,6 @@ export default function Login() {
                 {"Login to begin studying for UCF's Foundation Exam \n"}
               </Text>
 
-<<<<<<< HEAD
               <Text style={screenStyles.inputIdentifierText}> NID </Text>
               <TextInput
                 style={screenStyles.nidTextField}
@@ -53,21 +48,6 @@ export default function Login() {
                 placeholder=""
                 keyboardType="default"
               />
-=======
-                <Text style={screenStyles.inputIdentifierText}> NID </Text>
-                <TextInput
-                  style={screenStyles.nidTextField}
-                  placeholder=""
-                  keyboardType="default"
-                />
-
-                <Text style={screenStyles.inputIdentifierText}> Password </Text>
-                <TextInput
-                  style={screenStyles.pswdTextField}
-                  placeholder=""
-                  keyboardType="default"
-                />
->>>>>>> 1429469 (remove style sheet from Register.tsx and implement screen-styles.tsx instead)
 
               <Link
                 style={screenStyles.forgotPswdLink}
@@ -89,7 +69,6 @@ export default function Login() {
                 >
                   {"Register"}
                 </Link>
-<<<<<<< HEAD
               </Text>
             </View>
             <StatusBar style="auto" />
@@ -97,25 +76,5 @@ export default function Login() {
         </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
-=======
-              </View>
-
-              <View style={screenStyles.bottomContainer}>
-                <Pressable style={screenStyles.loginBtn} onPress={() => null}>
-                  <Text style={screenStyles.loginBtnText}> {"Login"} </Text>
-                </Pressable>
-                <Text style={screenStyles.contentText}>
-                  {"Don't have an account? "}
-                  <Link style={screenStyles.hyperlinkText} href="/screens/Register">
-                    {"Register"}
-                  </Link>
-                </Text>
-              </View>
-              <StatusBar style="auto" />
-              </KeyboardAwareScrollView>
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
->>>>>>> 1429469 (remove style sheet from Register.tsx and implement screen-styles.tsx instead)
   );
 }
