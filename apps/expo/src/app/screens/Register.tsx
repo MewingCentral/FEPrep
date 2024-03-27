@@ -18,9 +18,10 @@ import screenStyles from "~/utils/screen-styles";
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
-import { SignUpFormSchema, SignUpInput } from "../../../../../packages/validators/src";
+import { SignUpFormSchema, SignUpFormInput } from "../../../../../packages/validators/src";
 import { zodResolver } from '@hookform/resolvers/zod';
 
+// todo change func title
 export default function Login() {
   const router = useRouter();
   const {
@@ -51,7 +52,7 @@ export default function Login() {
     };
   };
 
-  const onSubmit = async (values: SignUpInput) => {
+  const onSubmit = async (values: SignUpFormInput) => {
     try {
       console.log(values);
       await signUp.mutateAsync(values);
@@ -81,10 +82,6 @@ export default function Login() {
 
             <Text style={styles.inputIdentifierText}> NID </Text>
             <Controller control={control} name="nid" 
-              // rules={{
-              //   required: true,
-              //   pattern: /[a-z]{2}[0-9]{6}/,
-              // }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.nidTextField}
@@ -99,10 +96,6 @@ export default function Login() {
 
             <Text style={styles.inputIdentifierText}> Password </Text>
             <Controller control={control} name="password"
-              // rules={{
-              //   required: true,
-              //   minLength: 8,
-              // }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput 
                   style={styles.pswdTextField}
