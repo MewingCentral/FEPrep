@@ -16,7 +16,6 @@ import { StatusBar } from "expo-status-bar";
 import screenStyles from "~/utils/screen-styles";
 
 export default function Register() {
-  
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
