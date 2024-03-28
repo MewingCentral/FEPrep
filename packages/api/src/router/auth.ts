@@ -20,7 +20,7 @@ import {
   ForgotPasswordSchema,
   ResetPasswordSchema,
   SignInSchema,
-  SignUpSchema,
+  SignUpFormSchema,
   VerifyEmailSchema,
 } from "@feprep/validators";
 
@@ -28,11 +28,12 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const authRouter = createTRPCRouter({
   signUp: publicProcedure
-    .input(SignUpSchema)
+    .input(SignUpFormSchema)
     .mutation(async ({ ctx, input }) => {
       // Check if user already exists
+      const email = `${input.nid}@ucf.edu`;
       const existingUser = await ctx.db.query.users.findFirst({
-        where: (table, { eq }) => eq(table.email, input.email),
+        where: (table, { eq }) => eq(table.email, email),
       });
 
       if (existingUser) {
@@ -47,17 +48,17 @@ export const authRouter = createTRPCRouter({
 
       await ctx.db.insert(users).values({
         id: userId,
-        email: input.email,
+        email: email,
         hashedPassword: hashedPassword,
       });
 
       try {
         const verificationCode = await generateEmailVerificationCode(
           userId,
-          input.email,
+          email,
         );
         await resend.emails.send({
-          to: input.email,
+          to: email,
           from: "team@feprep.org",
           subject: "Verify your email",
           html: renderEmailVerification(verificationCode),
