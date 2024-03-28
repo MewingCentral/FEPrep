@@ -162,7 +162,7 @@ export const authRouter = createTRPCRouter({
       await lucia.invalidateUserSessions(ctx.user.id);
       await ctx.db
         .update(users)
-        .set({ emailVerified: 1 })
+        .set({ emailVerified: true })
         .where(eq(users.id, ctx.user.id));
 
       const session = await lucia.createSession(ctx.user.id, {});
