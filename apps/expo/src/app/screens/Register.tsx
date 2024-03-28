@@ -25,6 +25,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 // todo change func title
 export default function Login() {
+  const onStorePress = async () => {
+    await SecureStore.setItemAsync("key", "value");
+  }
+
+  const onShowPress = async () => {
+    const res = await SecureStore.getItemAsync("key");
+    if (res) {
+      console.log(res);
+    } else {
+      console.log("not able to get val from SecureStore");
+    }
+  }
+
+
   const router = useRouter();
   const {
     control,
@@ -58,6 +72,7 @@ export default function Login() {
     try {
       console.log(values);
       await signUp.mutateAsync(values);
+      console.log("made it here");
       router.push("../dashboard/(tabs)/study-sets");
     } catch {
       // hehe
@@ -124,6 +139,12 @@ export default function Login() {
           <View style={screenStyles.bottomContainer}>
             <Pressable style={screenStyles.loginBtn} onPress={handleSubmit(onSubmit)}>
               <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
+            </Pressable>
+            <Pressable style={screenStyles.loginBtn} onPress={onStorePress}>
+              <Text style={screenStyles.loginBtnText}> {"Store me!!"} </Text>
+            </Pressable>
+            <Pressable style={screenStyles.loginBtn} onPress={onShowPress}>
+              <Text style={screenStyles.loginBtnText}> {"Show me!!"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
               {"Have an account already? "}
