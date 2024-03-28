@@ -16,13 +16,12 @@ export const uncachedValidateRequest = async ({
   if (authorization) {
     sessionId = lucia.readBearerToken(authorization);
   }
-
   // If session ID is not found in authorization header, check cookies
-  if (!sessionId) {
+  else if (!sessionId) {
     sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
   }
 
-  // If session ID is not found in cookies, return null
+  // If session ID is not found, return null
   if (!sessionId) {
     return { user: null, session: null };
   }
