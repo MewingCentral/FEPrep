@@ -27,11 +27,15 @@ import { db } from "@feprep/db";
  */
 
 export async function createTRPCContext(opts: { headers: Headers }) {
-  // Get latest session and user data
-  const { session, user } = await uncachedValidateRequest();
+  // Grab the source of the request
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
-  // TODO: log who is making the request
+  // Get latest session and user data
+  const { session, user } = await uncachedValidateRequest({
+    authorization:
+      source === "expo-react" ? opts.headers.get("Authorization") : null,
+  });
+
   console.log(">>> tRPC Request from", source, "by", user?.email);
 
   return {
