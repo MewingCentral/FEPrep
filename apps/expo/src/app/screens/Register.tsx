@@ -25,19 +25,19 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 // todo change func title
 export default function Login() {
-  const onStorePress = async () => {
-    await SecureStore.setItemAsync("key", "value");
-  }
+  // todo delete secure store testing
+  // const onStorePress = async () => {
+  //   await SecureStore.setItemAsync("key", "value");
+  // }
 
-  const onShowPress = async () => {
-    const res = await SecureStore.getItemAsync("key");
-    if (res) {
-      console.log(res);
-    } else {
-      console.log("not able to get val from SecureStore");
-    }
-  }
-
+  // const onShowPress = async () => {
+  //   const res = await SecureStore.getItemAsync("key");
+  //   if (res) {
+  //     console.log(res);
+  //   } else {
+  //     console.log("not able to get val from SecureStore");
+  //   }
+  // }
 
   const router = useRouter();
   const {
@@ -57,9 +57,13 @@ export default function Login() {
   const signUp = api.auth.signUp.useMutation({
     onSuccess: (data) => {
       if (!(data instanceof Error)) {
-        console.log(data.session);
+        SecureStore.setItem("session", data.session);
+        router.push("../dashboard/(tabs)/study-sets/");
       }
     },
+    onError: (error) => {
+      console.error(error);
+    }
   });
 
   const onChange = arg => {
@@ -69,15 +73,7 @@ export default function Login() {
   };
 
   const onSubmit = async (values: SignUpFormInput) => {
-    try {
-      console.log(values);
-      await signUp.mutateAsync(values);
-      console.log("made it here");
-      router.push("../dashboard/(tabs)/study-sets");
-    } catch {
-      // hehe
-      console.log("oh no");
-    }
+    signUp.mutate(values);
   };
 
   return (
@@ -140,12 +136,13 @@ export default function Login() {
             <Pressable style={screenStyles.loginBtn} onPress={handleSubmit(onSubmit)}>
               <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
-            <Pressable style={screenStyles.loginBtn} onPress={onStorePress}>
+            {/* todo delete secure store testing */}
+            {/* <Pressable style={screenStyles.loginBtn} onPress={onStorePress}>
               <Text style={screenStyles.loginBtnText}> {"Store me!!"} </Text>
             </Pressable>
             <Pressable style={screenStyles.loginBtn} onPress={onShowPress}>
               <Text style={screenStyles.loginBtnText}> {"Show me!!"} </Text>
-            </Pressable>
+            </Pressable> */}
             <Text style={screenStyles.contentText}>
               {"Have an account already? "}
               <Link style={screenStyles.hyperlinkText} href="/screens/Login">
