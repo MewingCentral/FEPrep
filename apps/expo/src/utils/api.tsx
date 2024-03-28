@@ -60,7 +60,8 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         httpBatchLink({
           transformer: superjson,
           // url: `${getBaseUrl()}/api/trpc`,
-          url: `http://localhost:3000/api/trpc`,
+          // url: `http://localhost:3000/api/trpc`,
+          url: `https://loud-glasses-shave.loca.lt/api/trpc`,
           headers() {
             const headers = new Map<string, string>();
             headers.set("x-trpc-source", "expo-react");

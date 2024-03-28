@@ -19,14 +19,13 @@ import { Controller, useForm } from "react-hook-form";
 import screenStyles from "~/utils/screen-styles";
 
 import { api } from "~/utils/api";
-import screenStyles from "~/utils/screen-styles";
 import {
   SignUpFormInput,
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
 
 // todo change func title
-export default function Login() {
+export default function Register() {
   const router = useRouter();
   const {
     control,
