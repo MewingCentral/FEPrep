@@ -16,9 +16,8 @@ import { StatusBar } from "expo-status-bar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
-import screenStyles from "~/utils/screen-styles";
-
 import { api } from "~/utils/api";
+import screenStyles from "~/utils/screen-styles";
 import {
   SignUpFormInput,
   SignUpFormSchema,
