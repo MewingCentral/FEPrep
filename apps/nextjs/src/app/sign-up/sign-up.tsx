@@ -70,10 +70,7 @@ export default function SignUp() {
                       <FormItem>
                         <FormLabel>NID</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="jd123456"
-                            {...field}
-                          />
+                          <Input placeholder="jd123456" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
