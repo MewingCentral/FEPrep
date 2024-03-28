@@ -33,6 +33,7 @@ export async function createTRPCContext(opts: { headers: Headers }) {
   // Get latest session and user data
   const { session, user } = await uncachedValidateRequest({
     authorization:
+      // If the request is from the Expo app, we need to get the token from the Authorization header
       source === "expo-react" ? opts.headers.get("Authorization") : null,
   });
 
