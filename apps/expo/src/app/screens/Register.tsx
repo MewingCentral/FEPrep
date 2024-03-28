@@ -11,34 +11,22 @@ import {
   View,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
-
-import screenStyles from "~/utils/screen-styles";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
 
 import screenStyles from "~/utils/screen-styles";
 
 import { api } from "~/utils/api";
-import * as SecureStore from "expo-secure-store";
-import { useForm, Controller } from "react-hook-form";
-import { SignUpFormSchema, SignUpFormInput } from "../../../../../packages/validators/src";
-import { zodResolver } from '@hookform/resolvers/zod';
+import screenStyles from "~/utils/screen-styles";
+import {
+  SignUpFormInput,
+  SignUpFormSchema,
+} from "../../../../../packages/validators/src";
 
 // todo change func title
 export default function Login() {
-  // todo delete secure store testing
-  // const onStorePress = async () => {
-  //   await SecureStore.setItemAsync("key", "value");
-  // }
-
-  // const onShowPress = async () => {
-  //   const res = await SecureStore.getItemAsync("key");
-  //   if (res) {
-  //     console.log(res);
-  //   } else {
-  //     console.log("not able to get val from SecureStore");
-  //   }
-  // }
-
   const router = useRouter();
   const {
     control,
@@ -63,16 +51,10 @@ export default function Login() {
     },
     onError: (error) => {
       console.error(error);
-    }
+    },
   });
 
-  const onChange = arg => {
-    return {
-      value: arg.nativeEvent.text,
-    };
-  };
-
-  const onSubmit = async (values: SignUpFormInput) => {
+  const onSubmit = (values: SignUpFormInput) => {
     signUp.mutate(values);
   };
 
@@ -94,55 +76,49 @@ export default function Login() {
             </Text>
 
             <Text style={screenStyles.inputIdentifierText}> NID </Text>
-            <Controller control={control} name="nid" 
+            <Controller
+              control={control}
+              name="nid"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={screenStyles.nidTextField}
                   placeholder=""
                   keyboardType="default"
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   onBlur={onBlur}
                   value={value}
-                   />
-              )} />
+                />
+              )}
+            />
             {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
 
             <Text style={screenStyles.inputIdentifierText}> Password </Text>
-            <Controller control={control} name="password"
+            <Controller
+              control={control}
+              name="password"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput 
+                <TextInput
                   style={screenStyles.pswdTextField}
                   placeholder=""
-                  keyboardType="default" 
-                  onChangeText={value => onChange(value)}
+                  keyboardType="default"
+                  onChangeText={(value) => onChange(value)}
                   onBlur={onBlur}
                   value={value}
-                  />
-              )} />
-            {errors.password?.message && <Text>{errors.password?.message}</Text>}
-            
-            {/* <Text style={styles.inputIdentifierText}> Confirm Password </Text>
-            <TextInput
-              style={screenStyles.confirmPswdTextField}
-              onChangeText={onChangeConfirmPswd}
-              //secureTextEntry={!displayPswd}
-              // value={confirmPswd}
-              placeholder=""
-              keyboardType="default"
-            /> */}
+                />
+              )}
+            />
+            {errors.password?.message && (
+              <Text>{errors.password?.message}</Text>
+            )}
           </View>
 
           <View style={screenStyles.bottomContainer}>
-            <Pressable style={screenStyles.loginBtn} onPress={handleSubmit(onSubmit)}>
+            <Pressable
+              style={screenStyles.loginBtn}
+              onPress={handleSubmit(onSubmit)}
+            >
               <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
-            {/* todo delete secure store testing */}
-            {/* <Pressable style={screenStyles.loginBtn} onPress={onStorePress}>
-              <Text style={screenStyles.loginBtnText}> {"Store me!!"} </Text>
-            </Pressable>
-            <Pressable style={screenStyles.loginBtn} onPress={onShowPress}>
-              <Text style={screenStyles.loginBtnText}> {"Show me!!"} </Text>
-            </Pressable> */}
             <Text style={screenStyles.contentText}>
               {"Have an account already? "}
               <Link style={screenStyles.hyperlinkText} href="/screens/Login">
