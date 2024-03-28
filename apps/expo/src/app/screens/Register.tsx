@@ -15,8 +15,6 @@ import { StatusBar } from "expo-status-bar";
 
 import screenStyles from "~/utils/screen-styles";
 
-import screenStyles from "~/utils/screen-styles";
-
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 import { useForm, Controller } from "react-hook-form";
@@ -82,11 +80,11 @@ export default function Login() {
               {"Enter your NID to create your account. \n"}
             </Text>
 
-            <Text style={styles.inputIdentifierText}> NID </Text>
+            <Text style={screenStyles.inputIdentifierText}> NID </Text>
             <Controller control={control} name="nid" 
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
-                  style={styles.nidTextField}
+                  style={screenStyles.nidTextField}
                   placeholder=""
                   keyboardType="default"
                   onChangeText={value => onChange(value)}
@@ -96,11 +94,11 @@ export default function Login() {
               )} />
             {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
 
-            <Text style={styles.inputIdentifierText}> Password </Text>
+            <Text style={screenStyles.inputIdentifierText}> Password </Text>
             <Controller control={control} name="password"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput 
-                  style={styles.pswdTextField}
+                  style={screenStyles.pswdTextField}
                   placeholder=""
                   keyboardType="default" 
                   onChangeText={value => onChange(value)}
@@ -121,9 +119,9 @@ export default function Login() {
             /> */}
           </View>
 
-          <View style={styles.bottomContainer}>
-            <Pressable style={styles.loginBtn} onPress={handleSubmit(onSubmit)}>
-              <Text style={styles.loginBtnText}> {"Sign Up"} </Text>
+          <View style={screenStyles.bottomContainer}>
+            <Pressable style={screenStyles.loginBtn} onPress={handleSubmit(onSubmit)}>
+              <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
             </Pressable>
             <Text style={screenStyles.contentText}>
               {"Have an account already? "}
