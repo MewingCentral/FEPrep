@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import type { SignUpInput } from "@feprep/validators";
+import type { SignUpFormInput } from "@feprep/validators";
 import { cn } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@feprep/ui/card";
@@ -17,26 +17,26 @@ import {
   useForm,
 } from "@feprep/ui/form";
 import { Input } from "@feprep/ui/input";
-import { SignUpSchema } from "@feprep/validators";
+import { SignUpFormSchema } from "@feprep/validators";
 
 import { api } from "~/trpc/react";
 
 export default function SignUp() {
   const router = useRouter();
   const form = useForm({
-    schema: SignUpSchema,
+    schema: SignUpFormSchema,
     defaultValues: {
-      email: "",
+      nid: "",
       password: "",
     },
   });
 
   const { mutateAsync } = api.auth.signUp.useMutation();
 
-  const onSubmit = async (values: SignUpInput) => {
+  const onSubmit = async (values: SignUpFormInput) => {
     try {
       await mutateAsync(values);
-      router.push("/dashboard");
+      router.push("/explore");
     } catch {
       // noop
     }
@@ -65,14 +65,13 @@ export default function SignUp() {
                 >
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="nid"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>UCF Email</FormLabel>
+                        <FormLabel>NID</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="jd123456@ucf.edu"
-                            autoComplete="email"
+                            placeholder="jd123456"
                             {...field}
                           />
                         </FormControl>
