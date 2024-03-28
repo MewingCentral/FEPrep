@@ -1,17 +1,34 @@
 import type { Session, User } from "lucia";
-import { cache } from "react";
 import { cookies } from "next/headers";
 
 import { lucia } from ".";
 
-export const uncachedValidateRequest = async (): Promise<
+export const uncachedValidateRequest = async ({
+  authorization,
+}: {
+  authorization: string | null;
+}): Promise<
   { user: User; session: Session } | { user: null; session: null }
 > => {
-  const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
+  let sessionId = null;
+
+  // Check if authorization header is present
+  if (authorization) {
+    sessionId = lucia.readBearerToken(authorization);
+  }
+
+  // If session ID is not found in authorization header, check cookies
+  if (!sessionId) {
+    sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
+  }
+
+  // If session ID is not found in cookies, return null
   if (!sessionId) {
     return { user: null, session: null };
   }
+
   const result = await lucia.validateSession(sessionId);
+
   // Next.js throws an error when you attempt to set cookie when rendering page
   try {
     if (result.session?.fresh) {
@@ -33,7 +50,6 @@ export const uncachedValidateRequest = async (): Promise<
   } catch {
     console.error("Failed to set session cookie");
   }
+
   return result;
 };
-
-export const validateRequest = cache(uncachedValidateRequest);
