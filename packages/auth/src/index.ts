@@ -1,4 +1,4 @@
-import { Lucia } from "lucia";
+import { Lucia, TimeSpan } from "lucia";
 
 import type { SelectUser } from "@feprep/db";
 import { adapter } from "@feprep/db";
@@ -15,6 +15,7 @@ export const lucia = new Lucia(adapter, {
       emailVerified: attributes.emailVerified,
     };
   },
+  sessionExpiresIn: new TimeSpan(1, "w"),
 });
 
 declare module "lucia" {
