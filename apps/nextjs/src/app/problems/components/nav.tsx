@@ -209,31 +209,19 @@ export function Nav({ user }: { user: User | null }) {
       <div className="flex grow flex-row justify-center gap-3">
         {/* Link onclick behavior to be updated once question section is done */}
         <Label className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
-          {" "}
-          <Popover>
-            <PopoverTrigger>
-              <HoverCard openDelay={50} closeDelay={50}>
-                <HoverCardTrigger className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center">
-                  <LapTimerIcon
-                    width="25"
-                    height="25"
-                    className="hidden md:block"
-                  />{" "}
-                  <span>Timer</span>
-                </HoverCardTrigger>
-                <HoverCardContent className="h-fit w-fit text-sm">
-                  Set Timer
-                </HoverCardContent>
-              </HoverCard>
-            </PopoverTrigger>
-            <PopoverContent className="w-60">
-              <div className="grid grid-cols-1 gap-4 gap-y-4">
-                <Button>10 minutes</Button>
-                <Button>15 minutes</Button>
-                <Button>20 minutes</Button>
-              </div>
-            </PopoverContent>
-          </Popover>
+          <HoverCard openDelay={50} closeDelay={50}>
+            <HoverCardTrigger className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center">
+              <LapTimerIcon
+                width="25"
+                height="25"
+                className="hidden md:block"
+              />{" "}
+              <span>Timer</span>
+            </HoverCardTrigger>
+            <HoverCardContent className="h-fit w-fit text-sm">
+              Start timer
+            </HoverCardContent>
+          </HoverCard>
         </Label>
         <Separator
           orientation="vertical"
