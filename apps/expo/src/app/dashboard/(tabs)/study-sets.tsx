@@ -8,17 +8,45 @@ import { useRouter } from "expo-router";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
+// Api stuff for log out, might do this somewhere else in the future
+import * as SecureStore from "expo-secure-store";
+import { api } from "~/utils/api";
+
+
 export default function Tab() {
   const router = useRouter();
+  const signOut = api.auth.signOut.useMutation({
+    onSuccess: () => {
+      const sessId = SecureStore.getItem("session");
+      console.log(`Session ID: ${sessId}`);
+      router.push("../");
+      const getSess = api.auth.getSession.useQuery();
+      // const getSess = api.auth.getSession.useQuery({
+      //   onSuccess: (data: ) => {
+      //     if (!(data instanceof Error)) {
+      //       console.log(data);
+      //     }
+      //   },
+      //   onError: (error) => {
+      //     console.log(error);
+      //   },
+      // });
+    },
+    onError: (error) => {
+      // todo is this necessary?
+      console.error(error);
+    },
+  });
+
+  const onSignOut = () => {
+    signOut.mutate();
+  }
 
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
         {/* Temp log out button */}
-        <Pressable style={tempStyles.pressable} onPress={() => {
-          router.push("../");
-          console.log("we tried");
-        }}>
+        <Pressable style={tempStyles.pressable} onPress={onSignOut}>
           <Text style={tempStyles.text}>Log out</Text>
         </Pressable>
 
