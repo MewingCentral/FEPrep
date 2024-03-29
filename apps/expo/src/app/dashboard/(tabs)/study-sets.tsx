@@ -1,15 +1,26 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { StyleSheet, KeyboardAvoidingView, Pressable, Text, TextInput, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RadixIcon } from "radix-ui-react-native-icons";
+
+import { useRouter } from "expo-router";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
 export default function Tab() {
+  const router = useRouter();
+
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
+        {/* Temp log out button */}
+        <Pressable style={tempStyles.pressable} onPress={() => {
+          router.push("../../index");
+        }}>
+          <Text style={tempStyles.text}>Log out</Text>
+        </Pressable>
+
         {/* Search input */}
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
           <View style={[dashStyles.container, dashStyles.inputContainer]}>
@@ -92,3 +103,17 @@ export default function Tab() {
     </SafeAreaView>
   );
 }
+
+const tempStyles = StyleSheet.create({
+  pressable: {
+    height: 50,
+    backgroundColor: Colors.dark_accent,
+    flex: 1,
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  text: {
+    textAlign: "center",
+    color: Colors.dark_primary_text,
+  }
+});
