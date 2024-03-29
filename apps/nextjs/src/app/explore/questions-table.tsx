@@ -16,6 +16,7 @@ import { DIFFICULTIES, SEMESTERS, TOPICS } from "@feprep/consts";
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
+  PlusIcon,
   ReloadIcon,
   ShuffleIcon,
 } from "@feprep/ui";
@@ -30,6 +31,14 @@ import {
 } from "@feprep/ui/dropdown-menu";
 import { Input } from "@feprep/ui/input";
 import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@feprep/ui/sheet";
+import {
   Table,
   TableBody,
   TableCell,
@@ -37,6 +46,8 @@ import {
   TableHeader,
   TableRow,
 } from "@feprep/ui/table";
+
+import { CreateQuestionForm } from "./create-question-form";
 
 export function QuestionsTable({
   columns,
@@ -58,6 +69,7 @@ export function QuestionsTable({
     <div>
       {/* Filtering options */}
       <div className="mb-4 flex items-center gap-2">
+        <CreateQuestionButton />
         <TopicsDropdownMenu />
         <DifficultyDropdownMenu />
         <SemesterDropdownMenu />
@@ -255,5 +267,28 @@ export function SemesterDropdownMenu() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+function CreateQuestionButton() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button>
+          <PlusIcon className="mr-2 h-4 w-4" />
+          Create Question
+        </Button>
+      </SheetTrigger>
+      <SheetContent className="w-[400px] sm:w-[540px]">
+        <SheetHeader>
+          <SheetTitle>Create Question</SheetTitle>
+          <SheetDescription>
+            Fill out the form below to create a new question to be added to the
+            site!
+          </SheetDescription>
+        </SheetHeader>
+        <CreateQuestionForm />
+      </SheetContent>
+    </Sheet>
   );
 }
