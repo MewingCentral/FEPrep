@@ -88,7 +88,7 @@ export const authRouter = createTRPCRouter({
 
       // Check if user exists
       const user = await ctx.db.query.users.findFirst({
-        where: (table, { eq }) => eq(table.email, nid),
+        where: (table, { eq }) => eq(table.email, email),
       });
 
       if (!user) {

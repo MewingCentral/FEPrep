@@ -16,15 +16,15 @@ import {
   useForm,
 } from "@feprep/ui/form";
 import { Input } from "@feprep/ui/input";
-import { SignInInput, SignUpSchema } from "@feprep/validators";
+import { SignInInput, SignUpFormSchema } from "@feprep/validators";
 
 import { api } from "~/trpc/react";
 
 export default function SignIn() {
   const form = useForm({
-    schema: SignUpSchema,
+    schema: SignUpFormSchema,
     defaultValues: {
-      email: "",
+      nid: "",
       password: "",
     },
   });
@@ -64,14 +64,13 @@ export default function SignIn() {
                 >
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="nid"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>UCF Email</FormLabel>
+                        <FormLabel>NID</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="jd123456@ucf.edu"
-                            autoComplete="email"
+                            placeholder="jd123456"
                             {...field}
                           />
                         </FormControl>
