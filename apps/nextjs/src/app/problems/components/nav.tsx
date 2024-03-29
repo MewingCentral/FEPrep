@@ -88,15 +88,20 @@ export function Nav({ user }: { user: User | null }) {
     <main className="flex flex-row justify-start px-10 py-6">
       {/* left side */}
       <div className="mr-5 flex flex-1 flex-row gap-3">
-        <Link href="/">
-          <Image
-            src="/Ellipse-3.svg"
-            width={25}
-            height={25}
-            alt="FEPrep Logo"
-            className="hidden transition-transform duration-200 hover:scale-125 md:block"
-          />
-        </Link>
+        <HoverCard openDelay={50} closeDelay={50}>
+          <HoverCardTrigger href="/">
+            <Image
+              src="/Ellipse-3.svg"
+              width={25}
+              height={25}
+              alt="FEPrep Logo"
+              className="hidden transition-transform duration-200 hover:scale-125 md:block"
+            />
+          </HoverCardTrigger>
+          <HoverCardContent className="h-fit w-fit text-sm">
+            Homepage
+          </HoverCardContent>
+        </HoverCard>
         <Separator
           orientation="vertical"
           decorative={true}
@@ -144,21 +149,42 @@ export function Nav({ user }: { user: User | null }) {
           </SheetContent>
         </Sheet>
         {/* Icon onclick behavior to be updated once question section is done */}
-        <ArrowLeftIcon
-          width="25"
-          height="25"
-          className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
-        />
-        <ArrowRightIcon
-          width="25"
-          height="25"
-          className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
-        />
-        <ShuffleIcon
-          width="25"
-          height="25"
-          className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
-        />
+        <HoverCard openDelay={50} closeDelay={50}>
+          <HoverCardTrigger>
+            <ArrowLeftIcon
+              width="25"
+              height="25"
+              className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
+            />
+          </HoverCardTrigger>
+          <HoverCardContent className="h-fit w-fit text-sm">
+            Previous
+          </HoverCardContent>
+        </HoverCard>
+        <HoverCard openDelay={50} closeDelay={50}>
+          <HoverCardTrigger>
+            <ArrowRightIcon
+              width="25"
+              height="25"
+              className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
+            />
+          </HoverCardTrigger>
+          <HoverCardContent className="h-fit w-fit text-sm">
+            Next
+          </HoverCardContent>
+        </HoverCard>
+        <HoverCard openDelay={50} closeDelay={50}>
+          <HoverCardTrigger>
+            <ShuffleIcon
+              width="25"
+              height="25"
+              className="text-muted-foreground transition-all duration-200 hover:scale-125 hover:cursor-pointer"
+            />
+          </HoverCardTrigger>
+          <HoverCardContent className="h-fit w-fit text-sm">
+            Random Question
+          </HoverCardContent>
+        </HoverCard>
       </div>
       {/* center */}
       <div className="flex grow flex-row justify-center gap-3">
