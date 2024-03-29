@@ -16,7 +16,8 @@ export default function Tab() {
       <KeyboardAwareScrollView>
         {/* Temp log out button */}
         <Pressable style={tempStyles.pressable} onPress={() => {
-          router.push("../../index");
+          router.push("../");
+          console.log("we tried");
         }}>
           <Text style={tempStyles.text}>Log out</Text>
         </Pressable>
