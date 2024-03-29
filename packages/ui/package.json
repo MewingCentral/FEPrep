@@ -23,7 +23,9 @@
     "./skeleton": "./src/skeleton.tsx",
     "./sheet": "./src/sheet.tsx",
     "./popover": "./src/popover.tsx",
-    "./input-otp": "./src/input-otp.tsx"
+    "./input-otp": "./src/input-otp.tsx",
+    "./hover-card": "./src/hover-card.tsx",
+    "./navigation-menu": "./src/navigation-menu.tsx"
   },
   "license": "MIT",
   "scripts": {
