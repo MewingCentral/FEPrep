@@ -12,25 +12,12 @@ import dashStyles from "~/utils/dash-styles";
 import * as SecureStore from "expo-secure-store";
 import { api } from "~/utils/api";
 
-
 export default function Tab() {
   const router = useRouter();
   const signOut = api.auth.signOut.useMutation({
     onSuccess: () => {
-      const sessId = SecureStore.getItem("session");
-      console.log(`Session ID: ${sessId}`);
+      SecureStore.setItem("session", "invalid");
       router.push("../");
-      const getSess = api.auth.getSession.useQuery();
-      // const getSess = api.auth.getSession.useQuery({
-      //   onSuccess: (data: ) => {
-      //     if (!(data instanceof Error)) {
-      //       console.log(data);
-      //     }
-      //   },
-      //   onError: (error) => {
-      //     console.log(error);
-      //   },
-      // });
     },
     onError: (error) => {
       // todo is this necessary?
@@ -38,8 +25,11 @@ export default function Tab() {
     },
   });
 
+  // const getSess = api.auth.getSession.useQuery();
+
   const onSignOut = () => {
     signOut.mutate();
+    // console.log(getSess.data);
   }
 
   return (
