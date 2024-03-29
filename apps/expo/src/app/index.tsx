@@ -2,8 +2,6 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, Stack } from "expo-router";
 
-import { api } from "~/utils/api";
-
 export default function HomePage() {
   return (
     <SafeAreaView style={[styles.container, styles.screenContainer]}>
