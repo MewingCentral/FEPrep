@@ -125,12 +125,12 @@ export function Nav({ user }: { user: User | null }) {
                       <SheetTitle>Topics</SheetTitle>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-fit gap-3 p-6 lg:grid-cols-[.75fr_1fr]">
+                      <ul className="grid w-fit gap-3 whitespace-nowrap p-6 lg:grid-cols-[.75fr_1fr]">
                         <li className="row-span-3">
                           {TOPICS.map((topic) => (
                             <NavigationMenuItem
                               key={topic}
-                              className="rounded-md p-1 transition-all duration-200 hover:cursor-pointer hover:bg-slate-100"
+                              className="rounded-md px-4 py-1 transition-all duration-200 hover:cursor-pointer hover:bg-secondary"
                             >
                               {topic}
                             </NavigationMenuItem>
