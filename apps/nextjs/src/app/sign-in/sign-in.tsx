@@ -35,7 +35,7 @@ export default function SignIn() {
   const onSubmit = async (values: SignInInput) => {
     try {
       await mutateAsync(values);
-      router.push("/dashboard");
+      router.push("/explore");
     } catch (error) {
       // noop
     }
