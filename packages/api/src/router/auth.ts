@@ -84,6 +84,7 @@ export const authRouter = createTRPCRouter({
     .input(SignInSchema)
     .mutation(async ({ ctx, input }) => {
       const { nid, password } = input;
+      const email = `${nid}@ucf.edu`;
 
       // Check if user exists
       const user = await ctx.db.query.users.findFirst({
