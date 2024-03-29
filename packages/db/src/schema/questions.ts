@@ -10,7 +10,7 @@ export const questions = sqliteTable("question", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
-  title: text("title").notNull(),
+  title: text("title"),
   // PDF or markdown content for the question
   question: text("question").notNull(),
   solution: text("solution").notNull(),
