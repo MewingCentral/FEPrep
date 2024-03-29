@@ -118,17 +118,37 @@ export function Nav({ user }: { user: User | null }) {
             className="max-h-screen min-w-[40vw] overflow-auto"
           >
             <SheetHeader className="mb-8">
-              <SheetTitle>More Questions:</SheetTitle>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>
+                      <SheetTitle>Topics</SheetTitle>
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-fit gap-3 p-6 lg:grid-cols-[.75fr_1fr]">
+                        <li className="row-span-3">
+                          {TOPICS.map((topic) => (
+                            <NavigationMenuItem
+                              key={topic}
+                              className="rounded-md p-1 transition-all duration-200 hover:cursor-pointer hover:bg-slate-100"
+                            >
+                              {topic}
+                            </NavigationMenuItem>
+                          ))}
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
             </SheetHeader>
             <Table>
-              {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[100px]">Semester</TableHead>
                   <TableHead>Section</TableHead>
                   <TableHead>Question</TableHead>
                   <TableHead className="text-right">Difficulty</TableHead>
-                  {/* <TableHead className="text-right">Amount</TableHead> */}
                 </TableRow>
               </TableHeader>
               <TableBody>
