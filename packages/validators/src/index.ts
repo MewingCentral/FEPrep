@@ -50,14 +50,19 @@ export const CreateQuestionSchema = z.object({
   question: z.string(),
   solution: z.string(),
   averageScore: z.number(),
-  easyVotes: z.number(),
-  mediumVotes: z.number(),
-  hardVotes: z.number(),
+  easyVotes: z.number().optional(),
+  mediumVotes: z.number().optional(),
+  hardVotes: z.number().optional(),
   points: z.number(),
   semester: z.enum(SEMESTERS),
   topic: z.enum(TOPICS),
   section: z.enum(SECTIONS),
   questionNumber: z.number(),
+});
+
+export const CreateQuestionFormSchema = CreateQuestionSchema.omit({
+  question: true,
+  solution: true,
 });
 
 export const UpdateQuestionSchema = CreateQuestionSchema.extend({
