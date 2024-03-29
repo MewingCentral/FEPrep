@@ -104,6 +104,7 @@ export default function Login() {
                     onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                     value={value}
+                    secureTextEntry
                   />
                 )}
               />

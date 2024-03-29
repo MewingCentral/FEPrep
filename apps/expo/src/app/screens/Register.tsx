@@ -101,6 +101,7 @@ export default function Register() {
                   onChangeText={(value) => onChange(value)}
                   onBlur={onBlur}
                   value={value}
+                  secureTextEntry
                 />
               )}
             />
