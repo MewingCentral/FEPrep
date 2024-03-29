@@ -1,0 +1,42 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.App {
+  font-family: NanumSquare;
+  text-align: center;
+}
+.timer-wrapper {
+  margin-top: 60px;
+}
+.time {
+  font-size: 30px;
+}
+.right {
+  margin-left: 20px;
+}
+.unit {
+  margin-left: 10px;
+  font-size: 16px;
+}
+.button-wrapper {
+  display: flex;
+  margin-top: 40px;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 38px;
+  background-color: #85159b;
+  color: white;
+  margin: 5px 20px;
+  border-radius: 10px;
+}
+.button:hover {
+  cursor: pointer;
+}
