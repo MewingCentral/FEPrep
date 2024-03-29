@@ -108,7 +108,7 @@ export function Nav({ user }: { user: User | null }) {
         />
         <Sheet>
           <SheetTrigger asChild>
-            <span className="text-slate hidden text-left text-lg font-semibold underline transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:block">
+            <span className="text-slate hidden text-left text-base font-semibold underline transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:block">
               Questions
             </span>
           </SheetTrigger>
@@ -228,17 +228,10 @@ export function Nav({ user }: { user: User | null }) {
           decorative={true}
           className="hidden bg-foreground md:block"
         />
-        <HoverCard openDelay={50} closeDelay={50}>
-          <HoverCardTrigger>
-            <Label className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
-              <RocketIcon width="25" height="25" className="hidden md:block" />{" "}
-              <span>Solution</span>
-            </Label>
-          </HoverCardTrigger>
-          <HoverCardContent className="h-fit w-fit text-sm">
-            View Solution
-          </HoverCardContent>
-        </HoverCard>
+        <Label className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
+          <RocketIcon width="25" height="25" className="hidden md:block" />{" "}
+          <span className="text-sm">View Solution</span>
+        </Label>
       </div>
       {/* right */}
       <div className="flex flex-1 flex-row-reverse items-end gap-3">
