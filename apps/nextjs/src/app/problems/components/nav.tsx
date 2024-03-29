@@ -25,7 +25,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@feprep/ui/navigation-menu";
-import { Popover, PopoverContent, PopoverTrigger } from "@feprep/ui/popover";
 import { Separator } from "@feprep/ui/separator";
 import {
   Sheet,
