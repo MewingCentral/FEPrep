@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import type { User } from "@feprep/auth";
+import { TOPICS } from "@feprep/consts";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -11,8 +12,19 @@ import {
   ShuffleIcon,
 } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
-import { Input } from "@feprep/ui/input";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@feprep/ui/hover-card";
 import { Label } from "@feprep/ui/label";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@feprep/ui/navigation-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@feprep/ui/popover";
 import { Separator } from "@feprep/ui/separator";
 import {
