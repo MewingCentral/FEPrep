@@ -83,17 +83,17 @@ export const authRouter = createTRPCRouter({
   signIn: publicProcedure
     .input(SignInSchema)
     .mutation(async ({ ctx, input }) => {
-      const { email, password } = input;
+      const { nid, password } = input;
 
       // Check if user exists
       const user = await ctx.db.query.users.findFirst({
-        where: (table, { eq }) => eq(table.email, email),
+        where: (table, { eq }) => eq(table.email, nid),
       });
 
       if (!user) {
         return new TRPCError({
           code: "BAD_REQUEST",
-          message: "Invalid email or password",
+          message: "Invalid nid or password",
         });
       }
 
@@ -105,7 +105,7 @@ export const authRouter = createTRPCRouter({
       if (!validPassword) {
         return new TRPCError({
           code: "BAD_REQUEST",
-          message: "Invalid email or password",
+          message: "Invalid nid or password",
         });
       }
 

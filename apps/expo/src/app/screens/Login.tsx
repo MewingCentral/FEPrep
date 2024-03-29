@@ -10,20 +10,19 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Link, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
+import { StatusBar } from "expo-status-bar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { api } from "~/utils/api";
+import screenStyles from "~/utils/screen-styles";
 import {
   SignInInput,
   SignInSchema,
 } from "../../../../../packages/validators/src";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { StatusBar } from "expo-status-bar";
-
-import screenStyles from "~/utils/screen-styles";
 
 export default function Login() {
   const router = useRouter();
@@ -91,12 +90,12 @@ export default function Login() {
                 )}
               />
               {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
-                
-                <Text style={screenStyles.inputIdentifierText}> Password </Text>
-                <Controller
-                  control={control}
-                  name="password"
-                  render={({ field: { onChange, onBlur, value } }) => (
+
+              <Text style={screenStyles.inputIdentifierText}> Password </Text>
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={screenStyles.pswdTextField}
                     placeholder=""
@@ -121,7 +120,10 @@ export default function Login() {
             </View>
 
             <View style={screenStyles.bottomContainer}>
-              <Pressable style={screenStyles.loginBtn} onPress={handleSubmit(onSubmit)}>
+              <Pressable
+                style={screenStyles.loginBtn}
+                onPress={handleSubmit(onSubmit)}
+              >
                 <Text style={screenStyles.loginBtnText}> {"Login"} </Text>
               </Pressable>
               <Text style={screenStyles.contentText}>
