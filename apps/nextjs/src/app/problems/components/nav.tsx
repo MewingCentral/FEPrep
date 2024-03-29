@@ -8,6 +8,9 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   LapTimerIcon,
+  PauseIcon,
+  PlayIcon,
+  ResetIcon,
   RocketIcon,
   ShuffleIcon,
 } from "@feprep/ui";
@@ -44,6 +47,7 @@ import {
 
 import { api } from "~/trpc/react";
 import questions from "./questions";
+import Timer from "./timer";
 
 export function Nav({ user }: { user: User | null }) {
   function AuthButton({ user }: { user: User | null }) {
@@ -216,10 +220,32 @@ export function Nav({ user }: { user: User | null }) {
                 height="25"
                 className="hidden md:block"
               />{" "}
-              <span>Timer</span>
+              {/* <span>Timer</span> */}
+              <Timer time={0} />
             </HoverCardTrigger>
-            <HoverCardContent className="h-fit w-fit text-sm">
-              Start timer
+            <HoverCardContent className="flex h-fit w-fit flex-row gap-1 text-sm">
+              {/* Start timer */}
+              <Button
+                variant="outline"
+                size="icon"
+                className="transition-all duration-200 hover:scale-110"
+              >
+                <PlayIcon width="20" height="20" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="transition-all duration-200 hover:scale-110"
+              >
+                <PauseIcon width="20" height="20" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="transition-all duration-200 hover:scale-110"
+              >
+                <ResetIcon width="20" height="20" />
+              </Button>
             </HoverCardContent>
           </HoverCard>
         </Label>
