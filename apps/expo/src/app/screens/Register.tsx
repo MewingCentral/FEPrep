@@ -23,7 +23,6 @@ import {
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
 
-// todo change func title
 export default function Register() {
   const router = useRouter();
   const {
