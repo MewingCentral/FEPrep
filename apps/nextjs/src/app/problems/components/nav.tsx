@@ -190,52 +190,28 @@ export function Nav({ user }: { user: User | null }) {
       <div className="flex grow flex-row justify-center gap-3">
         {/* Link onclick behavior to be updated once question section is done */}
         <Label className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
-          <LapTimerIcon width="25" height="25" className="hidden md:block" />{" "}
+          {" "}
           <Popover>
-            <PopoverTrigger>Timer</PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <h4 className="font-medium leading-none">Dimensions</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Set the timer length.
-                  </p>
-                </div>
-                <div className="grid gap-2">
-                  <div className="grid grid-cols-3 items-center gap-4">
-                    <Label htmlFor="width">Minutes</Label>
-                    <Input
-                      id="width"
-                      defaultValue="5"
-                      className="col-span-2 h-8"
-                    />
-                  </div>
-                  <div className="grid grid-cols-3 items-center gap-4">
-                    <Label htmlFor="maxWidth">Seconds</Label>
-                    <Input
-                      id="maxWidth"
-                      defaultValue="00"
-                      className="col-span-2 h-8"
-                    />
-                  </div>
-                  {/*
-                  <div className="grid grid-cols-3 items-center gap-4">
-                    <Label htmlFor="height">Height</Label>
-                    <Input
-                      id="height"
-                      defaultValue="25px"
-                      className="col-span-2 h-8"
-                    />
-                  </div>
-                  <div className="grid grid-cols-3 items-center gap-4">
-                    <Label htmlFor="maxHeight">Max. height</Label>
-                    <Input
-                      id="maxHeight"
-                      defaultValue="none"
-                      className="col-span-2 h-8"
-                    />
-                  </div> */}
-                </div>
+            <PopoverTrigger>
+              <HoverCard openDelay={50} closeDelay={50}>
+                <HoverCardTrigger className="hidden gap-2 text-left text-lg font-medium text-foreground transition-all duration-200 hover:text-muted-foreground md:flex md:items-center">
+                  <LapTimerIcon
+                    width="25"
+                    height="25"
+                    className="hidden md:block"
+                  />{" "}
+                  <span>Timer</span>
+                </HoverCardTrigger>
+                <HoverCardContent className="h-fit w-fit text-sm">
+                  Set Timer
+                </HoverCardContent>
+              </HoverCard>
+            </PopoverTrigger>
+            <PopoverContent className="w-60">
+              <div className="grid grid-cols-1 gap-4 gap-y-4">
+                <Button>10 minutes</Button>
+                <Button>15 minutes</Button>
+                <Button>20 minutes</Button>
               </div>
             </PopoverContent>
           </Popover>
@@ -245,10 +221,17 @@ export function Nav({ user }: { user: User | null }) {
           decorative={true}
           className="hidden bg-foreground md:block"
         />
-        <Label className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
-          <RocketIcon width="25" height="25" className="hidden md:block" />{" "}
-          <span>Solution</span>
-        </Label>
+        <HoverCard openDelay={50} closeDelay={50}>
+          <HoverCardTrigger>
+            <Label className="hidden gap-2 text-left text-lg font-semibold text-foreground transition-all duration-200 hover:cursor-pointer hover:text-muted-foreground md:flex md:items-center">
+              <RocketIcon width="25" height="25" className="hidden md:block" />{" "}
+              <span>Solution</span>
+            </Label>
+          </HoverCardTrigger>
+          <HoverCardContent className="h-fit w-fit text-sm">
+            View Solution
+          </HoverCardContent>
+        </HoverCard>
       </div>
       {/* right */}
       <div className="flex flex-1 flex-row-reverse items-end gap-3">
