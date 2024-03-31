@@ -9,43 +9,25 @@ export const flashcardsRouter = createTRPCRouter({
   createPack: publicProcedure
     .input(FlashCardPackSchema)
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(flashcardPacks).values({
+      const pack = await ctx.db.insert(flashcardPacks).values({
         name: input.name,
         userId: input.userId,
-      });
+      }).returning();
 
-      const results = await ctx.db
-        .select({ id: flashcardPacks.id })
-        .from(flashcardPacks)
-        .where(eq(flashcardPacks.name, input.name));
+      return pack;
 
-      const id = results[0];
-
-      return { newPackId: id };
     }),
 
   createCard: publicProcedure
     .input(FlashCardSchema)
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(flashcards).values({
+      const card = await ctx.db.insert(flashcards).values({
         packId: input.packId,
         front: input.front,
         back: input.back,
-      });
+      }).returning();
 
-      const results = await ctx.db
-        .select({ id: flashcards.id })
-        .from(flashcards)
-        .where(
-          and(
-            eq(flashcards.front, input.front),
-            eq(flashcards.packId, input.packId),
-            eq(flashcards.back, input.back),
-          ),
-        );
+      return card;
 
-      const id = results[0];
-
-      return { newCardId: id };
     }),
 });
