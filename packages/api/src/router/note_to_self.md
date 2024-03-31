@@ -10,7 +10,7 @@ import the following:
 
 create a testing suite:
 
-    suite("put tests here", () =>{})
+    suite("put tests here", async () =>{})
 
 inside of the testing suite, create ctx, and caller as follows:
 
