@@ -40,6 +40,7 @@ export const flashcardsRouter = createTRPCRouter({
           and(
             eq(flashcards.front, input.front),
             eq(flashcards.packId, input.packId),
+            eq(flashcards.back, input.back),
           ),
         );
 
