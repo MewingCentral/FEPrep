@@ -56,7 +56,7 @@ export const flashcardPacks = sqliteTable("flashcard_pack", {
 
 export const flashcards = sqliteTable("flashcard", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  packId: text("flashcard_pack_id")
+  packId: integer("flashcard_pack_id")
     .notNull()
     .references(() => flashcardPacks.id),
   front: text("front"),
