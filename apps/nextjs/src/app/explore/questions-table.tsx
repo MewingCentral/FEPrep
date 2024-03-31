@@ -2,6 +2,7 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   flexRender,
   getCoreRowModel,
@@ -12,6 +13,7 @@ import {
 } from "@tanstack/react-table";
 
 import type { RouterOutputs } from "@feprep/api";
+import type { User } from "@feprep/auth";
 import { DIFFICULTIES, SEMESTERS, TOPICS } from "@feprep/consts";
 import {
   ChevronDownIcon,
@@ -47,6 +49,7 @@ import {
   TableRow,
 } from "@feprep/ui/table";
 
+import { useUser } from "~/utils/user";
 import { CreateQuestionForm } from "./create-question-form";
 
 export function QuestionsTable({
@@ -56,6 +59,8 @@ export function QuestionsTable({
   columns: ColumnDef<RouterOutputs["questions"]["all"][number]>[];
   data: RouterOutputs["questions"]["all"];
 }) {
+  const user = useUser();
+  const router = useRouter();
   const table = useReactTable({
     data,
     columns,
@@ -69,7 +74,7 @@ export function QuestionsTable({
     <div>
       {/* Filtering options */}
       <div className="mb-4 flex items-center gap-2">
-        <CreateQuestionButton />
+        {user?.type === "Teacher" && <CreateQuestionButton user={user} />}
         <TopicsDropdownMenu />
         <DifficultyDropdownMenu />
         <SemesterDropdownMenu />
@@ -110,6 +115,11 @@ export function QuestionsTable({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  role="link"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    router.push(`/problems/${row.original.id}`);
+                  }}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -270,7 +280,7 @@ export function SemesterDropdownMenu() {
   );
 }
 
-function CreateQuestionButton() {
+function CreateQuestionButton({ user }: { user: User }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -287,7 +297,7 @@ function CreateQuestionButton() {
             site!
           </SheetDescription>
         </SheetHeader>
-        <CreateQuestionForm />
+        <CreateQuestionForm user={user} />
       </SheetContent>
     </Sheet>
   );
