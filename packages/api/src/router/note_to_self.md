@@ -17,7 +17,7 @@ inside of the testing suite, create ctx, and caller as follows:
     const ctx = await createTRPCContext({ headers: new Headers() });
     const caller = createCaller(ctx);
 
-then, create a test as follows 
+then, create a test as follows
 
     test("User sign-up", async () => {
 
@@ -32,4 +32,3 @@ then, create a test as follows
        expect(res).toHaveProperty("userId");
 
     });
-
