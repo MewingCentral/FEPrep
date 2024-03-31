@@ -3,7 +3,7 @@ import { expect, suite, test } from "vitest";
 // import type { AppRouter } from "../root";
 // import { createCaller, createTRPCContext } from "../index";
 
-import { generateEmailVerificationCode } from "./auth";
+// import { generateEmailVerificationCode } from "./auth";
 
 suite("Authentication Routes", () => {
 
