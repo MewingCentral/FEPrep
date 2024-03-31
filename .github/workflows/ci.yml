@@ -61,5 +61,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup
+        uses: ./tooling/github/setup
+
       - name: Test (Vitest)
         run: pnpm -F api test
