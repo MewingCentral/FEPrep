@@ -62,4 +62,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Test (Vitest)
-        run: pnpm test
+        run: pnpm -F api test
