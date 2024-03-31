@@ -8,7 +8,9 @@ export const questionsColumns: ColumnDef<
   {
     accessorKey: "Title",
     accessorFn: (row) =>
-      `${row.semester} ${row.section} Question ${row.questionNumber}`,
+      row.title
+        ? row.title
+        : `${row.semester} ${row.section} Question ${row.questionNumber}`,
   },
   {
     accessorKey: "Topic",
@@ -24,8 +26,13 @@ export const questionsColumns: ColumnDef<
         row.mediumVotes > row.hardVotes
       ) {
         return "Medium";
-      } else {
+      } else if (
+        row.hardVotes > row.easyVotes &&
+        row.hardVotes > row.mediumVotes
+      ) {
         return "Hard";
+      } else {
+        return "Unknown";
       }
     },
   },
