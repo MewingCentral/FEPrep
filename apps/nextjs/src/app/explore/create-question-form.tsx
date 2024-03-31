@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDropzone } from "@uploadthing/react";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
+import type { User } from "@feprep/auth";
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 import { Button } from "@feprep/ui/button";
 import {
@@ -15,6 +16,7 @@ import {
   useForm,
 } from "@feprep/ui/form";
 import { Input } from "@feprep/ui/input";
+import { Label } from "@feprep/ui/label";
 import {
   Select,
   SelectContent,
@@ -27,14 +29,14 @@ import { CreateQuestionFormSchema } from "@feprep/validators";
 import { api } from "~/trpc/react";
 import { useUploadThing } from "~/utils/uploadthing";
 
-export function CreateQuestionForm() {
-  const [files, setFiles] = useState<File[] | null>(null);
+export function CreateQuestionForm({ user }: { user: User }) {
+  const [question, setQuestion] = useState<File | null>(null);
+  const [solution, setSolution] = useState<File | null>(null);
 
   const form = useForm({
     schema: CreateQuestionFormSchema,
     defaultValues: {
-      // TODO: Change this to the user id of the current user
-      userId: "1",
+      userId: user.id,
       title: "",
       semester: SEMESTERS[0],
       section: SECTIONS[0],
@@ -45,6 +47,8 @@ export function CreateQuestionForm() {
     },
   });
 
+  const { startUpload, permittedFileInfo } = useUploadThing("pdfUploader");
+
   const createQuestion = api.questions.create.useMutation({
     onSuccess(values) {
       console.log(values);
@@ -54,34 +58,36 @@ export function CreateQuestionForm() {
     },
   });
 
-  const { isUploading, startUpload, permittedFileInfo } = useUploadThing(
-    "pdfUploader",
-    {
-      onClientUploadComplete: (data) => {
-        console.log(data);
-      },
-    },
-  );
-
-  const fileTypes = permittedFileInfo?.config
-    ? Object.keys(permittedFileInfo?.config)
-    : [];
-
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (files) => {
-      setFiles(files);
-    },
-    accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
-  });
-
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (values) => {
           console.log(values);
-          console.log(files);
-          if (!files?.length) return;
-          // createQuestion.mutate(values);
+          console.log(question, solution);
+          if (!question || !solution) return;
+
+          const uploadQuestion = await startUpload([question]);
+          if (!uploadQuestion?.[0]?.serverData.fileUrl) {
+            console.error("Failed to start upload for question");
+            return;
+          }
+
+          const uploadSolution = await startUpload([solution]);
+          if (!uploadSolution?.[0]?.serverData.fileUrl) {
+            console.error("Failed to start upload for solution");
+            return;
+          }
+
+          createQuestion.mutate({
+            ...values,
+            userId: user?.id,
+            question: uploadQuestion[0].url,
+            solution: uploadSolution[0].url,
+          });
+
+          form.reset();
+          setQuestion(null);
+          setSolution(null);
         })}
         className="flex w-full flex-col gap-2 py-4"
       >
@@ -200,17 +206,97 @@ export function CreateQuestionForm() {
             </FormItem>
           )}
         />
-        <div
-          {...getRootProps()}
-          className="mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 text-center"
-        >
-          {files?.length > 0 ? <div>{files[0]?.name}</div> : null}
-          <input className="sr-only" {...getInputProps()} />
-        </div>
+        <QuestionUploader
+          question={question}
+          setQuestion={setQuestion}
+          permittedFileInfo={permittedFileInfo}
+        />
+        <SolutionUploader
+          solution={solution}
+          setSolution={setSolution}
+          permittedFileInfo={permittedFileInfo}
+        />
+
         <Button className="mt-2" type="submit">
           Submit
         </Button>
       </form>
     </Form>
+  );
+}
+
+function QuestionUploader({
+  question,
+  setQuestion,
+  permittedFileInfo,
+}: {
+  question: File | null;
+  setQuestion: (file: File | null) => void;
+  permittedFileInfo?: ReturnType<typeof useUploadThing>["permittedFileInfo"];
+}) {
+  const fileTypes = permittedFileInfo?.config
+    ? Object.keys(permittedFileInfo?.config)
+    : [];
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: (files) => {
+      setQuestion(files[0] ?? null);
+    },
+    accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
+  });
+
+  return (
+    <div>
+      <Label>Question PDF</Label>
+      <div
+        {...getRootProps()}
+        className="mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
+      >
+        {question ? (
+          <div className="text-sm">{question.name}</div>
+        ) : (
+          <div className="text-sm">Drop PDF here or click here to upload</div>
+        )}
+        <input className="sr-only" {...getInputProps()} />
+      </div>
+    </div>
+  );
+}
+
+function SolutionUploader({
+  solution,
+  setSolution,
+  permittedFileInfo,
+}: {
+  solution: File | null;
+  setSolution: (file: File | null) => void;
+  permittedFileInfo?: ReturnType<typeof useUploadThing>["permittedFileInfo"];
+}) {
+  const fileTypes = permittedFileInfo?.config
+    ? Object.keys(permittedFileInfo?.config)
+    : [];
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: (files) => {
+      setSolution(files[0] ?? null);
+    },
+    accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
+  });
+
+  return (
+    <div>
+      <Label>Solution PDF</Label>
+      <div
+        {...getRootProps()}
+        className="mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
+      >
+        {solution ? (
+          <div className="text-sm">{solution.name}</div>
+        ) : (
+          <div className="text-sm">Drop PDF here or click here to upload</div>
+        )}
+        <input className="sr-only" {...getInputProps()} />
+      </div>
+    </div>
   );
 }
