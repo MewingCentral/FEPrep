@@ -69,9 +69,13 @@ export const flashcardsRouter = createTRPCRouter({
       return ctx.db.update(flashcards).set(card).where(eq(flashcards.id, id));
     }),
 
-  deletePack: publicProcedure.input(z.number()).mutation(({ ctx, input }) => {
-    return ctx.db.delete(flashcardPacks).where(eq(flashcardPacks.id, input));
-  }),
+  deletePack: publicProcedure
+    .input(z.number())
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.delete(flashcards).where(eq(flashcards.packId, input));
+
+      return ctx.db.delete(flashcardPacks).where(eq(flashcardPacks.id, input));
+    }),
 
   deleteCard: publicProcedure.input(z.number()).mutation(({ ctx, input }) => {
     return ctx.db.delete(flashcards).where(eq(flashcards.id, input));
