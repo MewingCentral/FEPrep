@@ -68,6 +68,7 @@ export const CreateQuestionFormSchema = CreateQuestionSchema.omit({
 export const UpdateQuestionSchema = CreateQuestionSchema.extend({
   questionId: z.number(),
 });
+
 export const FlashCardPackSchema = z.object({
   name: z.string(),
   userId: z.string(),
@@ -81,4 +82,16 @@ export const FlashCardSchema = z.object({
   back: z.string(),
 });
 
-export type FlashCardInput = z.infer<typeof FlashCardSchema>;
+export type FlashCardInputType = z.infer<typeof FlashCardSchema>;
+
+export const UpdatePackSchema = FlashCardPackSchema.extend({
+  packId: z.number(),
+});
+
+export type UpdatePackType = z.infer<typeof UpdatePackSchema>;
+
+export const UpdateCardSchema = FlashCardSchema.extend({
+  id: z.number(),
+});
+
+export type UpdateCardType = z.infer<typeof UpdateCardSchema>;
