@@ -168,6 +168,9 @@ importers:
       '@feprep/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@feprep/transactional':
+        specifier: workspace:*
+        version: link:../../packages/transactional
       '@feprep/ui':
         specifier: workspace:*
         version: link:../../packages/ui
