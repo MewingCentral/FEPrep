@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@feprep/ui/select";
+import { toast } from "@feprep/ui/toast";
 import { CreateQuestionFormSchema } from "@feprep/validators";
 
 import { api } from "~/trpc/react";
@@ -47,14 +48,17 @@ export function CreateQuestionForm({ user }: { user: User }) {
     },
   });
 
-  const { startUpload, permittedFileInfo } = useUploadThing("pdfUploader");
+  const { startUpload, permittedFileInfo, isUploading } =
+    useUploadThing("pdfUploader");
 
+  const utils = api.useUtils();
   const createQuestion = api.questions.create.useMutation({
-    onSuccess(values) {
-      console.log(values);
+    async onSuccess() {
+      await utils.questions.all.invalidate();
+      toast("Question created successfully");
     },
-    onError(error) {
-      console.error(error);
+    onError() {
+      toast("Failed to create message");
     },
   });
 
@@ -62,8 +66,6 @@ export function CreateQuestionForm({ user }: { user: User }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (values) => {
-          console.log(values);
-          console.log(question, solution);
           if (!question || !solution) return;
 
           const uploadQuestion = await startUpload([question]);
@@ -217,8 +219,14 @@ export function CreateQuestionForm({ user }: { user: User }) {
           permittedFileInfo={permittedFileInfo}
         />
 
-        <Button className="mt-2" type="submit">
-          Submit
+        <Button
+          className="mt-2"
+          type="submit"
+          disabled={isUploading || createQuestion.isPending}
+        >
+          {isUploading || createQuestion.isPending
+            ? "Uploading..."
+            : "Create Question"}
         </Button>
       </form>
     </Form>
