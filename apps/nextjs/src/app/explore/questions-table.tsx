@@ -1,7 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { useState } from "react";
+import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   flexRender,
@@ -49,20 +49,21 @@ import {
   TableRow,
 } from "@feprep/ui/table";
 
-import { useUser } from "~/utils/user";
 import { CreateQuestionForm } from "./create-question-form";
 
 export function QuestionsTable({
   columns,
-  data,
+  promise,
+  user,
 }: {
   columns: ColumnDef<RouterOutputs["questions"]["all"][number]>[];
-  data: RouterOutputs["questions"]["all"];
+  promise: Promise<RouterOutputs["questions"]["all"]>;
+  user: User | null;
 }) {
-  const user = useUser();
+  const questions = use(promise);
   const router = useRouter();
   const table = useReactTable({
-    data,
+    data: questions,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
