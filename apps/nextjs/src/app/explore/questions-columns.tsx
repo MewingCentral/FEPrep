@@ -3,6 +3,8 @@
 import type { ColumnDef } from "@tanstack/react-table";
 
 import type { RouterOutputs } from "@feprep/api";
+import { CaretSortIcon } from "@feprep/ui";
+import { Button } from "@feprep/ui/button";
 
 export const questionsColumns: ColumnDef<
   RouterOutputs["questions"]["all"][number]
@@ -13,10 +15,31 @@ export const questionsColumns: ColumnDef<
       row.title
         ? row.title
         : `${row.semester} ${row.section} Question ${row.questionNumber}`,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Title
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "Topic",
     accessorFn: (row) => row.topic,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Topic <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "Difficulty",
@@ -37,17 +60,61 @@ export const questionsColumns: ColumnDef<
         return "Unknown";
       }
     },
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Difficulty
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "Points",
     accessorFn: (row) => row.points,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Points
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "Average Score",
     accessorFn: (row) => row.averageScore,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Average Score
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "Votes",
     accessorFn: (row) => row.easyVotes + row.mediumVotes + row.hardVotes,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Votes
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
 ];
