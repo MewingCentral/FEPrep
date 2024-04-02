@@ -1,114 +1,74 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
 
-import type { SignUpFormInput } from "@feprep/validators";
-import { cn } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@feprep/ui/card";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  useForm,
-} from "@feprep/ui/form";
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@feprep/ui/card";
 import { Input } from "@feprep/ui/input";
-import { SignUpFormSchema } from "@feprep/validators";
+import { Label } from "@feprep/ui/label";
 
-import { api } from "~/trpc/react";
+import { signUpAction } from "./sign-up-action";
 
-export default function SignUp() {
-  const router = useRouter();
-  const form = useForm({
-    schema: SignUpFormSchema,
-    defaultValues: {
-      nid: "",
-      password: "",
-    },
-  });
-
-  const { mutateAsync } = api.auth.signUp.useMutation();
-
-  const onSubmit = async (values: SignUpFormInput) => {
-    try {
-      await mutateAsync(values);
-      router.push("/explore");
-    } catch {
-      // noop
-    }
-  };
+export function SignUp() {
+  const [state, formAction] = useFormState(signUpAction, null);
 
   return (
     <div className="flex min-h-screen">
-      <div className="hidden items-center justify-center bg-accent lg:flex lg:flex-1">
-        {/* Add logo here */}
-      </div>
-
+      <div className="hidden items-center justify-center bg-accent lg:flex lg:flex-1"></div>
       <div className="flex flex-1 items-center justify-center">
-        <div className="w-full max-w-lg">
-          <h1 className="mb-4 text-center text-xl font-semibold">Sign Up</h1>
+        <div className="w-full max-w-md">
           <Card>
-            <CardHeader
-              className={cn("w-full max-w-lg md:max-w-xl", "px-6 py-1")}
-            >
-              {}
+            <CardHeader className="text-center">
+              <CardTitle>FEPrep Sign Up</CardTitle>
+              <CardDescription>
+                Create an account using your NID
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="flex w-full flex-col gap-2"
-                >
-                  <FormField
-                    control={form.control}
-                    name="nid"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>NID</FormLabel>
-                        <FormControl>
-                          <Input placeholder="jd123456" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
+              <form action={formAction} className="flex flex-col gap-2">
+                <div className="space-y-1">
+                  <Label>NID</Label>
+                  <Input name="nid" placeholder="jd123456" />
+                  {state?.fieldError?.nid && (
+                    <p className="text-sm text-red-500">
+                      {state.fieldError.nid}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <Label>Password</Label>
+                  <Input
                     name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Password"
-                            type="password"
-                            autoComplete="current-password"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                    type="password"
+                    autoComplete="current-password"
+                    placeholder="********"
                   />
-                  <Button className="mt-2" type="submit">
-                    Submit
-                  </Button>
-                </form>
-              </Form>
+                  {state?.fieldError?.password && (
+                    <p className="text-sm text-red-500">
+                      {state.fieldError.password}
+                    </p>
+                  )}
+                </div>
+                <Button className="mt-2" type="submit">
+                  Submit
+                </Button>
+                <p className="font-regular mt-2 text-center text-sm">
+                  Already have an account?
+                  <Link href="/sign-in" className="font-semibold">
+                    {" "}
+                    Sign In
+                  </Link>
+                </p>
+              </form>
             </CardContent>
-            <CardFooter className="px-6 py-1">{}</CardFooter>
           </Card>
-          <p className="font-regular mt-4 text-center text-sm">
-            Already have an account?
-            <Link href="/sign-in" className="font-semibold">
-              {" "}
-              Login
-            </Link>
-          </p>
         </div>
       </div>
     </div>
