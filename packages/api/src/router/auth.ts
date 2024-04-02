@@ -71,12 +71,6 @@ export const authRouter = createTRPCRouter({
       }
 
       const session = await lucia.createSession(userId, {});
-      const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
 
       return { session: session.id, userId: userId };
     }),
@@ -111,12 +105,6 @@ export const authRouter = createTRPCRouter({
       }
 
       const session = await lucia.createSession(user.id, {});
-      const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
 
       return { session: session.id, userId: user.id };
     }),
@@ -269,7 +257,13 @@ export const authRouter = createTRPCRouter({
     return ctx.user;
   }),
   signOut: protectedProcedure.mutation(async ({ ctx }) => {
-    await lucia.invalidateUserSessions(ctx.user.id);
+    await lucia.invalidateSession(ctx.session.id);
+    const sessionCookie = lucia.createBlankSessionCookie();
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes,
+    );
   }),
 });
 
