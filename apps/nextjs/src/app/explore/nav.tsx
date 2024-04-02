@@ -31,7 +31,7 @@ export async function Nav({ user }: { user: User | null }) {
           </div>
         ) : (
           <Link href="/sign-in" passHref>
-            <Button>Sign In</Button>
+            <Button size="sm">Sign In</Button>
           </Link>
         )}
       </div>
