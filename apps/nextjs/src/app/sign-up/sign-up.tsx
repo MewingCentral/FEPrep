@@ -21,7 +21,9 @@ export function SignUp() {
 
   return (
     <div className="flex min-h-screen">
-      <div className="hidden items-center justify-center bg-accent lg:flex lg:flex-1"></div>
+      <div className="hidden items-center justify-center bg-accent lg:flex lg:flex-1">
+        <span className="text-9xl font-bold">:3</span>
+      </div>
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full max-w-md">
           <Card>
