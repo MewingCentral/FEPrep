@@ -1,10 +1,11 @@
 import { redirect } from "next/navigation";
 
-import { api } from "~/trpc/server";
+import { validateRequest } from "@feprep/auth";
+
 import { SignIn } from "./sign-in";
 
 export default async function Page() {
-  const session = await api.auth.getSession();
+  const { session } = await validateRequest();
 
   if (session) {
     return redirect("/explore");
