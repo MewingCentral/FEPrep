@@ -60,11 +60,16 @@ export function QuestionsTable({
   promise: Promise<RouterOutputs["questions"]["all"]>;
   user: User | null;
 }) {
+  const [globalFilter, setGlobalFilter] = useState<string>("");
+
   const questions = use(promise);
   const router = useRouter();
   const table = useReactTable({
     data: questions,
     columns,
+    state: {
+      globalFilter,
+    },
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -81,7 +86,14 @@ export function QuestionsTable({
         <SemesterDropdownMenu />
         <div className="relative flex flex-1 items-center">
           <MagnifyingGlassIcon className="absolute left-2.5 text-muted-foreground" />
-          <Input className="pl-8" placeholder="Search questions" />
+          <Input
+            className="pl-8"
+            placeholder="Search questions"
+            value={globalFilter}
+            onChange={(e) => {
+              setGlobalFilter(e.target.value);
+            }}
+          />
         </div>
         <Button>
           <ShuffleIcon className="mr-2 h-4 w-4" />
