@@ -47,8 +47,7 @@ export type VerifyEmailInput = z.infer<typeof VerifyEmailSchema>;
 export const CreateQuestionSchema = z.object({
   userId: z.string(),
   title: z.string().optional(),
-  question: z.string(),
-  solution: z.string(),
+  pdf: z.string(),
   averageScore: z.number(),
   easyVotes: z.number().optional(),
   mediumVotes: z.number().optional(),
@@ -61,8 +60,7 @@ export const CreateQuestionSchema = z.object({
 });
 
 export const CreateQuestionFormSchema = CreateQuestionSchema.omit({
-  question: true,
-  solution: true,
+  pdf: true,
 });
 
 export const UpdateQuestionSchema = CreateQuestionSchema.extend({
