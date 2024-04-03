@@ -50,6 +50,7 @@ import {
   TableRow,
 } from "@feprep/ui/table";
 
+import { api } from "~/trpc/react";
 import { CreateQuestionForm } from "./create-question-form";
 
 export function QuestionsTable({
@@ -62,13 +63,15 @@ export function QuestionsTable({
   user: User | null;
 }) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  console.log(columnFilters);
   const [globalFilter, setGlobalFilter] = useState<string>("");
 
   const questions = use(promise);
+  const allQuestions = api.questions.all.useQuery(undefined, {
+    initialData: questions,
+  });
   const router = useRouter();
   const table = useReactTable({
-    data: questions,
+    data: allQuestions.data,
     columns,
     state: {
       globalFilter,
