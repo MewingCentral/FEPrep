@@ -25,4 +25,9 @@ export const questionsRouter = createTRPCRouter({
         .set(question)
         .where(eq(questions.id, questionId));
     }),
+  byId: publicProcedure.input(z.number()).query(({ ctx, input }) => {
+    return ctx.db.query.questions.findFirst({
+      where: eq(questions.id, input),
+    });
+  }),
 });
