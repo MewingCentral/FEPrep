@@ -40,6 +40,22 @@ export const questionsColumns: ColumnDef<
         </Button>
       );
     },
+    filterFn: "arrIncludesSome",
+  },
+  {
+    accessorKey: "Semester",
+    accessorFn: (row) => row.semester,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Semester <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "Difficulty",
@@ -71,6 +87,7 @@ export const questionsColumns: ColumnDef<
         </Button>
       );
     },
+    filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "Points",
