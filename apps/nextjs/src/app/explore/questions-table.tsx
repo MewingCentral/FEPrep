@@ -201,7 +201,7 @@ export function TopicsDropdownMenu({
             onCheckedChange={(checked) => {
               setColumnFilters((previousFilter) => {
                 const topicFilter = previousFilter.find(
-                  (filter) => filter.id === "Topic",
+                  (f) => f.id === "Topic",
                 );
 
                 // If a column filter for the topic column exists
@@ -376,7 +376,7 @@ export function SemesterDropdownMenu({
             onCheckedChange={(checked) => {
               setColumnFilters((prevFilters) => {
                 const semesterFilter = prevFilters.find(
-                  (filter) => filter.id === "Semester",
+                  (f) => f.id === "Semester",
                 );
 
                 // If a column filter for the topic column exists
