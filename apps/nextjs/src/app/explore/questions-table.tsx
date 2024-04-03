@@ -1,6 +1,7 @@
 "use client";
 
-import type { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef, ColumnFiltersState } from "@tanstack/react-table";
+import type { Dispatch, SetStateAction } from "react";
 import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -60,6 +61,8 @@ export function QuestionsTable({
   promise: Promise<RouterOutputs["questions"]["all"]>;
   user: User | null;
 }) {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  console.log(columnFilters);
   const [globalFilter, setGlobalFilter] = useState<string>("");
 
   const questions = use(promise);
@@ -69,6 +72,7 @@ export function QuestionsTable({
     columns,
     state: {
       globalFilter,
+      columnFilters,
     },
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -81,9 +85,18 @@ export function QuestionsTable({
       {/* Filtering options */}
       <div className="mb-4 flex items-center gap-2">
         {user?.type === "Teacher" && <CreateQuestionButton user={user} />}
-        <TopicsDropdownMenu />
-        <DifficultyDropdownMenu />
-        <SemesterDropdownMenu />
+        <TopicsDropdownMenu
+          columnFilters={columnFilters}
+          setColumnFilters={setColumnFilters}
+        />
+        <DifficultyDropdownMenu
+          columnFilters={columnFilters}
+          setColumnFilters={setColumnFilters}
+        />
+        <SemesterDropdownMenu
+          columnFilters={columnFilters}
+          setColumnFilters={setColumnFilters}
+        />
         <div className="relative flex flex-1 items-center">
           <MagnifyingGlassIcon className="absolute left-2.5 text-muted-foreground" />
           <Input
@@ -161,11 +174,13 @@ export function QuestionsTable({
   );
 }
 
-export function TopicsDropdownMenu() {
-  const [selectedTopics, setSelectedTopics] = useState<
-    (typeof TOPICS)[number][]
-  >([]);
-
+export function TopicsDropdownMenu({
+  columnFilters,
+  setColumnFilters,
+}: {
+  columnFilters: ColumnFiltersState;
+  setColumnFilters: Dispatch<SetStateAction<ColumnFiltersState>>;
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -178,14 +193,50 @@ export function TopicsDropdownMenu() {
         {TOPICS.map((topic) => (
           <DropdownMenuCheckboxItem
             key={topic}
-            checked={selectedTopics.includes(topic)}
+            checked={columnFilters.some(
+              (f) =>
+                f.id === "Topic" && (f.value as typeof TOPICS).includes(topic),
+            )}
             onSelect={(e) => e.preventDefault()}
             onCheckedChange={(checked) => {
-              setSelectedTopics((prev) => {
-                if (checked) {
-                  return [...prev, topic];
+              setColumnFilters((previousFilter) => {
+                const topicFilter = previousFilter.find(
+                  (filter) => filter.id === "Topic",
+                );
+
+                // If a column filter for the topic column exists
+                if (topicFilter) {
+                  // If the topic is checked, add it to the filter
+                  if (checked) {
+                    return previousFilter.map((f) =>
+                      f.id === "Topic"
+                        ? {
+                            ...f,
+                            value: [...(f.value as typeof TOPICS), topic],
+                          }
+                        : f,
+                    );
+                  }
+                  // If the topic is unchecked, remove it from the filter
+                  const updatedValue = (
+                    topicFilter.value as typeof TOPICS
+                  ).filter((t: (typeof TOPICS)[number]) => t !== topic);
+                  if (updatedValue.length === 0) {
+                    // Clear the filter if the value is empty
+                    return previousFilter.filter((f) => f.id !== "Topic");
+                  }
+                  return previousFilter.map((f) =>
+                    f.id === "Topic" ? { ...f, value: updatedValue } : f,
+                  );
                 }
-                return prev.filter((t) => t !== topic);
+
+                // If a column filter for the topic column does not exist, create a new filter
+                if (checked) {
+                  return [...previousFilter, { id: "Topic", value: [topic] }];
+                }
+
+                // If the topic is unchecked, return the previous filter
+                return previousFilter;
               });
             }}
           >
@@ -195,7 +246,9 @@ export function TopicsDropdownMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onSelect={(e) => e.preventDefault()}
-          onClick={() => setSelectedTopics([])}
+          onClick={() =>
+            setColumnFilters((prev) => prev.filter((f) => f.id !== "Topic"))
+          }
         >
           <ReloadIcon className="mr-2 h-4 w-4" />
           <span>Reset</span>
@@ -205,11 +258,13 @@ export function TopicsDropdownMenu() {
   );
 }
 
-export function DifficultyDropdownMenu() {
-  const [selectedDifficulties, setSelectedDifficulties] = useState<
-    (typeof DIFFICULTIES)[number][]
-  >([]);
-
+export function DifficultyDropdownMenu({
+  columnFilters,
+  setColumnFilters,
+}: {
+  columnFilters: ColumnFiltersState;
+  setColumnFilters: Dispatch<SetStateAction<ColumnFiltersState>>;
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -222,14 +277,54 @@ export function DifficultyDropdownMenu() {
         {DIFFICULTIES.map((difficulty) => (
           <DropdownMenuCheckboxItem
             key={difficulty}
-            checked={selectedDifficulties.includes(difficulty)}
+            checked={columnFilters.some(
+              (f) =>
+                f.id === "Difficulty" &&
+                (f.value as typeof DIFFICULTIES).includes(difficulty),
+            )}
             onSelect={(e) => e.preventDefault()}
             onCheckedChange={(checked) => {
-              setSelectedDifficulties((prev) => {
-                if (checked) {
-                  return [...prev, difficulty];
+              setColumnFilters((prevFilters) => {
+                const difficultyFilter = prevFilters.find(
+                  (f) => f.id === "Difficulty",
+                );
+
+                if (difficultyFilter) {
+                  if (checked) {
+                    return prevFilters.map((f) =>
+                      f.id === "Difficulty"
+                        ? {
+                            ...f,
+                            value: [
+                              ...(f.value as typeof DIFFICULTIES),
+                              difficulty,
+                            ],
+                          }
+                        : f,
+                    );
+                  }
+
+                  const updatedValue = (
+                    difficultyFilter.value as typeof DIFFICULTIES
+                  ).filter(
+                    (d: (typeof DIFFICULTIES)[number]) => d !== difficulty,
+                  );
+                  if (updatedValue.length === 0) {
+                    return prevFilters.filter((f) => f.id !== "Difficulty");
+                  }
+                  return prevFilters.map((f) =>
+                    f.id === "Difficulty" ? { ...f, value: updatedValue } : f,
+                  );
                 }
-                return prev.filter((d) => d !== difficulty);
+
+                if (checked) {
+                  return [
+                    ...prevFilters,
+                    { id: "Difficulty", value: [difficulty] },
+                  ];
+                }
+
+                return prevFilters;
               });
             }}
           >
@@ -239,7 +334,11 @@ export function DifficultyDropdownMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onSelect={(e) => e.preventDefault()}
-          onClick={() => setSelectedDifficulties([])}
+          onClick={() =>
+            setColumnFilters((prev) =>
+              prev.filter((f) => f.id !== "Difficulty"),
+            )
+          }
         >
           <ReloadIcon className="mr-2 h-4 w-4" />
           <span>Reset</span>
@@ -249,11 +348,13 @@ export function DifficultyDropdownMenu() {
   );
 }
 
-export function SemesterDropdownMenu() {
-  const [selectedSemesters, setSelectedSemesters] = useState<
-    (typeof SEMESTERS)[number][]
-  >([]);
-
+export function SemesterDropdownMenu({
+  columnFilters,
+  setColumnFilters,
+}: {
+  columnFilters: ColumnFiltersState;
+  setColumnFilters: Dispatch<SetStateAction<ColumnFiltersState>>;
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -267,13 +368,53 @@ export function SemesterDropdownMenu() {
           <DropdownMenuCheckboxItem
             key={semester}
             onSelect={(e) => e.preventDefault()}
-            checked={selectedSemesters.includes(semester)}
+            checked={columnFilters.some(
+              (f) =>
+                f.id === "Semester" &&
+                (f.value as typeof SEMESTERS).includes(semester),
+            )}
             onCheckedChange={(checked) => {
-              setSelectedSemesters((prev) => {
-                if (checked) {
-                  return [...prev, semester];
+              setColumnFilters((prevFilters) => {
+                const semesterFilter = prevFilters.find(
+                  (filter) => filter.id === "Semester",
+                );
+
+                // If a column filter for the topic column exists
+                if (semesterFilter) {
+                  // If the topic is checked, add it to the filter
+                  if (checked) {
+                    return prevFilters.map((f) =>
+                      f.id === "Semester"
+                        ? {
+                            ...f,
+                            value: [...(f.value as typeof SEMESTERS), semester],
+                          }
+                        : f,
+                    );
+                  }
+                  // If the topic is unchecked, remove it from the filter
+                  return prevFilters.map((f) =>
+                    f.id === "Semester"
+                      ? {
+                          ...f,
+                          value: (f.value as typeof SEMESTERS).filter(
+                            (s: (typeof SEMESTERS)[number]) => s !== semester,
+                          ),
+                        }
+                      : f,
+                  );
                 }
-                return prev?.filter((s) => s !== semester);
+
+                // If a column filter for the topic column does not exist, create a new filter
+                if (checked) {
+                  return [
+                    ...prevFilters,
+                    { id: "Semester", value: [semester] },
+                  ];
+                }
+
+                // If the topic is unchecked, return the previous filter
+                return prevFilters;
               });
             }}
           >
@@ -283,7 +424,9 @@ export function SemesterDropdownMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onSelect={(e) => e.preventDefault()}
-          onClick={() => setSelectedSemesters([])}
+          onClick={() =>
+            setColumnFilters((prev) => prev.filter((f) => f.id !== "Semester"))
+          }
         >
           <ReloadIcon className="mr-2 h-4 w-4" />
           <span>Reset</span>
