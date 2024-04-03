@@ -12,8 +12,7 @@ export const questions = sqliteTable("question", {
     .references(() => users.id),
   title: text("title"),
   // PDF or markdown content for the question
-  question: text("question").notNull(),
-  solution: text("solution").notNull(),
+  pdf: text("pdf"),
   averageScore: real("average_score").default(0),
   easyVotes: integer("easy_votes").notNull().default(0),
   mediumVotes: integer("medium_votes").notNull().default(0),
