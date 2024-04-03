@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDropzone } from "@uploadthing/react";
+import PDFMerger from "pdf-merger-js/browser";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
 import type { User } from "@feprep/auth";
@@ -68,23 +69,26 @@ export function CreateQuestionForm({ user }: { user: User }) {
         onSubmit={form.handleSubmit(async (values) => {
           if (!question || !solution) return;
 
-          const uploadQuestion = await startUpload([question]);
-          if (!uploadQuestion?.[0]?.serverData.fileUrl) {
-            console.error("Failed to start upload for question");
-            return;
-          }
+          const merger = new PDFMerger();
 
-          const uploadSolution = await startUpload([solution]);
-          if (!uploadSolution?.[0]?.serverData.fileUrl) {
-            console.error("Failed to start upload for solution");
+          await merger.add(question);
+          await merger.add(solution);
+
+          const blob = await merger.saveAsBlob();
+          const file = new File([blob], `${values.title ?? "Merged"}.pdf`, {
+            type: "application/pdf",
+          });
+
+          const uploadPDF = await startUpload([file]);
+          if (!uploadPDF?.[0]?.serverData.fileUrl) {
+            console.error("Failed to start upload for question");
             return;
           }
 
           createQuestion.mutate({
             ...values,
             userId: user?.id,
-            question: uploadQuestion[0].url,
-            solution: uploadSolution[0].url,
+            pdf: uploadPDF[0].url,
           });
 
           form.reset();
