@@ -5,6 +5,7 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
+import { useRouteNode } from "expo-router/build/Route";
 
 export default function Tab() {
   // const router = useRouter();
@@ -26,6 +27,22 @@ export default function Tab() {
   //   // console.log(getSess.data);
   // };
 
+  const getUser = api.auth.getUser.useQuery();
+  const user = getUser.data;
+  console.log(user?.id);
+
+  const loadSets = api.flashcards.readPack.useMutation({
+    onSuccess: (data) => {
+      console.log("successfully loaded cards?");
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log("error: " + error);
+    },
+  });
+
+  const sets = loadSets.mutate(user?.id);
+
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
@@ -45,10 +62,10 @@ export default function Tab() {
           </View>
         </KeyboardAvoidingView>
 
-        {/* Study sets */}
+        {/* Study Sets */}
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -57,10 +74,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -69,10 +86,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -81,10 +98,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -93,10 +110,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -105,7 +122,7 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
