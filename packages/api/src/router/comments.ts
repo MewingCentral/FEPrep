@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { eq, comments } from "@feprep/db";
 
-import { commentSchema, UpdateCommentSchema } from "@feprep/validators"
+import { CommentSchema, UpdateCommentSchema } from "@feprep/validators"
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
