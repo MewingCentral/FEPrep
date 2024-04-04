@@ -11,7 +11,7 @@ export const appRouter = createTRPCRouter({
   auth: authRouter,
   questions: questionsRouter,
   flashcards: flashcardsRouter,
-  comments: commentsRouter
+  comments: commentsRouter,
 });
 
 export type AppRouter = typeof appRouter;
