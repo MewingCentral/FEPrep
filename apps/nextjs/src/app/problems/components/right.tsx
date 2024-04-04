@@ -1,10 +1,7 @@
 import { DotsHorizontalIcon, FileIcon, VideoIcon } from "@feprep/ui";
 import { Card, CardHeader } from "@feprep/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
-
-import { DiscussionTab } from "./discussion-tab";
 import { NotesTab } from "./notes-tab";
-import { ResourcesTab } from "./resources-tab";
 import { DiscussionTab } from "./discussion-tab";
 import { ResourcesTab } from "./resources-tab";
 
@@ -54,12 +51,7 @@ export function Right() {
               <ResourcesTab />
               {/* <div>hewwo</div> */}
             </TabsContent>
-            <TabsContent
-              className="flex flex-1 flex-col gap-4 md:min-h-0 lg:flex-row"
-              value="study"
-            >
-              <StudySetsTab />
-            </TabsContent> */}
+
           </Tabs>
         </div>
       </CardHeader>
