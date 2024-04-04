@@ -3,10 +3,10 @@ import { useRouter } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
 import { View, Pressable, Text } from "react-native";
-import Colors from "./colors";
+import Colors from "~/utils/colors";
 
 // api stuff for logging out.
-import { api } from "./api";
+import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
 
 export default function DrawerContent(props: any) {
@@ -14,8 +14,11 @@ export default function DrawerContent(props: any) {
 
     const signOut = api.auth.signOut.useMutation({
         onSuccess: () => {
+            console.log("i should at least be here");
             SecureStore.setItem("session", "invalid");
-            router.push("../");
+            console.log("made it here");
+            router.push("/");
+            console.log("it should have happened");
         },
         onError: (error) => {
             // todo make this better??
@@ -38,7 +41,11 @@ export default function DrawerContent(props: any) {
                     icon={() => <RadixIcon name="exit" color={Colors.dark_primary_text} />}
                     onPress={onSignOut} />
                 <View style={{ height: 50, justifyContent: "center", }}>
-                    <Text style={{textAlign: "center", color:Colors.dark_primary_text}}>todo darkmode toggle</Text>
+                    <Pressable onPress={onSignOut}>
+                        <Text style={{textAlign: "center", color: Colors.dark_primary_text}}>
+                            Logout
+                        </Text>
+                    </Pressable>
                 </View>
             </DrawerContentScrollView>
         </View>
