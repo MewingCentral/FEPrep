@@ -1,10 +1,10 @@
 import { DotsHorizontalIcon, FileIcon, VideoIcon } from "@feprep/ui";
 import { Card, CardHeader } from "@feprep/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
-import { NotesTab } from "./notes-tab";
-import { DiscussionTab } from "./discussion-tab";
-import { ResourcesTab } from "./resources-tab";
 
+import { DiscussionTab } from "./discussion-tab";
+import { NotesTab } from "./notes-tab";
+import { ResourcesTab } from "./resources-tab";
 
 export function Right() {
   return (
@@ -43,6 +43,9 @@ export function Right() {
               </TabsTrigger>
             </TabsList>
 
+            <TabsContent value="discussion">
+              <DiscussionTab />
+            </TabsContent>
             <TabsContent value="notes">
               <NotesTab />
             </TabsContent>
@@ -51,7 +54,6 @@ export function Right() {
               <ResourcesTab />
               {/* <div>hewwo</div> */}
             </TabsContent>
-
           </Tabs>
         </div>
       </CardHeader>
