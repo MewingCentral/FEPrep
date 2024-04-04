@@ -107,3 +107,18 @@ export type CommentType = z.infer<typeof CommentSchema>;
 export const UpdateCommentSchema = CommentSchema.extend({
   id: z.number(),
 });
+
+export type UpdateCommentType = z.infer<typeof UpdateCommentSchema>;
+
+export const ResourceSchema = z.object({
+  questionId: z.number(),
+  link: z.string(),
+});
+
+export type ResourceType = z.infer<typeof ResourceSchema>;
+
+export const UpdateResourceSchema = ResourceSchema.extend({
+  id: z.number(),
+});
+
+export type UpdateResourceType = z.infer<typeof UpdateResourceSchema>;
