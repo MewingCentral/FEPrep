@@ -1,10 +1,10 @@
 import { DotsHorizontalIcon, FileIcon, VideoIcon } from "@feprep/ui";
 import { Card, CardHeader } from "@feprep/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
-import { NotesTab } from "./notes-tab";
-import { DiscussionTab } from "./discussion-tab";
-import { ResourcesTab } from "./resources-tab";
 
+import { DiscussionTab } from "./discussion-tab";
+import { NotesTab } from "./notes-tab";
+import { ResourcesTab } from "./resources-tab";
 
 export function Right() {
   return (
@@ -16,9 +16,9 @@ export function Right() {
             className="flex flex-1 flex-col p-6 lg:min-h-5"
             defaultValue="notes"
           >
-            <TabsList className="mb-8 self-start h-15">
+            <TabsList className="h-15 mb-8 self-start">
               <TabsTrigger value="discussion">
-                <div className="mt-1 flex flex-row hover:text-muted-foreground transition-all duration-200 cursor-pointer">
+                <div className="mt-1 flex cursor-pointer flex-row transition-all duration-200 hover:text-muted-foreground">
                   <DotsHorizontalIcon width="25" height="25" />
                   <h1 className="text-slate font-small ml-2 mr-2 text-left text-xl">
                     Discussion
@@ -26,7 +26,7 @@ export function Right() {
                 </div>
               </TabsTrigger>
               <TabsTrigger value="notes">
-                <div className="ml-1 mt-1 flex flex-row hover:text-muted-foreground transition-all duration-200 cursor-pointer">
+                <div className="ml-1 mt-1 flex cursor-pointer flex-row transition-all duration-200 hover:text-muted-foreground">
                   <FileIcon width="25" height="25" />
                   <h1 className="text-slate font-small ml-1.5 mr-2 text-left text-xl">
                     Notes
@@ -34,7 +34,7 @@ export function Right() {
                 </div>
               </TabsTrigger>
               <TabsTrigger value="resources">
-                <div className="ml-2 mt-1 flex flex-row hover:text-muted-foreground transition-all duration-200 cursor-pointer">
+                <div className="ml-2 mt-1 flex cursor-pointer flex-row transition-all duration-200 hover:text-muted-foreground">
                   <VideoIcon width="25" height="25" />
                   <h1 className="text-slate font-small ml-2 text-left text-xl">
                     Resources
@@ -46,8 +46,8 @@ export function Right() {
             <TabsContent value="discussion">
               <DiscussionTab />
             </TabsContent>
-            
-            <TabsContent className="md:min-h-0 h-full" value="notes">
+
+            <TabsContent className="h-full md:min-h-0" value="notes">
               <NotesTab />
             </TabsContent>
 
@@ -55,7 +55,6 @@ export function Right() {
               <ResourcesTab />
               {/* <div>hewwo</div> */}
             </TabsContent>
-
           </Tabs>
         </div>
       </CardHeader>
