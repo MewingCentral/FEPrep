@@ -106,4 +106,4 @@ export type CommentType = z.infer<typeof CommentSchema>;
 
 export const UpdateCommentSchema = CommentSchema.extend({
   id: z.number(),
-})
+});
