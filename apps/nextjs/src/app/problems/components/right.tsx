@@ -5,6 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 import { DiscussionTab } from "./discussion-tab";
 import { NotesTab } from "./notes-tab";
 import { ResourcesTab } from "./resources-tab";
+import { DiscussionTab } from "./discussion-tab";
+import { ResourcesTab } from "./resources-tab";
+
 
 export function Right() {
   return (
@@ -43,11 +46,7 @@ export function Right() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="discussion">
-              <DiscussionTab />
-            </TabsContent>
-
-            <TabsContent className="h-full md:min-h-0" value="notes">
+            <TabsContent value="notes">
               <NotesTab />
             </TabsContent>
 
@@ -55,6 +54,12 @@ export function Right() {
               <ResourcesTab />
               {/* <div>hewwo</div> */}
             </TabsContent>
+            <TabsContent
+              className="flex flex-1 flex-col gap-4 md:min-h-0 lg:flex-row"
+              value="study"
+            >
+              <StudySetsTab />
+            </TabsContent> */}
           </Tabs>
         </div>
       </CardHeader>
