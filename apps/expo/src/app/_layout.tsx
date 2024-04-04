@@ -40,9 +40,13 @@ export default function RootLayout() {
             drawerItemStyle: { height: 0 },
           }} />
           <Drawer.Screen name="screens" options={{
+            headerShown: false,
             drawerItemStyle: { height: 0 },
           }} />
           <Drawer.Screen name="dashboard" options={{
+            drawerItemStyle: { height: 0 },
+          }} />
+          <Drawer.Screen name="components/drawer-content" options={{
             drawerItemStyle: { height: 0 },
           }} />
           <Drawer.Screen name="card-creation" options={{
