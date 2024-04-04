@@ -129,6 +129,9 @@ importers:
       '@feprep/api':
         specifier: workspace:*
         version: link:../../packages/api
+      '@feprep/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@feprep/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint

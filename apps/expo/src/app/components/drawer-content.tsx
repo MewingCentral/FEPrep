@@ -8,13 +8,16 @@ import Colors from "~/utils/colors";
 // api stuff for logging out.
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
+import { useAuth } from "~/utils/auth";
 
 export default function DrawerContent(props: any) {
+    const { sessionId, setSessionId } = useAuth()
+    console.log("Session id in drawer!", sessionId)
     const router = useRouter();
 
     const signOut = api.auth.signOut.useMutation({
         onSuccess: () => {
-            SecureStore.setItem("session", "invalid");
+            setSessionId("invalid")
             router.push("/");
         },
         onError: (error) => {
@@ -30,16 +33,20 @@ export default function DrawerContent(props: any) {
     return (
         <View style={{ flex: 1, backgroundColor: Colors.dark_bg, }}>
             <DrawerContentScrollView {...props}
-                contentContainerStyle={{ backgroundColor: Colors.dark_bg, }} 
+                contentContainerStyle={{ backgroundColor: Colors.dark_bg, }}
                 scrollEnabled={false}>
                 <DrawerItemList {...props} />
-                <DrawerItem label="Log out" style={{ borderWidth: 1, borderColor: Colors.dark_sec, }}
-                    labelStyle={{ color: Colors.dark_primary_text, marginLeft: -20, }}
-                    icon={() => <RadixIcon name="exit" color={Colors.dark_primary_text} />}
-                    onPress={onSignOut} />
+                {
+                    sessionId !== "invalid" && (
+                        <DrawerItem label="Log out" style={{ borderWidth: 1, borderColor: Colors.dark_sec, }}
+                            labelStyle={{ color: Colors.dark_primary_text, marginLeft: -20, }}
+                            icon={() => <RadixIcon name="exit" color={Colors.dark_primary_text} />}
+                            onPress={onSignOut} />
+                    )
+                }
                 <View style={{ height: 50, justifyContent: "center", }}>
                     <Pressable onPress={onSignOut}>
-                        <Text style={{textAlign: "center", color: Colors.dark_primary_text}}>
+                        <Text style={{ textAlign: "center", color: Colors.dark_primary_text }}>
                             todo make dark/light mode toggle
                         </Text>
                     </Pressable>

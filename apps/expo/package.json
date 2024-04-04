@@ -51,6 +51,7 @@
     "@babel/preset-env": "^7.23.9",
     "@babel/runtime": "^7.23.9",
     "@feprep/api": "workspace:*",
+    "@feprep/auth": "workspace:*",
     "@feprep/eslint-config": "workspace:*",
     "@feprep/prettier-config": "workspace:*",
     "@feprep/tailwind-config": "workspace:*",
