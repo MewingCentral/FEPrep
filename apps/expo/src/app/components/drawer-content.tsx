@@ -14,11 +14,8 @@ export default function DrawerContent(props: any) {
 
     const signOut = api.auth.signOut.useMutation({
         onSuccess: () => {
-            console.log("i should at least be here");
             SecureStore.setItem("session", "invalid");
-            console.log("made it here");
             router.push("/");
-            console.log("it should have happened");
         },
         onError: (error) => {
             // todo make this better??
@@ -33,17 +30,17 @@ export default function DrawerContent(props: any) {
     return (
         <View style={{ flex: 1, backgroundColor: Colors.dark_bg, }}>
             <DrawerContentScrollView {...props}
-                contentContainerStyle={{ backgroundColor: Colors.dark_sec, }} 
+                contentContainerStyle={{ backgroundColor: Colors.dark_bg, }} 
                 scrollEnabled={false}>
                 <DrawerItemList {...props} />
-                <DrawerItem label="Log out" 
+                <DrawerItem label="Log out" style={{ borderWidth: 1, borderColor: Colors.dark_sec, }}
                     labelStyle={{ color: Colors.dark_primary_text, marginLeft: -20, }}
                     icon={() => <RadixIcon name="exit" color={Colors.dark_primary_text} />}
                     onPress={onSignOut} />
                 <View style={{ height: 50, justifyContent: "center", }}>
                     <Pressable onPress={onSignOut}>
                         <Text style={{textAlign: "center", color: Colors.dark_primary_text}}>
-                            Logout
+                            todo make dark/light mode toggle
                         </Text>
                     </Pressable>
                 </View>
