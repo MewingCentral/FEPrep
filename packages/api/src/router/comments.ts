@@ -21,7 +21,7 @@ export const commentsRouter = createTRPCRouter({
 
   read: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.query.comments.findMany({
-      where: eq(comments.id, input),
+      where: eq(comments.questionId, input),
     });
   }),
 
