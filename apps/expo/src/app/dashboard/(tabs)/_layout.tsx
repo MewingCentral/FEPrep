@@ -1,10 +1,19 @@
 import React from "react";
 import { Tabs } from "expo-router";
+import { useAuth } from "~/utils/auth";
 
 import Colors from "~/utils/colors";
+import { TRPCProvider } from "~/utils/api";
 
 export default function TabLayout() {
+  const { sessionId, setSessionId } = useAuth();
+
   return (
+    // <TRPCProvider>
+    //   { sessionId !== "invalid" ? 
+
+    //   }
+    // </TRPCProvider>
     <Tabs
       screenOptions={{
         headerShown: false,
@@ -38,12 +47,27 @@ export default function TabLayout() {
           title: "Study Sets",
         }}
       />
-      <Tabs.Screen
+      {
+        // Only show custom sets tab if user is logged in.
+        sessionId !== "invalid" ? (
+          <Tabs.Screen name="custom-sets" options={{
+            title: "Custom Sets",
+          }} />
+        ) : (
+          <Tabs.Screen name="custom-sets" options={{
+            title: "Custom Sets",
+            // href: null,
+            tabBarShowLabel: false,
+          }} />
+        )
+      }
+      {/* <Tabs.Screen
         name="custom-sets"
         options={{
           title: "Custom Sets",
+          href: null,
         }}
-      />
+      /> */}
     </Tabs>
   );
 }
