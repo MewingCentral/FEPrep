@@ -2,8 +2,9 @@ import { DotsHorizontalIcon, FileIcon, VideoIcon } from "@feprep/ui";
 import { Card, CardHeader } from "@feprep/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 import { NotesTab } from "./notes-tab";
-// import { QuestionsTab } from "./../../explore/questions-tab";
-// import { StudySetsTab } from "./../../explore/study-sets-tab";
+import { DiscussionTab } from "./discussion-tab";
+import { ResourcesTab } from "./resources-tab";
+
 
 export function Right() {
   return (
@@ -42,24 +43,22 @@ export function Right() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="notes">
+            <TabsContent value="discussion">
+              <DiscussionTab />
+            </TabsContent>
+            
+            <TabsContent className="md:min-h-0 h-full" value="notes">
               <NotesTab />
             </TabsContent>
-            {/* <TabsContent value="questions">
-              <QuestionsTab />
+
+            <TabsContent value="resources">
+              <ResourcesTab />
+              {/* <div>hewwo</div> */}
             </TabsContent>
-            <TabsContent
-              className="flex flex-1 flex-col gap-4 md:min-h-0 lg:flex-row"
-              value="study"
-            >
-              <StudySetsTab />
-            </TabsContent> */}
+
           </Tabs>
         </div>
       </CardHeader>
-      {/* bottom right */}
-      <Card className="bottom-section mt-3 flex h-full flex-col overflow-x-hidden overflow-y-scroll">
-      </Card>
     </Card>
   );
 }
