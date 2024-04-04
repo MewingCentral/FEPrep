@@ -11,7 +11,7 @@ export const SignUpSchema = z.object({
 export type SignUpInput = z.infer<typeof SignUpSchema>;
 
 export const SignUpFormSchema = z.object({
-  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Invalid NID"),
+  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),
   // TODO: also make this more secure
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
@@ -19,8 +19,8 @@ export const SignUpFormSchema = z.object({
 export type SignUpFormInput = z.infer<typeof SignUpFormSchema>;
 
 export const SignInSchema = z.object({
-  nid: z.string(),
-  password: z.string(),
+  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),
+  password: z.string().min(1, "Please enter a password"),
 });
 
 export type SignInInput = z.infer<typeof SignInSchema>;

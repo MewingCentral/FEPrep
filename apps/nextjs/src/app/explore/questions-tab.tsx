@@ -1,23 +1,23 @@
-"use client";
+import { Suspense } from "react";
 
+import { validateRequest } from "@feprep/auth";
 import { Skeleton } from "@feprep/ui/skeleton";
 
-import { api } from "~/trpc/react";
+import { api } from "~/trpc/server";
 import { questionsColumns } from "./questions-columns";
 import { QuestionsTable } from "./questions-table";
 
-export function QuestionsTab() {
-  const getAllQuestions = api.questions.all.useQuery();
-
-  // TODO: make this a lot nicer
-  if (getAllQuestions.isLoading) {
-    return <Skeleton className="h-40 w-full" />;
-  }
+export async function QuestionsTab() {
+  const questions = api.questions.all();
+  const { user } = await validateRequest();
 
   return (
-    <QuestionsTable
-      data={getAllQuestions.data ?? []}
-      columns={questionsColumns}
-    />
+    <Suspense fallback={<Skeleton className="h-40 w-full" />}>
+      <QuestionsTable
+        promise={questions}
+        user={user}
+        columns={questionsColumns}
+      />
+    </Suspense>
   );
 }
