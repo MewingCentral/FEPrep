@@ -36,23 +36,17 @@ export const flashcardsRouter = createTRPCRouter({
         .returning();
     }),
 
-  readPack: publicProcedure
-    .input(z.string())
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db
-        .select()
-        .from(flashcardPacks)
-        .where(eq(flashcardPacks.userId, input));
-    }),
+  readPack: publicProcedure.input(z.string()).query(({ ctx, input }) => {
+    return ctx.db.query.flashcardPacks.findMany({
+      where: eq(flashcardPacks.userId, input),
+    });
+  }),
 
-  readCards: publicProcedure
-    .input(z.number())
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db
-        .select()
-        .from(flashcards)
-        .where(eq(flashcards.packId, input));
-    }),
+  readCards: publicProcedure.input(z.number()).query(({ ctx, input }) => {
+    return ctx.db.query.flashcards.findMany({
+      where: eq(flashcards.packId, input),
+    });
+  }),
 
   updatePack: publicProcedure
     .input(UpdatePackSchema)

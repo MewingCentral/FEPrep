@@ -77,15 +77,13 @@
 ### 3. Read Pack
 
 - **Endpoint:** `/api/trpc/flashcards.readPack`
-- **Method:** `POST`
+- **Method:** `GET`
 - **Description:** Retrieves flashcard packs associated with a specific user.
 - **Input Schema:** `string` (User ID)
 - **Example Request:**
 
 ```json
-{
-  "json": "tv9vgqk3uxkrj01"
-}
+localhost:3000/api/trpc/flashcards.readPack?input={ "json":"tv9vgqk3uxkrj01" }
 ```
 
 - **Example Response:**
@@ -109,15 +107,13 @@
 ### 4. Read Cards
 
 - **Endpoint:** `/api/trpc/flashcards.readCards`
-- **Method:** `POST`
+- **Method:** `GET`
 - **Description:** Retrieves flashcards within a specified pack.
 - **Input Schema:** `number` (Pack ID)
 - **Example Request:**
 
 ```json
-{
-  "json": 1
-}
+localhost:3000/api/trpc/flashcards.readCards?input={"json":1}
 ```
 
 - **Example Response:**
