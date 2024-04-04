@@ -25,7 +25,8 @@
     "./popover": "./src/popover.tsx",
     "./input-otp": "./src/input-otp.tsx",
     "./hover-card": "./src/hover-card.tsx",
-    "./navigation-menu": "./src/navigation-menu.tsx"
+    "./navigation-menu": "./src/navigation-menu.tsx",
+    "./textarea": "./src/textarea.tsx"
   },
   "license": "MIT",
   "scripts": {
