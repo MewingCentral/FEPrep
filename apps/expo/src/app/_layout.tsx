@@ -16,6 +16,7 @@ import DrawerContent from "./components/drawer-content";
 
 import { StyleSheet } from "react-native";
 import Colors from "~/utils/colors";
+import { AuthProvider } from "~/utils/auth";
 
 // Drawer stuff
 const DrawerLayout = () => {
@@ -27,35 +28,36 @@ const DrawerLayout = () => {
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
   return (
-    <TRPCProvider>
-      {/*
+    <AuthProvider>
+      <TRPCProvider>
+        {/*
           The Stack component displays the current page.
           It also allows you to configure your screens 
         */}
-      <GestureHandlerRootView style={{flex: 1}}>
-        <Drawer drawerContent={DrawerContent} 
-          screenOptions={headerDefault(colorScheme)}
-        >
-          <Drawer.Screen name="index" options={{
-            drawerItemStyle: { height: 0 },
-          }} />
-          <Drawer.Screen name="screens" options={{
-            headerShown: false,
-            drawerItemStyle: { height: 0 },
-          }} />
-          <Drawer.Screen name="dashboard" options={{
-            drawerItemStyle: { height: 0 },
-          }} />
-          <Drawer.Screen name="components/drawer-content" options={{
-            drawerItemStyle: { height: 0 },
-          }} />
-          <Drawer.Screen name="card-creation" options={{
-            headerShown: false,
-            drawerItemStyle: { height: 0 }
-          }} />
-        </Drawer>
-      </GestureHandlerRootView>
-      {/* <Stack screenOptions={headerDefault(colorScheme)}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Drawer drawerContent={DrawerContent}
+            screenOptions={headerDefault(colorScheme)}
+          >
+            <Drawer.Screen name="index" options={{
+              drawerItemStyle: { height: 0 },
+            }} />
+            <Drawer.Screen name="screens" options={{
+              headerShown: false,
+              drawerItemStyle: { height: 0 },
+            }} />
+            <Drawer.Screen name="dashboard" options={{
+              drawerItemStyle: { height: 0 },
+            }} />
+            <Drawer.Screen name="components/drawer-content" options={{
+              drawerItemStyle: { height: 0 },
+            }} />
+            <Drawer.Screen name="card-creation" options={{
+              headerShown: false,
+              drawerItemStyle: { height: 0 }
+            }} />
+          </Drawer>
+        </GestureHandlerRootView>
+        {/* <Stack screenOptions={headerDefault(colorScheme)}>
         <Stack.Screen
           name="card-creation"
           options={{
@@ -63,8 +65,10 @@ export default function RootLayout() {
           }}
         />
       </Stack> */}
-      <StatusBar />
-    </TRPCProvider>
+        <StatusBar />
+      </TRPCProvider>
+    </AuthProvider>
+
   );
 }
 
