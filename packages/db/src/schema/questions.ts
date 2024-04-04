@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
@@ -48,9 +48,30 @@ export const comments = sqliteTable("comment", {
   content: text("content").notNull(),
 });
 
-export const commentsRelations = relations(comments, ({ one }) => ({
-  user: one(users, {
-    fields: [comments.userId],
-    references: [users.id],
-  }),
-}));
+export const flashcardPacks = sqliteTable("flashcard_pack", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
+});
+
+export const flashcardPacksRelations = relations(flashcardPacks, ({ many}) => ({
+  cards: many(flashcards)
+}))
+
+export const flashcards = sqliteTable("flashcard", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  packId: integer("flashcard_pack_id")
+    .notNull()
+    .references(() => flashcardPacks.id),
+  front: text("front"),
+  back: text("back"),
+});
+
+export const flashcardsRelations = relations(flashcards, ({one}) => ({
+  cardpack: one(flashcardPacks, {
+    fields: [flashcards.packId],
+    references: [flashcardPacks.id]
+  })
+}))

@@ -10,11 +10,19 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
+import { api } from "~/utils/api";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
 export default function Tab() {
+  const getUser = api.auth.getUser.useQuery();
+  const user = getUser.data;
+  console.log(user?.id);
+
+  const loadCards = api.flashcards.readPack.useQuery(getUser.data?.id);
+  console.log(loadCards.data);
+
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       <KeyboardAwareScrollView>

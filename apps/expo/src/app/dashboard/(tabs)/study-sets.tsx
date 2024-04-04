@@ -27,22 +27,6 @@ export default function Tab() {
   //   // console.log(getSess.data);
   // };
 
-  const getUser = api.auth.getUser.useQuery();
-  const user = getUser.data;
-  console.log(user?.id);
-
-  const loadSets = api.flashcards.readPack.useMutation({
-    onSuccess: (data) => {
-      console.log("successfully loaded cards?");
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log("error: " + error);
-    },
-  });
-
-  const sets = loadSets.mutate(user?.id);
-
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
