@@ -12,10 +12,10 @@
 
 ```json
 {
-  "json":{
-    "questionId":1,
-    "userId":"tv9vgqk3uxkrj01",
-    "content":"test comment"
+  "json": {
+    "questionId": 1,
+    "userId": "tv9vgqk3uxkrj01",
+    "content": "test comment"
   }
 }
 ```
@@ -38,7 +38,6 @@
   }
 }
 ```
-
 
 ### 2. Read Comment
 
@@ -71,7 +70,6 @@ localhost:3000/api/trpc/comments.read?input={"json":1}
 }
 ```
 
-
 ### 3. Update Comment
 
 - **Endpoint:** `/api/trpc/comments.update`
@@ -82,11 +80,11 @@ localhost:3000/api/trpc/comments.read?input={"json":1}
 
 ```json
 {
-  "json":{
-    "id":1,
-    "questionId":1,
-    "userId":"tv9vgqk3uxkrj01",
-    "content":"test comment edit"
+  "json": {
+    "id": 1,
+    "questionId": 1,
+    "userId": "tv9vgqk3uxkrj01",
+    "content": "test comment edit"
   }
 }
 ```
@@ -108,7 +106,6 @@ localhost:3000/api/trpc/comments.read?input={"json":1}
   }
 }
 ```
-
 
 ### 4. Delete Comment
 
