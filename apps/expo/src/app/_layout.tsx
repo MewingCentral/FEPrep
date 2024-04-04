@@ -11,7 +11,8 @@ import { useColorScheme } from "nativewind";
 
 import headerDefault from "~/utils/header-default";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import DrawerContent from "~/utils/drawer-content";
+// import DrawerContent from "components/drawer-content";
+import DrawerContent from "./components/drawer-content";
 
 import { StyleSheet } from "react-native";
 import Colors from "~/utils/colors";
@@ -46,7 +47,6 @@ export default function RootLayout() {
           }} />
           <Drawer.Screen name="card-creation" options={{
             headerShown: false,
-            drawerLabel: () => null,
             drawerItemStyle: { height: 0 }
           }} />
         </Drawer>
