@@ -34,6 +34,7 @@ export default function RootLayout() {
           The Stack component displays the current page.
           It also allows you to configure your screens 
         */}
+        
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Drawer drawerContent={DrawerContent}
             screenOptions={headerDefault(colorScheme)}

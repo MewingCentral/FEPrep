@@ -31,6 +31,7 @@ export default function DrawerContent(props: any) {
     };
 
     return (
+        
         <View style={{ flex: 1, backgroundColor: Colors.dark_bg, }}>
             <DrawerContentScrollView {...props}
                 contentContainerStyle={{ backgroundColor: Colors.dark_bg, }}
