@@ -95,3 +95,15 @@ export const UpdateCardSchema = FlashCardSchema.extend({
 });
 
 export type UpdateCardType = z.infer<typeof UpdateCardSchema>;
+
+export const CommentSchema = z.object({
+  questionId: z.number(),
+  userId: z.string(),
+  content: z.string(),
+});
+
+export type CommentType = z.infer<typeof CommentSchema>;
+
+export const UpdateCommentSchema = CommentSchema.extend({
+  id: z.number(),
+})
