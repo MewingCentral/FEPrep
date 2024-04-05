@@ -1,4 +1,6 @@
 // "use client";
+import Link from "next/link";
+
 import { Card, CardContent } from "@feprep/ui/card";
 
 // import { Label } from "@feprep/ui/label"
@@ -8,22 +10,14 @@ import { Card, CardContent } from "@feprep/ui/card";
 
 export function ResourcesTab() {
   return (
-    <Card className="h-full flex-col">
-      {/* public comments */}
-      <CardContent className="space-y-2 p-4">
-        <ResourcesLink link="http://google.com" />
-        <ResourcesLink link="https://www.altcademy.com/blog/how-to-make-text-a-link-in-reactjs/" />
-      </CardContent>
-    </Card>
-  );
-}
-
-function ResourcesLink({ link }: { link: string }) {
-  return (
-    <Card className="p-2">
-      <a className="p-3" href={link} target="_blank" rel="noopener noreferrer">
-        {link}
-      </a>
-    </Card>
+    <div className="flex flex-col gap-2">
+      <iframe
+        className="aspect-video"
+        src="https://www.youtube.com/embed/zxwWpCwVExQ"
+        title="Ultimate Foundation Exam Review"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </div>
   );
 }
