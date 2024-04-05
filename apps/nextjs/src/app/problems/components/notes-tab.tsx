@@ -4,7 +4,7 @@ import { Textarea } from "@feprep/ui/textarea";
 
 export function NotesTab() {
   return (
-    <div className="h-full w-full">
+    <div>
       <Textarea className="h-40" />
     </div>
   );

@@ -56,25 +56,15 @@ export function Nav({ user }: { user: User | null }) {
   return (
     <nav className="flex h-14 items-center justify-between px-6">
       <div className="mr-4 flex flex-none items-center">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/explore"
-                className="flex  gap-3 text-xl font-semibold"
-              >
-                <Image
-                  src="/Ellipse-3.svg"
-                  width={25}
-                  height={25}
-                  alt="FEPrep Logo"
-                />
-                <span className="hidden lg:block">FEPrep</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>Go to home</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Link href="/explore" className="flex  gap-3 text-xl font-semibold">
+          <Image
+            src="/Ellipse-3.svg"
+            width={25}
+            height={25}
+            alt="FEPrep Logo"
+          />
+          <span className="hidden lg:block">FEPrep</span>
+        </Link>
 
         <Separator orientation="vertical" className="mx-4 h-8" decorative />
 
