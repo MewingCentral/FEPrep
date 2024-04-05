@@ -18,6 +18,7 @@
   "dependencies": {
     "@feprep/auth": "workspace:*",
     "@feprep/db": "workspace:*",
+    "@feprep/consts": "workspace:*",
     "@feprep/transactional": "workspace:*",
     "@feprep/validators": "workspace:*",
     "@trpc/server": "11.0.0-next-beta.264",
