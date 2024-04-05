@@ -1,12 +1,16 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 import type { User } from "@feprep/auth";
 import { TOPICS } from "@feprep/consts";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
+  ChevronLeftIcon,
   LapTimerIcon,
   PauseIcon,
   PlayIcon,
@@ -15,12 +19,6 @@ import {
   ShuffleIcon,
 } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@feprep/ui/hover-card";
-import { Label } from "@feprep/ui/label";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -44,49 +42,206 @@ import {
   TableHeader,
   TableRow,
 } from "@feprep/ui/table";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@feprep/ui/tooltip";
 
-import { api } from "~/trpc/react";
+import { signOutAction } from "~/utils/actions";
 import questions from "./questions";
-import Timer from "./timer";
 
 export function Nav({ user }: { user: User | null }) {
-  function AuthButton({ user }: { user: User | null }) {
-    const { mutateAsync } = api.auth.signOut.useMutation();
-    const router = useRouter();
+  return (
+    <nav className="flex h-14 items-center justify-between px-6">
+      <div className="mr-4 flex flex-none items-center">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/explore"
+                className="flex  gap-3 text-xl font-semibold"
+              >
+                <Image
+                  src="/Ellipse-3.svg"
+                  width={25}
+                  height={25}
+                  alt="FEPrep Logo"
+                />
+                <span className="hidden lg:block">FEPrep</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>Go to home</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
-    if (user) {
-      return (
-        <Button
-          onClick={async () => {
-            await mutateAsync();
-            router.push("/sign-in");
-          }}
-          className="hover:underline"
-        >
-          Sign out
-        </Button>
-      );
-    }
-    return (
-      <div className="flex flex-row gap-2">
-        <Link
-          className="hidden text-left text-lg font-medium text-muted-foreground transition-all duration-200 hover:text-foreground md:block"
-          href="/sign-up"
-        >
-          Register
-        </Link>
-        <p className="hidden text-lg font-normal text-muted-foreground md:block">
-          or
-        </p>
-        <Link
-          className="hidden text-left text-lg font-medium text-muted-foreground transition-all duration-200 hover:text-foreground md:block"
-          href="/sign-in"
-        >
-          Sign in
-        </Link>
+        <Separator orientation="vertical" className="mx-4 h-8" decorative />
+
+        <QuestionsSheet />
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                className=" rounded-l-none rounded-r-none focus-visible:bg-accent focus-visible:ring-0"
+                variant="outline"
+                size="icon"
+              >
+                <ArrowLeftIcon />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Previous Question</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                className=" rounded-l-none rounded-r-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
+                size="icon"
+              >
+                <ArrowRightIcon />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Next Question</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                className=" rounded-l-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
+                size="icon"
+              >
+                <ShuffleIcon />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Random Question</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
-    );
-  }
+
+      <div className="mr-4 flex gap-2">
+        <TimerButton />
+        <Button variant="outline" className="w-9 px-0 md:w-auto md:px-4">
+          <RocketIcon className="md:mr-2" />
+          <span className="hidden md:flex">Solution</span>
+        </Button>
+      </div>
+
+      <div className="flex items-center">
+        {user ? (
+          <div className="flex items-center gap-4">
+            <span className="hidden lg:inline">Welcome, {user.email}</span>
+            <form action={signOutAction}>
+              <Button size="sm" type="submit">
+                Sign Out
+              </Button>
+            </form>
+          </div>
+        ) : (
+          <Link href="/sign-in" passHref>
+            <Button size="sm">Sign In</Button>
+          </Link>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+function TimerButton() {
+  const [open, setOpen] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
+
+  const minutes = String(Math.floor(secondsElapsed / 60)).padStart(2, "0");
+  const hours = String(Math.floor(Number(minutes) / 60)).padStart(2, "0");
+  const seconds = String(secondsElapsed % 60).padStart(2, "0");
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isRunning) {
+      interval = setInterval(() => {
+        setSecondsElapsed((prev) => prev + 1);
+      }, 1000);
+    } else if (!isRunning && secondsElapsed !== 0 && interval) {
+      clearInterval(interval);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  });
+
+  return (
+    <AnimatePresence mode="popLayout" initial={false}>
+      {open ? (
+        <motion.div
+          key="hello"
+          className="flex items-center"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+        >
+          <Button
+            variant="outline"
+            size="icon"
+            className=" rounded-r-none"
+            onClick={() => setOpen(false)}
+          >
+            <ChevronLeftIcon />
+          </Button>
+          <Button
+            variant="outline"
+            className=" rounded-l-none rounded-r-none border-l-0 border-r-0"
+            onClick={() => {
+              setIsRunning(!isRunning);
+            }}
+          >
+            <span className="mr-2">
+              {isRunning ? <PauseIcon /> : <PlayIcon />}
+            </span>
+            <span>
+              {hours}:{minutes}:{seconds}
+            </span>
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className=" rounded-l-none"
+            onClick={() => {
+              setSecondsElapsed(0);
+              setIsRunning(false);
+            }}
+          >
+            <ResetIcon />
+          </Button>
+        </motion.div>
+      ) : (
+        <motion.div
+          key="world"
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+        >
+          <Button variant="outline" size="icon" onClick={() => setOpen(true)}>
+            <LapTimerIcon />
+          </Button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function QuestionsSheet() {
   return (
     <main className="flex flex-row justify-start px-10 py-6">
       {/* left side */}

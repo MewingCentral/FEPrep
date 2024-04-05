@@ -10,13 +10,18 @@ import { signOutAction } from "~/utils/actions";
 export async function Nav({ user }: { user: User | null }) {
   return (
     <nav className="flex h-16 items-center justify-between px-6">
-      <div className="mr-5 flex h-8 items-center gap-3">
-        <Image src="/Ellipse-3.svg" width={25} height={25} alt="FEPrep Logo" />
-        <Link href="/" className="text-left text-xl font-semibold">
+      <div className="mr-5 flex items-center gap-3">
+        <Link href="/" className="flex gap-3 text-left text-xl font-semibold">
+          <Image
+            src="/Ellipse-3.svg"
+            width={25}
+            height={25}
+            alt="FEPrep Logo"
+          />
           FEPrep
         </Link>
-        <Separator orientation="vertical" decorative />
-        <Link href="/dashboard">Dashboard</Link>
+        <Separator orientation="vertical" className="h-8" decorative />
+        <Link href="/about">About</Link>
       </div>
 
       <div className="flex items-center">
