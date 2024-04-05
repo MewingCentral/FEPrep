@@ -29,7 +29,7 @@ export async function Right({
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="discussion" >
+        <TabsContent value="discussion">
           <DiscussionTab question={question} />
         </TabsContent>
         <TabsContent value="notes" asChild>
