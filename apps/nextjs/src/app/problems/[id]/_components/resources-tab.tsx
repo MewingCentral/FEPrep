@@ -1,13 +1,3 @@
-// "use client";
-import Link from "next/link";
-
-import { Card, CardContent } from "@feprep/ui/card";
-
-// import { Label } from "@feprep/ui/label"
-// import { Textarea } from "@feprep/ui/textarea"
-// import { AvatarIcon } from "@feprep/ui";
-// import { Button } from "@feprep/ui/button";
-
 export function ResourcesTab() {
   return (
     <div className="flex flex-col gap-2">
