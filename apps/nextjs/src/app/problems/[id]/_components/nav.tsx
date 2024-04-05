@@ -1,47 +1,16 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 
+import type { RouterOutputs } from "@feprep/api";
 import type { User } from "@feprep/auth";
-import { TOPICS } from "@feprep/consts";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  ChevronLeftIcon,
-  LapTimerIcon,
-  PauseIcon,
-  PlayIcon,
-  ResetIcon,
   RocketIcon,
   ShuffleIcon,
 } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@feprep/ui/navigation-menu";
 import { Separator } from "@feprep/ui/separator";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@feprep/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@feprep/ui/table";
 import {
   Tooltip,
   TooltipContent,
@@ -50,11 +19,18 @@ import {
 } from "@feprep/ui/tooltip";
 
 import { signOutAction } from "~/utils/actions";
-import questions from "./questions";
+import { QuestionsSheet } from "./question-sheet";
+import { TimerButton } from "./timer-button";
 
-export function Nav({ user }: { user: User | null }) {
+export function Nav({
+  user,
+  question,
+}: {
+  user: User | null;
+  question: NonNullable<RouterOutputs["questions"]["byId"]>;
+}) {
   return (
-    <nav className="flex h-14 items-center justify-between px-6">
+    <nav className="flex h-14 items-center justify-between border-b px-6">
       <div className="mr-4 flex flex-none items-center">
         <Link href="/explore" className="flex  gap-3 text-xl font-semibold">
           <Image
@@ -68,7 +44,7 @@ export function Nav({ user }: { user: User | null }) {
 
         <Separator orientation="vertical" className="mx-4 h-8" decorative />
 
-        <QuestionsSheet />
+        <QuestionsSheet question={question} />
 
         <TooltipProvider>
           <Tooltip>

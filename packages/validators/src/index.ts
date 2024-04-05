@@ -67,56 +67,60 @@ export const UpdateQuestionSchema = CreateQuestionSchema.extend({
   questionId: z.number(),
 });
 
-export const FlashCardPackSchema = z.object({
+export const CreateFlashcardPackSchema = z.object({
   name: z.string(),
   userId: z.string(),
 });
 
-export type FlashCardPackType = z.infer<typeof FlashCardPackSchema>;
+export type CreateFlashcardPackInput = z.infer<
+  typeof CreateFlashcardPackSchema
+>;
 
-export const FlashCardSchema = z.object({
+export const CreateFlashcardSchema = z.object({
   packId: z.number(),
   front: z.string(),
   back: z.string(),
 });
 
-export type FlashCardInputType = z.infer<typeof FlashCardSchema>;
+export type FlashcardInputType = z.infer<typeof CreateFlashcardSchema>;
 
-export const UpdatePackSchema = FlashCardPackSchema.extend({
-  packId: z.number(),
+export const UpdateFlashcardPackSchema = CreateFlashcardPackSchema.extend({
+  flashcardPackId: z.number(),
 });
 
-export type UpdatePackType = z.infer<typeof UpdatePackSchema>;
+export type UpdateFlashcardPackInput = z.infer<
+  typeof UpdateFlashcardPackSchema
+>;
 
-export const UpdateCardSchema = FlashCardSchema.extend({
-  id: z.number(),
+export const UpdateFlashcardSchema = CreateFlashcardSchema.extend({
+  flashcardId: z.number(),
 });
 
-export type UpdateCardType = z.infer<typeof UpdateCardSchema>;
+export type UpdateFlashcardInput = z.infer<typeof UpdateFlashcardSchema>;
 
-export const CommentSchema = z.object({
+export const CreateCommentSchema = z.object({
   questionId: z.number(),
   userId: z.string(),
   content: z.string(),
 });
 
-export type CommentType = z.infer<typeof CommentSchema>;
+export type CreateCommentInput = z.infer<typeof CreateCommentSchema>;
 
-export const UpdateCommentSchema = CommentSchema.extend({
-  id: z.number(),
+export const UpdateCommentSchema = CreateCommentSchema.extend({
+  commentId: z.number(),
 });
 
-export type UpdateCommentType = z.infer<typeof UpdateCommentSchema>;
+export type UpdateCommentInput = z.infer<typeof UpdateCommentSchema>;
 
-export const ResourceSchema = z.object({
+export const CreateResourceSchema = z.object({
   questionId: z.number(),
   link: z.string(),
+  title: z.string(),
+  isVideo: z.boolean(),
 });
 
-export type ResourceType = z.infer<typeof ResourceSchema>;
+export type CreateResourceInput = z.infer<typeof CreateResourceSchema>;
 
-export const UpdateResourceSchema = ResourceSchema.extend({
-  id: z.number(),
+export const UpdateResourceSchema = CreateResourceSchema.extend({
+  resourceId: z.number(),
 });
-
-export type UpdateResourceType = z.infer<typeof UpdateResourceSchema>;

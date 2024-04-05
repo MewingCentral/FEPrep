@@ -1,40 +1,37 @@
 import { z } from "zod";
 
 import { comments, eq } from "@feprep/db";
-import { CommentSchema, UpdateCommentSchema } from "@feprep/validators";
+import { CreateCommentSchema, UpdateCommentSchema } from "@feprep/validators";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const commentsRouter = createTRPCRouter({
   create: publicProcedure
-    .input(CommentSchema)
+    .input(CreateCommentSchema)
     .mutation(async ({ ctx, input }) => {
-      return await ctx.db
-        .insert(comments)
-        .values({
-          questionId: input.questionId,
-          userId: input.userId,
-          content: input.content,
-        })
-        .returning();
+      await ctx.db.insert(comments).values({
+        questionId: input.questionId,
+        userId: input.userId,
+        content: input.content,
+      });
     }),
 
-  read: publicProcedure.input(z.number()).query(({ ctx, input }) => {
+  allByQuestionId: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.query.comments.findMany({
       where: eq(comments.questionId, input),
+      with: {
+        user: true,
+      },
     });
   }),
 
   update: publicProcedure
     .input(UpdateCommentSchema)
-    .mutation(async ({ ctx, input: { id, ...comment } }) => {
-      return await ctx.db
-        .update(comments)
-        .set(comment)
-        .where(eq(comments.id, id));
+    .mutation(async ({ ctx, input: { commentId: id, ...comment } }) => {
+      await ctx.db.update(comments).set(comment).where(eq(comments.id, id));
     }),
 
   delete: publicProcedure.input(z.number()).mutation(async ({ ctx, input }) => {
-    return await ctx.db.delete(comments).where(eq(comments.id, input));
+    await ctx.db.delete(comments).where(eq(comments.id, input));
   }),
 });

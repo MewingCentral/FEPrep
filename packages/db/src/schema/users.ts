@@ -1,6 +1,9 @@
+import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { USER_TYPES } from "@feprep/consts";
+
+import { comments } from "./questions";
 
 export const users = sqliteTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -15,6 +18,10 @@ export const users = sqliteTable("user", {
     .default("Student")
     .notNull(),
 });
+
+export const usersRelations = relations(users, ({ many }) => ({
+  comments: many(comments),
+}));
 
 export type SelectUser = typeof users.$inferSelect;
 
