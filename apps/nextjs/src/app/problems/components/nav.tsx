@@ -90,7 +90,7 @@ export function Nav({ user }: { user: User | null }) {
   return (
     <main className="flex flex-row justify-start px-10 py-6">
       {/* left side */}
-      <div className="mr-5 flex flex-1 flex-row gap-3">
+      <div className="mr-5 flex flex-1 flex-row items-center justify-center gap-3">
         <HoverCard openDelay={50} closeDelay={50}>
           <HoverCardTrigger href="/">
             <Image
