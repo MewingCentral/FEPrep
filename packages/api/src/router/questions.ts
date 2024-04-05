@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { TOPICS } from "@feprep/consts";
 import { eq, questions } from "@feprep/db";
 import { CreateQuestionSchema, UpdateQuestionSchema } from "@feprep/validators";
 
@@ -28,6 +29,11 @@ export const questionsRouter = createTRPCRouter({
   byId: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.query.questions.findFirst({
       where: eq(questions.id, input),
+    });
+  }),
+  byTopic: publicProcedure.input(z.enum(TOPICS)).query(({ ctx, input }) => {
+    return ctx.db.query.questions.findMany({
+      where: eq(questions.topic, input),
     });
   }),
 });
