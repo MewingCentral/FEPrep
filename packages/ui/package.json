@@ -26,7 +26,8 @@
     "./input-otp": "./src/input-otp.tsx",
     "./hover-card": "./src/hover-card.tsx",
     "./navigation-menu": "./src/navigation-menu.tsx",
-    "./textarea": "./src/textarea.tsx"
+    "./textarea": "./src/textarea.tsx",
+    "./tooltip": "./src/tooltip.tsx"
   },
   "license": "MIT",
   "scripts": {
@@ -46,6 +47,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.4",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "@tanstack/react-table": "^8.13.2",
     "class-variance-authority": "^0.7.0",
     "next-themes": "^0.2.1",
