@@ -1,5 +1,3 @@
-"use client";
-
 import { Textarea } from "@feprep/ui/textarea";
 
 export function NotesTab() {

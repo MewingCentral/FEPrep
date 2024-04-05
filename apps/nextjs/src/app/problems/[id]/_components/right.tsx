@@ -1,3 +1,4 @@
+import type { RouterOutputs } from "@feprep/api";
 import { ChatBubbleIcon, FileIcon, VideoIcon } from "@feprep/ui";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 
@@ -5,7 +6,11 @@ import { DiscussionTab } from "./discussion-tab";
 import { NotesTab } from "./notes-tab";
 import { ResourcesTab } from "./resources-tab";
 
-export function Right() {
+export async function Right({
+  question,
+}: {
+  question: NonNullable<RouterOutputs["questions"]["byId"]>;
+}) {
   return (
     <div className="basis-1/2 rounded-lg border p-4">
       <Tabs defaultValue="notes">
@@ -24,8 +29,8 @@ export function Right() {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="discussion" asChild>
-          <DiscussionTab />
+        <TabsContent value="discussion" >
+          <DiscussionTab question={question} />
         </TabsContent>
         <TabsContent value="notes" asChild>
           <NotesTab />

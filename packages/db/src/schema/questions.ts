@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
@@ -10,7 +11,7 @@ export const questions = sqliteTable("question", {
     .notNull()
     .references(() => users.id),
   title: text("title"),
-  pdf: text("pdf"),
+  pdf: text("pdf").notNull(),
   averageScore: real("average_score").default(0),
   easyVotes: integer("easy_votes").notNull().default(0),
   mediumVotes: integer("medium_votes").notNull().default(0),
@@ -47,4 +48,9 @@ export const comments = sqliteTable("comment", {
   content: text("content").notNull(),
 });
 
-
+export const commentsRelations = relations(comments, ({ one }) => ({
+  user: one(users, {
+    fields: [comments.userId],
+    references: [users.id],
+  }),
+}));

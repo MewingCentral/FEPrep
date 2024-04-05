@@ -2,17 +2,17 @@ import { z } from "zod";
 
 import { eq, flashcardPacks, flashcards } from "@feprep/db";
 import {
-  FlashCardPackSchema,
-  FlashCardSchema,
-  UpdateCardSchema,
-  UpdatePackSchema,
+  CreateFlashcardPackSchema,
+  CreateFlashcardSchema,
+  UpdateFlashcardPackSchema,
+  UpdateFlashcardSchema,
 } from "@feprep/validators";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const flashcardsRouter = createTRPCRouter({
   createPack: publicProcedure
-    .input(FlashCardPackSchema)
+    .input(CreateFlashcardPackSchema)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db
         .insert(flashcardPacks)
@@ -24,7 +24,7 @@ export const flashcardsRouter = createTRPCRouter({
     }),
 
   createCard: publicProcedure
-    .input(FlashCardSchema)
+    .input(CreateFlashcardSchema)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db
         .insert(flashcards)
@@ -49,8 +49,8 @@ export const flashcardsRouter = createTRPCRouter({
   }),
 
   updatePack: publicProcedure
-    .input(UpdatePackSchema)
-    .mutation(({ ctx, input: { packId, ...pack } }) => {
+    .input(UpdateFlashcardPackSchema)
+    .mutation(({ ctx, input: { flashcardPackId: packId, ...pack } }) => {
       return ctx.db
         .update(flashcardPacks)
         .set(pack)
@@ -58,8 +58,8 @@ export const flashcardsRouter = createTRPCRouter({
     }),
 
   updateCard: publicProcedure
-    .input(UpdateCardSchema)
-    .mutation(({ ctx, input: { id, ...card } }) => {
+    .input(UpdateFlashcardSchema)
+    .mutation(({ ctx, input: { flashcardId: id, ...card } }) => {
       return ctx.db.update(flashcards).set(card).where(eq(flashcards.id, id));
     }),
 
