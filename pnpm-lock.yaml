@@ -292,6 +292,9 @@ importers:
       '@feprep/auth':
         specifier: workspace:*
         version: link:../auth
+      '@feprep/consts':
+        specifier: workspace:*
+        version: link:../consts
       '@feprep/db':
         specifier: workspace:*
         version: link:../db
