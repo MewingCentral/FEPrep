@@ -1,4 +1,3 @@
-import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { USER_TYPES } from "@feprep/consts";
@@ -15,8 +14,6 @@ export const users = sqliteTable("user", {
   })
     .default("Student")
     .notNull(),
-  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
 export type SelectUser = typeof users.$inferSelect;

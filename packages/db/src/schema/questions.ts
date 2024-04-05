@@ -1,4 +1,3 @@
-import { sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
@@ -11,7 +10,6 @@ export const questions = sqliteTable("question", {
     .notNull()
     .references(() => users.id),
   title: text("title"),
-  // PDF or markdown content for the question
   pdf: text("pdf"),
   averageScore: real("average_score").default(0),
   easyVotes: integer("easy_votes").notNull().default(0),
@@ -22,8 +20,6 @@ export const questions = sqliteTable("question", {
   topic: text("topic", { enum: TOPICS }).notNull(),
   section: text("section", { enum: SECTIONS }).notNull(),
   questionNumber: integer("question_number").notNull(),
-  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
 export const resources = sqliteTable("resource", {
@@ -32,6 +28,12 @@ export const resources = sqliteTable("resource", {
     .notNull()
     .references(() => questions.id),
   link: text("link").notNull(),
+  title: text("title").notNull(),
+  isVideo: integer("is_video", {
+    mode: "boolean",
+  })
+    .notNull()
+    .default(false),
 });
 
 export const comments = sqliteTable("comment", {
@@ -45,19 +47,4 @@ export const comments = sqliteTable("comment", {
   content: text("content").notNull(),
 });
 
-export const flashcardPacks = sqliteTable("flashcard_pack", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id),
-});
 
-export const flashcards = sqliteTable("flashcard", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  packId: integer("flashcard_pack_id")
-    .notNull()
-    .references(() => flashcardPacks.id),
-  front: text("front"),
-  back: text("back"),
-});
