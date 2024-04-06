@@ -12,31 +12,30 @@ import { Link } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
 import { api } from "~/utils/api";
 
+import * as SecureStore from "expo-secure-store";
+
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
 export default function Tab() {
-  const getUser = api.auth.getUser.useQuery();
-  const user = getUser.data;
-  console.log("retrieving cards for user: ", user);
+  const userId = SecureStore.getItem("userId");
+  console.log("retrieving cards for user: ", userId);
 
-  // todo : do this better!!!!!!!!!!!!!!!!
-  const loadCards = api.flashcards.readPack.useQuery(user?.id);
-  const cardPacks = loadCards.data;
-  console.log("cardPacks: " , cardPacks);
+  const packs = api.flashcards.readPack.useQuery(userId);
+  console.log(packs.data);
 
-  const userCards = cardPacks.map(item => 
-    <View style={[dashStyles.container, dashStyles.setContainer]}>
-      <View style={[dashStyles.setTextContainer]}>
-        <Text style={[dashStyles.setText, dashStyles.titleText]}>
-          Set 1
-        </Text>
-        <Text style={[dashStyles.setText, dashStyles.setTerms]}>
-          15 terms
-        </Text>
-      </View>
-    </View>
-  );
+  // const userCards = packs.data.map(item => 
+  //   <View style={[dashStyles.container, dashStyles.setContainer]}>
+  //     <View style={[dashStyles.setTextContainer]}>
+  //       <Text style={[dashStyles.setText, dashStyles.titleText]}>
+  //         {item.name}
+  //       </Text>
+  //       <Text style={[dashStyles.setText, dashStyles.setTerms]}>
+  //         15 terms
+  //       </Text>
+  //     </View>
+  //   </View>
+  // );
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
@@ -84,7 +83,7 @@ export default function Tab() {
               </Text>
             </View>
           </View> */}
-          {userCards}
+          {/* {userCards} */}
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

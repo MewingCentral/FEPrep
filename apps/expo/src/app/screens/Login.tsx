@@ -25,6 +25,8 @@ import {
   SignInSchema,
 } from "../../../../../packages/validators/src";
 
+import * as SecureStore from "expo-secure-store";
+
 export default function Login() {
   const { setSessionId } = useAuth();
   const router = useRouter();
@@ -46,6 +48,7 @@ export default function Login() {
     onSuccess: (data) => {
       if (!(data instanceof Error)) {
         setSessionId(data.session);
+        SecureStore.setItem("userId", data.userId);
         router.push("../dashboard/(tabs)/study-sets/");
       }
     },
