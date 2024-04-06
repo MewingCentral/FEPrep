@@ -1,19 +1,15 @@
-import React from "react";
-import { Tabs } from "expo-router";
+import React, { useState } from "react";
+import { Tabs, useNavigation } from "expo-router";
 import { useAuth } from "~/utils/auth";
 
 import Colors from "~/utils/colors";
 import { TRPCProvider } from "~/utils/api";
+import { Modal, Text } from "react-native";
 
 export default function TabLayout() {
-  const { sessionId, setSessionId } = useAuth();
+  const { sessionId } = useAuth();
 
   return (
-    // <TRPCProvider>
-    //   { sessionId !== "invalid" ? 
-
-    //   }
-    // </TRPCProvider>
     <Tabs
       screenOptions={{
         headerShown: false,
@@ -57,17 +53,15 @@ export default function TabLayout() {
           <Tabs.Screen name="custom-sets" options={{
             title: "Custom Sets",
             // href: null,
-            tabBarShowLabel: false,
+          }}
+          listeners={{
+            tabPress: e => {
+              e.preventDefault();
+              // todo popup
+            }
           }} />
         )
       }
-      {/* <Tabs.Screen
-        name="custom-sets"
-        options={{
-          title: "Custom Sets",
-          href: null,
-        }}
-      /> */}
     </Tabs>
   );
 }
