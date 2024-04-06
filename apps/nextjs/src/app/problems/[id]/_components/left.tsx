@@ -33,7 +33,7 @@ export async function Left({
   return (
     <div className="basis-1/2 rounded-lg border p-4">
       <h1 className="mb-2 flex items-center text-pretty text-3xl font-bold">
-        {null ?? `${question.section} ${question.questionNumber}`}
+        {question.title ?? `${question.section} ${question.questionNumber}`}
       </h1>
 
       <div className="mb-4 flex gap-2">
