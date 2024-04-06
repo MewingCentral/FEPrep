@@ -1,5 +1,4 @@
-import { Stack, Slot } from "expo-router";
-import { Drawer } from "expo-router/drawer";
+import { Stack, router } from "expo-router";
 import { useRouter } from "expo-router";
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
@@ -11,9 +10,6 @@ import "../styles.css";
 import { useColorScheme } from "nativewind";
 
 import headerDefault from "~/utils/header-default";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-// import DrawerContent from "components/drawer-content";
-import DrawerContent from "./components/drawer-content";
 import { api } from "~/utils/api";
 
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -21,11 +17,6 @@ import Colors from "~/utils/colors";
 import { AuthProvider } from "~/utils/auth";
 import { useAuth } from "~/utils/auth";
 import { RadixIcon } from "radix-ui-react-native-icons";
-
-// Drawer stuff
-const DrawerLayout = () => {
-  return <Slot />;
-};
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
@@ -39,15 +30,27 @@ export default function RootLayout() {
           The Stack component displays the current page.
           It also allows you to configure your screens 
         */}
-        
+
         <Stack screenOptions={headerDefault(colorScheme)}>
         <Stack.Screen
         name="dashboard"
         options={{
           ...headerDefault(colorScheme),
+          headerLeft: () => {
+            const { sessionId } = useAuth();
+
+            return (
+              <View style={{ marginRight: 30, }}>
+                {
+                  sessionId !== "invalid" ?
+                  null :
+                  <BackBtn />
+                }
+              </View>
+            );
+          },
           headerRight: () => {
             const { sessionId, setSessionId } = useAuth();
-            console.log("Session id in drawer!", sessionId)
             const router = useRouter();
           
             const signOut = api.auth.signOut.useMutation({
@@ -91,6 +94,16 @@ export default function RootLayout() {
   );
 }
 
+function BackBtn() {
+  return (
+    <Pressable onPress={() => {
+      router.back();
+    }}>
+      <RadixIcon name="arrow-left" color={Colors.dark_primary_text} />
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
   logoutContainer: {
     flex: 1,
@@ -99,9 +112,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingVertical: 3,
   },
-  // logoutText: {
-  //   alignSelf: "center",
-  //   color: Colors.dark_primary_text,
-  //   textAlign: "center",
-  // },
 });

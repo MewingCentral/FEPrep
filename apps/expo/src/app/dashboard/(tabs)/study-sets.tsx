@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 // Api stuff for log out, might do this somewhere else in the future
 import * as SecureStore from "expo-secure-store";
 import { RadixIcon } from "radix-ui-react-native-icons";
@@ -16,6 +16,7 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 import { api } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
+import { useAuth } from "~/utils/auth";
 
 export default function Tab() {
   const router = useRouter();
@@ -40,10 +41,6 @@ export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
-        {/* Temp log out button */}
-        <Pressable style={tempStyles.pressable} onPress={onSignOut}>
-          <Text style={tempStyles.text}>Log out</Text>
-        </Pressable>
 
         {/* Search input */}
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
@@ -128,16 +125,16 @@ export default function Tab() {
   );
 }
 
-const tempStyles = StyleSheet.create({
-  pressable: {
-    height: 50,
-    backgroundColor: Colors.dark_accent,
-    flex: 1,
-    justifyContent: "center",
-    marginBottom: 10,
-  },
-  text: {
-    textAlign: "center",
-    color: Colors.dark_primary_text,
-  },
-});
+// const tempStyles = StyleSheet.create({
+//   pressable: {
+//     height: 50,
+//     backgroundColor: Colors.dark_accent,
+//     flex: 1,
+//     justifyContent: "center",
+//     marginBottom: 10,
+//   },
+//   text: {
+//     textAlign: "center",
+//     color: Colors.dark_primary_text,
+//   },
+// });
