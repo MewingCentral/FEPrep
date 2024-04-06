@@ -9,11 +9,9 @@ import {
 } from "react";
 import * as SecureStore from "expo-secure-store";
 
-import type { User } from "@feprep/auth";
-
 interface AuthContextValues {
-  sessionId: string | "invalid";
-  setSessionId: Dispatch<SetStateAction<string | "invalid">>;
+  sessionId: string;
+  setSessionId: Dispatch<SetStateAction<string>>;
 }
 
 export const AuthContext = createContext<AuthContextValues>({
@@ -22,7 +20,7 @@ export const AuthContext = createContext<AuthContextValues>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [sessionId, setSessionId] = useState<string | "invalid">("invalid");
+  const [sessionId, setSessionId] = useState<string>("invalid");
 
   useEffect(() => {
     console.log("Sesion id in useEffect", sessionId);

@@ -8,7 +8,7 @@ import { TRPCProvider } from "~/utils/api";
 
 import "../styles.css";
 
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { useColorScheme } from "nativewind";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
