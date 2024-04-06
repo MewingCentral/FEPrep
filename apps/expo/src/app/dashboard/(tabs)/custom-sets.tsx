@@ -18,10 +18,25 @@ import dashStyles from "~/utils/dash-styles";
 export default function Tab() {
   const getUser = api.auth.getUser.useQuery();
   const user = getUser.data;
-  console.log(user?.id);
+  console.log("retrieving cards for user: ", user);
 
-  const loadCards = api.flashcards.readPack.useQuery(getUser.data?.id);
-  console.log(loadCards.data);
+  // todo : do this better!!!!!!!!!!!!!!!!
+  const loadCards = api.flashcards.readPack.useQuery(user?.id);
+  const cardPacks = loadCards.data;
+  console.log("cardPacks: " , cardPacks);
+
+  const userCards = cardPacks.map(item => 
+    <View style={[dashStyles.container, dashStyles.setContainer]}>
+      <View style={[dashStyles.setTextContainer]}>
+        <Text style={[dashStyles.setText, dashStyles.titleText]}>
+          Set 1
+        </Text>
+        <Text style={[dashStyles.setText, dashStyles.setTerms]}>
+          15 terms
+        </Text>
+      </View>
+    </View>
+  );
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
@@ -59,7 +74,7 @@ export default function Tab() {
           </Link>
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -68,7 +83,8 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
+          {userCards}
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
