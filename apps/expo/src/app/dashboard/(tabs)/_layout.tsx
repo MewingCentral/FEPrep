@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Modal, Text } from "react-native";
-import { Tabs, useNavigation } from "expo-router";
+import React from "react";
+import { Tabs } from "expo-router";
 
-import { TRPCProvider } from "~/utils/api";
+// import { TRPCProvider } from "~/utils/api";
 import { useAuth } from "~/utils/auth";
 import Colors from "~/utils/colors";
 

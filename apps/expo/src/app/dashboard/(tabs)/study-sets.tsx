@@ -1,42 +1,35 @@
 import {
   KeyboardAvoidingView,
-  Pressable,
-  StyleSheet,
   Text,
   TextInput,
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation, useRouter } from "expo-router";
-// Api stuff for log out, might do this somewhere else in the future
-import * as SecureStore from "expo-secure-store";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
-import { api } from "~/utils/api";
-import { useAuth } from "~/utils/auth";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
 export default function Tab() {
-  const router = useRouter();
-  const signOut = api.auth.signOut.useMutation({
-    onSuccess: () => {
-      SecureStore.setItem("session", "invalid");
-      router.push("../");
-    },
-    onError: (error) => {
-      // todo is this necessary?
-      console.error(error);
-    },
-  });
+  // const router = useRouter();
+  // const signOut = api.auth.signOut.useMutation({
+  //   onSuccess: () => {
+  //     SecureStore.setItem("session", "invalid");
+  //     router.push("../");
+  //   },
+  //   onError: (error) => {
+  //     // todo is this necessary?
+  //     console.error(error);
+  //   },
+  // });
 
-  // const getSess = api.auth.getSession.useQuery();
+  // // const getSess = api.auth.getSession.useQuery();
 
-  const onSignOut = () => {
-    signOut.mutate();
-    // console.log(getSess.data);
-  };
+  // const onSignOut = () => {
+  //   signOut.mutate();
+  //   // console.log(getSess.data);
+  // };
 
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
