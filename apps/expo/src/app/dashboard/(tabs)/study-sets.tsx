@@ -1,9 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RadixIcon } from "radix-ui-react-native-icons";
