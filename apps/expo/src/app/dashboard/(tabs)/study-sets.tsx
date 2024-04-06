@@ -14,9 +14,9 @@ import * as SecureStore from "expo-secure-store";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
 import { api } from "~/utils/api";
-import { useAuth } from "~/utils/auth";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
+import { useAuth } from "~/utils/auth";
 
 export default function Tab() {
   const router = useRouter();
@@ -41,6 +41,7 @@ export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
+
         {/* Search input */}
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
           <View style={[dashStyles.container, dashStyles.inputContainer]}>

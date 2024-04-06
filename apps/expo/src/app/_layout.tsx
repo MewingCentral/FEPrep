@@ -1,21 +1,22 @@
-import { router, Stack, useRouter } from "expo-router";
-
+import { Stack, router } from "expo-router";
+import { useRouter } from "expo-router";
 import "react-native-gesture-handler";
-
 import { StatusBar } from "expo-status-bar";
 
 import { TRPCProvider } from "~/utils/api";
 
 import "../styles.css";
 
-import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useColorScheme } from "nativewind";
-import { RadixIcon } from "radix-ui-react-native-icons";
 
-import { api } from "~/utils/api";
-import { AuthProvider, useAuth } from "~/utils/auth";
-import Colors from "~/utils/colors";
 import headerDefault from "~/utils/header-default";
+import { api } from "~/utils/api";
+
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import Colors from "~/utils/colors";
+import { AuthProvider } from "~/utils/auth";
+import { useAuth } from "~/utils/auth";
+import { RadixIcon } from "radix-ui-react-native-icons";
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
@@ -31,76 +32,73 @@ export default function RootLayout() {
         */}
 
         <Stack screenOptions={headerDefault(colorScheme)}>
-          <Stack.Screen
-            name="dashboard"
-            options={{
-              ...headerDefault(colorScheme),
-              headerLeft: () => {
-                const { sessionId } = useAuth();
+        <Stack.Screen
+        name="dashboard"
+        options={{
+          ...headerDefault(colorScheme),
+          headerLeft: () => {
+            const { sessionId } = useAuth();
 
-                return (
-                  <View style={{ marginRight: 30 }}>
-                    {sessionId !== "invalid" ? null : <BackBtn />}
-                  </View>
-                );
-              },
-              headerRight: () => {
-                const { sessionId, setSessionId } = useAuth();
-                const router = useRouter();
-
-                const signOut = api.auth.signOut.useMutation({
-                  onSuccess: () => {
-                    setSessionId("invalid");
+            return (
+              <View style={{ marginRight: 30, }}>
+                {
+                  sessionId !== "invalid" ?
+                  null :
+                  <BackBtn />
+                }
+              </View>
+            );
+          },
+          headerRight: () => {
+            const { sessionId, setSessionId } = useAuth();
+            const router = useRouter();
+          
+            const signOut = api.auth.signOut.useMutation({
+                onSuccess: () => {
+                    setSessionId("invalid")
                     router.push("/");
-                  },
-                  onError: (error) => {
+                },
+                onError: (error) => {
                     // todo make this better??
                     console.log(error);
-                  },
-                });
+                }
+            });
+          
+            const onSignOut = () => {
+                signOut.mutate();
+            };
 
-                const onSignOut = () => {
-                  signOut.mutate();
-                };
-
-                return (
-                  <View>
-                    {sessionId !== "invalid" && (
-                      <Pressable
-                        style={[styles.logoutContainer]}
-                        onPress={onSignOut}
-                      >
-                        <RadixIcon
-                          name="exit"
-                          color={Colors.dark_primary_text}
-                        />
-                      </Pressable>
-                    )}
-                  </View>
-                );
-              },
-            }}
-          />
-          <Stack.Screen
-            name="card-creation"
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack>
+            return (
+              <View>
+                {
+                  sessionId !== "invalid" && (
+                  <Pressable style={[styles.logoutContainer]} onPress={onSignOut}>
+                    <RadixIcon name="exit" color={Colors.dark_primary_text} />
+                  </Pressable> )
+                }
+              </View>
+            );
+          },
+        }} />
+        <Stack.Screen
+          name="card-creation"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
         <StatusBar />
       </TRPCProvider>
     </AuthProvider>
+
   );
 }
 
 function BackBtn() {
   return (
-    <Pressable
-      onPress={() => {
-        router.back();
-      }}
-    >
+    <Pressable onPress={() => {
+      router.back();
+    }}>
       <RadixIcon name="arrow-left" color={Colors.dark_primary_text} />
     </Pressable>
   );
