@@ -270,6 +270,7 @@ function QuestionUploader({
         )}
         <input className="sr-only" {...getInputProps()} />
       </div>
+      <FormDescription>PDFs must be one page in length</FormDescription>
     </div>
   );
 }
