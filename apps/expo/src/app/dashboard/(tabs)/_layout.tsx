@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Tabs, useNavigation } from "expo-router";
-import { useAuth } from "~/utils/auth";
-
-import Colors from "~/utils/colors";
-import { TRPCProvider } from "~/utils/api";
 import { Modal, Text } from "react-native";
+import { Tabs, useNavigation } from "expo-router";
+
+import { TRPCProvider } from "~/utils/api";
+import { useAuth } from "~/utils/auth";
+import Colors from "~/utils/colors";
 
 export default function TabLayout() {
   const { sessionId } = useAuth();
@@ -46,20 +46,26 @@ export default function TabLayout() {
       {
         // Only show custom sets tab if user is logged in.
         sessionId !== "invalid" ? (
-          <Tabs.Screen name="custom-sets" options={{
-            title: "Custom Sets",
-          }} />
+          <Tabs.Screen
+            name="custom-sets"
+            options={{
+              title: "Custom Sets",
+            }}
+          />
         ) : (
-          <Tabs.Screen name="custom-sets" options={{
-            title: "Custom Sets",
-            // href: null,
-          }}
-          listeners={{
-            tabPress: e => {
-              e.preventDefault();
-              // todo popup
-            }
-          }} />
+          <Tabs.Screen
+            name="custom-sets"
+            options={{
+              title: "Custom Sets",
+              // href: null,
+            }}
+            listeners={{
+              tabPress: (e) => {
+                e.preventDefault();
+                // todo popup
+              },
+            }}
+          />
         )
       }
     </Tabs>

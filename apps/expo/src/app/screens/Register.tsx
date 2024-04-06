@@ -18,8 +18,9 @@ import { Controller, useForm } from "react-hook-form";
 
 import { api } from "~/utils/api";
 import screenStyles from "~/utils/screen-styles";
+import type {
+  SignUpFormInput} from "../../../../../packages/validators/src";
 import {
-  SignUpFormInput,
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
 
