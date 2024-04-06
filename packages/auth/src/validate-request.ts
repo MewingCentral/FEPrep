@@ -13,7 +13,7 @@ export const uncachedValidateRequest = async (): Promise<
   if (source === "expo-react") {
     const authorization = headersList.get("Authorization");
 
-    console.log(authorization)
+    console.log("auth:", authorization);
     if (!authorization) {
       return { user: null, session: null };
     }
