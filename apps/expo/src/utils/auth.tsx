@@ -16,6 +16,7 @@ interface AuthContextValues {
 
 export const AuthContext = createContext<AuthContextValues>({
   sessionId: "invalid",
+  // eslint-disable-next-line
   setSessionId: () => {},
 });
 

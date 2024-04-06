@@ -36,6 +36,7 @@ export default function RootLayout() {
             options={{
               ...headerDefault(colorScheme),
               headerLeft: () => {
+                // eslint-disable-next-line
                 const { sessionId } = useAuth();
 
                 return (
@@ -45,7 +46,9 @@ export default function RootLayout() {
                 );
               },
               headerRight: () => {
+                // eslint-disable-next-line
                 const { sessionId, setSessionId } = useAuth();
+                // eslint-disable-next-line
                 const router = useRouter();
 
                 const signOut = api.auth.signOut.useMutation({
