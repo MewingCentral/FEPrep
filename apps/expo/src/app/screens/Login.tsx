@@ -45,7 +45,7 @@ export default function Login() {
   const signIn = api.auth.signIn.useMutation({
     onSuccess: (data) => {
       if (!(data instanceof Error)) {
-        setSessionId(data.session)
+        setSessionId(data.session);
         router.push("../dashboard/(tabs)/study-sets/");
       }
     },

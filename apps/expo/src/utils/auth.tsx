@@ -13,19 +13,19 @@ export const AuthContext = createContext<AuthContextValues>({
 })
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [sessionId, setSessionId] = useState<string | "invalid">("invalid")
+    const [sessionId, setSessionId] = useState<string | "invalid">("invalid");
 
     useEffect(() => {
-        console.log("Sesion id in useEffect", sessionId)
-        SecureStore.setItem("session", sessionId)
-        console.log("Secure Store Session", SecureStore.getItem("session"))
+        console.log("Sesion id in useEffect", sessionId);
+        SecureStore.setItem("session", sessionId);
+        console.log("Secure Store Session", SecureStore.getItem("session"));
     }, [sessionId])
 
     return <AuthContext.Provider value={{ sessionId, setSessionId  }}>
         {children}
-    </AuthContext.Provider>
+    </AuthContext.Provider>;
 }
 
 export const useAuth = () => {
-    return useContext(AuthContext)
+    return useContext(AuthContext);
 }
