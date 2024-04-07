@@ -10,9 +10,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
-import { api } from "~/utils/api";
 
+import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
+import { map } from "@trpc/server/observable";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
@@ -22,20 +23,43 @@ export default function Tab() {
   console.log("retrieving cards for user: ", userId);
 
   const packs = api.flashcards.readPack.useQuery(userId);
-  console.log(packs.data);
+  console.log("packs: ", packs.data);
 
-  // const userCards = packs.data.map(item => 
-  //   <View style={[dashStyles.container, dashStyles.setContainer]}>
-  //     <View style={[dashStyles.setTextContainer]}>
-  //       <Text style={[dashStyles.setText, dashStyles.titleText]}>
-  //         {item.name}
-  //       </Text>
-  //       <Text style={[dashStyles.setText, dashStyles.setTerms]}>
-  //         15 terms
-  //       </Text>
+  if (!packs.isLoading && !packs.isError) {
+    console.log("Me when i'm ready");
+  }
+
+  // todo style error message.
+  const userCards = (!packs.isLoading && !packs.isError) ?
+  packs.data.map((item) => <View style={[dashStyles.container, dashStyles.setContainer]}>
+    <View style={[dashStyles.setTextContainer]}>
+      <Text style={[dashStyles.setText, dashStyles.titleText]}>
+        {item.name}
+      </Text>
+      <Text style={[dashStyles.setText, dashStyles.setTerms]}>
+        15 terms
+      </Text>
+    </View>
+  </View>) :
+  <View>
+    <Text>Error loading custom sets.</Text>
+  </View>;
+
+  // todo error handling??
+  // if (!packs.isLoading && !packs.isError) {
+  //   const userCards = packs.data.map(item => 
+  //     <View style={[dashStyles.container, dashStyles.setContainer]}>
+  //       <View style={[dashStyles.setTextContainer]}>
+  //         <Text style={[dashStyles.setText, dashStyles.titleText]}>
+  //           {item.name}
+  //         </Text>
+  //         <Text style={[dashStyles.setText, dashStyles.setTerms]}>
+  //           15 terms
+  //         </Text>
+  //       </View>
   //     </View>
-  //   </View>
-  // );
+  //   );
+  // }
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
@@ -83,7 +107,7 @@ export default function Tab() {
               </Text>
             </View>
           </View> */}
-          {/* {userCards} */}
+          {userCards}
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
