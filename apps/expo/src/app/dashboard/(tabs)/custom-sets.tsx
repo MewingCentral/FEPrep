@@ -8,10 +8,11 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
 import { useRouter } from "expo-router";
+import { usePackId } from "~/utils/pack";
 
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
@@ -21,12 +22,16 @@ import dashStyles from "~/utils/dash-styles";
 
 function Pack({ packName, packId } : { packName:string, packId:number }) {
   const router = useRouter();
-  console.log("packId in custom-sets: " , packId);
+  // const { setPackId } = usePackId();
+  // setPackId(999);
 
   return (
     <Pressable style={[dashStyles.container, dashStyles.setContainer]}
       // onPress={() => router.push({ pathName: "../../card-screens/study", params: { key }}) }
-      onPress={() => router.push({ pathname: "../../card-screens/study", params: {packId}})}
+      onPress={() => {
+        // setPackId(packId);
+        router.push({ pathname: "../../card-screens/study", params: { id: packId } });
+      }}
       >
       <View style={[dashStyles.setTextContainer]}>
         <Text style={[dashStyles.setText, dashStyles.titleText]}>

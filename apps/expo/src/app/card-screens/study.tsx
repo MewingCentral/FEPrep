@@ -1,14 +1,25 @@
 import { RadixIcon } from "radix-ui-react-native-icons";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import Colors from "~/utils/colors";
-
-import { useLocalSearchParams } from "expo-router";
-
 import * as Progress from 'react-native-progress';
 
+import { useLocalSearchParams } from "expo-router";
+import { api } from "~/utils/api";
+import { usePackId } from "~/utils/pack";
+import { useEffect } from "react";
+
 export default function StudySet() {
-    const {packId} = useLocalSearchParams();
-    console.log("packId in study pg: ", packId);
+    const { id } = useLocalSearchParams();
+    console.log("packId in study pg: ", id);
+    const packId = id ? +id : -1;
+
+    const cards = (packId !== -1) ?
+     api.flashcards.readCards.useQuery(packId) :
+     undefined;
+
+    if (cards && !cards.isLoading && !cards.isError) {
+        console.log(cards.data);
+    }
     
     return (
         <View style={[styles.screenContainer]}>
