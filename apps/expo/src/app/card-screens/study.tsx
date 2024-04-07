@@ -7,13 +7,15 @@ import { useLocalSearchParams } from "expo-router";
 import { api } from "~/utils/api";
 import { useState } from "react";
 
-function CardWithNav({ term, definition } : { term:string|null, definition:string|null}) {
+function CardWithNav({ cards }) {
+    const [curCard, setCurCard] = useState(0);
+    
     return (
         <View style={[styles.screenContainer]}>
             <Pressable style={[styles.cardContainer]} 
             onPress={() => alert("heehee")}>
                 <Text style={[styles.defText]}>
-                    {definition}
+                    {cards[curCard].back}
                 </Text>
             </Pressable>
 
@@ -25,7 +27,9 @@ function CardWithNav({ term, definition } : { term:string|null, definition:strin
                 <Pressable style={[styles.shuffleContainer]}>
                     <RadixIcon name="shuffle" color={Colors.dark_secondary_text} />
                 </Pressable>
-                <Pressable>
+                <Pressable onPress={() => {
+                    setCurCard(curCard + 1);
+                }}>
                     <RadixIcon name="arrow-right" size={40} color={Colors.dark_secondary_text} />
                 </Pressable>
             </View>
@@ -60,15 +64,14 @@ export default function StudySet() {
     }
 
     // preparing to display
-    const [curCard, setCurCard] = useState(0);
+    // todo handle case where cards has no uhhhh members
     
     return (
         <View style={[styles.screenContainer]}>
             {
                 (cards && !cards.isLoading && !cards.isError) ? 
                 <CardWithNav 
-                    definition={cards.data[curCard]?.back} 
-                    term={cards.data[curCard]?.front}
+                    cards={cards.data}
                 /> :
                 <Text style={{color: Colors.dark_primary_text}}>Errormsggg</Text>
             }
