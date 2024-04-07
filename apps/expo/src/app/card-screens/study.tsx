@@ -9,26 +9,35 @@ import { useState } from "react";
 
 function CardWithNav({ cards }) {
     const [curCard, setCurCard] = useState(0);
+    console.log(cards);
     
     return (
         <View style={[styles.screenContainer]}>
             <Pressable style={[styles.cardContainer]} 
             onPress={() => alert("heehee")}>
                 <Text style={[styles.defText]}>
-                    {cards[curCard].back}
+                    { cards[curCard] && (cards[curCard].back)}
                 </Text>
             </Pressable>
 
             {/* Card Navigation */}
             <View style={[styles.cardNavContainer]}>
-                <Pressable>
+                <Pressable onPress={() => {
+                    const nextCard = curCard - 1;
+                    console.log("displaying card ", nextCard);
+                    if (nextCard >= 0)
+                        setCurCard(nextCard);
+                }}>
                     <RadixIcon name="arrow-left" size={40} color={Colors.dark_secondary_text} />
                 </Pressable>
                 <Pressable style={[styles.shuffleContainer]}>
                     <RadixIcon name="shuffle" color={Colors.dark_secondary_text} />
                 </Pressable>
                 <Pressable onPress={() => {
-                    setCurCard(curCard + 1);
+                    const nextCard = curCard + 1;
+                    console.log("displaying card ", nextCard);
+                    if (nextCard < cards.length)
+                        setCurCard(nextCard);
                 }}>
                     <RadixIcon name="arrow-right" size={40} color={Colors.dark_secondary_text} />
                 </Pressable>
