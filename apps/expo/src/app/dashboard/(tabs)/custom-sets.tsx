@@ -18,6 +18,21 @@ import { map } from "@trpc/server/observable";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
+function Pack({ packName } : { packName:string }) {
+  return (
+    <View style={[dashStyles.container, dashStyles.setContainer]}>
+      <View style={[dashStyles.setTextContainer]}>
+        <Text style={[dashStyles.setText, dashStyles.titleText]}>
+          {packName}
+        </Text>
+        <Text style={[dashStyles.setText, dashStyles.setTerms]}>
+          15 terms
+        </Text>
+      </View>
+    </View>
+  )
+}
+
 export default function Tab() {
   const userId = SecureStore.getItem("userId");
   console.log("retrieving cards for user: ", userId);
@@ -31,35 +46,11 @@ export default function Tab() {
 
   // todo style error message.
   const userCards = (!packs.isLoading && !packs.isError) ?
-  packs.data.map((item) => <View style={[dashStyles.container, dashStyles.setContainer]}>
-    <View style={[dashStyles.setTextContainer]}>
-      <Text style={[dashStyles.setText, dashStyles.titleText]}>
-        {item.name}
-      </Text>
-      <Text style={[dashStyles.setText, dashStyles.setTerms]}>
-        15 terms
-      </Text>
-    </View>
-  </View>) :
+  packs.data.map((item) => 
+  <Pack packName={item.name} key={item.id} />) :
   <View>
     <Text>Error loading custom sets.</Text>
   </View>;
-
-  // todo error handling??
-  // if (!packs.isLoading && !packs.isError) {
-  //   const userCards = packs.data.map(item => 
-  //     <View style={[dashStyles.container, dashStyles.setContainer]}>
-  //       <View style={[dashStyles.setTextContainer]}>
-  //         <Text style={[dashStyles.setText, dashStyles.titleText]}>
-  //           {item.name}
-  //         </Text>
-  //         <Text style={[dashStyles.setText, dashStyles.setTerms]}>
-  //           15 terms
-  //         </Text>
-  //       </View>
-  //     </View>
-  //   );
-  // }
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
