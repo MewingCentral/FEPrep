@@ -9,12 +9,18 @@
 export default async function HomePage() {
   return (
 
-    //<div className="bg-muted-foreground">
     <section className="">
     
       <div className="grid h-screen grid-rows-5">
         
-        <div className="bg-muted-foreground"></div>
+        <div className="bg-muted-foreground">
+          <div className="ml-12">
+            <h1 className="text-foreground mt-8 mr-10 text-right text-3xl font-semibold "> 
+              {"FEPrep"}
+            </h1>
+          </div>
+     
+        </div>
       
         <div className="bg-muted-foreground"></div>
 
