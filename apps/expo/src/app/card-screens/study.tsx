@@ -9,14 +9,20 @@ import { useState } from "react";
 
 function CardWithNav({ cards }) {
     const [curCard, setCurCard] = useState(0);
-    console.log(cards);
+    const [showingDef, setShowingDef] = useState(true);
     
     return (
         <View style={[styles.screenContainer]}>
             <Pressable style={[styles.cardContainer]} 
-            onPress={() => alert("heehee")}>
+            onPress={() => {
+                showingDef ? setShowingDef(false) : setShowingDef(true);
+            }}>
                 <Text style={[styles.defText]}>
-                    { cards[curCard] && (cards[curCard].back)}
+                    { cards[curCard] && (
+                        showingDef ?
+                        cards[curCard].back :
+                        cards[curCard].front )
+                    }
                 </Text>
             </Pressable>
 
@@ -25,8 +31,10 @@ function CardWithNav({ cards }) {
                 <Pressable onPress={() => {
                     const nextCard = curCard - 1;
                     console.log("displaying card ", nextCard);
-                    if (nextCard >= 0)
+                    if (nextCard >= 0) {
                         setCurCard(nextCard);
+                        setShowingDef(true);
+                    }
                 }}>
                     <RadixIcon name="arrow-left" size={40} color={Colors.dark_secondary_text} />
                 </Pressable>
@@ -36,8 +44,10 @@ function CardWithNav({ cards }) {
                 <Pressable onPress={() => {
                     const nextCard = curCard + 1;
                     console.log("displaying card ", nextCard);
-                    if (nextCard < cards.length)
+                    if (nextCard < cards.length) {
                         setCurCard(nextCard);
+                        setShowingDef(true);
+                    }
                 }}>
                     <RadixIcon name="arrow-right" size={40} color={Colors.dark_secondary_text} />
                 </Pressable>
