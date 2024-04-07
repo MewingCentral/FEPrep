@@ -28,6 +28,19 @@ export default function StudySet() {
                     <RadixIcon name="arrow-right" size={40} color={Colors.dark_secondary_text} />
                 </Pressable>
             </View>
+
+            {/* Progress Bar */}
+            <View style={[styles.progressContainer]}>
+                <Text style={[styles.progressText]}>3/10</Text>
+                <Progress.Bar style={[styles.progressBar]} 
+                progress={0.3} 
+                height={10}
+                width={300} 
+                unfilledColor={Colors.dark_secondary_text} 
+                color={Colors.dark_primary_text} 
+                borderWidth={0} />               
+            </View>
+
         </View>
     );
 }
@@ -57,11 +70,27 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
     },
+    progressContainer: {
+        position: "absolute",
+        bottom: 0,
+        marginBottom: 20,
+        justifyContent: "space-between",
+        height: 45,
+    },
     defText: {
         marginHorizontal: 25,
         textAlign: "center",
         fontSize: 18,
         color: Colors.dark_primary_text,
+    },
+    progressText: {
+        textAlign: "center",
+        fontSize: 22,
+        color: Colors.dark_secondary_text,
+    },
+    progressBar: {
+        flexDirection: "column",
+        alignContent: "flex-end",
     },
     delYellowBorder: {
         borderWidth: 1,
