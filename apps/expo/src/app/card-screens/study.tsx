@@ -30,7 +30,6 @@ function CardWithNav({ cards }) {
             <View style={[styles.cardNavContainer]}>
                 <Pressable onPress={() => {
                     const nextCard = curCard - 1;
-                    console.log("displaying card ", nextCard);
                     if (nextCard >= 0) {
                         setCurCard(nextCard);
                         setShowingDef(true);
@@ -43,7 +42,6 @@ function CardWithNav({ cards }) {
                 </Pressable>
                 <Pressable onPress={() => {
                     const nextCard = curCard + 1;
-                    console.log("displaying card ", nextCard);
                     if (nextCard < cards.length) {
                         setCurCard(nextCard);
                         setShowingDef(true);

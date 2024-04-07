@@ -77,6 +77,7 @@ export default function Tab() {
             <RadixIcon
               name="magnifying-glass"
               color={Colors.dark_primary_text}
+              size={35}
             />
           </View>
         </KeyboardAvoidingView>

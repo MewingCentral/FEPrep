@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, Text, TextInput, View, StyleSheet } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RadixIcon } from "radix-ui-react-native-icons";
@@ -31,7 +31,7 @@ export default function Tab() {
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
         {/* Search input */}
-        <KeyboardAvoidingView style={{ flexDirection: "row" }}>
+        <KeyboardAvoidingView style={{ flexDirection: "row", alignItems: "stretch", width: 300 }}>
           <View style={[dashStyles.container, dashStyles.inputContainer]}>
             <TextInput
               style={[dashStyles.input]}
@@ -42,6 +42,7 @@ export default function Tab() {
             <RadixIcon
               name="magnifying-glass"
               color={Colors.dark_primary_text}
+              size={35}
             />
           </View>
         </KeyboardAvoidingView>
@@ -113,16 +114,20 @@ export default function Tab() {
   );
 }
 
-// const tempStyles = StyleSheet.create({
-//   pressable: {
-//     height: 50,
-//     backgroundColor: Colors.dark_accent,
-//     flex: 1,
-//     justifyContent: "center",
-//     marginBottom: 10,
-//   },
-//   text: {
-//     textAlign: "center",
-//     color: Colors.dark_primary_text,
-//   },
-// });
+const tempStyles = StyleSheet.create({
+  pressable: {
+    height: 50,
+    backgroundColor: Colors.dark_accent,
+    flex: 1,
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  text: {
+    textAlign: "center",
+    color: Colors.dark_primary_text,
+  },
+  delYellowBorder: {
+    borderWidth: 1,
+    borderColor: "yellow",
+  }
+});
