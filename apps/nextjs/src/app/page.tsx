@@ -26,7 +26,11 @@ export default async function HomePage() {
 
         <div className="bg-muted-foreground"></div>
       
-        <div className="bg-white"></div>
+        <div className="bg-white">
+          <p className="mt-8 text-red-600 text-center font-regular"> 
+            {"Made with in Central Florida"}
+          </p>
+        </div>
 
         <div className="bg-white"></div>
         
