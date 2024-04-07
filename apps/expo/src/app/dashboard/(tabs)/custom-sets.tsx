@@ -8,28 +8,34 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
+
+import { useRouter } from "expo-router";
 
 import { api } from "~/utils/api";
 import * as SecureStore from "expo-secure-store";
-import { map } from "@trpc/server/observable";
 
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
 function Pack({ packName } : { packName:string }) {
+  const router = useRouter();
+
   return (
-    <View style={[dashStyles.container, dashStyles.setContainer]}>
+    <Pressable style={[dashStyles.container, dashStyles.setContainer]}
+      // onPress={() => router.push({ pathName: "../../card-screens/study", params: { key }}) }
+      onPress={() => router.push("../../card-screens/study")}
+      >
       <View style={[dashStyles.setTextContainer]}>
         <Text style={[dashStyles.setText, dashStyles.titleText]}>
           {packName}
         </Text>
-        <Text style={[dashStyles.setText, dashStyles.setTerms]}>
+        {/* <Text style={[dashStyles.setText, dashStyles.setTerms]}>
           15 terms
-        </Text>
+        </Text> */}
       </View>
-    </View>
+    </Pressable>
   )
 }
 
@@ -39,10 +45,6 @@ export default function Tab() {
 
   const packs = api.flashcards.readPack.useQuery(userId);
   console.log("packs: ", packs.data);
-
-  if (!packs.isLoading && !packs.isError) {
-    console.log("Me when i'm ready");
-  }
 
   // todo style error message.
   const userCards = (!packs.isLoading && !packs.isError) ?
@@ -78,7 +80,7 @@ export default function Tab() {
           {/* Create new set button */}
           <Link
             style={[styles.createSetButton]}
-            href="../../card-creation/create"
+            href="../../card-screens/create"
             asChild
           >
             <Pressable>

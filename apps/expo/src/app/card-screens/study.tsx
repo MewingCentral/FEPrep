@@ -1,0 +1,70 @@
+import { RadixIcon } from "radix-ui-react-native-icons";
+import { Text, View, StyleSheet, Pressable } from "react-native";
+import Colors from "~/utils/colors";
+
+import * as Progress from 'react-native-progress';
+
+export default function StudySet() {
+    return (
+        <View style={[styles.screenContainer]}>
+            {/* Current Card */}
+            <Pressable style={[styles.cardContainer]} 
+            onPress={() => alert("heehee")}>
+                <Text style={[styles.defText]}>
+                    Definition asjkgh skjdgha sajdghkasd gaskjdghajsdhg ajsdhga sdgjaksdhgasjd
+                    skjdgh aksjdhgkjashd gkjash dgkjasdgjhasjdhgkasf.
+                </Text>
+            </Pressable>
+
+            {/* Card Navigation */}
+            <View style={[styles.cardNavContainer]}>
+                <Pressable>
+                    <RadixIcon name="arrow-left" size={40} color={Colors.dark_secondary_text} />
+                </Pressable>
+                <Pressable style={[styles.shuffleContainer]}>
+                    <RadixIcon name="shuffle" color={Colors.dark_secondary_text} />
+                </Pressable>
+                <Pressable>
+                    <RadixIcon name="arrow-right" size={40} color={Colors.dark_secondary_text} />
+                </Pressable>
+            </View>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    screenContainer: {
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    cardContainer: {
+        flexDirection: "column",
+        justifyContent: "center",
+        backgroundColor: Colors.dark_sec,
+        borderRadius: 10,
+        height: 300,
+        width: 300,
+    },
+    cardNavContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10,
+        width: 300,
+    },
+    shuffleContainer: {
+        flexDirection: "column",
+        justifyContent: "center",
+    },
+    defText: {
+        marginHorizontal: 25,
+        textAlign: "center",
+        fontSize: 18,
+        color: Colors.dark_primary_text,
+    },
+    delYellowBorder: {
+        borderWidth: 1,
+        borderColor: "yellow",
+    }
+});
