@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
 import { useRouter } from "expo-router";
@@ -19,13 +19,14 @@ import * as SecureStore from "expo-secure-store";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
-function Pack({ packName } : { packName:string }) {
+function Pack({ packName, packId } : { packName:string, packId:number }) {
   const router = useRouter();
+  console.log("packId in custom-sets: " , packId);
 
   return (
     <Pressable style={[dashStyles.container, dashStyles.setContainer]}
       // onPress={() => router.push({ pathName: "../../card-screens/study", params: { key }}) }
-      onPress={() => router.push("../../card-screens/study")}
+      onPress={() => router.push({ pathname: "../../card-screens/study", params: {packId}})}
       >
       <View style={[dashStyles.setTextContainer]}>
         <Text style={[dashStyles.setText, dashStyles.titleText]}>
@@ -49,7 +50,7 @@ export default function Tab() {
   // todo style error message.
   const userCards = (!packs.isLoading && !packs.isError) ?
   packs.data.map((item) => 
-  <Pack packName={item.name} key={item.id} />) :
+  <Pack packName={item.name} packId={item.id} key={item.id} />) :
   <View>
     <Text>Error loading custom sets.</Text>
   </View>;

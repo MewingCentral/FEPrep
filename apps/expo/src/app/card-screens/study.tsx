@@ -2,9 +2,14 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import Colors from "~/utils/colors";
 
+import { useLocalSearchParams } from "expo-router";
+
 import * as Progress from 'react-native-progress';
 
 export default function StudySet() {
+    const {packId} = useLocalSearchParams();
+    console.log("packId in study pg: ", packId);
+    
     return (
         <View style={[styles.screenContainer]}>
             {/* Current Card */}
