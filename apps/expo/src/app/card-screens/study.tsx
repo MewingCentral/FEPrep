@@ -5,30 +5,15 @@ import * as Progress from 'react-native-progress';
 
 import { useLocalSearchParams } from "expo-router";
 import { api } from "~/utils/api";
-import { usePackId } from "~/utils/pack";
-import { useEffect } from "react";
+import { useState } from "react";
 
-export default function StudySet() {
-    const { id } = useLocalSearchParams();
-    console.log("packId in study pg: ", id);
-    const packId = id ? +id : -1;
-
-    const cards = (packId !== -1) ?
-     api.flashcards.readCards.useQuery(packId) :
-     undefined;
-
-    if (cards && !cards.isLoading && !cards.isError) {
-        console.log(cards.data);
-    }
-    
+function CardWithNav({ term, definition } : { term:string|null, definition:string|null}) {
     return (
         <View style={[styles.screenContainer]}>
-            {/* Current Card */}
             <Pressable style={[styles.cardContainer]} 
             onPress={() => alert("heehee")}>
                 <Text style={[styles.defText]}>
-                    Definition asjkgh skjdgha sajdghkasd gaskjdghajsdhg ajsdhga sdgjaksdhgasjd
-                    skjdgh aksjdhgkjashd gkjash dgkjasdgjhasjdhgkasf.
+                    {definition}
                 </Text>
             </Pressable>
 
@@ -56,6 +41,37 @@ export default function StudySet() {
                 color={Colors.dark_primary_text} 
                 borderWidth={0} />               
             </View>
+
+        </View>
+    );
+}
+
+export default function StudySet() {
+    const { id } = useLocalSearchParams();
+    console.log("packId in study pg: ", id);
+    const packId = id ? +id : -1;
+
+    const cards = (packId !== -1) ?
+     api.flashcards.readCards.useQuery(packId) :
+     undefined;
+
+    if (cards && !cards.isLoading && !cards.isError) {
+        console.log(cards.data);
+    }
+
+    // preparing to display
+    const [curCard, setCurCard] = useState(0);
+    
+    return (
+        <View style={[styles.screenContainer]}>
+            {
+                (cards && !cards.isLoading && !cards.isError) ? 
+                <CardWithNav 
+                    definition={cards.data[curCard]?.back} 
+                    term={cards.data[curCard]?.front}
+                /> :
+                <Text style={{color: Colors.dark_primary_text}}>Errormsggg</Text>
+            }
 
         </View>
     );
