@@ -22,8 +22,10 @@ import {
   SignUpFormInput,
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
+import { useAuth } from "~/utils/auth";
 
 export default function Register() {
+  const { setSessionId } = useAuth();
   const router = useRouter();
   const {
     control,
@@ -43,6 +45,7 @@ export default function Register() {
     onSuccess: (data) => {
       if (!(data instanceof Error)) {
         SecureStore.setItem("session", data.session);
+        setSessionId(data.session);
         router.push("../dashboard/(tabs)/study-sets/");
       }
     },
