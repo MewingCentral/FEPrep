@@ -35,14 +35,7 @@ export default async function HomePage() {
 
         {/* 3rd row for the buttons. */}
         <div className="bg-muted-foreground grid grid-cols-3 grid-flow-row">
-          <div className="">
-            <Link href="/explore">
-              <Button type="submit"
-                className="content-center rounded-md border-input text-white transition-colors hover:bg-accent">
-                  {"Start Practicing"}
-              </Button>
-            </Link>
-          </div>
+          <div className=""></div>
           <div className="justify-self-center">
             <Link href="/sign-up">
               <Button type="submit"
@@ -51,7 +44,14 @@ export default async function HomePage() {
               </Button>
             </Link>
           </div>
-          <div className=""></div>
+          <div className="">
+            <Link href="/explore">
+              <Button type="submit"
+                className="content-center rounded-md border-input text-white transition-colors hover:bg-accent w-44 ml-16">
+                  {"Start Practicing"}
+              </Button>
+            </Link>
+          </div>
         </div>
 
 
