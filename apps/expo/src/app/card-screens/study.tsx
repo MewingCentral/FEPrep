@@ -89,10 +89,12 @@ export default function StudySet() {
 
           {/* Progress Bar */}
           <View style={[styles.progressContainer]}>
-            <Text style={[styles.progressText]}>3/10</Text>
+            <Text style={[styles.progressText]}>
+                {curCard + 1}/{cards.data.length}
+            </Text>
             <Progress.Bar
               style={[styles.progressBar]}
-              progress={0.3}
+              progress={(curCard + 1)/cards.data.length}
               height={10}
               width={300}
               unfilledColor={Colors.dark_secondary_text}
@@ -119,6 +121,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     backgroundColor: Colors.dark_sec,
+    borderColor: "rgba(148, 163, 184, 0.50)",
+    borderWidth: 2,
     borderRadius: 10,
     height: 300,
     width: 300,
