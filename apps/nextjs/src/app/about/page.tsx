@@ -1,17 +1,14 @@
-"use client";
+import { validateRequest } from "@feprep/auth";
 
-import "@feprep/ui";
+import { Nav } from "./nav";
 
-export const runtime = "edge";
+export default async function Explore() {
+    const { user } = await validateRequest();
+  
+    return (
+        <section className="">
+            <Nav user={user} />
 
-export default function About() {
-  return (
-    <>
-      <div className="mt-8 flex flex-1 flex-col items-center justify-start">
-        <h1 className="mb-2 flex flex-row items-center gap-4 text-left text-6xl font-semibold">
-          Meet the Developers{" "}
-        </h1>
-      </div>
-    </>
-  );
+        </section>
+    );
 }
