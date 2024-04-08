@@ -15,7 +15,6 @@ export const commentsRouter = createTRPCRouter({
         content: input.content,
       });
     }),
-
   allByQuestionId: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.query.comments.findMany({
       where: eq(comments.questionId, input),
@@ -24,13 +23,11 @@ export const commentsRouter = createTRPCRouter({
       },
     });
   }),
-
   update: publicProcedure
     .input(UpdateCommentSchema)
     .mutation(async ({ ctx, input: { commentId: id, ...comment } }) => {
       await ctx.db.update(comments).set(comment).where(eq(comments.id, id));
     }),
-
   delete: publicProcedure.input(z.number()).mutation(async ({ ctx, input }) => {
     await ctx.db.delete(comments).where(eq(comments.id, input));
   }),

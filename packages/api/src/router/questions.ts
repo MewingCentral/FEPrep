@@ -1,12 +1,27 @@
 import { z } from "zod";
 
 import { TOPICS } from "@feprep/consts";
-import { eq, questions } from "@feprep/db";
+import { count, eq, questions } from "@feprep/db";
 import { CreateQuestionSchema, UpdateQuestionSchema } from "@feprep/validators";
 
 import { adminProcedure, createTRPCRouter, publicProcedure } from "../trpc";
 
 export const questionsRouter = createTRPCRouter({
+  count: publicProcedure.query(async ({ ctx }) => {
+    const question = (
+      await ctx.db
+        .select({
+          value: count(),
+        })
+        .from(questions)
+    )[0];
+
+    if (!question) {
+      throw new Error("Failed to count questions");
+    }
+
+    return question.value;
+  }),
   all: publicProcedure.query(({ ctx }) => {
     return ctx.db.query.questions.findMany();
   }),
