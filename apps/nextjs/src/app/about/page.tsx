@@ -15,8 +15,17 @@ export default async function AboutUs() {
             </div>
 
                 <div className="grid h-screen grid-rows-2">
-                    <div className="bg-lime-400"></div>
-                    <div className="bg-pink-500"></div>
+                    <div className="grid grid-flow-row grid-cols-4">
+                        <div className="bg-lime-400"></div>
+                        <div className="bg-pink-500"></div>
+                        <div className="bg-orange-500"></div>
+                        <div className="bg-sky-400"></div>
+                    </div>
+                    <div className="grid grid-flow-row grid-cols-3">
+                        <div className="bg-indigo-500"></div>
+                        <div className="bg-green-700"></div>
+                        <div className="bg-red-600"></div>
+                    </div>
                 </div>
         </section>
     );
