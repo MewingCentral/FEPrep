@@ -13,7 +13,7 @@ export const commentsRouter = createTRPCRouter({
         questionId: input.questionId,
         userId: input.userId,
         content: input.content,
-      });
+      }).returning();
     }),
   allByQuestionId: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.query.comments.findMany({
