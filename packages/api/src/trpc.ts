@@ -8,9 +8,8 @@
  */
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
-import { ZodError } from "zod";
-
 import { uncachedValidateRequest } from "@feprep/auth";
+import { ZodError } from "zod";
 import { db } from "@feprep/db";
 
 /**
@@ -33,7 +32,7 @@ export async function createTRPCContext(opts: { headers: Headers }) {
   // Get latest session and user data
   const { session, user } = await uncachedValidateRequest();
 
-  console.log(">>> tRPC Request from", source, "by", user?.email);
+  console.log(">>> tRPC Request from", source, "by");
 
   return {
     db,
@@ -44,6 +43,16 @@ export async function createTRPCContext(opts: { headers: Headers }) {
 }
 
 type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;
+
+export function TESTINGcreateTRPCContext(opts: { headers: Headers }) {
+
+  return {
+    db,
+    ...opts,
+  };
+}
+
+type TESTINGTRPCContext = Awaited<ReturnType<typeof TESTINGcreateTRPCContext>>;
 
 /**
  * 2. INITIALIZATION
@@ -62,11 +71,24 @@ const t = initTRPC.context<TRPCContext>().create({
   }),
 });
 
+const TESTINGt = initTRPC.context<TESTINGTRPCContext>().create({
+  transformer: superjson,
+  errorFormatter: ({ shape, error }) => ({
+    ...shape,
+    data: {
+      ...shape.data,
+      zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
+    },
+  }),
+});
+
 /**
  * Create a server-side caller
  * @see https://trpc.io/docs/server/server-side-calls
  */
 export const createCallerFactory = t.createCallerFactory;
+
+export const TESTINGcreateCallerFactory = TESTINGt.createCallerFactory;
 
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
@@ -81,6 +103,8 @@ export const createCallerFactory = t.createCallerFactory;
  */
 export const createTRPCRouter = t.router;
 
+export const TESTINGcreateTRPCRouter = TESTINGt.router;
+
 /**
  * Public (unauthed) procedure
  *
@@ -89,6 +113,7 @@ export const createTRPCRouter = t.router;
  * can still access user session data if they are logged in
  */
 export const publicProcedure = t.procedure;
+
 
 /**
  * Protected (authenticated) procedure
