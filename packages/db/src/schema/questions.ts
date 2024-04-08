@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
@@ -46,6 +46,9 @@ export const comments = sqliteTable("comment", {
     .notNull()
     .references(() => users.id),
   content: text("content").notNull(),
+  time: text("time")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
 });
 
 export const commentsRelations = relations(comments, ({ one }) => ({
