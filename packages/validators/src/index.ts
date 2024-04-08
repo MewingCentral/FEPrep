@@ -67,6 +67,12 @@ export const UpdateQuestionSchema = CreateQuestionSchema.extend({
   questionId: z.number(),
 });
 
+export const UpdateQuestionFormSchema = UpdateQuestionSchema.extend({
+  questionId: z.number(),
+}).omit({
+  pdf: true,
+});
+
 export const CreateFlashcardPackSchema = z.object({
   name: z.string(),
   userId: z.string(),

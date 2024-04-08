@@ -4,7 +4,7 @@ import type { RouterOutputs } from "@feprep/api";
 import { cn } from "@feprep/ui";
 import { Badge } from "@feprep/ui/badge";
 
-import { PDF } from "./pdf";
+import { QuestionPDF } from "./question-pdf";
 
 export async function Left({
   question,
@@ -31,15 +31,14 @@ export async function Left({
   }
 
   return (
-    <div className="basis-1/2 rounded-lg border p-4">
+    <div className="min-w-0 rounded-md border p-4 lg:basis-1/2">
       <h1 className="mb-2 flex items-center text-pretty text-3xl font-bold">
         {question.title ?? `${question.section} ${question.questionNumber}`}
       </h1>
-
       <div className="mb-4 flex gap-2">
         <Badge
           variant="secondary"
-          className={cn({
+          className={cn("text-nowrap", {
             "text-accent": questionDifficulty === "Easy",
             "text-warning": questionDifficulty === "Medium",
             "text-danger": questionDifficulty === "Hard",
@@ -48,14 +47,18 @@ export async function Left({
         >
           {questionDifficulty}
         </Badge>
-        <Badge variant="secondary">{question.topic}</Badge>
-        <Badge variant="secondary" color="primary">
+        <Badge variant="secondary" className="text-nowrap">
+          {question.topic}
+        </Badge>
+        <Badge variant="secondary" color="primary" className="text-nowrap">
           {question.points} points
         </Badge>
-        <Badge variant="secondary">{question.averageScore}% Average</Badge>
+        <Badge variant="secondary" className="text-nowrap">
+          {question.averageScore}% Average
+        </Badge>
       </div>
-      <div className="overflow-hidden rounded-md">
-        <PDF file={question.pdf} pageNumber={1} />
+      <div className="max-w-fit overflow-y-auto">
+        <QuestionPDF file={question.pdf} />
       </div>
     </div>
   );

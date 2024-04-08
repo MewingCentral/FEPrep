@@ -3,7 +3,7 @@ import { useDropzone } from "@uploadthing/react";
 import PDFMerger from "pdf-merger-js/browser";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
-import type { User } from "@feprep/auth";
+import type { RouterOutputs } from "@feprep/api";
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 import { Button } from "@feprep/ui/button";
 import {
@@ -26,26 +26,31 @@ import {
   SelectValue,
 } from "@feprep/ui/select";
 import { toast } from "@feprep/ui/toast";
-import { CreateQuestionFormSchema } from "@feprep/validators";
+import { UpdateQuestionFormSchema } from "@feprep/validators";
 
 import { api } from "~/trpc/react";
 import { useUploadThing } from "~/utils/uploadthing";
 
-export function CreateQuestionForm({ user }: { user: User }) {
-  const [questionPDF, setQuestion] = useState<File | null>(null);
+export function UpdateQuestionForm({
+  question,
+}: {
+  question: NonNullable<RouterOutputs["questions"]["all"][number]>;
+}) {
+  const [questionPDF, setQuestionPDF] = useState<File | null>(null);
   const [solutionPDF, setSolutionPDF] = useState<File | null>(null);
 
   const form = useForm({
-    schema: CreateQuestionFormSchema,
+    schema: UpdateQuestionFormSchema,
     defaultValues: {
-      userId: user.id,
-      title: "",
-      semester: SEMESTERS[0],
-      section: SECTIONS[0],
-      topic: TOPICS[0],
-      averageScore: 0,
-      points: 0,
-      questionNumber: 1,
+      questionId: question.id,
+      userId: question.userId,
+      title: question.title ?? "",
+      semester: question.semester,
+      section: question.section,
+      topic: question.topic,
+      averageScore: question.averageScore ?? 0,
+      points: question.points ?? 0,
+      questionNumber: question.questionNumber,
     },
   });
 
@@ -53,7 +58,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
     useUploadThing("pdfUploader");
 
   const utils = api.useUtils();
-  const createQuestion = api.questions.create.useMutation({
+  const updateQuestion = api.questions.update.useMutation({
     async onSuccess() {
       await utils.questions.invalidate();
       toast("Question created successfully");
@@ -85,13 +90,13 @@ export function CreateQuestionForm({ user }: { user: User }) {
             return;
           }
 
-          createQuestion.mutate({
+          updateQuestion.mutate({
             ...values,
             pdf: uploadPDF[0].url,
           });
 
           form.reset();
-          setQuestion(null);
+          setQuestionPDF(null);
           setSolutionPDF(null);
         })}
         className="flex w-full flex-col gap-2 py-4"
@@ -213,7 +218,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
         />
         <QuestionUploader
           question={questionPDF}
-          setQuestion={setQuestion}
+          setQuestion={setQuestionPDF}
           permittedFileInfo={permittedFileInfo}
         />
         <SolutionUploader
@@ -225,9 +230,9 @@ export function CreateQuestionForm({ user }: { user: User }) {
         <Button
           className="mt-2"
           type="submit"
-          disabled={isUploading || createQuestion.isPending}
+          disabled={isUploading || updateQuestion.isPending}
         >
-          {isUploading || createQuestion.isPending
+          {isUploading || updateQuestion.isPending
             ? "Uploading..."
             : "Create Question"}
         </Button>

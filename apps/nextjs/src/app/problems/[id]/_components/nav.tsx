@@ -3,12 +3,7 @@ import Link from "next/link";
 
 import type { RouterOutputs } from "@feprep/api";
 import type { User } from "@feprep/auth";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  RocketIcon,
-  ShuffleIcon,
-} from "@feprep/ui";
+import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
 import { Separator } from "@feprep/ui/separator";
 import {
@@ -20,6 +15,7 @@ import {
 
 import { signOutAction } from "~/utils/actions";
 import { QuestionsSheet } from "./question-sheet";
+import { QuestionToggleButton } from "./question-toggle-button";
 import { TimerButton } from "./timer-button";
 
 export function Nav({
@@ -30,7 +26,7 @@ export function Nav({
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
   return (
-    <nav className="flex h-14 items-center justify-between border-b px-6">
+    <nav className="flex min-h-14 items-center justify-between border-b px-6">
       <div className="mr-4 flex flex-none items-center">
         <Link href="/explore" className="flex  gap-3 text-xl font-semibold">
           <Image
@@ -94,10 +90,7 @@ export function Nav({
 
       <div className="mr-4 flex gap-2">
         <TimerButton />
-        <Button variant="outline" className="w-9 px-0 md:w-auto md:px-4">
-          <RocketIcon className="md:mr-2" />
-          <span className="hidden md:flex">Solution</span>
-        </Button>
+        <QuestionToggleButton />
       </div>
 
       <div className="flex items-center">

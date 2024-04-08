@@ -12,7 +12,7 @@ export async function Right({
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
   return (
-    <div className="basis-1/2 rounded-lg border p-4">
+    <div className="flex-none rounded-md border p-4 lg:basis-1/2">
       <Tabs defaultValue="notes">
         <TabsList className="mb-4">
           <TabsTrigger value="discussion">
