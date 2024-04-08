@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Link, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 // import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,8 +25,6 @@ import {
   SignInInput,
   SignInSchema,
 } from "../../../../../packages/validators/src";
-
-import * as SecureStore from "expo-secure-store";
 
 export default function Login() {
   const { setSessionId } = useAuth();

@@ -8,31 +8,31 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, useLocalSearchParams } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
-import { useRouter } from "expo-router";
-import { usePackId } from "~/utils/pack";
-
 import { api } from "~/utils/api";
-import * as SecureStore from "expo-secure-store";
-
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
-function Pack({ packName, packId } : { packName:string, packId:number }) {
+function Pack({ packName, packId }: { packName: string; packId: number }) {
   const router = useRouter();
   // const { setPackId } = usePackId();
   // setPackId(999);
 
   return (
-    <Pressable style={[dashStyles.container, dashStyles.setContainer]}
+    <Pressable
+      style={[dashStyles.container, dashStyles.setContainer]}
       // onPress={() => router.push({ pathName: "../../card-screens/study", params: { key }}) }
       onPress={() => {
         // setPackId(packId);
-        router.push({ pathname: "../../card-screens/study", params: { id: packId } });
+        router.push({
+          pathname: "../../card-screens/study",
+          params: { id: packId },
+        });
       }}
-      >
+    >
       <View style={[dashStyles.setTextContainer]}>
         <Text style={[dashStyles.setText, dashStyles.titleText]}>
           {packName}
@@ -42,7 +42,7 @@ function Pack({ packName, packId } : { packName:string, packId:number }) {
         </Text> */}
       </View>
     </Pressable>
-  )
+  );
 }
 
 export default function Tab() {
@@ -53,12 +53,16 @@ export default function Tab() {
   console.log("packs: ", packs.data);
 
   // todo style error message.
-  const userCards = (!packs.isLoading && !packs.isError) ?
-  packs.data.map((item) => 
-  <Pack packName={item.name} packId={item.id} key={item.id} />) :
-  <View>
-    <Text>Error loading custom sets.</Text>
-  </View>;
+  const userCards =
+    !packs.isLoading && !packs.isError ? (
+      packs.data.map((item) => (
+        <Pack packName={item.name} packId={item.id} key={item.id} />
+      ))
+    ) : (
+      <View>
+        <Text>Error loading custom sets.</Text>
+      </View>
+    );
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
