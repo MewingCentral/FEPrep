@@ -19,6 +19,7 @@ const dashStyles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "stretch",
     justifyContent: "space-between",
+    gap: 8,
     marginBottom: 30,
   },
   allSetsContainer: {

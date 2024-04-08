@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, TextInput, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RadixIcon } from "radix-ui-react-native-icons";
@@ -7,30 +7,13 @@ import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
 export default function Tab() {
-  // const router = useRouter();
-  // const signOut = api.auth.signOut.useMutation({
-  //   onSuccess: () => {
-  //     SecureStore.setItem("session", "invalid");
-  //     router.push("../");
-  //   },
-  //   onError: (error) => {
-  //     // todo is this necessary?
-  //     console.error(error);
-  //   },
-  // });
-
-  // // const getSess = api.auth.getSession.useQuery();
-
-  // const onSignOut = () => {
-  //   signOut.mutate();
-  //   // console.log(getSess.data);
-  // };
-
   return (
     <SafeAreaView style={[dashStyles.screenContainer, dashStyles.container]}>
       <KeyboardAwareScrollView>
         {/* Search input */}
-        <KeyboardAvoidingView style={{ flexDirection: "row" }}>
+        <KeyboardAvoidingView
+          style={{ flexDirection: "row", alignItems: "stretch", width: 300 }}
+        >
           <View style={[dashStyles.container, dashStyles.inputContainer]}>
             <TextInput
               style={[dashStyles.input]}
@@ -41,14 +24,15 @@ export default function Tab() {
             <RadixIcon
               name="magnifying-glass"
               color={Colors.dark_primary_text}
+              size={35}
             />
           </View>
         </KeyboardAvoidingView>
 
-        {/* Study sets */}
+        {/* Study Sets */}
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -57,10 +41,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -69,10 +53,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -81,10 +65,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -93,10 +77,10 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
+          {/* <View style={[dashStyles.container, dashStyles.setContainer]}>
             <View style={[dashStyles.setTextContainer]}>
               <Text style={[dashStyles.setText, dashStyles.titleText]}>
                 Set 1
@@ -105,7 +89,7 @@ export default function Tab() {
                 15 terms
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
@@ -124,4 +108,8 @@ export default function Tab() {
 //     textAlign: "center",
 //     color: Colors.dark_primary_text,
 //   },
+//   delYellowBorder: {
+//     borderWidth: 1,
+//     borderColor: "yellow",
+//   }
 // });

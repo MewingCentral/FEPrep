@@ -85,7 +85,7 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="card-creation"
+            name="card-screens"
             options={{
               headerShown: false,
             }}

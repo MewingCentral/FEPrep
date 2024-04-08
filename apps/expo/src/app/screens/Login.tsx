@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Link, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 // import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,6 +47,7 @@ export default function Login() {
     onSuccess: (data) => {
       if (!(data instanceof Error)) {
         setSessionId(data.session);
+        SecureStore.setItem("userId", data.userId);
         router.push("../dashboard/(tabs)/study-sets/");
       }
     },
