@@ -90,11 +90,11 @@ export default function StudySet() {
           {/* Progress Bar */}
           <View style={[styles.progressContainer]}>
             <Text style={[styles.progressText]}>
-                {curCard + 1}/{cards.data.length}
+              {curCard + 1}/{cards.data.length}
             </Text>
             <Progress.Bar
               style={[styles.progressBar]}
-              progress={(curCard + 1)/cards.data.length}
+              progress={(curCard + 1) / cards.data.length}
               height={10}
               width={300}
               unfilledColor={Colors.dark_secondary_text}

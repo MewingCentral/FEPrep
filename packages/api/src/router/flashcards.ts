@@ -36,9 +36,9 @@ export const flashcardsRouter = createTRPCRouter({
         .returning();
     }),
 
-  allByUser: publicProcedure.query(({ ctx, input }) => {
+  allByUser: publicProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.db.query.flashcardPacks.findMany({
-      where: eq(flashcardPacks.userId, ctx.user.id),
+      where: eq(flashcardPacks.userId, input),
     });
   }),
 
