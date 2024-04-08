@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack } from "expo-router";
 import { useColorScheme } from "nativewind";
 
 import Colors from "~/utils/colors";
