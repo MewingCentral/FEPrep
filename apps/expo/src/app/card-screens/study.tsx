@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as Progress from "react-native-progress";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useNavigation } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
 import { api } from "~/utils/api";
 import Colors from "~/utils/colors";
 
 export default function StudySet() {
-  const { id } = useLocalSearchParams();
-  console.log("packId in study pg: ", id);
-  const packId = id ? +id : -1;
+  const { pId, pName } = useLocalSearchParams();
+  console.log("packId in study pg: ", pId);
+  const packId = pId ? + pId : -1;
+  const studyTitle = pName && (typeof pName === "string") ? pName : "";
+  console.log("study title should be ", studyTitle);
+
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({
+        title: studyTitle,
+    });
+  }, []);
 
   const cards =
     packId !== -1 ? api.flashcards.readCards.useQuery(packId) : undefined;

@@ -29,7 +29,7 @@ function Pack({ packName, packId }: { packName: string; packId: number }) {
         // setPackId(packId);
         router.push({
           pathname: "../../card-screens/study",
-          params: { id: packId },
+          params: { pId: packId, pName: packName },
         });
       }}
     >
