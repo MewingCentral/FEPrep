@@ -50,12 +50,12 @@ export default async function HomePage() {
 
         <div className="grid grid-flow-col grid-rows-2 bg-white">
           <div className="bg-white">
-            <p className="font-regular mt-8 text-center text-red-600">
+            <p className="font-regular text-lg mt-9 text-center text-red-600">
               {"Made with in Central Florida"}
             </p>
           </div>
-          <div className="bg-white">
-            <p className="text-center text-xs font-medium">
+          <div className="h-24">
+            <p className="text-center text-sm font-medium mt-4">
               {
                 "UCF strives to help every student unleash their greatest potential. Through a competitive curriculum and high academic excellence"
               }
@@ -69,18 +69,6 @@ export default async function HomePage() {
               }{" "}
               <br />
             </p>
-          </div>
-        </div>
-
-        <div className="grid grid-flow-col grid-rows-1">
-          <div className="grid grid-cols-7 bg-white">
-            <div className=""></div>
-            <div className=""></div>
-            <div className="justify-self-center"></div>
-            <div className="justify-self-center"></div>
-            <div className="justify-self-center"></div>
-            <div className=""></div>
-            <div className=""></div>
           </div>
         </div>
       </div>
