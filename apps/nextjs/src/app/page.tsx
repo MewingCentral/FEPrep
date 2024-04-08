@@ -79,7 +79,8 @@ export default async function HomePage() {
 
         {/* 5th row for the icons */}
         <div className="grid grid-flow-col grid-rows-2">
-          <div className="grid grid-cols-8 bg-white">
+        {/* 1st row of icons */}
+        <div className="grid grid-cols-8 bg-white">
             <div className=""></div>
             <div className=""></div>
             <div className=""></div>
@@ -89,7 +90,16 @@ export default async function HomePage() {
             <div className=""></div>
             <div className=""></div>
           </div>
-          <div className="bg-white"></div>
+          {/* 2nd row of icons */}
+          <div className="grid grid-cols-7 bg-white">
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+          </div>
         </div>
 
         {/* closing div */}
