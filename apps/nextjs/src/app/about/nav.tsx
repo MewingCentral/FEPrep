@@ -21,7 +21,7 @@ export async function Nav({ user }: { user: User | null }) {
           FEPrep
         </Link>
         <Separator orientation="vertical" className="h-8" decorative />
-        <Link href="/about">About</Link>
+        <Link href="/about">About Us</Link>
       </div>
 
       <div className="flex items-center">
