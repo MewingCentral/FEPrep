@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { api } from "~/utils/api";
 import Colors from "~/utils/colors";
@@ -8,47 +8,83 @@ import { useState } from "react";
 import { UpdateFlashcardInput, UpdateFlashcardSchema } from "@feprep/validators";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RadixIcon } from "radix-ui-react-native-icons";
 
 function Card({ term, def } : {term:string|null, def:string|null}) {
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(UpdateFlashcardSchema),
+        defaultValues: {
+            packId: 0,
+            front: "",
+            back: "",
+            flashcardId: 0,
+        },
+    });
+
+    const updateCard = api.flashcards.updateCard.useMutation({
+        onSuccess: (data) => {
+            console.log("card updated in db");
+        },
+        onError: (error) => {
+            console.error(error);
+        }
+    });
+
+    const onSubmit = (values: UpdateFlashcardInput) => {
+        updateCard.mutate(values);
+        // values.forEach((cardInput) => {
+        //     updateCard.mutate(cardInput);
+        // })
+    };
+
     return (
         <View style={[styles.cardContainer]}>
-        <View style={[styles.cardInputContainer]}>
-            {
-                term === null ?
-                <TextInput 
-                    style={[styles.input]}
-                    placeholder="Enter term"
-                    placeholderTextColor={Colors.dark_primary_text}
-                    cursorColor={Colors.dark_primary_text}
-                /> :
-                <TextInput 
-                    style={[styles.input]}
-                    defaultValue={term}
-                    placeholder="Enter term"
-                    placeholderTextColor={Colors.dark_primary_text}
-                    cursorColor={Colors.dark_primary_text}
-                />
-            }
-        </View>
+            <View style={[styles.cardInputContainer, styles.termGroupContainer]}>
+                <View>
+                    {
+                        term === null ?
+                        <TextInput 
+                            style={[styles.input, styles.termInput]}
+                            placeholder="Enter term"
+                            placeholderTextColor={Colors.dark_primary_text}
+                            cursorColor={Colors.dark_primary_text}
+                        /> :
+                        <TextInput 
+                            style={[styles.input, styles.termInput]}
+                            defaultValue={term}
+                            placeholder="Enter term"
+                            placeholderTextColor={Colors.dark_primary_text}
+                            cursorColor={Colors.dark_primary_text}
+                        />
+                    }
+                </View>
+                <Pressable style={[styles.delBtn]} onPress={() => alert("deleting!!")}>
+                    <RadixIcon name="trash" color={Colors.dark_secondary_text} size={30} />
+                </Pressable>
+            </View>
 
-        <View style={[styles.cardInputContainer]}>
-            {
-                def === null ?
-                <TextInput 
-                    style={[styles.input]}
-                    placeholder="Enter definition"
-                    placeholderTextColor={Colors.dark_primary_text}
-                    cursorColor={Colors.dark_primary_text}
-                /> :
-                <TextInput 
-                    style={[styles.input]}
-                    defaultValue={def}
-                    placeholder="Enter definition"
-                    placeholderTextColor={Colors.dark_primary_text}
-                    cursorColor={Colors.dark_primary_text}
-                />
-            }
-        </View>
+            <View style={[styles.cardInputContainer]}>
+                {
+                    def === null ?
+                    <TextInput 
+                        style={[styles.input]}
+                        placeholder="Enter definition"
+                        placeholderTextColor={Colors.dark_primary_text}
+                        cursorColor={Colors.dark_primary_text}
+                    /> :
+                    <TextInput 
+                        style={[styles.input]}
+                        defaultValue={def}
+                        placeholder="Enter definition"
+                        placeholderTextColor={Colors.dark_primary_text}
+                        cursorColor={Colors.dark_primary_text}
+                    />
+                }
+            </View>
         </View>
     );
 }
@@ -95,46 +131,46 @@ export default function UpdateCards() {
     const flashcards = 
         cards && cards.data && !cards.isLoading && !cards.isError ? (
             cards.data.map((item) => (
-                // <Card term={item.front} def={item.back} key={item.id} />
-                <View style={[styles.cardContainer]}>
-                <View style={[styles.cardInputContainer]}>
-                    {
-                        item.front === null ?
-                        <TextInput 
-                            style={[styles.input]}
-                            placeholder="Enter term"
-                            placeholderTextColor={Colors.dark_primary_text}
-                            cursorColor={Colors.dark_primary_text}
-                        /> :
-                        <TextInput 
-                            style={[styles.input]}
-                            defaultValue={item.front}
-                            placeholder="Enter term"
-                            placeholderTextColor={Colors.dark_primary_text}
-                            cursorColor={Colors.dark_primary_text}
-                        />
-                    }
-                </View>
+                <Card term={item.front} def={item.back} key={item.id} />
+                // <View style={[styles.cardContainer]}>
+                // <View style={[styles.cardInputContainer]}>
+                //     {
+                //         item.front === null ?
+                //         <TextInput 
+                //             style={[styles.input]}
+                //             placeholder="Enter term"
+                //             placeholderTextColor={Colors.dark_primary_text}
+                //             cursorColor={Colors.dark_primary_text}
+                //         /> :
+                //         <TextInput 
+                //             style={[styles.input]}
+                //             defaultValue={item.front}
+                //             placeholder="Enter term"
+                //             placeholderTextColor={Colors.dark_primary_text}
+                //             cursorColor={Colors.dark_primary_text}
+                //         />
+                //     }
+                // </View>
         
-                <View style={[styles.cardInputContainer]}>
-                    {
-                        item.back === null ?
-                        <TextInput 
-                            style={[styles.input]}
-                            placeholder="Enter definition"
-                            placeholderTextColor={Colors.dark_primary_text}
-                            cursorColor={Colors.dark_primary_text}
-                        /> :
-                        <TextInput 
-                            style={[styles.input]}
-                            defaultValue={item.back}
-                            placeholder="Enter definition"
-                            placeholderTextColor={Colors.dark_primary_text}
-                            cursorColor={Colors.dark_primary_text}
-                        />
-                    }
-                </View>
-                </View>
+                // <View style={[styles.cardInputContainer]}>
+                //     {
+                //         item.back === null ?
+                //         <TextInput 
+                //             style={[styles.input]}
+                //             placeholder="Enter definition"
+                //             placeholderTextColor={Colors.dark_primary_text}
+                //             cursorColor={Colors.dark_primary_text}
+                //         /> :
+                //         <TextInput 
+                //             style={[styles.input]}
+                //             defaultValue={item.back}
+                //             placeholder="Enter definition"
+                //             placeholderTextColor={Colors.dark_primary_text}
+                //             cursorColor={Colors.dark_primary_text}
+                //         />
+                //     }
+                // </View>
+                // </View>
             ))
         ) : (
             <View>
@@ -199,11 +235,21 @@ const styles = StyleSheet.create({
         padding: 15,
         gap: 10,
     },
+    termGroupContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
     input: {
         fontSize: 20,
         color: Colors.dark_primary_text,
         borderBottomWidth: 1,
         borderBottomColor: Colors.dark_primary_text,
+    },
+    termInput: {
+        width: 200,
+    },
+    delBtn: {
+        alignSelf: "flex-end",
     },
     delYellowBorder: {
         borderWidth: 1,

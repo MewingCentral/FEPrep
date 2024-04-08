@@ -19,6 +19,19 @@ import dashStyles from "~/utils/dash-styles";
 function Pack({ packName, packId }: { packName: string; packId: number }) {
   const router = useRouter();
 
+  const deletePack = api.flashcards.deletePack.useMutation({
+    onSuccess: () => {
+      console.log("successfully deleted pack ", packId);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+
+  const onDelete = () => {
+    deletePack.mutate(packId);
+  };
+
   return (
     <Pressable
       style={[dashStyles.container, dashStyles.setContainer]}
@@ -42,7 +55,7 @@ function Pack({ packName, packId }: { packName: string; packId: number }) {
           }}>
             <RadixIcon name="pencil-2" color={Colors.dark_secondary_text} size={30} />
           </Pressable>
-          <Pressable>
+          <Pressable onPress={onDelete}>
             <RadixIcon name="trash" color={Colors.dark_secondary_text} size={33} />
           </Pressable>
         </View>
