@@ -1,8 +1,8 @@
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 
 import type { AppRouter } from "./root";
-import { appRouter } from "./root";
-import { createCallerFactory, createTRPCContext } from "./trpc";
+import { TESTINGappRouter, appRouter } from "./root";
+import { TESTINGcreateCallerFactory, TESTINGcreateTRPCContext, createCallerFactory, createTRPCContext } from "./trpc";
 
 /**
  * Create a server-side caller for the tRPC API
@@ -12,6 +12,7 @@ import { createCallerFactory, createTRPCContext } from "./trpc";
  *       ^? Post[]
  */
 const createCaller = createCallerFactory(appRouter);
+const TESTINGcreateCaller = TESTINGcreateCallerFactory(TESTINGappRouter);
 
 /**
  * Inference helpers for input types
@@ -29,5 +30,5 @@ type RouterInputs = inferRouterInputs<AppRouter>;
  **/
 type RouterOutputs = inferRouterOutputs<AppRouter>;
 
-export { createTRPCContext, appRouter, createCaller };
+export { createTRPCContext, appRouter, createCaller, TESTINGcreateTRPCContext, TESTINGcreateCaller, TESTINGappRouter };
 export type { AppRouter, RouterInputs, RouterOutputs };
