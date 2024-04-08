@@ -1,6 +1,6 @@
-// import Link from "next/link";
+import Link from "next/link";
 // https://tailwindui.com/components/marketing/sections/content-sections
-// //import { Button } from "@feprep/ui/button";
+import { Button } from "@feprep/ui/button";
 
 // import "@feprep/ui";
 
@@ -35,7 +35,19 @@ export default async function HomePage() {
 
         {/* 3rd row for the buttons. */}
         <div className="bg-muted-foreground">
-          {/* put the buttons in here */}
+          <div className="flex flex-row gap-5">
+            <Link href="/explore">
+              <Button type="submit">
+                {"Start Practicing"}
+              </Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button type="submit"
+                className="rounded-md border border-input bg-white text-black transition-colors hover:bg-accent">
+                  {"Create Account"}
+              </Button>
+            </Link>
+          </div>
         </div>
 
 
