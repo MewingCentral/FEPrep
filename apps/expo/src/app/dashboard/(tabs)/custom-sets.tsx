@@ -8,13 +8,55 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
+import { api } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
+function Pack({ packName, packId }: { packName: string; packId: number }) {
+  const router = useRouter();
+
+  return (
+    <Pressable
+      style={[dashStyles.container, dashStyles.setContainer]}
+      onPress={() => {
+        router.push({
+          pathname: "../../card-screens/study",
+          params: { pId: packId, pName: packName },
+        });
+      }}
+    >
+      <View style={[dashStyles.setTextContainer]}>
+        <Text style={[dashStyles.setText, dashStyles.titleText]}>
+          {packName}
+        </Text>
+      </View>
+    </Pressable>
+  );
+}
+
 export default function Tab() {
+  const userId = SecureStore.getItem("userId");
+  console.log("retrieving cards for user: ", userId);
+
+  const packs = api.flashcards.readPack.useQuery(userId);
+  console.log("packs: ", packs.data);
+
+  // todo style error message.
+  const userCards =
+    !packs.isLoading && !packs.isError ? (
+      packs.data.map((item) => (
+        <Pack packName={item.name} packId={item.id} key={item.id} />
+      ))
+    ) : (
+      <View>
+        <Text style={[styles.errorTxt]}>Error loading custom sets.</Text>
+      </View>
+    );
+
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       <KeyboardAwareScrollView>
@@ -32,6 +74,7 @@ export default function Tab() {
             <RadixIcon
               name="magnifying-glass"
               color={Colors.dark_primary_text}
+              size={35}
             />
           </View>
         </KeyboardAvoidingView>
@@ -41,7 +84,7 @@ export default function Tab() {
           {/* Create new set button */}
           <Link
             style={[styles.createSetButton]}
-            href="../../card-creation/create"
+            href="../../card-screens/create"
             asChild
           >
             <Pressable>
@@ -50,17 +93,8 @@ export default function Tab() {
             </Pressable>
           </Link>
 
-          {/* Individual study set */}
-          <View style={[dashStyles.container, dashStyles.setContainer]}>
-            <View style={[dashStyles.setTextContainer]}>
-              <Text style={[dashStyles.setText, dashStyles.titleText]}>
-                Set 1
-              </Text>
-              <Text style={[dashStyles.setText, dashStyles.setTerms]}>
-                15 terms
-              </Text>
-            </View>
-          </View>
+          {userCards}
+          
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
@@ -77,6 +111,12 @@ const styles = StyleSheet.create({
     borderColor: Colors.dark_primary_text,
     borderWidth: 1,
     borderRadius: 6,
+  },
+  errorTxt: {
+    fontSize: 20,
+    marginTop: 30,
+    textAlign: "center",
+    color: Colors.dark_primary_text,
   },
   deleteYellowBorder: {
     borderWidth: 1,
