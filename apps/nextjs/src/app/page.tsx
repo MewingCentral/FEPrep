@@ -36,6 +36,11 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="bg-white">
+            <p className="text-xs text-center font-medium">
+              {"UCF strives to help every student unleash their greatest potential. Through a competitive curriculum and high academic excellence"} <br/>
+              {"upheld by standardized tests like the Foundation Exam, students and alumni from the College of Engineering and Computer Science are"} <br/>
+              {"employed at top companies across the nation. With this app, we aim to help you on this journey as you reach for the stars."} <br/>
+            </p>
           </div>
         </div>
 
