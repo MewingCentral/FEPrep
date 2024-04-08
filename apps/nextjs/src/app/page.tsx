@@ -50,12 +50,12 @@ export default async function HomePage() {
 
         <div className="grid grid-flow-col grid-rows-2 bg-white">
           <div className="bg-white">
-            <p className="font-regular text-lg mt-9 text-center text-red-600">
+            <p className="font-regular mt-9 text-center text-lg text-red-600">
               {"Made with in Central Florida"}
             </p>
           </div>
           <div className="h-24">
-            <p className="text-center text-sm font-medium mt-4">
+            <p className="mt-4 text-center text-sm font-medium">
               {
                 "UCF strives to help every student unleash their greatest potential. Through a competitive curriculum and high academic excellence"
               }
