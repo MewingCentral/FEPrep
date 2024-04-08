@@ -27,7 +27,7 @@ export default async function HomePage() {
 
         {/* 2nd row: mission statement. */}
         <div className="bg-muted-foreground">
-          <h2 className="mb-4 mr-24 text-3xl text-right font-normal">
+          <h2 className="mb-4 mr-28 text-3xl text-right font-normal">
             {"A new way to prepare for the Foundation Exam."}
           </h2>
         </div>
@@ -39,7 +39,7 @@ export default async function HomePage() {
           <div className="justify-self-center">
             <Link href="/sign-up">
               <Button type="submit"
-                className="rounded-md border border-input bg-white text-black transition-colors hover:bg-accent w-44 ml-16">
+                className="rounded-md border border-input bg-white text-black transition-colors hover:bg-accent w-44 ml-28">
                   {"Create Account"}
               </Button>
             </Link>
@@ -47,7 +47,7 @@ export default async function HomePage() {
           <div className="">
             <Link href="/explore">
               <Button type="submit"
-                className="content-center rounded-md border-input text-white transition-colors hover:bg-accent w-44 ml-16">
+                className="content-center rounded-md border-input text-white transition-colors hover:bg-accent w-44 ml-20">
                   {"Start Practicing"}
               </Button>
             </Link>
