@@ -29,10 +29,23 @@ function Pack({ packName, packId }: { packName: string; packId: number }) {
         });
       }}
     >
-      <View style={[dashStyles.setTextContainer]}>
+      <View style={[styles.setContentsContainer]}>
         <Text style={[dashStyles.setText, dashStyles.titleText]}>
           {packName}
         </Text>
+        <View style={[styles.setBtnsContainer]}>
+          <Pressable onPress={() => {
+            router.push({
+              pathname: "../../card-screens/update",
+              params: { pId: packId, pName: packName },
+            });
+          }}>
+            <RadixIcon name="pencil-2" color={Colors.dark_secondary_text} size={30} />
+          </Pressable>
+          <Pressable>
+            <RadixIcon name="trash" color={Colors.dark_secondary_text} size={33} />
+          </Pressable>
+        </View>
       </View>
     </Pressable>
   );
@@ -109,6 +122,17 @@ const styles = StyleSheet.create({
     borderColor: Colors.dark_primary_text,
     borderWidth: 1,
     borderRadius: 6,
+  },
+  setContentsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  setBtnsContainer: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    paddingVertical: 5,
+    paddingRight: 5,
+    height: 100,
   },
   errorTxt: {
     fontSize: 20,
