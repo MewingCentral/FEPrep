@@ -9,9 +9,7 @@ export const runtime = "edge";
 export default async function HomePage() {
   return (
     <section className="">
-      {/* opening div for the screen divider  */}
       <div className="grid h-screen grid-rows-5">
-        {/* 1st row for the FEPrep header in upper right corner. */}
         <div className="bg-muted-foreground">
           <div className="ml-12">
             <h1 className="mr-10 mt-8 text-right text-3xl font-semibold text-foreground ">
@@ -20,14 +18,12 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* 2nd row: mission statement. */}
         <div className="bg-muted-foreground">
           <h2 className="mb-4 mr-28 text-right text-3xl font-normal">
             {"A new way to prepare for the Foundation Exam."}
           </h2>
         </div>
 
-        {/* 3rd row for the buttons. */}
         <div className="grid grid-flow-row grid-cols-3 bg-muted-foreground">
           <div className=""></div>
           <div className="justify-self-center">
@@ -52,7 +48,6 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* 4th row: made with love statement. */}
         <div className="grid grid-flow-col grid-rows-2 bg-white">
           <div className="bg-white">
             <p className="font-regular mt-8 text-center text-red-600">
@@ -77,13 +72,11 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* 5th row for the icons */}
         <div className="grid grid-flow-col grid-rows-1">
-        {/* 1st row of icons */}
         <div className="grid grid-cols-7 bg-white">
             <div className=""></div>
             <div className=""></div>
-            <div className="justify-self-center">
+            <div className="">
               <div className="m-4 lg:mx-0 w-28 flex items-center justify-center text-gray-400">
                 <svg className="h-8" viewBox="0 0 151 34" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_3753_27919)">
@@ -149,7 +142,6 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* closing div */}
       </div>
     </section>
   );
