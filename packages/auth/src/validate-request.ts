@@ -1,5 +1,5 @@
 import type { Session, User } from "lucia";
-import { cache } from "react";
+//import { cache } from "react";
 import { cookies, headers } from "next/headers";
 
 import { lucia } from ".";
@@ -61,4 +61,4 @@ export const uncachedValidateRequest = async (): Promise<
   }
 };
 
-export const validateRequest = cache(uncachedValidateRequest);
+// export const validateRequest = cache(uncachedValidateRequest);
