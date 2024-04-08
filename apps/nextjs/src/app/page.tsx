@@ -76,7 +76,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-7 bg-white">
             <div className=""></div>
             <div className=""></div>
-            <div className="">
+            <div className="justify-self-center">
               <div className="m-4 flex w-28 items-center justify-center text-gray-400 lg:mx-0">
                 <svg
                   className="h-8"
