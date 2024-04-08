@@ -17,12 +17,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { api } from "~/utils/api";
+import { useAuth } from "~/utils/auth";
 import screenStyles from "~/utils/screen-styles";
 import {
   SignUpFormInput,
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
-import { useAuth } from "~/utils/auth";
 
 export default function Register() {
   const { setSessionId } = useAuth();
