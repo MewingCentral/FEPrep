@@ -4,6 +4,7 @@ import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 
 import { users } from "./users";
+import { flashcardPacks } from "./flashcards";
 
 export const questions = sqliteTable("question", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -46,14 +47,6 @@ export const comments = sqliteTable("comment", {
     .notNull()
     .references(() => users.id),
   content: text("content").notNull(),
-});
-
-export const flashcardPacks = sqliteTable("flashcard_pack", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id),
 });
 
 export const flashcardPacksRelations = relations(flashcardPacks, ({ many}) => ({

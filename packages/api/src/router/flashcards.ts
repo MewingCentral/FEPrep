@@ -36,7 +36,7 @@ export const flashcardsRouter = createTRPCRouter({
         .returning();
     }),
 
-  readPack: publicProcedure.query(({ ctx, input }) => {
+  allByUser: publicProcedure.query(({ ctx, input }) => {
     return ctx.db.query.flashcardPacks.findMany({
       where: eq(flashcardPacks.userId, ctx.user.id),
     });

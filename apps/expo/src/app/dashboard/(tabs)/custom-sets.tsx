@@ -49,7 +49,7 @@ export default function Tab() {
   const userId = SecureStore.getItem("userId");
   console.log("retrieving cards for user: ", userId);
 
-  const packs = api.flashcards.readPack.useQuery(userId);
+  const packs = api.flashcards.allByUser.useQuery(userId);
   console.log("packs: ", packs.data);
 
   // todo style error message.
