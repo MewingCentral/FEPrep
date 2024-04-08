@@ -107,7 +107,7 @@ export type UpdateFlashcardInput = z.infer<typeof UpdateFlashcardSchema>;
 export const CreateCommentSchema = z.object({
   questionId: z.number(),
   userId: z.string(),
-  content: z.string(),
+  content: z.string().min(1, "Please enter a comment"),
 });
 
 export type CreateCommentInput = z.infer<typeof CreateCommentSchema>;

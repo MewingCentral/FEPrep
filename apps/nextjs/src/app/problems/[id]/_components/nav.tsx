@@ -26,24 +26,12 @@ export async function Nav({
   user: User | null;
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
-  const questionsByTopic = await api.questions.byTopic(question.topic);
-
-  const indexOfQuestion = questionsByTopic.findIndex(
-    (q) => q.id === question.id,
-  );
+  const questionsCount = await api.questions.count();
 
   const nextQuestionId =
-    questionsByTopic[(indexOfQuestion + 1) % questionsByTopic.length]?.id;
-
-  console.log(nextQuestionId);
-
-  const prevQuestionId =
-    questionsByTopic[
-      (indexOfQuestion - 1 + questionsByTopic.length) % questionsByTopic.length
-    ]?.id;
-
-  const randomQuestionId =
-    questionsByTopic[Math.floor(Math.random() * questionsByTopic.length)]?.id;
+    question.id + 1 <= questionsCount ? question.id + 1 : question.id;
+  const prevQuestionId = question.id - 1 >= 1 ? question.id - 1 : question.id;
+  const randomQuestionId = Math.floor(Math.random() * questionsCount) + 1;
 
   return (
     <nav className="flex min-h-14 items-center justify-between border-b px-6">
