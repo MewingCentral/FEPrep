@@ -1,11 +1,10 @@
 import Link from "next/link";
 
-// https://tailwindui.com/components/marketing/sections/content-sections
 import { Button } from "@feprep/ui/button";
 
-// import "@feprep/ui";
+import "@feprep/ui";
 
-// export const runtime = "edge";
+export const runtime = "edge";
 
 export default async function HomePage() {
   return (
@@ -64,11 +63,11 @@ export default async function HomePage() {
             <p className="text-center text-xs font-medium">
               {
                 "UCF strives to help every student unleash their greatest potential. Through a competitive curriculum and high academic excellence"
-              }{" "}
+              }
               <br />
               {
                 "upheld by standardized tests like the Foundation Exam, students and alumni from the College of Engineering and Computer Science are"
-              }{" "}
+              }
               <br />
               {
                 "employed at top companies across the nation. With this app, we aim to help you on this journey as you reach for the stars."
@@ -80,7 +79,16 @@ export default async function HomePage() {
 
         {/* 5th row for the icons */}
         <div className="grid grid-flow-col grid-rows-2">
-          <div className="bg-white"></div>
+          <div className="grid grid-cols-8 bg-white">
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+            <div className=""></div>
+          </div>
           <div className="bg-white"></div>
         </div>
 
