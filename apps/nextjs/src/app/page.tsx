@@ -11,24 +11,35 @@ export default async function HomePage() {
 
     <section className="">
     
+      {/* opening div for the screen divider  */}
       <div className="grid h-screen grid-rows-5">
         
+
+        {/* 1st row for the FEPrep header in upper right corner. */}
         <div className="bg-muted-foreground">
           <div className="ml-12">
             <h1 className="text-foreground mt-8 mr-10 text-right text-3xl font-semibold "> 
               {"FEPrep"}
             </h1>
           </div>
-     
         </div>
       
+
+        {/* 2nd row: mission statement. */}
         <div className="bg-muted-foreground">
-
-
+          <h2 className="mb-4 mr-16 text-3xl text-right font-normal">
+            {"A new way to prepare for the Foundation Exam."}
+          </h2>
         </div>
 
-        <div className="bg-muted-foreground"></div>
-      
+
+        {/* 3rd row for the buttons. */}
+        <div className="bg-muted-foreground">
+          {/* put the buttons in here */}
+        </div>
+
+
+        {/* 4th row: made with love statement. */}
         <div className="bg-white grid grid-rows-2 grid-flow-col">
           <div className="bg-white">
             <p className="mt-8 text-red-600 text-center font-regular"> 
@@ -44,11 +55,15 @@ export default async function HomePage() {
           </div>
         </div>
 
+
+        {/* 5th row for the icons */}
         <div className="grid grid-rows-2 grid-flow-col">
           <div className="bg-white"></div>
           <div className="bg-white"></div>
         </div>
-        
+
+
+      {/* closing div         */}
       </div>
 
     </section>
