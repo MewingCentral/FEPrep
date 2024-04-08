@@ -13,18 +13,38 @@ import {
   TooltipTrigger,
 } from "@feprep/ui/tooltip";
 
+import { api } from "~/trpc/server";
 import { signOutAction } from "~/utils/actions";
 import { QuestionsSheet } from "./question-sheet";
 import { QuestionToggleButton } from "./question-toggle-button";
 import { TimerButton } from "./timer-button";
 
-export function Nav({
+export async function Nav({
   user,
   question,
 }: {
   user: User | null;
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
+  const questionsByTopic = await api.questions.byTopic(question.topic);
+
+  const indexOfQuestion = questionsByTopic.findIndex(
+    (q) => q.id === question.id,
+  );
+
+  const nextQuestionId =
+    questionsByTopic[(indexOfQuestion + 1) % questionsByTopic.length]?.id;
+
+  console.log(nextQuestionId);
+
+  const prevQuestionId =
+    questionsByTopic[
+      (indexOfQuestion - 1 + questionsByTopic.length) % questionsByTopic.length
+    ]?.id;
+
+  const randomQuestionId =
+    questionsByTopic[Math.floor(Math.random() * questionsByTopic.length)]?.id;
+
   return (
     <nav className="flex min-h-14 items-center justify-between border-b px-6">
       <div className="mr-4 flex flex-none items-center">
@@ -45,13 +65,15 @@ export function Nav({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                className=" rounded-l-none rounded-r-none focus-visible:bg-accent focus-visible:ring-0"
-                variant="outline"
-                size="icon"
-              >
-                <ArrowLeftIcon />
-              </Button>
+              <Link href={`/problems/${prevQuestionId}`} passHref>
+                <Button
+                  className="rounded-l-none rounded-r-none focus-visible:bg-accent focus-visible:ring-0"
+                  variant="outline"
+                  size="icon"
+                >
+                  <ArrowLeftIcon />
+                </Button>
+              </Link>
             </TooltipTrigger>
             <TooltipContent>Previous Question</TooltipContent>
           </Tooltip>
@@ -60,13 +82,15 @@ export function Nav({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                className=" rounded-l-none rounded-r-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
-                size="icon"
-              >
-                <ArrowRightIcon />
-              </Button>
+              <Link href={`/problems/${nextQuestionId}`} passHref>
+                <Button
+                  variant="outline"
+                  className=" rounded-l-none rounded-r-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
+                  size="icon"
+                >
+                  <ArrowRightIcon />
+                </Button>
+              </Link>
             </TooltipTrigger>
             <TooltipContent>Next Question</TooltipContent>
           </Tooltip>
@@ -75,13 +99,15 @@ export function Nav({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                className=" rounded-l-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
-                size="icon"
-              >
-                <ShuffleIcon />
-              </Button>
+              <Link href={`/problems/${randomQuestionId}`} passHref>
+                <Button
+                  variant="outline"
+                  className=" rounded-l-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
+                  size="icon"
+                >
+                  <ShuffleIcon />
+                </Button>
+              </Link>
             </TooltipTrigger>
             <TooltipContent>Random Question</TooltipContent>
           </Tooltip>

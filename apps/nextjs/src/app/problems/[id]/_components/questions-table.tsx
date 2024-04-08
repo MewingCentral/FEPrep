@@ -1,6 +1,7 @@
 "use client";
 
 import { use } from "react";
+import { useRouter } from "next/navigation";
 
 import type { RouterOutputs } from "@feprep/api";
 import type { TOPICS } from "@feprep/consts";
@@ -25,9 +26,11 @@ export function QuestionsTable({
 }) {
   const questions = use(promise);
 
-  const allQuestions = api.questions.byTopic.useQuery(topic, {
+  const questionsByTopic = api.questions.byTopic.useQuery(topic, {
     initialData: questions,
   });
+
+  const router = useRouter();
 
   return (
     <Table>
@@ -40,7 +43,7 @@ export function QuestionsTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {allQuestions.data.map((question) => {
+        {questionsByTopic.data.map((question) => {
           let questionDifficulty = "Unknown";
 
           if (
@@ -61,7 +64,14 @@ export function QuestionsTable({
           }
 
           return (
-            <TableRow key={question.id}>
+            <TableRow
+              key={question.id}
+              role="link"
+              className="cursor-pointer"
+              onClick={() => {
+                router.push(`/problems/${question.id}`);
+              }}
+            >
               <TableCell>{question.title}</TableCell>
               <TableCell>{question.semester}</TableCell>
               <TableCell>{question.points}</TableCell>

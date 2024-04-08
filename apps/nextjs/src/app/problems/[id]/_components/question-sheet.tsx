@@ -1,6 +1,13 @@
 import type { RouterOutputs } from "@feprep/api";
 import { Button } from "@feprep/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@feprep/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@feprep/ui/sheet";
 
 import { api } from "~/trpc/server";
 import { QuestionsTable } from "./questions-table";
@@ -22,6 +29,12 @@ export async function QuestionsSheet({
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="min-w-[40vw]">
+        <SheetHeader className="mb-4">
+          <SheetTitle>{question.topic}</SheetTitle>
+          <SheetDescription>
+            Questions for the topic of {question.topic}
+          </SheetDescription>
+        </SheetHeader>
         <QuestionsTable topic={question.topic} promise={promise} />
       </SheetContent>
     </Sheet>
