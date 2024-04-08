@@ -1,4 +1,4 @@
-//import Link from "next/link";
+// import Link from "next/link";
 // https://tailwindui.com/components/marketing/sections/content-sections
 // //import { Button } from "@feprep/ui/button";
 
@@ -22,17 +22,27 @@ export default async function HomePage() {
      
         </div>
       
-        <div className="bg-muted-foreground"></div>
+        <div className="bg-muted-foreground">
+
+
+        </div>
 
         <div className="bg-muted-foreground"></div>
       
-        <div className="bg-white">
-          <p className="mt-8 text-red-600 text-center font-regular"> 
-            {"Made with in Central Florida"}
-          </p>
+        <div className="bg-white grid grid-rows-2 grid-flow-col">
+          <div className="bg-white">
+            <p className="mt-8 text-red-600 text-center font-regular"> 
+              {"Made with in Central Florida"}
+            </p>
+          </div>
+          <div className="bg-white">
+          </div>
         </div>
 
-        <div className="bg-white"></div>
+        <div className="grid grid-rows-2 grid-flow-col">
+          <div className="bg-white"></div>
+          <div className="bg-white"></div>
+        </div>
         
       </div>
 
