@@ -27,7 +27,7 @@ export default async function HomePage() {
 
         {/* 2nd row: mission statement. */}
         <div className="bg-muted-foreground">
-          <h2 className="mb-4 mr-16 text-3xl text-right font-normal">
+          <h2 className="mb-4 mr-24 text-3xl text-right font-normal">
             {"A new way to prepare for the Foundation Exam."}
           </h2>
         </div>
