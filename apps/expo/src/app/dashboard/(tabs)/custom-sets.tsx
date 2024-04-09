@@ -141,13 +141,14 @@ export default function Tab() {
   const createPack = api.flashcards.createPack.useMutation({
     onSuccess: async (data) => {
       await utils.flashcards.readPacks.invalidate();
-      console.log("my id is ", data.id);
+      if (!(data instanceof Error)) {
+        console.log("my id is ", data[0]!.id);
+        router.push({
+          pathname: "../../card-screens/update",
+          params: { pId: data[0]!.id, pName: data[0]!.name, uId: data[0]!.userId },
+        });
+      }
       setModalVisible(false);
-      console.log("disappearing modal in api onSuccess");
-      router.push({
-        pathname: "../../card-screens/update",
-        params: { pId: data.id, pName: data.name, uId: data.userId },
-      }); // TODO push to update screen
     },
     onError: (error) => {
       console.error(error);
@@ -215,16 +216,10 @@ export default function Tab() {
 
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           {/* Create new set button */}
-          {/* <Link
-            style={[styles.createSetButton]}
-            href="../../card-screens/create"
-            asChild
-          > */}
             <Pressable style={[styles.createSetButton]} onPress={() => setModalVisible(true)}>
               <Text style={[dashStyles.titleText]}>Create set</Text>
               <Text style={[dashStyles.titleText]}>+</Text>
             </Pressable>
-          {/* </Link> */}
 
           <Packs />
         </View>
