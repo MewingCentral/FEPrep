@@ -14,7 +14,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 
 import { AddResourceForm } from "./add-resource-form";
 import { DiscussionTab } from "./discussion-tab";
-import { NotesTab } from "./notes-tab";
 import { ResourcesTab } from "./resources-tab";
 
 export async function Right({
@@ -26,9 +25,9 @@ export async function Right({
 }) {
   return (
     <div className="flex-none rounded-md border p-4 lg:basis-1/2">
-      <Tabs defaultValue="notes">
+      <Tabs defaultValue="resources">
         <div className="flex flex-row justify-between">
-          <TabsList defaultValue="resources">
+          <TabsList>
             <TabsTrigger value="discussion">
               <ChatBubbleIcon className="mr-2" />
               Discussion
@@ -46,9 +45,6 @@ export async function Right({
 
         <TabsContent value="discussion">
           <DiscussionTab question={question} />
-        </TabsContent>
-        <TabsContent value="notes">
-          <NotesTab />
         </TabsContent>
         <TabsContent value="resources">
           <ResourcesTab question={question} />
