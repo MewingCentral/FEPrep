@@ -18,7 +18,8 @@ import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { CreateFlashcardPackSchema } from "@feprep/validators";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CreateFlashcardPackInput, CreateFlashcardPackSchema } from "@feprep/validators";
 
 function Pack({
   pack,
@@ -119,6 +120,44 @@ function Packs() {
 
 export default function Tab() {
   const [modalVisible, setModalVisible] = useState(false);
+  const userId = SecureStore.getItem("userId");
+  const router = useRouter();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(CreateFlashcardPackSchema),
+    defaultValues: {
+      name: "",
+      userId: userId,
+    },
+  });
+  console.log(errors);
+
+  const utils = api.useUtils();
+
+  const createPack = api.flashcards.createPack.useMutation({
+    onSuccess: async (data) => {
+      await utils.flashcards.readPacks.invalidate();
+      console.log("my id is ", data.id);
+      setModalVisible(false);
+      console.log("disappearing modal in api onSuccess");
+      router.push({
+        pathname: "../../card-screens/update",
+        params: { pId: data.id, pName: data.name, uId: data.userId },
+      }); // TODO push to update screen
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+
+  const onSubmit = (values: CreateFlashcardPackInput) => {
+    console.log(values);
+    createPack.mutate(values);
+  }
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
@@ -142,43 +181,50 @@ export default function Tab() {
           </View>
         </KeyboardAvoidingView>
 
-          {/* <View>
-            <Modal
-              visible={modalVisible}
-              style={[styles.modalContainer]}
-              animationType="slide"
-              onRequestClose{() => {
-                setModalVisible(false);
-              }}
-            >
-
-              <Pressable onPress={() => {
-                setModalVisible(false);
-              }}>
-                <RadixIcon name="cross-1" color={Colors.dark_secondary_text} />
-              </Pressable>
+        <View>
+          <Modal
+            visible={modalVisible}
+            animationType="slide"
+            onRequestClose={() => (setModalVisible(false))}
+          >
+            <Pressable onPress={() => setModalVisible(false)}>
+              <RadixIcon name="cross-1" color={Colors.dark_secondary_text} />
+            </Pressable>
               <View>
-                <Text>Term</Text>
-
+                <Text style={[styles.modalTitle]}>New Set Title</Text>
+                <Controller 
+                  control={control}
+                  name="name"
+                  render={({field: {onChange, onBlur, value}}) => (
+                    <TextInput 
+                      style={[styles.modalInput]}
+                      placeholder="New Set"
+                      keyboardType="default"
+                      onChangeText={(value) => onChange(value)}
+                      onBlur={onBlur}
+                      value={value}
+                    />
+                  )}
+                />
+                <Pressable onPress={handleSubmit(onSubmit)}>
+                  <Text>Create</Text>
+                </Pressable>
               </View>
-
           </Modal>
-        </View> */}
+        </View>
 
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           {/* Create new set button */}
-          <Link
+          {/* <Link
             style={[styles.createSetButton]}
             href="../../card-screens/create"
             asChild
-          >
-            <Pressable onPress={() => {
-
-            }}>
+          > */}
+            <Pressable style={[styles.createSetButton]} onPress={() => setModalVisible(true)}>
               <Text style={[dashStyles.titleText]}>Create set</Text>
               <Text style={[dashStyles.titleText]}>+</Text>
             </Pressable>
-          </Link>
+          {/* </Link> */}
 
           <Packs />
         </View>
@@ -211,6 +257,14 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
 
+  },
+  modalTitle: {
+    fontSize: 25,
+    backgroundColor: Colors.light_primary_text,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderColor: "black",
   },
   errorTxt: {
     fontSize: 20,
