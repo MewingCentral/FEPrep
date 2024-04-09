@@ -1,16 +1,19 @@
 import React from "react";
 
 import type { RouterOutputs } from "@feprep/api";
+import { validateRequest } from "@feprep/auth";
 import { cn } from "@feprep/ui";
 import { Badge } from "@feprep/ui/badge";
 
 import { QuestionPDF } from "./question-pdf";
+import { QuestionVoting } from "./question-voting";
 
 export async function Left({
   question,
 }: {
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
+  const { user } = await validateRequest();
   let questionDifficulty = "Unknown";
 
   if (
@@ -33,16 +36,15 @@ export async function Left({
   return (
     <div className="min-w-0 rounded-md border p-4 lg:basis-1/2">
       <h1 className="mb-2 flex items-center text-pretty text-3xl font-bold">
-        {question.title ?? `${question.section} ${question.questionNumber}`}
+        {question.title
+          ? question.title
+          : `${question.section} ${question.semester}`}
       </h1>
       <div className="mb-4 flex gap-2">
         <Badge
           variant="secondary"
           className={cn("text-nowrap", {
-            "text-accent": questionDifficulty === "Easy",
-            "text-warning": questionDifficulty === "Medium",
-            "text-danger": questionDifficulty === "Hard",
-            "text-gray-500": questionDifficulty === "Unknown",
+            "bg-red-500": questionDifficulty === "easy",
           })}
         >
           {questionDifficulty}
@@ -57,9 +59,10 @@ export async function Left({
           {question.averageScore}% Average
         </Badge>
       </div>
-      <div className="max-w-fit overflow-y-auto">
+      <div className="mb-4 max-w-fit overflow-y-auto">
         <QuestionPDF file={question.pdf} />
       </div>
+      <QuestionVoting question={question} user={user!} />
     </div>
   );
 }

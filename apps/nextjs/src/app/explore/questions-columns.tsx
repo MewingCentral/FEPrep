@@ -10,6 +10,21 @@ export const questionsColumns: ColumnDef<
   RouterOutputs["questions"]["all"][number]
 >[] = [
   {
+    accessorKey: "Id",
+    accessorFn: (row) => row.id,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Id
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
     accessorKey: "Title",
     accessorFn: (row) =>
       row.title

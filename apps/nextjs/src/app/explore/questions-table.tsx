@@ -166,7 +166,7 @@ export function QuestionsTable({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  No Questions
                 </TableCell>
               </TableRow>
             )}

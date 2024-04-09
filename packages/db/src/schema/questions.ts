@@ -1,12 +1,18 @@
 import { relations, sql } from "drizzle-orm";
-import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import {
+  integer,
+  real,
+  sqliteTable,
+  text,
+  unique,
+} from "drizzle-orm/sqlite-core";
 
 import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 
 import { users } from "./users";
 
 export const questions = sqliteTable("question", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+  id: integer("id").primaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
@@ -57,3 +63,22 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const votes = sqliteTable(
+  "vote",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    questionId: integer("question_id")
+      .notNull()
+      .references(() => questions.id),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id),
+    vote: text("vote", {
+      enum: ["easy", "medium", "hard"],
+    }).notNull(),
+  },
+  (table) => ({
+    unique: unique().on(table.userId, table.questionId),
+  }),
+);

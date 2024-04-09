@@ -3,7 +3,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 
 import { Nav } from "./nav";
 import { QuestionsTab } from "./questions-tab";
-import { StudySetsTab } from "./study-sets-tab";
 
 export default async function Explore() {
   const { user } = await validateRequest();
@@ -17,17 +16,17 @@ export default async function Explore() {
       >
         <TabsList className="mb-8 self-start">
           <TabsTrigger value="questions">Questions</TabsTrigger>
-          <TabsTrigger value="study">Study Sets</TabsTrigger>
+          {/* <TabsTrigger value="study">Study Sets</TabsTrigger> */}
         </TabsList>
         <TabsContent value="questions">
           <QuestionsTab />
         </TabsContent>
-        <TabsContent
+        {/* <TabsContent
           className="flex flex-1 flex-col gap-4 md:min-h-0 lg:flex-row"
           value="study"
         >
           <StudySetsTab />
-        </TabsContent>
+        </TabsContent> */}
       </Tabs>
     </div>
   );
