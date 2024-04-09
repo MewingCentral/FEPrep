@@ -97,6 +97,19 @@ export function CreateQuestionForm({ user }: { user: User }) {
         className="flex w-full flex-col gap-2 py-4"
       >
         <FormField
+          name="id"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Id</FormLabel>
+              <FormControl>
+                <Input type="number" placeholder="Id" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
           name="title"
           control={form.control}
           render={({ field }) => (

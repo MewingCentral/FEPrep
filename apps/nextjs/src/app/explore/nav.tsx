@@ -14,6 +14,7 @@ export async function Nav({ user }: { user: User | null }) {
         <Link href="/" className="flex gap-3 text-left text-xl font-semibold">
           <Image
             src="/Ellipse-3.svg"
+            className="h-[25px] w-[25px]"
             width={25}
             height={25}
             alt="FEPrep Logo"

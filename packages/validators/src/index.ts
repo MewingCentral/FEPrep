@@ -5,15 +5,25 @@ import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 export const SignUpSchema = z.object({
   email: z.string().email("Invalid email address"),
   // TODO: make this more secure
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  password: z
+    .string()
+    .regex(
+      /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,}$/,
+      "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number",
+    ),
 });
 
 export type SignUpInput = z.infer<typeof SignUpSchema>;
 
 export const SignUpFormSchema = z.object({
-  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),
+  nid: z.string().regex(/^[a-z]{2}[0-9]{6}$/, "Please enter a valid NID"),
   // TODO: also make this more secure
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  password: z
+    .string()
+    .regex(
+      /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,}$/,
+      "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number",
+    ),
 });
 
 export type SignUpFormInput = z.infer<typeof SignUpFormSchema>;
@@ -45,14 +55,21 @@ export const VerifyEmailSchema = z.object({
 export type VerifyEmailInput = z.infer<typeof VerifyEmailSchema>;
 
 export const CreateQuestionSchema = z.object({
+  id: z.number({
+    coerce: true,
+  }),
   userId: z.string(),
   title: z.string().optional(),
   pdf: z.string(),
-  averageScore: z.number(),
+  averageScore: z.number({
+    coerce: true,
+  }),
   easyVotes: z.number().optional(),
   mediumVotes: z.number().optional(),
   hardVotes: z.number().optional(),
-  points: z.number(),
+  points: z.number({
+    coerce: true,
+  }),
   semester: z.enum(SEMESTERS),
   topic: z.enum(TOPICS),
   section: z.enum(SECTIONS),
