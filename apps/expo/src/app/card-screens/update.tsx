@@ -112,7 +112,7 @@ export default function UpdateCards() {
       <View style={[styles.cardsContainer]}>{flashcards}</View>
 
       {/* Add Card */}
-      <AddCard />
+      <AddCard packId={packId} />
     </KeyboardAwareScrollView>
   );
 }
@@ -289,11 +289,12 @@ function AddCard({packId}:{packId:number}) {
   const createCard= api.flashcards.createCard.useMutation({
     onSuccess: async (data) => {
       await utils.flashcards.readCards.invalidate();
-      console.log("created card data: ", data);
+      if (!(data instanceof Error)) {
+        console.log("created card data: ", data);
+      }
       setModalVisible(false);
     },
     onError: (error) => {
-      console.log("YEOOOOOOOOOOOOOOOOWWWWWWWCHHH");
       console.error(error);
     }
   });
@@ -384,6 +385,7 @@ const styles = StyleSheet.create({
   saveBtnContainer: {
     alignContent: "center",
     alignItems: "center",
+    gap: 20,
     marginTop: 30,
   },
   cardsContainer: {
