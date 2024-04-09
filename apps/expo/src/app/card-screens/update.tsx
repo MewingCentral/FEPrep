@@ -62,6 +62,8 @@ export default function UpdateCards() {
 
 function Card({ card } : {card: RouterOutputs["flashcards"]["readCards"][number]}) {
     const [modalVisible, setModalVisible] = useState(false);
+    const [cardExists, setCardExists] = useState(true);
+
     const {
         control,
         handleSubmit,
@@ -92,6 +94,20 @@ function Card({ card } : {card: RouterOutputs["flashcards"]["readCards"][number]
         console.log(values);
         updateCard.mutate(values);
     };
+
+    const deleteCard = api.flashcards.deleteCard.useMutation({
+        onSuccess: async (data) => {
+            utils.flashcards.readCards.invalidate();
+            setCardExists(false);
+        },
+        onError: (error) => {
+            console.error(error);
+        }
+    });
+
+    const onDelete = () => {
+        deleteCard.mutate(card.id);
+    }
 
     return (
         <View>
@@ -147,30 +163,33 @@ function Card({ card } : {card: RouterOutputs["flashcards"]["readCards"][number]
                     </View>
                 </Modal>     
             </View>
-            <View style={[styles.cardContainer]}>
-                <View style={[styles.cardTextContainer]}>
-                    <Text style={[styles.cardTermLabel]}>Term</Text>
-                    <View style={[styles.cardTermTextContainer]}>
-                        <Text style={[styles.cardTermText]}>{card.front}</Text>
+            {
+                (cardExists) && 
+                <View style={[styles.cardContainer]}>
+                    <View style={[styles.cardTextContainer]}>
+                        <Text style={[styles.cardTermLabel]}>Term</Text>
+                        <View style={[styles.cardTermTextContainer]}>
+                            <Text style={[styles.cardTermText]}>{card.front}</Text>
+                        </View>
+                        <Text style={[styles.cardTermLabel]}>Definition</Text>
+                        <View style={[styles.cardTermTextContainer]}>
+                            <Text style={[styles.cardTermText]}>{card.back}</Text>
+                        </View>
                     </View>
-                    <Text style={[styles.cardTermLabel]}>Definition</Text>
-                    <View style={[styles.cardTermTextContainer]}>
-                        <Text style={[styles.cardTermText]}>{card.back}</Text>
+                    <View style={[styles.btnsContainer]}>
+                        <Pressable style={[styles.btn]} onPress={() => {
+                            setModalVisible(true);
+                        }}>
+                            <Text style={[styles.btnText]}>Edit</Text>
+                            <RadixIcon name="pencil-2" color={Colors.dark_primary_text} />
+                        </Pressable>
+                        <Pressable style={[styles.btn]} onPress={onDelete}>
+                            <Text style={[styles.btnText]}>Delete</Text>
+                            <RadixIcon name="trash" color={Colors.dark_primary_text} />
+                        </Pressable>
                     </View>
-                </View>
-                <View style={[styles.btnsContainer]}>
-                    <Pressable style={[styles.btn]} onPress={() => {
-                        setModalVisible(true);
-                    }}>
-                        <Text style={[styles.btnText]}>Edit</Text>
-                        <RadixIcon name="pencil-2" color={Colors.dark_primary_text} />
-                    </Pressable>
-                    <Pressable style={[styles.btn]}>
-                        <Text style={[styles.btnText]}>Delete</Text>
-                        <RadixIcon name="trash" color={Colors.dark_primary_text} />
-                    </Pressable>
-                </View>
-            </View> 
+                </View> 
+            }
         </View>
     );
 }
