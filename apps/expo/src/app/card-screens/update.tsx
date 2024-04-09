@@ -14,6 +14,8 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 import { Controller, useForm } from "react-hook-form";
 
 import {
+  CreateFlashcardSchema,
+  FlashcardInputType,
   UpdateFlashcardInput,
   UpdateFlashcardPackSchema,
   UpdateFlashcardSchema,
@@ -108,6 +110,9 @@ export default function UpdateCards() {
 
       {/* Cards */}
       <View style={[styles.cardsContainer]}>{flashcards}</View>
+
+      {/* Add Card */}
+      <AddCard />
     </KeyboardAwareScrollView>
   );
 }
@@ -262,6 +267,106 @@ export function Card({
     </View>
   );
 }
+
+function AddCard({packId}:{packId:number}) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(CreateFlashcardSchema),
+    defaultValues: {
+      packId: packId,
+      front: "",
+      back: "",
+    },
+  });
+
+  const utils = api.useUtils();
+
+  const createCard= api.flashcards.createCard.useMutation({
+    onSuccess: async (data) => {
+      await utils.flashcards.readCards.invalidate();
+      console.log("created card data: ", data);
+      setModalVisible(false);
+    },
+    onError: (error) => {
+      console.log("YEOOOOOOOOOOOOOOOOWWWWWWWCHHH");
+      console.error(error);
+    }
+  });
+
+  const onSubmit = (values: FlashcardInputType) => {
+    console.log("values sending to create endpoint: ", values);
+    createCard.mutate(values);
+  }
+
+  console.log(errors);
+
+  return (
+    <View>
+
+      {/* Create Card Modal */}
+      <View>
+        <Modal
+          visible={modalVisible}
+          animationType="slide"
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <Pressable onPress={() => setModalVisible(false)}>
+            <RadixIcon name="cross-1" color={Colors.light_secondary_text} />
+          </Pressable>
+          <Text>Term</Text>
+          <Controller 
+            control={control}
+            name="front"
+            render={({field:{onChange,onBlur,value}}) => (
+              <TextInput
+                placeholder="Enter term"
+                keyboardType="default"
+                onChangeText={(value) => onChange(value)}
+                onBlur={onBlur}
+                value={value}
+              />
+            )}
+          />
+          {errors.front?.message && <Text>{errors.front?.message}</Text>}
+          <Text>Definition</Text>
+          <Controller 
+            control={control}
+            name="back"
+            render={({field:{onChange,onBlur,value}}) => (
+              <TextInput
+                placeholder="Enter term"
+                keyboardType="default"
+                onChangeText={(value) => onChange(value)}
+                onBlur={onBlur}
+                value={value}
+              />
+            )}
+          />
+          {errors.back?.message && <Text>{errors.back?.message}</Text>}
+
+          <View style={[styles.saveBtnContainer]}>
+            <Pressable style={[styles.saveBtn]} onPress={() => setModalVisible(false)}>
+              <Text style={[styles.saveBtnText]}>Cancel</Text>
+            </Pressable>
+            <Pressable style={[styles.saveBtn]} onPress={handleSubmit(onSubmit)}>
+            {/* <Pressable style={[styles.saveBtn]} onPress={() => console.log("submit")}> */}
+              <Text style={[styles.saveBtnText]}>Save</Text>
+            </Pressable>
+          </View>
+        </Modal>
+      </View>
+      <Pressable onPress={() => setModalVisible(true)}>
+        <RadixIcon name="plus-circled" size={60} color={Colors.dark_primary_text} />
+      </Pressable>
+    </View>
+  );
+}
+
 
 const styles = StyleSheet.create({
   screenContainer: {
