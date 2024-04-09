@@ -1,14 +1,13 @@
 "use client";
 
 import { use } from "react";
-import { toast } from "@feprep/ui/toast";
 
 import type { RouterOutputs } from "@feprep/api";
 import { AvatarIcon } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
+import { toast } from "@feprep/ui/toast";
 
 import { api } from "~/trpc/react";
-
 
 export function CommentsList({
   promise,
@@ -62,20 +61,21 @@ function CommentCard({
         <AvatarIcon className="mr-2" width="25" height="25" />
         {comment.user.email} ({comment.user.type})
       </div>
-      <p className="whitespace-normal p-2 flex flex-1 flex-col gap-5 lg:flex-row">
+      <p className="flex flex-1 flex-col gap-5 whitespace-normal p-2 lg:flex-row">
         {comment.content}
         <div {...delComment}>
-          <Button variant='destructive' onClick={async () => {
-            delComment.mutate(comment.id);
-            
-            
-            // const elem = document.getElementById(comment.id.toString());
-            // elem?.remove();
-          }
-        }>bye</Button> 
-        
-        </div>
+          <Button
+            variant="destructive"
+            onClick={async () => {
+              delComment.mutate(comment.id);
 
+              // const elem = document.getElementById(comment.id.toString());
+              // elem?.remove();
+            }}
+          >
+            bye
+          </Button>
+        </div>
       </p>
     </div>
   );

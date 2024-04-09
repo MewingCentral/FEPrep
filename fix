@@ -1,0 +1,19 @@
+
+> feprep@ format /home/kag/Desktop/SCHOOL/POOSD/FEPrep
+> turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache
+
+• Packages in scope: @feprep/api, @feprep/auth, @feprep/consts, @feprep/db, @feprep/eslint-config, @feprep/expo, @feprep/github, @feprep/nextjs, @feprep/prettier-config, @feprep/tailwind-config, @feprep/transactional, @feprep/tsconfig, @feprep/ui, @feprep/validators
+• Running format in 14 packages
+• Remote caching disabled
+@feprep/nextjs:format: cache miss, executing 0bf6b11669ab508a
+@feprep/validators:format: cache miss, executing 36435de602a664da
+@feprep/db:format: cache miss, executing e6e6fc4f49af3fd5
+@feprep/expo:format: cache miss, executing 54f75f628353df42
+@feprep/ui:format: cache miss, executing ed9f85e0683d6054
+@feprep/prettier-config:format: cache miss, executing d178cee762d9aa6c
+@feprep/auth:format: cache miss, executing cac8f39e1bc9bd56
+@feprep/consts:format: cache miss, executing dcb3d4a146c3cd86
+@feprep/transactional:format: cache miss, executing 48a8179159eff892
+@feprep/api:format: cache miss, executing 3d0e21dda768cd15
+@feprep/eslint-config:format: cache miss, executing 4f52e185eef0d863
+@feprep/tailwind-config:format: cache miss, executing 1f0f62f19468c562
