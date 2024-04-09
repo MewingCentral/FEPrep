@@ -108,7 +108,7 @@ export const authRouter = createTRPCRouter({
 
       return { session: session.id, userId: user.id };
     }),
-  verifiyEmail: protectedProcedure
+  verifyEmail: protectedProcedure
     .input(VerifyEmailSchema)
     .mutation(async ({ ctx, input }) => {
       const emailVerificationCode = await ctx.db.transaction(async (tx) => {
