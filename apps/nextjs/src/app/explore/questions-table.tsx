@@ -390,9 +390,7 @@ export function SemesterDropdownMenu({
                   (f) => f.id === "Semester",
                 );
 
-                // If a column filter for the topic column exists
                 if (semesterFilter) {
-                  // If the topic is checked, add it to the filter
                   if (checked) {
                     return prevFilters.map((f) =>
                       f.id === "Semester"
@@ -403,20 +401,18 @@ export function SemesterDropdownMenu({
                         : f,
                     );
                   }
-                  // If the topic is unchecked, remove it from the filter
+
+                  const updatedValue = (
+                    semesterFilter.value as typeof SEMESTERS
+                  ).filter((d: (typeof SEMESTERS)[number]) => d !== semester);
+                  if (updatedValue.length === 0) {
+                    return prevFilters.filter((f) => f.id !== "Semester");
+                  }
                   return prevFilters.map((f) =>
-                    f.id === "Semester"
-                      ? {
-                          ...f,
-                          value: (f.value as typeof SEMESTERS).filter(
-                            (s: (typeof SEMESTERS)[number]) => s !== semester,
-                          ),
-                        }
-                      : f,
+                    f.id === "Semester" ? { ...f, value: updatedValue } : f,
                   );
                 }
 
-                // If a column filter for the topic column does not exist, create a new filter
                 if (checked) {
                   return [
                     ...prevFilters,
@@ -424,7 +420,6 @@ export function SemesterDropdownMenu({
                   ];
                 }
 
-                // If the topic is unchecked, return the previous filter
                 return prevFilters;
               });
             }}

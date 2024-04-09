@@ -32,7 +32,7 @@ export async function signInAction(_: unknown, formData: FormData) {
   if (!user) {
     return {
       fieldError: {
-        nid: "User not found",
+        nid: "User with this NID does not exist",
       },
     };
   }
@@ -44,9 +44,7 @@ export async function signInAction(_: unknown, formData: FormData) {
 
   if (!validPassword) {
     return {
-      fieldError: {
-        password: "Invalid NID or password",
-      },
+      error: "Invalid nid or password",
     };
   }
 

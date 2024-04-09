@@ -1,10 +1,9 @@
 import { z } from "zod";
 
-import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+import { DIFFICULTIES, SECTIONS, TOPICS } from "@feprep/consts";
 
 export const SignUpSchema = z.object({
   email: z.string().email("Invalid email address"),
-  // TODO: make this more secure
   password: z
     .string()
     .regex(
@@ -17,7 +16,6 @@ export type SignUpInput = z.infer<typeof SignUpSchema>;
 
 export const SignUpFormSchema = z.object({
   nid: z.string().regex(/^[a-z]{2}[0-9]{6}$/, "Please enter a valid NID"),
-  // TODO: also make this more secure
   password: z
     .string()
     .regex(
@@ -42,11 +40,13 @@ export const ResetPasswordSchema = z.object({
 
 export type ResetPasswordInput = z.infer<typeof ResetPasswordSchema>;
 
-export const ForgotPasswordSchema = z.object({
-  email: z.string().email("Invalid email address"),
+export const SendResetPasswordEmailSchema = z.object({
+  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),  
 });
 
-export type ForgotPasswordInput = z.infer<typeof ForgotPasswordSchema>;
+export type SendResetPasswordEmailInput = z.infer<
+  typeof SendResetPasswordEmailSchema
+>;
 
 export const VerifyEmailSchema = z.object({
   code: z.string(),
@@ -70,7 +70,7 @@ export const CreateQuestionSchema = z.object({
   points: z.number({
     coerce: true,
   }),
-  semester: z.enum(SEMESTERS),
+  semester: z.enum(DIFFICULTIES),
   topic: z.enum(TOPICS),
   section: z.enum(SECTIONS),
   questionNumber: z.number(),

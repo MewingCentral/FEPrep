@@ -57,7 +57,9 @@ export async function signUpAction(_: unknown, formData: FormData) {
       html: renderEmailVerification(verificationCode),
     });
   } catch {
-    // Ignore error
+    return {
+      error: "Failed to send verification email",
+    };
   }
 
   const session = await lucia.createSession(userId, {});
@@ -67,8 +69,6 @@ export async function signUpAction(_: unknown, formData: FormData) {
     sessionCookie.value,
     sessionCookie.attributes,
   );
-
-  // TODO: redirect to verify email page
 
   return redirect("/explore");
 }
