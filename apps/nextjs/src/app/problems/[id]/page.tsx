@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <Nav question={question} user={user} />
         <main className="flex flex-1 flex-col gap-2 p-4 lg:flex-row">
           <Left question={question} />
-          <Right question={question} />
+          <Right question={question} user={user} />
         </main>
       </div>
     </QuestionProvider>
