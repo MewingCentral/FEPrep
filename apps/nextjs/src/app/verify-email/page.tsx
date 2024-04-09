@@ -1,5 +1,7 @@
-import { validateRequest } from "@feprep/auth";
 import { redirect } from "next/navigation";
+
+import { validateRequest } from "@feprep/auth";
+
 import { Verification } from "./verify-email";
 
 export default async function Page() {
