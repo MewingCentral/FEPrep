@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RadixIcon } from "radix-ui-react-native-icons";
 import { Controller, useForm } from "react-hook-form";
@@ -58,7 +58,7 @@ export default function UpdateCards() {
   const updatePack = api.flashcards.updatePack.useMutation({
     onSuccess: async () => {
       await util.flashcards.readPack.invalidate();
-      console.log("Hi I'm successful!");
+      router.back();
     },
     onError: (error) => {
       console.error(error);
