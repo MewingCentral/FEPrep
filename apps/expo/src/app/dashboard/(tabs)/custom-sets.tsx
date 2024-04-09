@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   KeyboardAvoidingView,
   Pressable,
@@ -15,7 +16,6 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 import { api } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
-import { useState } from "react";
 
 function Pack({ packName, packId }: { packName: string; packId: number }) {
   const router = useRouter();
@@ -25,12 +25,12 @@ function Pack({ packName, packId }: { packName: string; packId: number }) {
 
   const deletePack = api.flashcards.deletePack.useMutation({
     onSuccess: async () => {
-      utils.flashcards.readPack.invalidate();
+      await utils.flashcards.readPack.invalidate();
       console.log("successfully deleted pack ", packId);
     },
     onError: (error) => {
       console.error(error);
-    }
+    },
   });
 
   const onDelete = () => {
@@ -38,10 +38,9 @@ function Pack({ packName, packId }: { packName: string; packId: number }) {
     deletePack.mutate(packId);
   };
 
-  return ( 
+  return (
     <>
-    {
-      (!isDeleted) && (
+      {!isDeleted && (
         <Pressable
           style={[dashStyles.container, dashStyles.setContainer]}
           onPress={() => {
@@ -51,27 +50,36 @@ function Pack({ packName, packId }: { packName: string; packId: number }) {
             });
           }}
         >
-        <View style={[styles.setContentsContainer]}>
-          <Text style={[dashStyles.setText, dashStyles.titleText]}>
-            {packName}
-          </Text>
-          <View style={[styles.setBtnsContainer]}>
-            <Pressable onPress={() => {
-              router.push({
-                pathname: "../../card-screens/update",
-                params: { pId: packId, pName: packName },
-              });
-            }}>
-              <RadixIcon name="pencil-2" color={Colors.dark_secondary_text} size={30} />
-            </Pressable>
-            <Pressable onPress={onDelete}>
-              <RadixIcon name="trash" color={Colors.dark_secondary_text} size={33} />
-            </Pressable>
+          <View style={[styles.setContentsContainer]}>
+            <Text style={[dashStyles.setText, dashStyles.titleText]}>
+              {packName}
+            </Text>
+            <View style={[styles.setBtnsContainer]}>
+              <Pressable
+                onPress={() => {
+                  router.push({
+                    pathname: "../../card-screens/update",
+                    params: { pId: packId, pName: packName },
+                  });
+                }}
+              >
+                <RadixIcon
+                  name="pencil-2"
+                  color={Colors.dark_secondary_text}
+                  size={30}
+                />
+              </Pressable>
+              <Pressable onPress={onDelete}>
+                <RadixIcon
+                  name="trash"
+                  color={Colors.dark_secondary_text}
+                  size={33}
+                />
+              </Pressable>
+            </View>
           </View>
-        </View>
-      </Pressable>
-      )
-    }
+        </Pressable>
+      )}
     </>
   );
 }
