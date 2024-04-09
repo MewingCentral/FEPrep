@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   Pressable,
@@ -9,23 +8,20 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import { Link, useFocusEffect, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
-import { RouterOutputs, api } from "~/utils/api";
+import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 
-function Pack({ pack }: { pack: RouterOutputs["flashcards"]["readPack"][number] }) {
+function Pack({
+  pack,
+}: {
+  pack: RouterOutputs["flashcards"]["readPack"][number];
+}) {
   const router = useRouter();
-  // const updatePacks = useLocalSearchParams();
-
-  // useEffect(() => {
-  //   if (updatePacks) {
-  //     pack.name = ;
-  //   }
-  // }, [updatePacks]);
 
   const utils = api.useUtils();
 
@@ -82,63 +78,42 @@ function Pack({ pack }: { pack: RouterOutputs["flashcards"]["readPack"][number] 
         </View>
       </View>
     </Pressable>
-  )
+  );
 }
 
 function Packs() {
   const userId = SecureStore.getItem("userId")!;
-  const packs = api.flashcards.readPack.useQuery(userId!, {
-    refetchOnMount: true,
+  const packs = api.flashcards.readPack.useQuery(userId);
+
+  // Refetch packs on focus
+  useFocusEffect(() => {
+    void packs.refetch();
   });
 
-  useFocusEffect(() => {
-    packs.refetch()
-  })
-
   if (packs.isLoading) {
-    return (
-      <Text>Loading...</Text>
-    )
+    return <Text>Loading...</Text>;
   }
 
   if (packs.isError) {
-    return (
-      <Text>Oops... There was an issue loading your packs</Text>
-    )
+    return <Text>Oops... There was an issue loading your packs</Text>;
   }
 
   if (!packs.data?.length) {
-    return <Text>You have no packs</Text>
+    return <Text>You have no packs</Text>;
   }
-
 
   return (
     <View>
       {packs.data.map((pack) => (
-        <View>
-          <Pack pack={pack} key={pack.id} />
+        <View key={pack.id}>
+          <Pack pack={pack} />
         </View>
       ))}
     </View>
-  )
-
+  );
 }
 
 export default function Tab() {
-
-  // todo style error message.
-  // const userPacks =
-  //   packs && packs.data && !packs.isLoading && !packs.isError ? (
-  //     packs.data.map((item) => (
-  //       <Pack pack={item} key={item.id} />
-  //     ))
-  //   ) : (
-  //     <View>
-  //       <Text style={[styles.errorTxt]}>Error loading custom sets.</Text>
-  //     </View>
-  //   );
-
-
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       <KeyboardAwareScrollView>
