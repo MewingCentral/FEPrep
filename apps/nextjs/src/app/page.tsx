@@ -8,70 +8,27 @@ export const runtime = "edge";
 
 export default async function HomePage() {
   return (
-    <section className="">
-      <div className="grid h-screen grid-rows-5">
-        <div className="bg-muted-foreground">
-          <div className="ml-12">
-            <h1 className="mr-10 mt-8 text-right text-3xl font-semibold text-foreground ">
-              {"FEPrep"}
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-muted-foreground">
-          <h2 className="mb-4 mr-28 text-right text-3xl font-normal">
-            {"A new way to prepare for the Foundation Exam."}
-          </h2>
-        </div>
-
-        <div className="grid grid-flow-row grid-cols-3 bg-muted-foreground">
-          <div className=""></div>
-          <div className="justify-self-center">
-            <Link href="/sign-up">
-              <Button
-                type="submit"
-                className="ml-28 w-44 rounded-md border border-input bg-white text-black transition-colors hover:bg-accent"
-              >
-                {"Create Account"}
-              </Button>
-            </Link>
-          </div>
-          <div className="">
-            <Link href="/explore">
-              <Button
-                type="submit"
-                className="ml-20 w-44 content-center rounded-md border-input text-white transition-colors hover:bg-accent"
-              >
-                {"Start Practicing"}
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        <div className="grid grid-flow-col grid-rows-2 bg-white">
-          <div className="bg-white">
-            <p className="font-regular mt-9 text-center text-lg text-red-600">
-              {"Made with in Central Florida"}
-            </p>
-          </div>
-          <div className="h-24">
-            <p className="mt-4 text-center text-sm font-medium">
-              {
-                "UCF strives to help every student unleash their greatest potential. Through a competitive curriculum and high academic excellence"
-              }
-              <br />
-              {
-                "upheld by standardized tests like the Foundation Exam, students and alumni from the College of Engineering and Computer Science are"
-              }
-              <br />
-              {
-                "employed at top companies across the nation. With this app, we aim to help you on this journey as you reach for the stars."
-              }{" "}
-              <br />
-            </p>
-          </div>
+    <div className="flex flex-1 flex-col items-start justify-center">
+      <div className="ml-12">
+        <div className="mb-8 text-9xl font-bold">:3</div>
+        <h1 className="mb-4 text-left text-6xl font-semibold">FEPrep</h1>
+        <h2 className="mb-4 max-w-sm text-left text-3xl font-normal leading-normal">
+          A new way to prepare for the Foundation Exam.
+        </h2>
+        <div className="flex flex-row gap-5">
+          <Link href="/explore">
+            <Button type="submit">Start Practicing</Button>
+          </Link>
+          <Link href="/sign-up">
+            <Button
+              type="submit"
+              className="rounded-md border border-input bg-background text-accent-foreground transition-colors hover:bg-accent "
+            >
+              Create Account
+            </Button>
+          </Link>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
