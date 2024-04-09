@@ -1,11 +1,14 @@
 "use client";
 
 import { use } from "react";
+import { toast } from "@feprep/ui/toast";
 
 import type { RouterOutputs } from "@feprep/api";
 import { AvatarIcon } from "@feprep/ui";
+import { Button } from "@feprep/ui/button";
 
 import { api } from "~/trpc/react";
+
 
 export function CommentsList({
   promise,
@@ -41,13 +44,39 @@ function CommentCard({
 }: {
   comment: RouterOutputs["comments"]["allByQuestionId"][number];
 }) {
+  const utils = api.useUtils();
+  const delComment = api.comments.delete.useMutation({
+    onSuccess: async () => {
+      await utils.comments.allByQuestionId.invalidate();
+      toast("deleted");
+    },
+    onError: () => {
+      toast("failed to delete");
+    },
+  });
+  // function handleDelete(id) {
+  // }
   return (
-    <div className="rounded-md border p-2">
+    <div className="rounded-md border p-2" id={comment.id.toString()}>
       <div className="flex items-center p-2 font-bold">
         <AvatarIcon className="mr-2" width="25" height="25" />
         {comment.user.email} ({comment.user.type})
       </div>
-      <p className="whitespace-normal p-2">{comment.content}</p>
+      <p className="whitespace-normal p-2 flex flex-1 flex-col gap-5 lg:flex-row">
+        {comment.content}
+        <div {...delComment}>
+          <Button variant='destructive' onClick={async () => {
+            delComment.mutate(comment.id);
+            
+            
+            // const elem = document.getElementById(comment.id.toString());
+            // elem?.remove();
+          }
+        }>bye</Button> 
+        
+        </div>
+
+      </p>
     </div>
   );
 }
