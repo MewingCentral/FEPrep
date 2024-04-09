@@ -91,9 +91,9 @@ function Packs() {
     refetchOnMount: true,
   });
 
-  // useFocusEffect(() => {
-  //   packs.refetch()
-  // })
+  useFocusEffect(() => {
+    packs.refetch()
+  })
 
   if (packs.isLoading) {
     return (
@@ -125,7 +125,6 @@ function Packs() {
 }
 
 export default function Tab() {
-
 
   // todo style error message.
   // const userPacks =
