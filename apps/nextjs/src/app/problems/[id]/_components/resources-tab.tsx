@@ -1,34 +1,18 @@
 import type { RouterOutputs } from "@feprep/api";
 
+import { api } from "~/trpc/server";
+import { ResourcesList } from "./resources-list";
+
 export function ResourcesTab({
   question,
 }: {
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
+  const resources = api.resources.allByQuestionId(question.id);
+
   return (
     <div className="flex flex-col gap-2">
-      <iframe
-        className="aspect-video"
-        src="https://www.youtube.com/embed/zxwWpCwVExQ"
-        title="Ultimate Foundation Exam Review"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
-      {question.id}
+      <ResourcesList promise={resources} question={question} />
     </div>
   );
 }
-
-// export function ResourcesTab() {
-//   return (
-//     <div className="flex flex-col gap-2">
-//       <iframe
-//         className="aspect-video"
-//         src="https://www.youtube.com/embed/zxwWpCwVExQ"
-//         title="Ultimate Foundation Exam Review"
-//         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-//         referrerPolicy="strict-origin-when-cross-origin"
-//       ></iframe>
-//     </div>
-//   );
-// }
