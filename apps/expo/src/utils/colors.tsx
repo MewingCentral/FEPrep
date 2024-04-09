@@ -3,9 +3,10 @@
 const Colors = {
   dark_bg: "#020817",
   dark_sec: "#1E293B",
-  dark_accent: "#2563EB",
+  dark_accent: "#3a4961",
   dark_primary_text: "#F8FAFC",
   dark_secondary_text: "#94A3B8",
+  dark_btn_border: "#546a8c",
 
   light_bg: "#F8FAFC",
   light_sec: "#F1F5F9",

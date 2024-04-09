@@ -26,7 +26,7 @@ const dashStyles = StyleSheet.create({
     gap: 20,
   },
   setContainer: {
-    height: 100,
+    height: 130,
     width: 300,
     backgroundColor: Colors.dark_sec,
     borderColor: "rgba(148, 163, 184, 0.50)",
@@ -48,7 +48,7 @@ const dashStyles = StyleSheet.create({
     fontSize: 20,
   },
   setText: {
-    margin: 10,
+    margin: 15,
   },
   setTerms: {
     color: Colors.dark_secondary_text,
