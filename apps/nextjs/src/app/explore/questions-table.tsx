@@ -85,8 +85,8 @@ export function QuestionsTable({
 
   const resetAllFilters = () => {
     setColumnFilters([]);
-  }
-  
+  };
+
   return (
     <div>
       {/* Filtering options */}
