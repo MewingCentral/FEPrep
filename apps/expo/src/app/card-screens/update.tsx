@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Modal,
   Pressable,
   StyleSheet,
   Text,
@@ -23,6 +22,8 @@ import {
 
 import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
+import modalStyles from "~/utils/modal-styles";
+import Modal from "react-native-modal";
 
 export default function UpdateCards() {
   const { pId, pName, uId } = useLocalSearchParams();
@@ -175,13 +176,14 @@ export function Card({
   return (
     <View>
       <View>
+        {/* Update Card Modal */}
         <Modal
-          visible={modalVisible}
+          isVisible={modalVisible}
           style={[styles.modalContainer]}
-          animationType="slide"
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}
+          hasBackdrop={true}
+          backdropColor="black"
+          backdropOpacity={0.7}
+          onBackdropPress={() => setModalVisible(false)}
         >
           <Pressable
             onPress={() => {
@@ -319,51 +321,59 @@ function AddCard({packId}:{packId:number}) {
       {/* Create Card Modal */}
       <View>
         <Modal
-          visible={modalVisible}
-          animationType="slide"
-          onRequestClose={() => setModalVisible(false)}
+          isVisible={modalVisible}
+          // style={[styles.modalContainer]}
+          hasBackdrop={true}
+          backdropColor="black"
+          backdropOpacity={0.7}
+          onBackdropPress={() => setModalVisible(false)}
         >
-          <Pressable onPress={() => setModalVisible(false)}>
-            <RadixIcon name="cross-1" color={Colors.light_secondary_text} />
-          </Pressable>
-          <Text>Term</Text>
-          <Controller 
-            control={control}
-            name="front"
-            render={({field:{onChange,onBlur,value}}) => (
-              <TextInput
-                placeholder="Enter term"
-                keyboardType="default"
-                onChangeText={(value) => onChange(value)}
-                onBlur={onBlur}
-                value={value}
-              />
-            )}
-          />
-          {errors.front?.message && <Text>{errors.front?.message}</Text>}
-          <Text>Definition</Text>
-          <Controller 
-            control={control}
-            name="back"
-            render={({field:{onChange,onBlur,value}}) => (
-              <TextInput
-                placeholder="Enter term"
-                keyboardType="default"
-                onChangeText={(value) => onChange(value)}
-                onBlur={onBlur}
-                value={value}
-              />
-            )}
-          />
-          {errors.back?.message && <Text>{errors.back?.message}</Text>}
+          <View style={[modalStyles.container]}>
+            <View style={[modalStyles.closeBtnContainer]}>
+              <Pressable onPress={() => setModalVisible(false)}>
+                {/* Todo fix not working for some reason */}
+                <RadixIcon name="cross-1" color="#ffffff" />
+              </Pressable>
+            </View>
+            <Text>Term</Text>
+            <Controller 
+              control={control}
+              name="front"
+              render={({field:{onChange,onBlur,value}}) => (
+                <TextInput
+                  placeholder="Enter term"
+                  keyboardType="default"
+                  onChangeText={(value) => onChange(value)}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+            {errors.front?.message && <Text>{errors.front?.message}</Text>}
+            <Text>Definition</Text>
+            <Controller 
+              control={control}
+              name="back"
+              render={({field:{onChange,onBlur,value}}) => (
+                <TextInput
+                  placeholder="Enter term"
+                  keyboardType="default"
+                  onChangeText={(value) => onChange(value)}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+            {errors.back?.message && <Text>{errors.back?.message}</Text>}
 
-          <View style={[styles.mainBtnContainer]}>
-            <Pressable style={[styles.mainBtn]} onPress={() => setModalVisible(false)}>
-              <Text style={[styles.mainBtnText]}>Cancel</Text>
-            </Pressable>
-            <Pressable style={[styles.mainBtn]} onPress={handleSubmit(onSubmit)}>
-              <Text style={[styles.mainBtnText]}>Save</Text>
-            </Pressable>
+            <View style={[styles.mainBtnContainer]}>
+              <Pressable style={[styles.mainBtn]} onPress={() => setModalVisible(false)}>
+                <Text style={[styles.mainBtnText]}>Cancel</Text>
+              </Pressable>
+              <Pressable style={[styles.mainBtn]} onPress={handleSubmit(onSubmit)}>
+                <Text style={[styles.mainBtnText]}>Save</Text>
+              </Pressable>
+            </View>          
           </View>
         </Modal>
       </View>
