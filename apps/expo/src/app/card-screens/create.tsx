@@ -3,20 +3,70 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
 import Colors from "~/utils/colors";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CreateFlashcardPackInput, CreateFlashcardPackSchema } from "@feprep/validators";
+import * as SecureStore from "expo-secure-store";
+import { api } from "~/utils/api";
 
 export default function cardCreation() {
+  const userId = SecureStore.getItem("userId")!;
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(CreateFlashcardPackSchema),
+    defaultValues: {
+      name: "",
+      userId: userId,
+    },
+  });
+  console.log(errors);
+
+  const utils = api.useUtils();
+
+  const createPack = api.flashcards.createPack.useMutation({
+    onSuccess: async () => {
+      await utils.flashcards.readPacks.invalidate();
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
+
+  const onSubmit = (values: CreateFlashcardPackInput) => {
+    console.log(values);
+    createPack.mutate(values);
+  }
+  
   return (
     <SafeAreaView style={[styles.screenContainer]}>
       {/* Title input */}
       <View style={{ flexDirection: "row" }}>
-        <View style={[styles.container, styles.inputContainer]}>
-          <TextInput
-            style={[styles.input]}
-            placeholder="Enter set title"
-            placeholderTextColor={Colors.dark_secondary_text}
-            cursorColor={Colors.dark_primary_text}
-          />
+        <View style={[styles.container, styles.inputContainer, styles.deleteYellowBorder]}>
+          <Controller 
+              control={control}
+              name="name"
+              render={({ field: {onChange, onBlur, value }}) => (
+                <TextInput 
+                  style={[styles.input]}
+                  placeholder="Enter title"
+                  keyboardType="default"
+                  onChangeText={(value) => onChange(value)}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
         </View>
+      </View>
+
+      {/* Save changes */}
+      <View style={[styles.saveBtnContainer]}>
+        <Pressable style={[styles.saveBtn]} onPress={handleSubmit(onSubmit)}>
+          <Text style={[styles.saveBtnText]}>Save changes</Text>
+        </Pressable>
       </View>
 
       {/* Card forms */}
@@ -96,6 +146,11 @@ const styles = StyleSheet.create({
     alignContent: "stretch",
     marginHorizontal: 20,
   },
+  saveBtnContainer: {
+    alignContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+  },
   cardsContainer: {
     gap: 30,
   },
@@ -117,6 +172,18 @@ const styles = StyleSheet.create({
     color: Colors.dark_primary_text,
     borderBottomWidth: 1,
     borderBottomColor: Colors.dark_primary_text,
+  },
+  saveBtn: {
+    flexDirection: "column",
+    justifyContent: "center",
+    backgroundColor: Colors.dark_accent,
+    width: 200,
+    height: 50,
+  },
+  saveBtnText: {
+    fontSize: 25,
+    textAlign: "center",
+    color: Colors.dark_primary_text,
   },
   cardInputLabel: {
     color: Colors.dark_primary_text,
