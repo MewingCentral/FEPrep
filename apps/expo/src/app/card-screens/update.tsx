@@ -112,7 +112,7 @@ export default function UpdateCards() {
   );
 }
 
-function Card({
+export function Card({
   card,
 }: {
   card: RouterOutputs["flashcards"]["readCards"][number];

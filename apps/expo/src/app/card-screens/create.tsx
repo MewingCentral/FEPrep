@@ -5,13 +5,17 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 import Colors from "~/utils/colors";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateFlashcardPackInput, CreateFlashcardPackSchema } from "@feprep/validators";
+import { CreateFlashcardPackInput, CreateFlashcardPackSchema, UpdateFlashcardPackSchema } from "@feprep/validators";
 import * as SecureStore from "expo-secure-store";
 import { api } from "~/utils/api";
 import { router } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Card } from "./update";
+import { useState } from "react";
 
 export default function cardCreation() {
+
+  // Create api stuff
   const userId = SecureStore.getItem("userId")!;
   const {
     control,
@@ -29,9 +33,11 @@ export default function cardCreation() {
   const utils = api.useUtils();
 
   const createPack = api.flashcards.createPack.useMutation({
-    onSuccess: async () => {
+    onSuccess: async (data) => {
       await utils.flashcards.readPacks.invalidate();
-      router.back();
+      console.log("my id is ", data.id);
+      // setPackId(data.id);
+      // router.back();
     },
     onError: (error) => {
       console.error(error);
@@ -39,6 +45,7 @@ export default function cardCreation() {
   });
 
   const onSubmit = (values: CreateFlashcardPackInput) => {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(values);
     createPack.mutate(values);
   }
@@ -132,6 +139,14 @@ export default function cardCreation() {
         </Pressable>
       </KeyboardAwareScrollView>
     </SafeAreaView>
+  );
+}
+
+function CreatedCards() {
+  const cards = api.flashcards.readCards.useQuery();
+
+  return (
+    <Card />
   );
 }
 
