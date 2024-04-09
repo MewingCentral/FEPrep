@@ -72,31 +72,34 @@ export default function UpdateCards() {
   return (
     <KeyboardAwareScrollView style={[styles.screenContainer]}>
       {/* Title input */}
-      <View style={{ flexDirection: "row" }}>
-        <View style={[styles.titleInputContainer]}>
-          <Controller
-            control={control}
-            name="name"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={[styles.input]}
-                defaultValue={packName}
-                placeholder="Enter title"
-                cursorColor={Colors.dark_primary_text}
-                keyboardType="default"
-                onChangeText={(value) => onChange(value)}
-                onBlur={onBlur}
-                value={value}
-              />
-            )}
-          />
+      <View style={[styles.titleContainer]}>
+        <View style={{ flexDirection: "row" }}>
+          <View style={[styles.titleInputContainer]}>
+            <Controller
+              control={control}
+              name="name"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={[styles.input]}
+                  defaultValue={packName}
+                  placeholder="Enter title"
+                  cursorColor={Colors.dark_primary_text}
+                  keyboardType="default"
+                  onChangeText={(value) => onChange(value)}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          </View>
         </View>
+        <Text style={[styles.titleLabel]}>Title</Text>
       </View>
 
       {/* Save updates btn */}
-      <View style={[styles.saveBtnContainer]}>
+      <View style={[styles.mainBtnContainer]}>
         <Pressable
-          style={[styles.saveBtn]}
+          style={[styles.mainBtn]}
           onPress={handleSubmit((values) => {
             updatePack.mutate({
               ...values,
@@ -104,7 +107,7 @@ export default function UpdateCards() {
             });
           })}
         >
-          <Text style={[styles.saveBtnText]}>Save changes</Text>
+          <Text style={[styles.mainBtnText]}>Save changes</Text>
         </Pressable>
       </View>
 
@@ -255,12 +258,16 @@ export function Card({
               setModalVisible(true);
             }}
           >
-            <Text style={[styles.btnText]}>Edit</Text>
-            <RadixIcon name="pencil-2" color={Colors.dark_primary_text} />
+            <View style={[styles.btnContents]}>
+              <Text style={[styles.btnText]}>Edit</Text>
+              <RadixIcon name="pencil-2" color={Colors.dark_primary_text} />
+            </View>
           </Pressable>
           <Pressable style={[styles.btn]} onPress={onDelete}>
-            <Text style={[styles.btnText]}>Delete</Text>
-            <RadixIcon name="trash" color={Colors.dark_primary_text} />
+            <View style={[styles.btnContents]}>
+              <Text style={[styles.btnText]}>Delete</Text>
+              <RadixIcon name="trash" color={Colors.dark_primary_text} />
+            </View>
           </Pressable>
         </View>
       </View>
@@ -350,20 +357,24 @@ function AddCard({packId}:{packId:number}) {
           />
           {errors.back?.message && <Text>{errors.back?.message}</Text>}
 
-          <View style={[styles.saveBtnContainer]}>
-            <Pressable style={[styles.saveBtn]} onPress={() => setModalVisible(false)}>
-              <Text style={[styles.saveBtnText]}>Cancel</Text>
+          <View style={[styles.mainBtnContainer]}>
+            <Pressable style={[styles.mainBtn]} onPress={() => setModalVisible(false)}>
+              <Text style={[styles.mainBtnText]}>Cancel</Text>
             </Pressable>
-            <Pressable style={[styles.saveBtn]} onPress={handleSubmit(onSubmit)}>
-            {/* <Pressable style={[styles.saveBtn]} onPress={() => console.log("submit")}> */}
-              <Text style={[styles.saveBtnText]}>Save</Text>
+            <Pressable style={[styles.mainBtn]} onPress={handleSubmit(onSubmit)}>
+              <Text style={[styles.mainBtnText]}>Save</Text>
             </Pressable>
           </View>
         </Modal>
       </View>
-      <Pressable onPress={() => setModalVisible(true)}>
-        <RadixIcon name="plus-circled" size={60} color={Colors.dark_primary_text} />
-      </Pressable>
+      <View style={[styles.mainBtnContainer]}>
+        <Pressable style={[styles.mainBtn]} onPress={() => setModalVisible(true)}>
+          <View style={[styles.mainBtnContentContainer]}>
+            <RadixIcon name="plus" size={30} color={Colors.dark_primary_text} />
+            <Text style={[styles.mainBtnText]}>New card</Text>
+          </View>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -376,17 +387,30 @@ const styles = StyleSheet.create({
     gap: 30,
     alignContent: "center",
   },
+  titleContainer: {
+    marginHorizontal: 20,
+    marginTop: 20,
+    marginBottom: 20,
+    gap: 10,
+  },
   titleInputContainer: {
     flex: 1,
     alignContent: "stretch",
-    marginHorizontal: 20,
-    marginTop: 20,
   },
-  saveBtnContainer: {
+  titleLabel: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: Colors.dark_primary_text,
+  },
+  mainBtnContainer: {
     alignContent: "center",
     alignItems: "center",
     gap: 20,
-    marginTop: 30,
+    // marginTop: 30,
+  },
+  mainBtnContentContainer: {
+    flexDirection: "row",
+    gap: 15,
   },
   cardsContainer: {
     alignSelf: "center",
@@ -428,37 +452,53 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Colors.dark_primary_text,
   },
-  saveBtn: {
+  mainBtn: {
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: Colors.dark_accent,
+    alignItems: "center",
+    backgroundColor: Colors.light_secondary_text,
     width: 200,
     height: 50,
+    // borderWidth: 2,
+    // borderColor: Colors.dark_btn_border,
+    borderRadius: 6,
   },
-  saveBtnText: {
+  mainBtnText: {
     fontSize: 25,
     textAlign: "center",
     color: Colors.dark_primary_text,
   },
   cardTermLabel: {
     fontSize: 20,
+    fontWeight: "bold",
+    marginHorizontal: 10,
     color: Colors.dark_primary_text,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.dark_secondary_text,
   },
   cardTermText: {
     fontSize: 16,
-    color: Colors.dark_primary_text,
-    marginHorizontal: 6,
-    marginVertical: 3,
+    color: Colors.dark_secondary_text,
+    marginHorizontal: 10,
+    // marginVertical: 3,
+    marginTop: 3,
+    marginBottom: 15,
   },
   btn: {
-    backgroundColor: "#324461",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    backgroundColor: Colors.light_primary_text,
+    flexDirection: "column",
+    justifyContent: "center",
+    height: 50,
+    width: 100,
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderWidth: 2,
-    borderColor: Colors.dark_secondary_text,
+    borderColor: Colors.light_primary_text,
     borderRadius: 6,
+  },
+  btnContents: {
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   btnText: {
     fontSize: 20,

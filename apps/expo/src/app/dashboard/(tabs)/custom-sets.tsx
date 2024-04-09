@@ -108,9 +108,9 @@ function Packs() {
   }
 
   return (
-    <View>
+    <View style={[styles.setsContainer]}>
       {packs.data.map((pack) => (
-        <View key={pack.id}>
+        <View style={[styles.setContentsContainer]} key={pack.id}>
           <Pack pack={pack} />
         </View>
       ))}
@@ -233,22 +233,27 @@ const styles = StyleSheet.create({
     height: 60,
     width: 300,
     paddingVertical: 10,
+    marginBottom: 10,
     justifyContent: "center",
     alignItems: "center",
     borderColor: Colors.dark_primary_text,
     borderWidth: 1,
     borderRadius: 6,
   },
+  setsContainer: {
+    gap: 15,
+  },
   setContentsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    height: 150,
   },
   setBtnsContainer: {
     flexDirection: "column",
     justifyContent: "space-between",
-    paddingVertical: 5,
-    paddingRight: 5,
-    height: 100,
+    paddingVertical: 12,
+    paddingRight: 12,
+    height: 130,
   },
   modalContainer: {
 
