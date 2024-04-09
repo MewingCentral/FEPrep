@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useDropzone } from "@uploadthing/react";
 import PDFMerger from "pdf-merger-js/browser";
@@ -61,10 +63,10 @@ export function UpdateQuestionForm({
   const updateQuestion = api.questions.update.useMutation({
     async onSuccess() {
       await utils.questions.invalidate();
-      toast("Question created successfully");
+      toast("Question updated successfully");
     },
     onError() {
-      toast("Failed to create question");
+      toast("Failed to update question");
     },
   });
 
@@ -72,7 +74,10 @@ export function UpdateQuestionForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (values) => {
-          if (!questionPDF || !solutionPDF) return;
+          if (!questionPDF || !solutionPDF) {
+            toast("Please upload both question and solution PDFs");
+            return;
+          }
 
           const merger = new PDFMerger();
 
@@ -80,9 +85,13 @@ export function UpdateQuestionForm({
           await merger.add(solutionPDF);
 
           const blob = await merger.saveAsBlob();
-          const file = new File([blob], `${values.title ?? "Merged"}.pdf`, {
-            type: "application/pdf",
-          });
+          const file = new File(
+            [blob],
+            `${values.title ?? `${values.semester} ${values.section} Question ${values.questionNumber}`}.pdf`,
+            {
+              type: "application/pdf",
+            },
+          );
 
           const uploadPDF = await startUpload([file]);
           if (!uploadPDF?.[0]?.serverData.fileUrl) {
@@ -234,7 +243,7 @@ export function UpdateQuestionForm({
         >
           {isUploading || updateQuestion.isPending
             ? "Uploading..."
-            : "Create Question"}
+            : "Update Question"}
         </Button>
       </form>
     </Form>
@@ -266,7 +275,7 @@ function QuestionUploader({
       <Label>Question PDF</Label>
       <div
         {...getRootProps()}
-        className="mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
+        className="mb-2 mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
       >
         {question ? (
           <div className="text-sm">{question.name}</div>
@@ -275,6 +284,9 @@ function QuestionUploader({
         )}
         <input className="sr-only" {...getInputProps()} />
       </div>
+      <p className="text-[0.8rem] text-muted-foreground">
+        PDFs must be one page in length
+      </p>
     </div>
   );
 }
@@ -304,7 +316,7 @@ function SolutionUploader({
       <Label>Solution PDF</Label>
       <div
         {...getRootProps()}
-        className="mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
+        className="mb-2 mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
       >
         {solution ? (
           <div className="text-sm">{solution.name}</div>
@@ -313,6 +325,9 @@ function SolutionUploader({
         )}
         <input className="sr-only" {...getInputProps()} />
       </div>
+      <p className="text-[0.8rem] text-muted-foreground">
+        PDFs must be one page in length
+      </p>
     </div>
   );
 }

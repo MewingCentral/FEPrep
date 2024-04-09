@@ -2,11 +2,21 @@ import React from "react";
 
 import type { RouterOutputs } from "@feprep/api";
 import { validateRequest } from "@feprep/auth";
-import { cn } from "@feprep/ui";
+import { cn, Pencil2Icon } from "@feprep/ui";
 import { Badge } from "@feprep/ui/badge";
+import { Button } from "@feprep/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@feprep/ui/sheet";
 
 import { QuestionPDF } from "./question-pdf";
 import { QuestionVoting } from "./question-voting";
+import { UpdateQuestionForm } from "./update-question-form";
 
 export async function Left({
   question,
@@ -63,6 +73,25 @@ export async function Left({
         <QuestionPDF file={question.pdf} />
       </div>
       <QuestionVoting question={question} user={user!} />
+      {user!.type === "Teacher" && (
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button>
+              <Pencil2Icon className="mr-2 h-4 w-4" />
+              <span>Update Queston</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Update Question</SheetTitle>
+              <SheetDescription>
+                Update the question details and upload a new PDF file.
+              </SheetDescription>
+              <UpdateQuestionForm question={question} />
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+      )}
     </div>
   );
 }

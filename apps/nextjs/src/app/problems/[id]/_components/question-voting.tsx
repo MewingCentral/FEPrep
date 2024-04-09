@@ -35,7 +35,7 @@ export function QuestionVoting({
   });
 
   return (
-    <div>
+    <div className="mb-4">
       <div className="mb-2">What you think about this question?</div>
       <div className="flex gap-2">
         <Button

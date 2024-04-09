@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { UTApi } from "uploadthing/server";
 import { z } from "zod";
 
 import { TOPICS } from "@feprep/consts";
@@ -41,7 +42,25 @@ export const questionsRouter = createTRPCRouter({
     }),
   update: adminProcedure
     .input(UpdateQuestionSchema)
-    .mutation(({ ctx, input: { questionId, ...question } }) => {
+    .mutation(async ({ ctx, input: { questionId, ...question } }) => {
+      const utapi = new UTApi();
+
+      // Delete the previous question and solution pdfs
+      const previousQuestion = await ctx.db.query.questions.findFirst({
+        where: eq(questions.id, questionId),
+      });
+
+      if (!previousQuestion) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Question not found",
+        });
+      }
+
+      if (question.pdf) {
+        await utapi.deleteFiles(previousQuestion.pdf.split("/").pop()!);
+      }
+
       return ctx.db
         .update(questions)
         .set(question)

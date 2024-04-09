@@ -12,7 +12,9 @@ import { DIFFICULTIES, SECTIONS, TOPICS } from "@feprep/consts";
 import { users } from "./users";
 
 export const questions = sqliteTable("question", {
-  id: integer("id").primaryKey(),
+  id: integer("id").primaryKey({
+    autoIncrement: true,
+  }),
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
