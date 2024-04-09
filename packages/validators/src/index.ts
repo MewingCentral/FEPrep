@@ -41,7 +41,7 @@ export const ResetPasswordSchema = z.object({
 export type ResetPasswordInput = z.infer<typeof ResetPasswordSchema>;
 
 export const SendResetPasswordEmailSchema = z.object({
-  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),  
+  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),
 });
 
 export type SendResetPasswordEmailInput = z.infer<
