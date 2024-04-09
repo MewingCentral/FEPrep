@@ -46,10 +46,10 @@ export default function HomePage() {
         </div>
       </div>
       <div className="flex min-h-screen flex-1 flex-col items-center justify-center">
-        <div className="flex flex-row content-center items-center justify-center gap-4 text-3xl font-normal leading-normal text-red-500">
+        <div className="flex flex-row content-center items-center justify-center gap-1 text-3xl font-normal leading-normal text-red-500">
           <h2>Made with</h2>
           <Link href="/about">
-            <HeartIcon className="h-auto w-[40px] transition-all duration-500 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-foreground" />
+            <HeartIcon className="h-[30px] w-[30px] transition-all duration-500 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-foreground" />
           </Link>
           <h2>in central Florida.</h2>
 
@@ -59,7 +59,7 @@ export default function HomePage() {
             </Link>
           </div> */}
         </div>
-        <p className="mx-4 text-center lg:mx-16">
+        <p className="mx-4 w-3/4 text-center text-xl lg:mx-16">
           UCF strives to help every student unleash their greatest potential.
           Through a competitive curriculum and high academic excellence upheld
           by standardized tests like the Foundation Exam, students and alumni

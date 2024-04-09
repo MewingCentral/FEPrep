@@ -85,7 +85,7 @@ async function generateEmailVerificationCode(
     userId,
     email,
     code,
-    expiresAt: createDate(new TimeSpan(10, "m")).getSeconds(), // 10 minutes
+    expiresAt: createDate(new TimeSpan(10, "m")).getTime(), // 10 minutes
   });
   return code;
 }
