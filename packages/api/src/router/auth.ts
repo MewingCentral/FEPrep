@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { TRPCError } from "@trpc/server";
 import { createDate } from "oslo";
 import { alphabet, generateRandomString } from "oslo/crypto";
@@ -17,8 +16,8 @@ import {
   resend,
 } from "@feprep/transactional";
 import {
-  ForgotPasswordSchema,
   ResetPasswordSchema,
+  SendResetPasswordEmailSchema,
   SignInSchema,
   SignUpFormSchema,
   VerifyEmailSchema,
@@ -133,7 +132,7 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      if (emailVerificationCode.expiresAt < new Date().getSeconds()) {
+      if (emailVerificationCode.expiresAt < new Date().getTime()) {
         return new TRPCError({
           code: "BAD_REQUEST",
           message: "Email verification code has expired",
@@ -154,20 +153,16 @@ export const authRouter = createTRPCRouter({
         .where(eq(users.id, ctx.user.id));
 
       const session = await lucia.createSession(ctx.user.id, {});
-      const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
 
       return { session: session.id, userId: ctx.user.id };
     }),
-  forgotPassword: publicProcedure
-    .input(ForgotPasswordSchema)
+  sendResetPassWordEmail: publicProcedure
+    .input(SendResetPasswordEmailSchema)
     .mutation(async ({ ctx, input }) => {
+      const email = `${input.nid}@ucf.edu`;
+
       const user = await ctx.db.query.users.findFirst({
-        where: (table, { eq }) => eq(table.email, input.email),
+        where: (table, { eq }) => eq(table.email, email),
       });
 
       if (!user?.emailVerified) {
@@ -179,12 +174,12 @@ export const authRouter = createTRPCRouter({
 
       const passwordResetToken = await generatePasswordResetToken(user.id);
 
-      const resetPasswordLink = `${process.env.APP_URL}/reset-password?token=${passwordResetToken}`;
+      const resetPasswordLink = `${process.env.APP_URL}/reset-password/${passwordResetToken}`;
 
       try {
         await resend.emails.send({
           from: "team@feprep.org",
-          to: input.email,
+          to: email,
           subject: "Reset your password",
           html: renderResetPassword(resetPasswordLink),
         });
@@ -225,7 +220,7 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      if (passwordResetToken.expiresAt < new Date().getSeconds()) {
+      if (passwordResetToken.expiresAt < new Date().getTime()) {
         return new TRPCError({
           code: "BAD_REQUEST",
           message: "Password reset link has expired",
@@ -241,15 +236,44 @@ export const authRouter = createTRPCRouter({
         .where(eq(users.id, passwordResetToken.userId));
 
       const session = await lucia.createSession(passwordResetToken.userId, {});
-      const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
 
       return { session: session.id, userId: passwordResetToken.userId };
     }),
+  sendEmailVerificationEmail: protectedProcedure.mutation(async ({ ctx }) => {
+    const lastEmailVerificationCode =
+      await ctx.db.query.emailVerificationCodes.findFirst({
+        where: eq(emailVerificationCodes.userId, ctx.user.id),
+        columns: { expiresAt: true },
+      });
+
+    if (
+      lastEmailVerificationCode &&
+      lastEmailVerificationCode.expiresAt > new Date().getTime()
+    ) {
+      return new TRPCError({
+        code: "BAD_REQUEST",
+        message: `Email verification code already sent. Please wait ${lastEmailVerificationCode.expiresAt} seconds`,
+      });
+    }
+
+    try {
+      const verificationCode = await generateEmailVerificationCode(
+        ctx.user.id,
+        ctx.user.email,
+      );
+      await resend.emails.send({
+        to: ctx.user.email,
+        from: "team@feprep.org",
+        subject: "Verify your email",
+        html: renderEmailVerification(verificationCode),
+      });
+    } catch {
+      return new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Failed to send verification email",
+      });
+    }
+  }),
   getSession: publicProcedure.query(({ ctx }) => {
     return ctx.session;
   }),
@@ -258,12 +282,6 @@ export const authRouter = createTRPCRouter({
   }),
   signOut: protectedProcedure.mutation(async ({ ctx }) => {
     await lucia.invalidateSession(ctx.session.id);
-    const sessionCookie = lucia.createBlankSessionCookie();
-    cookies().set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes,
-    );
   }),
 });
 
@@ -277,7 +295,7 @@ export async function generatePasswordResetToken(
   await db.insert(passwordResetTokens).values({
     id: tokenId,
     userId,
-    expiresAt: createDate(new TimeSpan(2, "h")).getSeconds(),
+    expiresAt: createDate(new TimeSpan(2, "h")).getTime(),
   });
   return tokenId;
 }
@@ -294,7 +312,7 @@ export async function generateEmailVerificationCode(
     userId,
     email,
     code,
-    expiresAt: createDate(new TimeSpan(10, "m")).getSeconds(), // 10 minutes
+    expiresAt: createDate(new TimeSpan(10, "m")).getTime(),
   });
   return code;
 }

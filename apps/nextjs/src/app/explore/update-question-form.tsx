@@ -4,7 +4,7 @@ import PDFMerger from "pdf-merger-js/browser";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
 import type { RouterOutputs } from "@feprep/api";
-import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+import { DIFFICULTIES, SECTIONS, TOPICS } from "@feprep/consts";
 import { Button } from "@feprep/ui/button";
 import {
   Form,
@@ -131,7 +131,7 @@ export function UpdateQuestionForm({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {SEMESTERS.map((semester) => (
+                  {DIFFICULTIES.map((semester) => (
                     <SelectItem key={semester} value={semester}>
                       {semester}
                     </SelectItem>

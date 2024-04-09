@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@feprep/ui/tabs";
 import { Nav } from "./nav";
 import { QuestionsTab } from "./questions-tab";
 
-export default async function Explore() {
+export default async function Page() {
   const { user } = await validateRequest();
 
   return (

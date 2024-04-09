@@ -4,7 +4,7 @@ import PDFMerger from "pdf-merger-js/browser";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
 import type { User } from "@feprep/auth";
-import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+import { DIFFICULTIES, SECTIONS, TOPICS } from "@feprep/consts";
 import { Button } from "@feprep/ui/button";
 import {
   Form,
@@ -40,7 +40,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
     defaultValues: {
       userId: user.id,
       title: "",
-      semester: SEMESTERS[0],
+      semester: DIFFICULTIES[0],
       section: SECTIONS[0],
       topic: TOPICS[0],
       averageScore: 0,
@@ -139,7 +139,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {SEMESTERS.map((semester) => (
+                  {DIFFICULTIES.map((semester) => (
                     <SelectItem key={semester} value={semester}>
                       {semester}
                     </SelectItem>
