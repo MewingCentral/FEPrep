@@ -14,7 +14,6 @@ import {
   useForm,
 } from "@feprep/ui/form";
 import { Input } from "@feprep/ui/input";
-
 import { toast } from "@feprep/ui/toast";
 import {
   Tooltip,
@@ -45,7 +44,7 @@ export function AddResourceForm({
   const createResource = api.resources.create.useMutation({
     onSuccess: async () => {
       await utils.resources.allByQuestionId.invalidate();
-      form.reset()
+      form.reset();
       toast("Resource added successfully!");
     },
     onError: () => {
