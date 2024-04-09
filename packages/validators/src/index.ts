@@ -55,9 +55,6 @@ export const VerifyEmailSchema = z.object({
 export type VerifyEmailInput = z.infer<typeof VerifyEmailSchema>;
 
 export const CreateQuestionSchema = z.object({
-  id: z.number({
-    coerce: true,
-  }),
   userId: z.string(),
   title: z.string().optional(),
   pdf: z.string(),

@@ -67,7 +67,10 @@ export function CreateQuestionForm({ user }: { user: User }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (values) => {
-          if (!questionPDF || !solutionPDF) return;
+          if (!questionPDF || !solutionPDF) {
+            toast("Please upload both question and solution PDFs");
+            return;
+          }
 
           const merger = new PDFMerger();
 
@@ -96,19 +99,6 @@ export function CreateQuestionForm({ user }: { user: User }) {
         })}
         className="flex w-full flex-col gap-2 py-4"
       >
-        <FormField
-          name="id"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Id</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="Id" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           name="title"
           control={form.control}
@@ -274,7 +264,7 @@ function QuestionUploader({
       <Label>Question PDF</Label>
       <div
         {...getRootProps()}
-        className="mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
+        className="mb-2 mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
       >
         {question ? (
           <div className="text-sm">{question.name}</div>
@@ -283,7 +273,9 @@ function QuestionUploader({
         )}
         <input className="sr-only" {...getInputProps()} />
       </div>
-      <FormDescription>PDFs must be one page in length</FormDescription>
+      <p className="text-[0.8rem] text-muted-foreground">
+        PDFs must be one page in length
+      </p>
     </div>
   );
 }
@@ -313,7 +305,7 @@ function SolutionUploader({
       <Label>Solution PDF</Label>
       <div
         {...getRootProps()}
-        className="mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
+        className="mb-2 mt-2 flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-accent px-6 py-8 text-center"
       >
         {solution ? (
           <div className="text-sm">{solution.name}</div>
@@ -322,6 +314,9 @@ function SolutionUploader({
         )}
         <input className="sr-only" {...getInputProps()} />
       </div>
+      <p className="text-[0.8rem] text-muted-foreground">
+        PDFs must be one page in length
+      </p>
     </div>
   );
 }
