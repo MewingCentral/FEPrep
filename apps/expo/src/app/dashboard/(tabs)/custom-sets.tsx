@@ -21,8 +21,11 @@ function Pack({ packName, packId }: { packName: string; packId: number }) {
   const router = useRouter();
   const [isDeleted, setIsDeleted] = useState(false);
 
+  const utils = api.useUtils();
+
   const deletePack = api.flashcards.deletePack.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
+      utils.flashcards.readPack.invalidate();
       console.log("successfully deleted pack ", packId);
     },
     onError: (error) => {
