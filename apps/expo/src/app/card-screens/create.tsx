@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateFlashcardPackInput, CreateFlashcardPackSchema } from "@feprep/validators";
 import * as SecureStore from "expo-secure-store";
 import { api } from "~/utils/api";
+import { router } from "expo-router";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function cardCreation() {
   const userId = SecureStore.getItem("userId")!;
@@ -29,6 +31,7 @@ export default function cardCreation() {
   const createPack = api.flashcards.createPack.useMutation({
     onSuccess: async () => {
       await utils.flashcards.readPacks.invalidate();
+      router.back();
     },
     onError: (error) => {
       console.error(error);
@@ -42,90 +45,92 @@ export default function cardCreation() {
   
   return (
     <SafeAreaView style={[styles.screenContainer]}>
-      {/* Title input */}
-      <View style={{ flexDirection: "row" }}>
-        <View style={[styles.container, styles.inputContainer, styles.deleteYellowBorder]}>
-          <Controller 
-              control={control}
-              name="name"
-              render={({ field: {onChange, onBlur, value }}) => (
-                <TextInput 
-                  style={[styles.input]}
-                  placeholder="Enter title"
-                  keyboardType="default"
-                  onChangeText={(value) => onChange(value)}
-                  onBlur={onBlur}
-                  value={value}
-                />
-              )}
-            />
+      <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
+        {/* Title input */}
+        <View style={{ flexDirection: "row" }}>
+          <View style={[styles.container, styles.inputContainer, styles.deleteYellowBorder]}>
+            <Controller 
+                control={control}
+                name="name"
+                render={({ field: {onChange, onBlur, value }}) => (
+                  <TextInput 
+                    style={[styles.input]}
+                    placeholder="Enter title"
+                    keyboardType="default"
+                    onChangeText={(value) => onChange(value)}
+                    onBlur={onBlur}
+                    value={value}
+                  />
+                )}
+              />
+          </View>
         </View>
-      </View>
 
-      {/* Save changes */}
-      <View style={[styles.saveBtnContainer]}>
-        <Pressable style={[styles.saveBtn]} onPress={handleSubmit(onSubmit)}>
-          <Text style={[styles.saveBtnText]}>Save changes</Text>
+        {/* Save changes */}
+        <View style={[styles.saveBtnContainer]}>
+          <Pressable style={[styles.saveBtn]} onPress={handleSubmit(onSubmit)}>
+            <Text style={[styles.saveBtnText]}>Save changes</Text>
+          </Pressable>
+        </View>
+
+        {/* Card forms */}
+        <View style={[styles.container, styles.cardsContainer]}>
+          {/* Individual card form */}
+          <View style={[styles.container, styles.cardContainer]}>
+            <View style={[styles.cardInputContainer]}>
+              <TextInput
+                style={[styles.input]}
+                placeholder="Enter term"
+                placeholderTextColor={Colors.dark_secondary_text}
+                cursorColor={Colors.dark_primary_text}
+              />
+              <Text style={[styles.cardInputLabel]}>Term</Text>
+            </View>
+
+            <View style={[styles.cardInputContainer]}>
+              <TextInput
+                style={[styles.input]}
+                placeholder="Enter definition"
+                placeholderTextColor={Colors.dark_secondary_text}
+                cursorColor={Colors.dark_primary_text}
+              />
+              <Text style={[styles.cardInputLabel]}>Definition</Text>
+            </View>
+          </View>
+
+          {/* Individual card form */}
+          <View style={[styles.container, styles.cardContainer]}>
+            <View style={[styles.cardInputContainer]}>
+              <TextInput
+                style={[styles.input]}
+                placeholder="Enter term"
+                placeholderTextColor={Colors.dark_secondary_text}
+                cursorColor={Colors.dark_primary_text}
+              />
+              <Text style={[styles.cardInputLabel]}>Term</Text>
+            </View>
+
+            <View style={[styles.cardInputContainer]}>
+              <TextInput
+                style={[styles.input]}
+                placeholder="Enter definition"
+                placeholderTextColor={Colors.dark_secondary_text}
+                cursorColor={Colors.dark_primary_text}
+              />
+              <Text style={[styles.cardInputLabel]}>Definition</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Add more button */}
+        <Pressable>
+          <RadixIcon
+            name="plus-circled"
+            size={60}
+            color={Colors.dark_primary_text}
+          />
         </Pressable>
-      </View>
-
-      {/* Card forms */}
-      <View style={[styles.container, styles.cardsContainer]}>
-        {/* Individual card form */}
-        <View style={[styles.container, styles.cardContainer]}>
-          <View style={[styles.cardInputContainer]}>
-            <TextInput
-              style={[styles.input]}
-              placeholder="Enter term"
-              placeholderTextColor={Colors.dark_secondary_text}
-              cursorColor={Colors.dark_primary_text}
-            />
-            <Text style={[styles.cardInputLabel]}>Term</Text>
-          </View>
-
-          <View style={[styles.cardInputContainer]}>
-            <TextInput
-              style={[styles.input]}
-              placeholder="Enter definition"
-              placeholderTextColor={Colors.dark_secondary_text}
-              cursorColor={Colors.dark_primary_text}
-            />
-            <Text style={[styles.cardInputLabel]}>Definition</Text>
-          </View>
-        </View>
-
-        {/* Individual card form */}
-        <View style={[styles.container, styles.cardContainer]}>
-          <View style={[styles.cardInputContainer]}>
-            <TextInput
-              style={[styles.input]}
-              placeholder="Enter term"
-              placeholderTextColor={Colors.dark_secondary_text}
-              cursorColor={Colors.dark_primary_text}
-            />
-            <Text style={[styles.cardInputLabel]}>Term</Text>
-          </View>
-
-          <View style={[styles.cardInputContainer]}>
-            <TextInput
-              style={[styles.input]}
-              placeholder="Enter definition"
-              placeholderTextColor={Colors.dark_secondary_text}
-              cursorColor={Colors.dark_primary_text}
-            />
-            <Text style={[styles.cardInputLabel]}>Definition</Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Add more button */}
-      <Pressable>
-        <RadixIcon
-          name="plus-circled"
-          size={60}
-          color={Colors.dark_primary_text}
-        />
-      </Pressable>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
