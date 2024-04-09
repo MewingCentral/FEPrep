@@ -8,7 +8,7 @@ export default async function Explore() {
   const { user } = await validateRequest();
 
   return (
-    <div className="mx-auto flex h-screen w-full flex-col">
+    <div className="mx-auto flex h-screen w-full max-w-screen-xl flex-col">
       <Nav user={user} />
       <Tabs
         className="flex flex-1 flex-col p-6 lg:min-h-0"
