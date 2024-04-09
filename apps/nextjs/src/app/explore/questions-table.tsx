@@ -83,6 +83,10 @@ export function QuestionsTable({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const resetAllFilters = () => {
+    setColumnFilters([]);
+  }
+  
   return (
     <div>
       {/* Filtering options */}
@@ -100,6 +104,10 @@ export function QuestionsTable({
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
         />
+        <Button onClick={resetAllFilters}>
+          <ReloadIcon className="mr-2 h-4 w-4" />
+          Clear Filters
+        </Button>
         <div className="relative flex flex-1 items-center">
           <MagnifyingGlassIcon className="absolute left-2.5 text-muted-foreground" />
           <Input
