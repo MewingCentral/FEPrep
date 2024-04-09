@@ -15,6 +15,6 @@ export const flashcards = sqliteTable("flashcard", {
   packId: integer("flashcard_pack_id")
     .notNull()
     .references(() => flashcardPacks.id),
-  front: text("front"),
-  back: text("back"),
+  front: text("front").notNull(),
+  back: text("back").notNull(),
 });

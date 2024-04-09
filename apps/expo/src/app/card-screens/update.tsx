@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { api } from "~/utils/api";
+import { RouterOutputs, api } from "~/utils/api";
 import Colors from "~/utils/colors";
 import { flashcardPacks } from "../../../../../packages/db/src/schema/flashcards";
 import { useState } from "react";
@@ -9,85 +9,12 @@ import { UpdateFlashcardInput, UpdateFlashcardSchema } from "@feprep/validators"
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RadixIcon } from "radix-ui-react-native-icons";
+import {Dimensions} from 'react-native';
 
-function Card({ term, def } : {term:string|null, def:string|null}) {
-    const {
-        control,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        resolver: zodResolver(UpdateFlashcardSchema),
-        defaultValues: {
-            packId: 0,
-            front: "",
-            back: "",
-            flashcardId: 0,
-        },
-    });
-
-    const updateCard = api.flashcards.updateCard.useMutation({
-        onSuccess: (data) => {
-            console.log("card updated in db");
-        },
-        onError: (error) => {
-            console.error(error);
-        }
-    });
-
-    const onSubmit = (values: UpdateFlashcardInput) => {
-        updateCard.mutate(values);
-        // values.forEach((cardInput) => {
-        //     updateCard.mutate(cardInput);
-        // })
-    };
-
-    return (
-        <View style={[styles.cardContainer]}>
-            <View style={[styles.cardInputContainer, styles.termGroupContainer]}>
-                <View>
-                    {
-                        term === null ?
-                        <TextInput 
-                            style={[styles.input, styles.termInput]}
-                            placeholder="Enter term"
-                            placeholderTextColor={Colors.dark_primary_text}
-                            cursorColor={Colors.dark_primary_text}
-                        /> :
-                        <TextInput 
-                            style={[styles.input, styles.termInput]}
-                            defaultValue={term}
-                            placeholder="Enter term"
-                            placeholderTextColor={Colors.dark_primary_text}
-                            cursorColor={Colors.dark_primary_text}
-                        />
-                    }
-                </View>
-                <Pressable style={[styles.delBtn]} onPress={() => alert("deleting!!")}>
-                    <RadixIcon name="trash" color={Colors.dark_secondary_text} size={30} />
-                </Pressable>
-            </View>
-
-            <View style={[styles.cardInputContainer]}>
-                {
-                    def === null ?
-                    <TextInput 
-                        style={[styles.input]}
-                        placeholder="Enter definition"
-                        placeholderTextColor={Colors.dark_primary_text}
-                        cursorColor={Colors.dark_primary_text}
-                    /> :
-                    <TextInput 
-                        style={[styles.input]}
-                        defaultValue={def}
-                        placeholder="Enter definition"
-                        placeholderTextColor={Colors.dark_primary_text}
-                        cursorColor={Colors.dark_primary_text}
-                    />
-                }
-            </View>
-        </View>
-    );
-}
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const modalMarginHorizontal = windowWidth / 9;
+const modalMarginVertical = windowHeight / 6;
 
 export default function UpdateCards() {
     const { pId, pName } = useLocalSearchParams();
@@ -97,80 +24,10 @@ export default function UpdateCards() {
     const cards = api.flashcards.readCards.useQuery(packId);
     console.log(cards.data);
 
-    const {
-        control,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        resolver: zodResolver(UpdateFlashcardSchema),
-        defaultValues: {
-            packId: 0,
-            front: "",
-            back: "",
-            flashcardId: 0,
-        },
-    });
-
-    const updateCard = api.flashcards.updateCard.useMutation({
-        onSuccess: (data) => {
-            console.log("card updated in db");
-        },
-        onError: (error) => {
-            console.error(error);
-        }
-    });
-
-    const onSubmit = (values: UpdateFlashcardInput[]) => {
-        values.forEach((cardInput) => {
-            updateCard.mutate(cardInput);
-        })
-    };
-
-    const [cardSubmitHandlers, setCardSubmitHandlers] = useState([]);
-
     const flashcards = 
         cards && cards.data && !cards.isLoading && !cards.isError ? (
             cards.data.map((item) => (
-                <Card term={item.front} def={item.back} key={item.id} />
-                // <View style={[styles.cardContainer]}>
-                // <View style={[styles.cardInputContainer]}>
-                //     {
-                //         item.front === null ?
-                //         <TextInput 
-                //             style={[styles.input]}
-                //             placeholder="Enter term"
-                //             placeholderTextColor={Colors.dark_primary_text}
-                //             cursorColor={Colors.dark_primary_text}
-                //         /> :
-                //         <TextInput 
-                //             style={[styles.input]}
-                //             defaultValue={item.front}
-                //             placeholder="Enter term"
-                //             placeholderTextColor={Colors.dark_primary_text}
-                //             cursorColor={Colors.dark_primary_text}
-                //         />
-                //     }
-                // </View>
-        
-                // <View style={[styles.cardInputContainer]}>
-                //     {
-                //         item.back === null ?
-                //         <TextInput 
-                //             style={[styles.input]}
-                //             placeholder="Enter definition"
-                //             placeholderTextColor={Colors.dark_primary_text}
-                //             cursorColor={Colors.dark_primary_text}
-                //         /> :
-                //         <TextInput 
-                //             style={[styles.input]}
-                //             defaultValue={item.back}
-                //             placeholder="Enter definition"
-                //             placeholderTextColor={Colors.dark_primary_text}
-                //             cursorColor={Colors.dark_primary_text}
-                //         />
-                //     }
-                // </View>
-                // </View>
+                <Card card={item} key={item.id} />
             ))
         ) : (
             <View>
@@ -203,6 +60,121 @@ export default function UpdateCards() {
     );
 }
 
+function Card({ card } : {card: RouterOutputs["flashcards"]["readCards"][number]}) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(UpdateFlashcardSchema),
+        defaultValues: {
+            packId: card.packId,
+            front: card.front,
+            back: card.back,
+            flashcardId: card.id,
+        },
+    });
+
+    const utils = api.useUtils();
+
+    const updateCard = api.flashcards.updateCard.useMutation({
+        onSuccess: async (data) => {
+            utils.flashcards.readCards.invalidate();
+            setModalVisible(false);
+        },
+        onError: (error) => {
+            console.error(error);
+        }
+    });
+
+    const onSubmit = (values: UpdateFlashcardInput) => {
+        console.log(values);
+        updateCard.mutate(values);
+    };
+
+    return (
+        <View>
+            <View>
+                <Modal visible={modalVisible}
+                    style={[styles.modalContainer]}
+                    animationType="slide"
+                    onRequestClose={() => {
+                        setModalVisible(false);
+                    }}>
+                    <Pressable onPress={() => {
+                        setModalVisible(false);
+                    }}>
+                        <RadixIcon name="cross-1" color={Colors.dark_secondary_text} />
+                    </Pressable>
+                    <View style={{margin:10}}>
+                        <Text>New Term</Text>
+                        <Controller 
+                            control={control}
+                            name="front"
+                            render={({ field: { onChange, onBlur, value }}) => (
+                                <TextInput 
+                                    placeholder="Enter term"
+                                    keyboardType="default"
+                                    onChangeText={(value) => onChange(value)}
+                                    onBlur={onBlur}
+                                    value={value}
+                                />
+                            )}
+                        />
+                        <Text>New Definition</Text>
+                        <Controller
+                            control={control}
+                            name="back"
+                            render={({ field: { onChange, onBlur, value }}) => (
+                                <TextInput 
+                                    placeholder="Enter definition"
+                                    keyboardType="default"
+                                    onChangeText={(value) => onChange(value)}
+                                    onBlur={onBlur}
+                                    value={value}
+                                />
+                            )}
+                        /> 
+                        <Pressable style={{borderWidth: 1, borderColor: "black"}}
+                            onPress={() => setModalVisible(false)}>
+                            <Text>Cancel</Text>
+                        </Pressable>   
+                        <Pressable style={{borderWidth: 1, borderColor: "black", marginTop: 15, height: 100, width: 100}}
+                            onPress={handleSubmit(onSubmit)}>
+                            <Text>Save</Text>
+                        </Pressable>      
+                    </View>
+                </Modal>     
+            </View>
+            <View style={[styles.cardContainer]}>
+                <View style={[styles.cardTextContainer]}>
+                    <Text style={[styles.cardTermLabel]}>Term</Text>
+                    <View style={[styles.cardTermTextContainer]}>
+                        <Text style={[styles.cardTermText]}>{card.front}</Text>
+                    </View>
+                    <Text style={[styles.cardTermLabel]}>Definition</Text>
+                    <View style={[styles.cardTermTextContainer]}>
+                        <Text style={[styles.cardTermText]}>{card.back}</Text>
+                    </View>
+                </View>
+                <View style={[styles.btnsContainer]}>
+                    <Pressable style={[styles.btn]} onPress={() => {
+                        setModalVisible(true);
+                    }}>
+                        <Text style={[styles.btnText]}>Edit</Text>
+                        <RadixIcon name="pencil-2" color={Colors.dark_primary_text} />
+                    </Pressable>
+                    <Pressable style={[styles.btn]}>
+                        <Text style={[styles.btnText]}>Delete</Text>
+                        <RadixIcon name="trash" color={Colors.dark_primary_text} />
+                    </Pressable>
+                </View>
+            </View> 
+        </View>
+    );
+}
+
 const styles = StyleSheet.create({
     screenContainer: {
         flexGrow: 1,
@@ -226,18 +198,29 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         minHeight: 180,
         width: 300,
+        gap: 25,
         backgroundColor: Colors.dark_sec,
         borderColor: "rgba(148, 163, 184, 0.50)",
         borderWidth: 2,
         borderRadius: 6,
     },
-    cardInputContainer: {
-        padding: 15,
-        gap: 10,
+    cardTextContainer: {
+        marginTop: 10,
+        marginHorizontal: 10,
+        gap: 5,
     },
-    termGroupContainer: {
+    cardTermTextContainer: {
+        marginBottom: 5,
+    },
+    btnsContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
+        width: 300,
+        marginBottom: 10,
+    },
+    modalContainer: {
+        backgroundColor: "#00000080",
+        height: 100,
     },
     input: {
         fontSize: 20,
@@ -245,11 +228,29 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: Colors.dark_primary_text,
     },
-    termInput: {
-        width: 200,
+    cardTermLabel: {
+        fontSize: 20,
+        color: Colors.dark_primary_text,
     },
-    delBtn: {
-        alignSelf: "flex-end",
+    cardTermText: {
+        fontSize: 16,
+        color: Colors.dark_primary_text,
+        marginHorizontal: 6,
+        marginVertical: 3,
+    },
+    btn: {
+        backgroundColor: "#324461",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderWidth: 2,
+        borderColor: Colors.dark_secondary_text,
+        borderRadius: 6,
+    },
+    btnText: {
+        fontSize: 20,
+        color: Colors.dark_primary_text,
     },
     delYellowBorder: {
         borderWidth: 1,
