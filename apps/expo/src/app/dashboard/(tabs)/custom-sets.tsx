@@ -1,5 +1,6 @@
 import {
   KeyboardAvoidingView,
+  Modal,
   Pressable,
   StyleSheet,
   Text,
@@ -15,6 +16,9 @@ import { RadixIcon } from "radix-ui-react-native-icons";
 import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { CreateFlashcardPackSchema } from "@feprep/validators";
 
 function Pack({
   pack,
@@ -114,6 +118,8 @@ function Packs() {
 }
 
 export default function Tab() {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       <KeyboardAwareScrollView>
@@ -136,6 +142,29 @@ export default function Tab() {
           </View>
         </KeyboardAvoidingView>
 
+          {/* <View>
+            <Modal
+              visible={modalVisible}
+              style={[styles.modalContainer]}
+              animationType="slide"
+              onRequestClose{() => {
+                setModalVisible(false);
+              }}
+            >
+
+              <Pressable onPress={() => {
+                setModalVisible(false);
+              }}>
+                <RadixIcon name="cross-1" color={Colors.dark_secondary_text} />
+              </Pressable>
+              <View>
+                <Text>Term</Text>
+
+              </View>
+
+          </Modal>
+        </View> */}
+
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           {/* Create new set button */}
           <Link
@@ -143,7 +172,9 @@ export default function Tab() {
             href="../../card-screens/create"
             asChild
           >
-            <Pressable>
+            <Pressable onPress={() => {
+
+            }}>
               <Text style={[dashStyles.titleText]}>Create set</Text>
               <Text style={[dashStyles.titleText]}>+</Text>
             </Pressable>
@@ -177,6 +208,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingRight: 5,
     height: 100,
+  },
+  modalContainer: {
+
   },
   errorTxt: {
     fontSize: 20,
