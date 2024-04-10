@@ -116,7 +116,11 @@ function Packs() {
   );
 }
 
-function SearchPacks({packs}:{packs:RouterOutputs["flashcards"]["readPack"]}) {
+function SearchPacks({
+  packs,
+}: {
+  packs: RouterOutputs["flashcards"]["readPack"];
+}) {
   console.log("packs: ", packs);
   const [searchInput, setSearchInput] = useState("");
   console.log("search input: ", searchInput);
@@ -130,7 +134,8 @@ function SearchPacks({packs}:{packs:RouterOutputs["flashcards"]["readPack"]}) {
   return (
     <View>
       <KeyboardAvoidingView
-          style={[{ flexDirection: "row", alignItems: "stretch" }]}>
+        style={[{ flexDirection: "row", alignItems: "stretch" }]}
+      >
         <View style={[dashStyles.container, dashStyles.inputContainer]}>
           <TextInput
             style={[dashStyles.input]}
@@ -144,9 +149,11 @@ function SearchPacks({packs}:{packs:RouterOutputs["flashcards"]["readPack"]}) {
             }}
             value={searchInput}
           />
-          <Pressable onPress={() => {
-            console.log(searchInput)
-          }}>
+          <Pressable
+            onPress={() => {
+              console.log(searchInput);
+            }}
+          >
             <RadixIcon
               name="magnifying-glass"
               color={Colors.dark_primary_text}
@@ -211,7 +218,6 @@ export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       <KeyboardAwareScrollView>
-
         <View>
           <Modal
             isVisible={modalVisible}
