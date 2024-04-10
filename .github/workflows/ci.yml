@@ -32,7 +32,7 @@ jobs:
         run: cp .env.example .env
 
       - name: add database url
-        run: echo http://localhost:3000 >> .env
+        run: echo DATABASE_URL=http://localhost:3000 >> .env
 
       - name: Test (Vitest)
         run: pnpm -F api test
