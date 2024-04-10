@@ -95,7 +95,7 @@ export const questionsRouter = createTRPCRouter({
       if (existingVote?.vote === input.vote) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "You have already voted with thiss option",
+          message: "You have already voted with this option",
         });
       }
 
