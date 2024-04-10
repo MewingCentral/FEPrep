@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import { StatusBar } from "expo-status-bar";
+import { StatusBar, setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
@@ -46,6 +46,7 @@ export default function Register() {
     onSuccess: (data) => {
       if (!(data instanceof Error)) {
         SecureStore.setItem("session", data.session);
+        SecureStore.setItem("userId", data.userId);
         setSessionId(data.session);
         router.push("../dashboard/(tabs)/study-sets/");
       }

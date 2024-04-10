@@ -25,6 +25,7 @@ export default function UpdateCards() {
   const userId = uId && typeof uId === "string" ? uId : "";
 
   const isPublic = pStatus && typeof pStatus === "boolean" ? pStatus : false;
+  console.log("in update: i am public? ", isPublic);
   const [packIsPublic, setPackIsPublic] = useState(isPublic);
   const togglePublicity = () => {
     setPackIsPublic(previousState => !previousState);
