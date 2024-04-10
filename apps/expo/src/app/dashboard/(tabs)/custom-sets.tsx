@@ -63,10 +63,14 @@ function Pack({
           }}
         >
           <View style={[modalStyles.container]}>
-            <View style={[modalStyles.headerContainer, styles.deleteModalHeader]}>
-              <Pressable onPress={() => {
-                setModalVisible(false);
-              }}>
+            <View
+              style={[modalStyles.headerContainer, styles.deleteModalHeader]}
+            >
+              <Pressable
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
                 <RadixIcon
                   name="cross-circled"
                   size={25}
@@ -75,18 +79,20 @@ function Pack({
               </Pressable>
             </View>
             <View style={[modalStyles.inputContainer]}>
-              <Text style={[modalStyles.inputLabel]}>Are you sure you want to delete {pack.name}?</Text>
+              <Text style={[modalStyles.inputLabel]}>
+                Are you sure you want to delete {pack.name}?
+              </Text>
             </View>
             <View style={[modalStyles.footerBtnsContainer]}>
-              <Pressable style={[modalStyles.footerBtn]} onPress={() => {
-                setModalVisible(false);
-              }}>
-                <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
-              </Pressable>
               <Pressable
                 style={[modalStyles.footerBtn]}
-                onPress={onDelete}
+                onPress={() => {
+                  setModalVisible(false);
+                }}
               >
+                <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
+              </Pressable>
+              <Pressable style={[modalStyles.footerBtn]} onPress={onDelete}>
                 <Text style={[modalStyles.footerBtnText]}>Confirm</Text>
               </Pressable>
             </View>
@@ -138,9 +144,11 @@ function Pack({
                 size={30}
               />
             </Pressable>
-            <Pressable onPress={() => {
-              setModalVisible(true);
-            }}>
+            <Pressable
+              onPress={() => {
+                setModalVisible(true);
+              }}
+            >
               <RadixIcon
                 name="trash"
                 color={Colors.dark_secondary_text}
