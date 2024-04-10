@@ -53,7 +53,7 @@ export default async function AboutUs() {
       <Nav user={user} />
       <div className="mb-4 space-y-16 py-4">
         <h2 className="font-heading text-center text-4xl font-semibold text-black text-foreground">
-          {"Meet the Developers"}
+          {"Meet the Developers"} <br />
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
