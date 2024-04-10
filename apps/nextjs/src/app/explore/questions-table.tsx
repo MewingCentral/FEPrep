@@ -83,10 +83,6 @@ export function QuestionsTable({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const resetAllFilters = () => {
-    setColumnFilters([]);
-  };
-
   return (
     <div>
       {/* Filtering options */}
@@ -104,9 +100,15 @@ export function QuestionsTable({
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
         />
-        <Button onClick={resetAllFilters}>
-          <ReloadIcon className="mr-2 h-4 w-4" />
-          Clear Filters
+        <Button
+          className="w-9 px-0 lg:w-auto lg:px-4"
+          onClick={() => {
+            setColumnFilters([]);
+            setGlobalFilter("");
+          }}
+        >
+          <ReloadIcon className="lg:mr-2" />
+          <span className="hidden lg:flex">Clear Filters</span>
         </Button>
         <div className="relative flex flex-1 items-center">
           <MagnifyingGlassIcon className="absolute left-2.5 text-muted-foreground" />
@@ -194,7 +196,7 @@ export function TopicsDropdownMenu({
       <DropdownMenuTrigger asChild>
         <Button>
           <span>Topics</span>
-          <ChevronDownIcon className="ml-2 h-4 w-4" />
+          <ChevronDownIcon className="ml-2" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -258,7 +260,7 @@ export function TopicsDropdownMenu({
             setColumnFilters((prev) => prev.filter((f) => f.id !== "Topic"))
           }
         >
-          <ReloadIcon className="mr-2 h-4 w-4" />
+          <ReloadIcon className="mr-2" />
           <span>Reset</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -278,7 +280,7 @@ export function DifficultyDropdownMenu({
       <DropdownMenuTrigger asChild>
         <Button>
           <span>Difficulties</span>
-          <ChevronDownIcon className="ml-2 h-4 w-4" />
+          <ChevronDownIcon className="ml-2" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -348,7 +350,7 @@ export function DifficultyDropdownMenu({
             )
           }
         >
-          <ReloadIcon className="mr-2 h-4 w-4" />
+          <ReloadIcon className="mr-2" />
           <span>Reset</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -368,7 +370,7 @@ export function SemesterDropdownMenu({
       <DropdownMenuTrigger asChild>
         <Button>
           <span>Semesters</span>
-          <ChevronDownIcon className="ml-2 h-4 w-4" />
+          <ChevronDownIcon className="ml-2" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -431,7 +433,7 @@ export function SemesterDropdownMenu({
             setColumnFilters((prev) => prev.filter((f) => f.id !== "Semester"))
           }
         >
-          <ReloadIcon className="mr-2 h-4 w-4" />
+          <ReloadIcon className="mr-2" />
           <span>Reset</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -443,9 +445,8 @@ function CreateQuestionButton({ user }: { user: User }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button>
-          <PlusIcon className="mr-2 h-4 w-4" />
-          Create Question
+        <Button size="icon">
+          <PlusIcon />
         </Button>
       </SheetTrigger>
       <SheetContent className="w-[400px] sm:w-[540px]">
