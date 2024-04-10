@@ -45,7 +45,7 @@ export default function HomePage() {
         </div>
         <div className="translate-y-60 transform">
           <ChevronDownIcon
-            className="mt-14 h-auto w-[40px] animate-bounce hover:cursor-pointer"
+            className="mt-14 h-auto w-[50px] animate-bounce hover:cursor-pointer"
             onClick={() => {
               window.scrollTo({
                 top: document.body.scrollHeight,
@@ -82,7 +82,7 @@ export default function HomePage() {
         </p>
         <Image
           src="/ucf.svg"
-          className="mt-4 h-[120px] w-auto text-foreground dark:invert"
+          className="mt-4 h-[200px] w-auto text-foreground dark:invert"
           width={50}
           height={50}
           alt="UCF Logo"
