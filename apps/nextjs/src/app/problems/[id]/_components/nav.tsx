@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import type { RouterOutputs } from "@feprep/api";
 import type { User } from "@feprep/auth";
@@ -31,7 +32,6 @@ export async function Nav({
   const nextQuestionId =
     question.id + 1 <= questionsCount ? question.id + 1 : question.id;
   const prevQuestionId = question.id - 1 >= 1 ? question.id - 1 : question.id;
-  const randomQuestionId = Math.floor(Math.random() * questionsCount) + 1;
 
   return (
     <nav className="flex min-h-14 items-center justify-between border-b px-6">
@@ -54,15 +54,16 @@ export async function Nav({
         <TooltipProvider>
           <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
-              <Link href={`/problems/${prevQuestionId}`} passHref>
-                <Button
-                  className="rounded-l-none rounded-r-none focus-visible:bg-accent focus-visible:ring-0"
-                  variant="outline"
-                  size="icon"
-                >
+              <Button
+                asChild
+                className="rounded-l-none rounded-r-none focus-visible:bg-accent focus-visible:ring-0"
+                variant="outline"
+                size="icon"
+              >
+                <Link href={`/problems/${prevQuestionId}`}>
                   <ArrowLeftIcon />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </TooltipTrigger>
             <TooltipContent>Previous Question</TooltipContent>
           </Tooltip>
@@ -71,15 +72,16 @@ export async function Nav({
         <TooltipProvider>
           <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
-              <Link href={`/problems/${nextQuestionId}`} passHref>
-                <Button
-                  variant="outline"
-                  className=" rounded-l-none rounded-r-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
-                  size="icon"
-                >
+              <Button
+                variant="outline"
+                className=" rounded-l-none rounded-r-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
+                size="icon"
+                asChild
+              >
+                <Link href={`/problems/${nextQuestionId}`}>
                   <ArrowRightIcon />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </TooltipTrigger>
             <TooltipContent>Next Question</TooltipContent>
           </Tooltip>
@@ -88,15 +90,21 @@ export async function Nav({
         <TooltipProvider>
           <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
-              <Link href={`/problems/${randomQuestionId}`} passHref>
+              <form>
                 <Button
+                  formAction={async () => {
+                    "use server";
+                    const randomQuestionId =
+                      await api.questions.randomQuestionId();
+                    redirect(`/problems/${randomQuestionId}`);
+                  }}
                   variant="outline"
                   className=" rounded-l-none border-l-0 focus-visible:bg-accent focus-visible:ring-0"
                   size="icon"
                 >
                   <ShuffleIcon />
                 </Button>
-              </Link>
+              </form>
             </TooltipTrigger>
             <TooltipContent>Random Question</TooltipContent>
           </Tooltip>
@@ -111,7 +119,7 @@ export async function Nav({
       <div className="flex items-center">
         {user ? (
           <div className="flex items-center gap-4">
-            <span className="hidden lg:inline">Welcome, {user.email}</span>
+            <span className="hidden md:inline">Welcome, {user.email}</span>
             {user.emailVerified ? null : (
               <Link href="/verify-email" passHref>
                 <Button variant="secondary" size="sm">
