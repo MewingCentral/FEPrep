@@ -10,22 +10,22 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Link, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import { StatusBar, setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { api } from "~/utils/api";
 import { useAuth } from "~/utils/auth";
-import screenStyles from "~/utils/screen-styles";
+import Colors from "~/utils/colors";
 import errorStyles from "~/utils/error-styles";
+import screenStyles from "~/utils/screen-styles";
 import {
   SignUpFormInput,
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import Colors from "~/utils/colors";
 
 export default function Register() {
   const { setSessionId } = useAuth();
@@ -63,7 +63,10 @@ export default function Register() {
   };
 
   return (
-    <KeyboardAwareScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={screenStyles.outer}>
+    <KeyboardAwareScrollView
+      keyboardShouldPersistTaps="handled"
+      contentContainerStyle={screenStyles.outer}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={screenStyles.container}
@@ -96,7 +99,11 @@ export default function Register() {
                   />
                 )}
               />
-              {errors.nid?.message && <Text style={[errorStyles.errorText]}>{errors.nid?.message}</Text>}
+              {errors.nid?.message && (
+                <Text style={[errorStyles.errorText]}>
+                  {errors.nid?.message}
+                </Text>
+              )}
 
               <Text style={screenStyles.inputIdentifierText}> Password </Text>
               <Controller
@@ -116,7 +123,9 @@ export default function Register() {
                 )}
               />
               {errors.password?.message && (
-                <Text style={[errorStyles.errorText]}>{errors.password?.message}</Text>
+                <Text style={[errorStyles.errorText]}>
+                  {errors.password?.message}
+                </Text>
               )}
             </View>
 

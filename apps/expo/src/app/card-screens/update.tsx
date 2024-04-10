@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View, Switch } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Switch,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Modal from "react-native-modal";
 import { router, useLocalSearchParams } from "expo-router";
@@ -24,7 +31,8 @@ export default function UpdateCards() {
   const packName = pName && typeof pName === "string" ? pName : "";
   const userId = uId && typeof uId === "string" ? uId : "";
 
-  const isPublic = pStatus && typeof pStatus === "string" && pStatus === "true" ? true : false;
+  const isPublic =
+    pStatus && typeof pStatus === "string" && pStatus === "true" ? true : false;
   console.log("isPublic: ", isPublic);
 
   const packId = pId ? +pId : -1;
@@ -44,9 +52,7 @@ export default function UpdateCards() {
   const {
     control,
     handleSubmit,
-
-    formState: { errors, },
-    getValues,
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(UpdateFlashcardPackSchema),
     defaultValues: {
@@ -71,7 +77,10 @@ export default function UpdateCards() {
   console.log(errors);
 
   return (
-    <KeyboardAwareScrollView style={[styles.screenContainer]} keyboardShouldPersistTaps="handled">
+    <KeyboardAwareScrollView
+      style={[styles.screenContainer]}
+      keyboardShouldPersistTaps="handled"
+    >
       {/* Save updates btn */}
       <View style={[styles.mainBtnContainer]}>
         <Pressable
@@ -113,32 +122,39 @@ export default function UpdateCards() {
         <Text style={[styles.titleLabel]}>Title</Text>
       </View>
 
-            <Controller
-              control={control}
-              name="isPublic"
-              render={({ field: { onChange, value } }) => (
-                <View style={[styles.publicityContainer]}>
-                  <View style={[styles.publicityItemsContainer]}>
-                      <View style={[styles.publicityTextContainer]}>
-                        {
-                          value ?
-                            <Text style={[styles.publicityText, styles.publicityTextPublic]}>Public </Text> :
-                            <Text style={[styles.publicityText]}>Private</Text>
-                        }
-                      </View>
-                      <View style={[styles.publicitySwitchContainer]}>
-                        <Switch
-                          trackColor={{ false: Colors.dark_bg, true: Colors.light_bg }}
-                          thumbColor={value ? Colors.dark_secondary_text : Colors.dark_secondary_text}
-                          onValueChange={onChange}
-                          value={value}
-                        />
-                    </View>
-                  </View>
-                </View>
-
-              )}
-            />
+      <Controller
+        control={control}
+        name="isPublic"
+        render={({ field: { onChange, value } }) => (
+          <View style={[styles.publicityContainer]}>
+            <View style={[styles.publicityItemsContainer]}>
+              <View style={[styles.publicityTextContainer]}>
+                {value ? (
+                  <Text
+                    style={[styles.publicityText, styles.publicityTextPublic]}
+                  >
+                    Public{" "}
+                  </Text>
+                ) : (
+                  <Text style={[styles.publicityText]}>Private</Text>
+                )}
+              </View>
+              <View style={[styles.publicitySwitchContainer]}>
+                <Switch
+                  trackColor={{ false: Colors.dark_bg, true: Colors.light_bg }}
+                  thumbColor={
+                    value
+                      ? Colors.dark_secondary_text
+                      : Colors.dark_secondary_text
+                  }
+                  onValueChange={onChange}
+                  value={value}
+                />
+              </View>
+            </View>
+          </View>
+        )}
+      />
 
       {/* Cards */}
       <View style={[styles.cardsContainer]}>{flashcards}</View>

@@ -31,10 +31,12 @@ export default function RootLayout() {
         */}
 
         {/* <Stack screenOptions={headerDefault(colorScheme)}> */}
-        <Stack screenOptions={{
-          ...headerDefault(colorScheme),
-          statusBarColor: Colors.dark_bg,
-        }} >
+        <Stack
+          screenOptions={{
+            ...headerDefault(colorScheme),
+            statusBarColor: Colors.dark_bg,
+          }}
+        >
           <Stack.Screen
             name="screens"
             options={{
