@@ -21,7 +21,9 @@ export function CommentsList({
 
   if (comments.data.length === 0) {
     return (
-      <div>Looks like there are no comments yet. Be the first to comment!</div>
+      <div className="text-muted-foreground">
+        Looks like there are no comments yet. Be the first to comment!
+      </div>
     );
   }
 
