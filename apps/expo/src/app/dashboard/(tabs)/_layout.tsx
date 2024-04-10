@@ -13,12 +13,6 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
-        // tabBarStyle: [
-        //   {
-        //     display: "flex"
-        //   },
-        //   null
-        // ],
 
         // Tab colors
         tabBarActiveBackgroundColor: Colors.dark_sec,
@@ -39,7 +33,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="study-sets"
         options={{
-          title: "Study Sets",
+          title: "Public sets",
         }}
       />
       {
@@ -48,14 +42,14 @@ export default function TabLayout() {
           <Tabs.Screen
             name="custom-sets"
             options={{
-              title: "Custom Sets",
+              title: "My sets",
             }}
           />
         ) : (
           <Tabs.Screen
             name="custom-sets"
             options={{
-              title: "Custom Sets",
+              title: "My sets",
               href: null,
             }}
           />
