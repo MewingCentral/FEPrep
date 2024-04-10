@@ -54,7 +54,12 @@ export async function Left({
         <Badge
           variant="secondary"
           className={cn("text-nowrap", {
-            "bg-red-500": questionDifficulty === "easy",
+            "bg-green-500 text-white hover:bg-green-500":
+              questionDifficulty === "Easy",
+            "bg-yellow-500 text-white hover:bg-yellow-500":
+              questionDifficulty === "Medium",
+            "bg-red-500 text-white hover:bg-red-500":
+              questionDifficulty === "Hard",
           })}
         >
           {questionDifficulty}
