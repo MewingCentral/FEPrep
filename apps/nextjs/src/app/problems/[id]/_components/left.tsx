@@ -44,7 +44,7 @@ export async function Left({
   }
 
   return (
-    <div className="min-w-0 rounded-md border p-4 lg:basis-1/2">
+    <div>
       <h1 className="mb-2 flex items-center text-pretty text-3xl font-bold">
         {question.title
           ? question.title
@@ -74,7 +74,7 @@ export async function Left({
           {question.averageScore}% Average
         </Badge>
       </div>
-      <div className="mb-4 max-w-fit overflow-y-auto">
+      <div className="mb-4 max-w-fit">
         <QuestionPDF file={question.pdf} />
       </div>
       <QuestionVoting question={question} user={user!} />
