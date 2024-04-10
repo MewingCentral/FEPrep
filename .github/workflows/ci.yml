@@ -34,5 +34,11 @@ jobs:
       - name: add database url
         run: echo DATABASE_URL=http://localhost:3000 >> .env
 
+      - name: run server
+        run: pnpm dev -F nextjs
+
+      - name: run db
+        run: pnpm dev -F db
+
       - name: Test (Vitest)
         run: pnpm -F api test
