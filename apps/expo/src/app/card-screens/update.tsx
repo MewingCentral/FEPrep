@@ -1,16 +1,11 @@
 import { useState } from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Modal from "react-native-modal";
 import { router, useLocalSearchParams } from "expo-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RadixIcon } from "radix-ui-react-native-icons";
-import { Controller, Form, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import {
   CreateFlashcardSchema,
@@ -23,7 +18,6 @@ import {
 import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
 import modalStyles from "~/utils/modal-styles";
-import Modal from "react-native-modal";
 
 export default function UpdateCards() {
   const { pId, pName, uId } = useLocalSearchParams();
@@ -193,22 +187,28 @@ export function Card({
           <View style={[modalStyles.container]}>
             <View style={[modalStyles.headerContainer]}>
               <Text style={[modalStyles.headerText]}>Edit Card</Text>
-              <Pressable onPress={() => {
-                setModalVisible(false);
-                reset();
-                }}>
-                <RadixIcon name="cross-circled" size={25} color={Colors.dark_secondary_text} />
+              <Pressable
+                onPress={() => {
+                  setModalVisible(false);
+                  reset();
+                }}
+              >
+                <RadixIcon
+                  name="cross-circled"
+                  size={25}
+                  color={Colors.dark_secondary_text}
+                />
               </Pressable>
             </View>
             <View style={[modalStyles.inputContainer]}>
               <Text style={[modalStyles.inputLabel]}>Term</Text>
-              <Controller 
+              <Controller
                 control={control}
                 name="front"
-                render={({field:{onChange,onBlur,value}}) => (
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={[modalStyles.inputField]}
-                    multiline = {true}
+                    multiline={true}
                     placeholder="Enter term"
                     placeholderTextColor={Colors.dark_secondary_text}
                     underlineColorAndroid="transparent"
@@ -220,17 +220,21 @@ export function Card({
                   />
                 )}
               />
-              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+              {errors.front?.message && (
+                <Text style={[modalStyles.inputErrorMsg]}>
+                  {errors.front?.message}
+                </Text>
+              )}
             </View>
             <View style={[modalStyles.inputContainer]}>
               <Text style={[modalStyles.inputLabel]}>Definition</Text>
-              <Controller 
+              <Controller
                 control={control}
                 name="back"
-                render={({field:{onChange,onBlur,value}}) => (
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={[modalStyles.inputField]}
-                    multiline = {true}
+                    multiline={true}
                     placeholder="Enter definition"
                     placeholderTextColor={Colors.dark_secondary_text}
                     underlineColorAndroid="transparent"
@@ -242,20 +246,30 @@ export function Card({
                   />
                 )}
               />
-              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+              {errors.front?.message && (
+                <Text style={[modalStyles.inputErrorMsg]}>
+                  {errors.front?.message}
+                </Text>
+              )}
             </View>
 
             <View style={[modalStyles.footerBtnsContainer]}>
-              <Pressable style={[modalStyles.footerBtn]} onPress={() => {
-                setModalVisible(false);
-                reset();
-                }}>
+              <Pressable
+                style={[modalStyles.footerBtn]}
+                onPress={() => {
+                  setModalVisible(false);
+                  reset();
+                }}
+              >
                 <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
               </Pressable>
-              <Pressable style={[modalStyles.footerBtn]} onPress={handleSubmit(onSubmit)}>
+              <Pressable
+                style={[modalStyles.footerBtn]}
+                onPress={handleSubmit(onSubmit)}
+              >
                 <Text style={[modalStyles.footerBtnText]}>Save</Text>
               </Pressable>
-            </View>          
+            </View>
           </View>
         </Modal>
       </View>
@@ -294,7 +308,7 @@ export function Card({
   );
 }
 
-function AddCard({packId}:{packId:number}) {
+function AddCard({ packId }: { packId: number }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const {
@@ -313,7 +327,7 @@ function AddCard({packId}:{packId:number}) {
 
   const utils = api.useUtils();
 
-  const createCard= api.flashcards.createCard.useMutation({
+  const createCard = api.flashcards.createCard.useMutation({
     onSuccess: async (data) => {
       await utils.flashcards.readCards.invalidate();
       if (!(data instanceof Error)) {
@@ -324,19 +338,18 @@ function AddCard({packId}:{packId:number}) {
     },
     onError: (error) => {
       console.error(error);
-    }
+    },
   });
 
   const onSubmit = (values: FlashcardInputType) => {
     console.log("values sending to create endpoint: ", values);
     createCard.mutate(values);
-  }
+  };
 
   console.log(errors);
 
   return (
     <View>
-
       {/* Create Card Modal */}
       <View>
         <Modal
@@ -352,22 +365,28 @@ function AddCard({packId}:{packId:number}) {
           <View style={[modalStyles.container]}>
             <View style={[modalStyles.headerContainer]}>
               <Text style={[modalStyles.headerText]}>New Card</Text>
-              <Pressable onPress={() => {
-                setModalVisible(false);
-                reset();
-                }}>
-                <RadixIcon name="cross-circled" size={25} color={Colors.dark_secondary_text} />
+              <Pressable
+                onPress={() => {
+                  setModalVisible(false);
+                  reset();
+                }}
+              >
+                <RadixIcon
+                  name="cross-circled"
+                  size={25}
+                  color={Colors.dark_secondary_text}
+                />
               </Pressable>
             </View>
             <View style={[modalStyles.inputContainer]}>
               <Text style={[modalStyles.inputLabel]}>Term</Text>
-              <Controller 
+              <Controller
                 control={control}
                 name="front"
-                render={({field:{onChange,onBlur,value}}) => (
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={[modalStyles.inputField]}
-                    multiline = {true}
+                    multiline={true}
                     placeholder="Enter term"
                     placeholderTextColor={Colors.dark_secondary_text}
                     underlineColorAndroid="transparent"
@@ -379,17 +398,21 @@ function AddCard({packId}:{packId:number}) {
                   />
                 )}
               />
-              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+              {errors.front?.message && (
+                <Text style={[modalStyles.inputErrorMsg]}>
+                  {errors.front?.message}
+                </Text>
+              )}
             </View>
             <View style={[modalStyles.inputContainer]}>
               <Text style={[modalStyles.inputLabel]}>Definition</Text>
-              <Controller 
+              <Controller
                 control={control}
                 name="back"
-                render={({field:{onChange,onBlur,value}}) => (
+                render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={[modalStyles.inputField]}
-                    multiline = {true}
+                    multiline={true}
                     placeholder="Enter definition"
                     placeholderTextColor={Colors.dark_secondary_text}
                     underlineColorAndroid="transparent"
@@ -401,25 +424,38 @@ function AddCard({packId}:{packId:number}) {
                   />
                 )}
               />
-              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+              {errors.front?.message && (
+                <Text style={[modalStyles.inputErrorMsg]}>
+                  {errors.front?.message}
+                </Text>
+              )}
             </View>
 
             <View style={[modalStyles.footerBtnsContainer]}>
-              <Pressable style={[modalStyles.footerBtn]} onPress={() => {
-                setModalVisible(false);
-                reset();
-                }}>
+              <Pressable
+                style={[modalStyles.footerBtn]}
+                onPress={() => {
+                  setModalVisible(false);
+                  reset();
+                }}
+              >
                 <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
               </Pressable>
-              <Pressable style={[modalStyles.footerBtn]} onPress={handleSubmit(onSubmit)}>
+              <Pressable
+                style={[modalStyles.footerBtn]}
+                onPress={handleSubmit(onSubmit)}
+              >
                 <Text style={[modalStyles.footerBtnText]}>Save</Text>
               </Pressable>
-            </View>          
+            </View>
           </View>
         </Modal>
       </View>
       <View style={[styles.mainBtnContainer]}>
-        <Pressable style={[styles.mainBtn]} onPress={() => setModalVisible(true)}>
+        <Pressable
+          style={[styles.mainBtn]}
+          onPress={() => setModalVisible(true)}
+        >
           <View style={[styles.mainBtnContentContainer]}>
             <RadixIcon name="plus" size={30} color={Colors.dark_primary_text} />
             <Text style={[styles.mainBtnText]}>New card</Text>
@@ -429,7 +465,6 @@ function AddCard({packId}:{packId:number}) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   screenContainer: {
