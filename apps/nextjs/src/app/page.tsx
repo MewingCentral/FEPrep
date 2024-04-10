@@ -52,12 +52,6 @@ export default function HomePage() {
             <HeartIcon className="h-[30px] w-[30px] transition-all duration-500 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-foreground" />
           </Link>
           <h2>in central Florida.</h2>
-
-          {/* <div className="flex flex-row gap-5">
-            <Link href="/explore">
-              <Button type="submit">Start Practicing</Button>
-            </Link>
-          </div> */}
         </div>
         <p className="mx-4 w-3/4 text-center text-xl lg:mx-16">
           UCF strives to help every student unleash their greatest potential.
