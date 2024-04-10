@@ -185,7 +185,7 @@ function Packs() {
   }
 
   return (
-    <View>
+    <View style={{paddingBottom: 50}}>
       <SearchPacks packs={packs.data} />
     </View>
   );

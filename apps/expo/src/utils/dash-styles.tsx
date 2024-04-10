@@ -9,7 +9,6 @@ const dashStyles = StyleSheet.create({
   },
   container: {
     flexDirection: "column",
-    paddingBottom: 50,
   },
   screenContainer: {
     flexGrow: 1,
