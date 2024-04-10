@@ -22,8 +22,8 @@ export function PickRandomQuestionButton() {
 
   return (
     <form action={formAction}>
-      <Button type="submit">
-        <ShuffleIcon className="mr-2 h-4 w-4" />
+      <Button type="submit" className="w-9 px-0 lg:w-auto lg:px-4">
+        <ShuffleIcon className="lg:mr-2 " />
         <span className="hidden lg:inline">Pick Random</span>
       </Button>
     </form>
