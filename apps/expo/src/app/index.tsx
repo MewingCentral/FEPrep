@@ -15,6 +15,7 @@ export default function HomePage() {
       <View style={[styles.container, styles.contentContainer]}>
         <View style={[styles.container, styles.titleContainer]}>
           <Text style={[styles.text, styles.title]}>FEPrep</Text>
+          <Text style={[styles.text, styles.title2]}>Flashcards</Text>
           <Text style={[styles.text, styles.subtitle]}>
             A new way to prepare for the Foundation Exam.
           </Text>
@@ -86,6 +87,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: "bold",
+  },
+  title2: {
+    fontSize: 22,
+    fontWeight: "bold",
+    paddingBottom: 5,
   },
   subtitle: {
     lineHeight: 30,
