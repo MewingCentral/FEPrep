@@ -217,13 +217,14 @@ export default function Tab() {
       await utils.flashcards.readPack.invalidate();
       if (!(data instanceof Error)) {
         console.log("my id is ", data[0]!.id);
+        const isPublicString = data[0]!.isPublic ? "true" : "false";
         router.push({
           pathname: "../../card-screens/update",
           params: {
             pId: data[0]!.id,
             pName: data[0]!.name,
             uId: data[0]!.userId,
-            pStatus: data[0]!.isPublic,
+            pStatus: isPublicString,
           },
         });
       }
