@@ -19,7 +19,7 @@ export async function DiscussionTab({
     <div>
       {user && <CreateCommentTextarea question={question} user={user} />}
       <Suspense fallback={<div>Loading comments...</div>}>
-        <CommentsList promise={comments} question={question} />
+        <CommentsList promise={comments} question={question} user={user} />
       </Suspense>
     </div>
   );
