@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <main className="flex flex-1 flex-col gap-2 p-4 lg:min-h-0 lg:flex-row">
           <ScrollArea className="rounded-md border p-8 lg:basis-1/2">
             <Left question={question} />
-            <ScrollBar orientation="vertical" />
+            <ScrollBar orientation="horizontal" />
           </ScrollArea>
           <ScrollArea className="rounded-md border p-8 lg:basis-1/2">
             <Right question={question} user={user} />
