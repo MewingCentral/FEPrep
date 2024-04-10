@@ -9,6 +9,7 @@
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+
 import { db } from "@feprep/db";
 
 /**
@@ -26,11 +27,10 @@ import { db } from "@feprep/db";
 
 export function createTRPCContext(opts: { headers: Headers }) {
   // Grab the source of the request
-    return {
-      db,
-      ...opts,
-    };
-
+  return {
+    db,
+    ...opts,
+  };
 }
 
 type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;
