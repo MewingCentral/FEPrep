@@ -11,16 +11,15 @@ import {
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const flashcardsRouter = createTRPCRouter({
+  allPublicPacks: publicProcedure.query(({ ctx }) => {
+    return ctx.db.query.flashcardPacks.findMany({
+      where: eq(flashcardPacks.isPublic, true),
+    });
+  }),
   createPack: publicProcedure
     .input(CreateFlashcardPackSchema)
     .mutation(async ({ ctx, input }) => {
-      return await ctx.db
-        .insert(flashcardPacks)
-        .values({
-          name: input.name,
-          userId: input.userId,
-        })
-        .returning();
+      return await ctx.db.insert(flashcardPacks).values(input).returning();
     }),
 
   createCard: publicProcedure
@@ -35,19 +34,16 @@ export const flashcardsRouter = createTRPCRouter({
         })
         .returning();
     }),
-
   readPack: publicProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.db.query.flashcardPacks.findMany({
       where: eq(flashcardPacks.userId, input),
     });
   }),
-
   readCards: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.query.flashcards.findMany({
       where: eq(flashcards.packId, input),
     });
   }),
-
   updatePack: publicProcedure
     .input(UpdateFlashcardPackSchema)
     .mutation(({ ctx, input: { flashcardPackId: packId, ...pack } }) => {
@@ -62,7 +58,6 @@ export const flashcardsRouter = createTRPCRouter({
     .mutation(({ ctx, input: { flashcardId: id, ...card } }) => {
       return ctx.db.update(flashcards).set(card).where(eq(flashcards.id, id));
     }),
-
   deletePack: publicProcedure
     .input(z.number())
     .mutation(async ({ ctx, input }) => {

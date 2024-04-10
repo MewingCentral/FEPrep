@@ -90,6 +90,7 @@ export const UpdateQuestionFormSchema = UpdateQuestionSchema.extend({
 export const CreateFlashcardPackSchema = z.object({
   name: z.string(),
   userId: z.string(),
+  isPublic: z.boolean(),
 });
 
 export type CreateFlashcardPackInput = z.infer<
