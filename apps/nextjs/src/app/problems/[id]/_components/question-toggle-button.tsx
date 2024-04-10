@@ -21,7 +21,7 @@ export function QuestionToggleButton() {
       }}
     >
       <RocketIcon className="lg:mr-2" />
-      <span className="hidden lg:flex">
+      <span className="hidden lg:inline">
         {pageNumber === 1 ? "Solution" : "Question"}
       </span>
     </Button>
