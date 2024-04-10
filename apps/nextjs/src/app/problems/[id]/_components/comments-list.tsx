@@ -3,6 +3,7 @@
 import { use } from "react";
 
 import type { RouterOutputs } from "@feprep/api";
+import type { User } from "@feprep/auth";
 import { AvatarIcon, Pencil1Icon, TrashIcon } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
 import {
@@ -11,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
 } from "@feprep/ui/dialog";
 import {
   Form,
@@ -27,9 +29,11 @@ import { UpdateCommentSchema } from "@feprep/validators";
 import { api } from "~/trpc/react";
 
 export function CommentsList({
+  user,
   promise,
   question,
 }: {
+  user: User | null;
   promise: Promise<RouterOutputs["comments"]["allByQuestionId"]>;
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
@@ -49,22 +53,26 @@ export function CommentsList({
   return (
     <div className="flex flex-col gap-2">
       {comments.data.map((comment) => (
-        <CommentCard key={comment.id} comment={comment} />
+        <CommentCard key={comment.id} comment={comment} user={user} question={question}/>
       ))}
     </div>
   );
 }
 
 function CommentCard({
+  user,
   comment,
+  question
 }: {
+  user: User | null;
   comment: RouterOutputs["comments"]["allByQuestionId"][number];
+  question: NonNullable<RouterOutputs["questions"]["byId"]>
 }) {
   const utils = api.useUtils();
   const delComment = api.comments.delete.useMutation({
     onSuccess: async () => {
       await utils.comments.allByQuestionId.invalidate();
-      toast("deleted");
+      toast("Seuccessfully Deleted");
     },
     onError: () => {
       toast("failed to delete");
@@ -73,17 +81,19 @@ function CommentCard({
   const updateForm = useForm({
     schema: UpdateCommentSchema,
     defaultValues: {
+      userId: user!.id,
       content: comment.content,
+      commentId: comment.id,
+      questionId: question.id,
     },
   });
-  const updateComment = api.comments.create.useMutation({
+  const updateComment = api.comments.update.useMutation({
     onSuccess: async () => {
       await utils.comments.allByQuestionId.invalidate();
-      updateForm.reset();
       toast("Comment Edited!");
     },
     onError: () => {
-      toast("Failed to create comment");
+      toast("Failed to edit");
     },
   });
   return (
@@ -94,56 +104,67 @@ function CommentCard({
       </div>
       <p className="flex flex-1 flex-col gap-5 whitespace-normal p-2 lg:flex-row">
         <div className="w-8 flex-1">{comment.content}</div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className="right-0" variant="secondary" size="icon">
-              <Pencil1Icon width="15" height="15" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[900px]">
-            <DialogHeader>
-              <DialogTitle>Edit Comment</DialogTitle>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="flex grid-cols-6 items-center gap-4">
-                <Form {...updateForm}>
-                  <form
-                    className="w-full"
-                    onSubmit={updateForm.handleSubmit(async (values) => {
-                      updateComment.mutate(values);
-                    })}
-                  >
-                    <FormField
-                      name="content"
-                      control={updateForm.control}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Textarea
-                              className="col-span-6"
-                              placeholder={comment.content}
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button className="mt-3" type="submit">
-                      Save changes
-                    </Button>
-                  </form>
-                </Form>
+        {user?.id === comment.userId && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="right-0" variant="secondary" size="icon">
+                <Pencil1Icon width="15" height="15" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[900px]">
+              <DialogHeader>
+                <DialogTitle>Edit Comment</DialogTitle>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="flex grid-cols-6 items-center gap-4">
+                  <Form {...updateForm}>
+                    <form
+                      className="w-full"
+                      onSubmit={updateForm.handleSubmit(async (values) => {
+                        updateComment.mutate(values);
+                        toast("yahoo");
+                      })}
+                    >
+                      <FormField
+                        name="content"
+                        control={updateForm.control}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Textarea
+                                className="col-span-6"
+                                placeholder={comment.content}
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <DialogFooter>
+                        <Button className="mt-3" type="submit">
+                          Save changes
+                        </Button>                    
+                      </DialogFooter>
+                    </form>
+                  </Form>
+                </div>
               </div>
-            </div>
-          </DialogContent>
-        </Dialog>
+            </DialogContent>
+          </Dialog>
+        )}
+        {user?.id === comment.userId && (
+          <div>
+            <Button 
+            onClick={() => {
+              delComment.mutate(comment.id)
+            }}
+            className="right-0" variant="destructive" size="icon">
+              <TrashIcon width="15" height="15" />
+            </Button>
+          </div>
+        )}
 
-        <div {...delComment}>
-          <Button className="right-0" variant="destructive" size="icon">
-            <TrashIcon width="15" height="15" />
-          </Button>
-        </div>
       </p>
     </div>
   );
