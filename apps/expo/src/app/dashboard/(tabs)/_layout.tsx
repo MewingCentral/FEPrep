@@ -22,6 +22,9 @@ export default function TabLayout() {
 
         // Tab text / labels
         tabBarLabelPosition: "beside-icon",
+        tabBarStyle: {
+          backgroundColor: Colors.dark_bg,
+        },
         tabBarLabelStyle: {
           fontSize: 16,
         },

@@ -7,9 +7,7 @@ const modalStyles = StyleSheet.create({
     flexDirection: "column",
     width: "95%",
     alignSelf: "center",
-    // margin: "auto",
     marginVertical: "20%",
-    // top: "20%",
     backgroundColor: Colors.dark_sec,
     borderWidth: 2,
     borderColor: Colors.dark_secondary_text,
@@ -35,6 +33,12 @@ const modalStyles = StyleSheet.create({
     alignItems: "stretch",
     gap: 5,
     marginHorizontal: 10,
+  },
+  deleteConfirmation: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: Colors.dark_primary_text,
   },
   inputLabel: {
     fontSize: 20,
