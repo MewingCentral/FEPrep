@@ -50,7 +50,9 @@ export function SignUp() {
                   </p>
                 )}
               </div>
-              <Button className="mt-2" type="submit"></Button>
+              <Button className="mt-2" type="submit">
+                Sign Up
+              </Button>
               <p className="font-regular mt-2 text-center text-sm">
                 Already have an account?
                 <Link href="/sign-in" className="font-semibold">
