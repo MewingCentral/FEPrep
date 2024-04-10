@@ -23,7 +23,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.6, x: -45 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{
-                duration: 5,
+                duration: 3,
                 delay: 0.25,
                 ease: [0, 0.71, 0.2, 1.01],
               }}
@@ -60,7 +60,7 @@ export default function HomePage() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
             duration: 7,
-            delay: 2,
+            delay: 3,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
