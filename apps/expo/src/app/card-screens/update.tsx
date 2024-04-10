@@ -25,13 +25,7 @@ export default function UpdateCards() {
   const userId = uId && typeof uId === "string" ? uId : "";
 
   const isPublic = pStatus && typeof pStatus === "string" && pStatus === "true" ? true : false;
-  console.log("in update: i am public? ", isPublic);
-  const [packIsPublic, setPackIsPublic] = useState(isPublic);
-  const togglePublicity = () => {
-    setPackIsPublic(previousState => !previousState);
-  }
-
-  console.log("public? ", packIsPublic);
+  console.log("isPublic: ", isPublic);
 
   const packId = pId ? +pId : -1;
   const cards = api.flashcards.readCards.useQuery(packId);
@@ -50,13 +44,15 @@ export default function UpdateCards() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+
+    formState: { errors, },
+    getValues,
   } = useForm({
     resolver: zodResolver(UpdateFlashcardPackSchema),
     defaultValues: {
       name: packName,
       userId: userId,
-      isPublic: packIsPublic, // todo change
+      isPublic, // todo change
       flashcardPackId: packId,
     },
   });
@@ -116,26 +112,32 @@ export default function UpdateCards() {
         <Text style={[styles.titleLabel]}>Title</Text>
       </View>
 
-      {/* TODO test this */}
-      <View style={[styles.publicityContainer]}>
-        <View style={[styles.publicityItemsContainer]}>
-          <View style={[styles.publicityTextContainer]}>
-            {
-              packIsPublic ? 
-              <Text style={[styles.publicityText, styles.publicityTextPublic]}>Public </Text> :
-              <Text style={[styles.publicityText]}>Private</Text>
-            }
-          </View>
-          <View style={[styles.publicitySwitchContainer]}>
-            <Switch 
-              trackColor={{false: Colors.dark_bg, true: Colors.light_bg}}
-              thumbColor={packIsPublic? Colors.dark_secondary_text : Colors.dark_secondary_text}
-              onValueChange={togglePublicity}
-              value={packIsPublic}
+            <Controller
+              control={control}
+              name="isPublic"
+              render={({ field: { onChange, value } }) => (
+                <View style={[styles.publicityContainer]}>
+                  <View style={[styles.publicityItemsContainer]}>
+                      <View style={[styles.publicityTextContainer]}>
+                        {
+                          value ?
+                            <Text style={[styles.publicityText, styles.publicityTextPublic]}>Public </Text> :
+                            <Text style={[styles.publicityText]}>Private</Text>
+                        }
+                      </View>
+                      <View style={[styles.publicitySwitchContainer]}>
+                        <Switch
+                          trackColor={{ false: Colors.dark_bg, true: Colors.light_bg }}
+                          thumbColor={value ? Colors.dark_secondary_text : Colors.dark_secondary_text}
+                          onValueChange={onChange}
+                          value={value}
+                        />
+                    </View>
+                  </View>
+                </View>
+
+              )}
             />
-          </View>
-        </View>
-      </View>
 
       {/* Cards */}
       <View style={[styles.cardsContainer]}>{flashcards}</View>
@@ -624,34 +626,34 @@ const styles = StyleSheet.create({
     borderColor: "yellow",
   },
 
-    // Public vs private components
-    publicityContainer: {
-      flexDirection: "row",
-      paddingLeft: 10,
-      justifyContent: "center",
-    },
-    publicityItemsContainer: {
-      flexDirection: "row",
-      paddingLeft: 10,
-      gap: 10,
-      backgroundColor: Colors.dark_sec2,
-      borderColor: Colors.dark_secondary_text,
-      borderWidth: 1,
-      borderRadius: 50,
-    },
-    publicityTextContainer: {
-      flexDirection: "column",
-      justifyContent: "center",
-    },
-    publicitySwitchContainer: {
-      paddingLeft: 3,
-      paddingRight: 6,
-    },
-    publicityText: {
-      fontSize: 18,
-      color: Colors.dark_primary_text,
-    },
-    publicityTextPublic: {
-      paddingRight: 1,
-    },
+  // Public vs private components
+  publicityContainer: {
+    flexDirection: "row",
+    paddingLeft: 10,
+    justifyContent: "center",
+  },
+  publicityItemsContainer: {
+    flexDirection: "row",
+    paddingLeft: 10,
+    gap: 10,
+    backgroundColor: Colors.dark_sec2,
+    borderColor: Colors.dark_secondary_text,
+    borderWidth: 1,
+    borderRadius: 50,
+  },
+  publicityTextContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  publicitySwitchContainer: {
+    paddingLeft: 3,
+    paddingRight: 6,
+  },
+  publicityText: {
+    fontSize: 18,
+    color: Colors.dark_primary_text,
+  },
+  publicityTextPublic: {
+    paddingRight: 1,
+  },
 });
