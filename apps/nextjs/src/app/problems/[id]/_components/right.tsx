@@ -24,9 +24,9 @@ export async function Right({
   user: User | null;
 }) {
   return (
-    <div className="flex-none rounded-md border p-4 lg:basis-1/2">
+    <div>
       <Tabs defaultValue="resources">
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row items-center justify-between gap-4 mb-4">
           <TabsList>
             <TabsTrigger value="discussion">
               <ChatBubbleIcon className="mr-2" />
@@ -61,7 +61,7 @@ function AddResourceButton({
 }) {
   return (
     <Sheet>
-      <SheetTrigger asChild className="text-xs">
+      <SheetTrigger asChild>
         <Button>
           <PlusIcon className="mr-2 h-4 w-4" />
           Add Resource
