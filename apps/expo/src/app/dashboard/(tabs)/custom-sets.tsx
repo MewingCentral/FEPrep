@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   Pressable,
   StyleSheet,
+  Switch,
   Text,
   TextInput,
   View,
@@ -57,15 +58,24 @@ function Pack({
       }}
     >
       <View style={[styles.setContentsContainer]}>
-        <Text style={[dashStyles.setText, dashStyles.titleText]}>
-          {pack.name}
-        </Text>
+
+        {/* TODO test this */}
+        <View style={[styles.setTextContainer]}>
+          <Text style={[dashStyles.setText, dashStyles.titleText]}>
+            {pack.name}
+          </Text> 
+          {
+            pack.isPublic ?
+            <Text style={[styles.setStatusText]}>Public</Text> :
+            <Text style={[styles.setStatusText]}>Private</Text>
+          }
+        </View>
         <View style={[styles.setBtnsContainer]}>
           <Pressable
             onPress={() => {
               router.push({
                 pathname: "../../card-screens/update",
-                params: { pId: pack.id, pName: pack.name, uId: pack.userId },
+                params: { pId: pack.id, pName: pack.name, uId: pack.userId, pStatus: pack.isPublic },
               });
             }}
           >
@@ -178,6 +188,11 @@ export default function Tab() {
   const userId = SecureStore.getItem("userId")!;
   const router = useRouter();
 
+  const [packIsPublic, setPackIsPublic] = useState(true);
+  const togglePublicity = () => {
+    setPackIsPublic(previousState => !previousState);
+  };
+
   const {
     control,
     handleSubmit,
@@ -188,6 +203,7 @@ export default function Tab() {
     defaultValues: {
       name: "",
       userId: userId,
+      isPublic: packIsPublic,
     },
   });
   console.log(errors);
@@ -205,6 +221,7 @@ export default function Tab() {
             pId: data[0]!.id,
             pName: data[0]!.name,
             uId: data[0]!.userId,
+            pStatus: data[0]!.isPublic,
           },
         });
       }
@@ -272,6 +289,16 @@ export default function Tab() {
                 )}
               </View>
 
+              {/* TODO test this */}
+              <View>
+                <Switch 
+                  trackColor={{false: "#ffffff", true: "#000000"}}
+                  thumbColor={packIsPublic? "yellow" : "green"}
+                  onValueChange={togglePublicity}
+                  value={packIsPublic}
+                />
+              </View>
+
               <View style={[modalStyles.footerBtnsContainer]}>
                 <Pressable
                   style={[modalStyles.footerBtn]}
@@ -333,6 +360,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: 150,
   },
+  setTextContainer: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
   setBtnsContainer: {
     flexDirection: "column",
     justifyContent: "space-between",
@@ -340,20 +371,14 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     height: 130,
   },
-  modalContainer: {},
-  modalTitle: {
-    fontSize: 25,
-    backgroundColor: Colors.light_primary_text,
-  },
-  modalInput: {
-    borderWidth: 1,
-    borderColor: "black",
-  },
   errorTxt: {
     fontSize: 20,
     marginTop: 30,
     textAlign: "center",
     color: Colors.dark_primary_text,
+  },
+  setStatusText: {
+    color: Colors.dark_secondary_text,
   },
   deleteYellowBorder: {
     borderWidth: 1,

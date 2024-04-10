@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View, Switch } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Modal from "react-native-modal";
 import { router, useLocalSearchParams } from "expo-router";
@@ -20,9 +20,15 @@ import Colors from "~/utils/colors";
 import modalStyles from "~/utils/modal-styles";
 
 export default function UpdateCards() {
-  const { pId, pName, uId } = useLocalSearchParams();
+  const { pId, pName, uId, pStatus } = useLocalSearchParams();
   const packName = pName && typeof pName === "string" ? pName : "";
   const userId = uId && typeof uId === "string" ? uId : "";
+
+  const isPublic = pStatus && typeof pStatus === "boolean" ? pStatus : false;
+  const [packIsPublic, setPackIsPublic] = useState(isPublic);
+  const togglePublicity = () => {
+    setPackIsPublic(previousState => !previousState);
+  }
 
   const packId = pId ? +pId : -1;
   const cards = api.flashcards.readCards.useQuery(packId);
@@ -47,6 +53,7 @@ export default function UpdateCards() {
     defaultValues: {
       name: packName,
       userId: userId,
+      isPublic: packIsPublic, // todo change
       flashcardPackId: packId,
     },
   });
@@ -85,6 +92,16 @@ export default function UpdateCards() {
                   value={value}
                 />
               )}
+            />
+          </View>
+
+          {/* TODO test this */}
+          <View>
+            <Switch 
+              trackColor={{false: "#ffffff", true: "#000000"}}
+              thumbColor={packIsPublic? "green" : "yellow"}
+              onValueChange={togglePublicity}
+              value={packIsPublic}
             />
           </View>
         </View>
