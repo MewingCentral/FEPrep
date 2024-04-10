@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   KeyboardAvoidingView,
   Pressable,
@@ -7,20 +8,19 @@ import {
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Modal from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, useFocusEffect, useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { RadixIcon } from "radix-ui-react-native-icons";
+import { Controller, useForm } from "react-hook-form";
+
+import { CreateFlashcardPackSchema } from "@feprep/validators";
 
 import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateFlashcardPackInput, CreateFlashcardPackSchema } from "@feprep/validators";
-
-import Modal from "react-native-modal";
 import modalStyles from "~/utils/modal-styles";
 
 function Pack({
@@ -122,7 +122,7 @@ function Packs() {
 
 export default function Tab() {
   const [modalVisible, setModalVisible] = useState(false);
-  const userId = SecureStore.getItem("userId");
+  const userId = SecureStore.getItem("userId")!;
   const router = useRouter();
 
   const {
@@ -143,25 +143,24 @@ export default function Tab() {
 
   const createPack = api.flashcards.createPack.useMutation({
     onSuccess: async (data) => {
-      await utils.flashcards.readPacks.invalidate();
+      await utils.flashcards.readPack.invalidate();
       if (!(data instanceof Error)) {
         console.log("my id is ", data[0]!.id);
         router.push({
           pathname: "../../card-screens/update",
-          params: { pId: data[0]!.id, pName: data[0]!.name, uId: data[0]!.userId },
+          params: {
+            pId: data[0]!.id,
+            pName: data[0]!.name,
+            uId: data[0]!.userId,
+          },
         });
       }
       setModalVisible(false);
     },
     onError: (error) => {
       console.error(error);
-    }
+    },
   });
-
-  const onSubmit = (values: CreateFlashcardPackInput) => {
-    console.log(values);
-    createPack.mutate(values);
-  }
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
@@ -199,22 +198,28 @@ export default function Tab() {
             <View style={[modalStyles.container]}>
               <View style={[modalStyles.headerContainer]}>
                 <Text style={[modalStyles.headerText]}>New Set</Text>
-                <Pressable onPress={() => {
-                  setModalVisible(false);
-                  reset();
-                  }}>
-                  <RadixIcon name="cross-circled" size={25} color={Colors.dark_secondary_text} />
+                <Pressable
+                  onPress={() => {
+                    setModalVisible(false);
+                    reset();
+                  }}
+                >
+                  <RadixIcon
+                    name="cross-circled"
+                    size={25}
+                    color={Colors.dark_secondary_text}
+                  />
                 </Pressable>
               </View>
               <View style={[modalStyles.inputContainer]}>
                 <Text style={[modalStyles.inputLabel]}>Title</Text>
-                <Controller 
+                <Controller
                   control={control}
                   name="name"
-                  render={({field:{onChange,onBlur,value}}) => (
+                  render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput
                       style={[modalStyles.inputField]}
-                      multiline = {true}
+                      multiline={true}
                       placeholder="Enter term"
                       placeholderTextColor={Colors.dark_secondary_text}
                       underlineColorAndroid="transparent"
@@ -226,30 +231,46 @@ export default function Tab() {
                     />
                   )}
                 />
-                {errors.name?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.name?.message}</Text>}
+                {errors.name?.message && (
+                  <Text style={[modalStyles.inputErrorMsg]}>
+                    {errors.name?.message}
+                  </Text>
+                )}
               </View>
 
               <View style={[modalStyles.footerBtnsContainer]}>
-                <Pressable style={[modalStyles.footerBtn]} onPress={() => {
-                  setModalVisible(false);
-                  reset();
-                  }}>
+                <Pressable
+                  style={[modalStyles.footerBtn]}
+                  onPress={() => {
+                    setModalVisible(false);
+                    reset();
+                  }}
+                >
                   <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
                 </Pressable>
-                <Pressable style={[modalStyles.footerBtn]} onPress={handleSubmit(onSubmit)}>
+                <Pressable
+                  style={[modalStyles.footerBtn]}
+                  onPress={handleSubmit((values) => {
+                    console.log(values);
+                    createPack.mutate(values);
+                  })}
+                >
                   <Text style={[modalStyles.footerBtnText]}>Create</Text>
                 </Pressable>
-              </View>          
+              </View>
             </View>
           </Modal>
         </View>
 
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           {/* Create new set button */}
-            <Pressable style={[styles.createSetButton]} onPress={() => setModalVisible(true)}>
-              <Text style={[dashStyles.titleText]}>Create set</Text>
-              <Text style={[dashStyles.titleText]}>+</Text>
-            </Pressable>
+          <Pressable
+            style={[styles.createSetButton]}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={[dashStyles.titleText]}>Create set</Text>
+            <Text style={[dashStyles.titleText]}>+</Text>
+          </Pressable>
 
           <Packs />
         </View>
@@ -285,9 +306,7 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     height: 130,
   },
-  modalContainer: {
-
-  },
+  modalContainer: {},
   modalTitle: {
     fontSize: 25,
     backgroundColor: Colors.light_primary_text,
