@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 
 import { lucia, validateRequest } from "@feprep/auth";
 
+import { api } from "~/trpc/server";
+
 export async function signOutAction() {
   const { session } = await validateRequest();
   if (!session) {
@@ -18,4 +20,15 @@ export async function signOutAction() {
     sessionCookie.value,
     sessionCookie.attributes,
   );
+}
+
+export async function getRandomQuestionId() {
+  try {
+    const randomQuestionId = await api.questions.randomQuestionId();
+    return { randomQuestionId };
+  } catch (error) {
+    return {
+      error: "Failed to get random question",
+    };
+  }
 }

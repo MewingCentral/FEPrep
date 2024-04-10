@@ -14,6 +14,23 @@ import {
 } from "../trpc";
 
 export const questionsRouter = createTRPCRouter({
+  randomQuestionId: publicProcedure.query(async ({ ctx }) => {
+    const question = (
+      await ctx.db
+        .select({
+          value: questions.id,
+        })
+        .from(questions)
+        .orderBy(sql`RANDOM()`)
+        .limit(1)
+    )[0];
+
+    if (!question) {
+      throw new Error("Failed to get random question");
+    }
+
+    return question.value;
+  }),
   count: publicProcedure.query(async ({ ctx }) => {
     const question = (
       await ctx.db
