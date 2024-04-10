@@ -11,6 +11,8 @@
     "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
     "start": "pnpm with-env next start",
     "typecheck": "tsc --noEmit",
+    "test": "pnpm with-env vitest run",
+    "test:watch": "vitest run --watch",
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {

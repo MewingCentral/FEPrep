@@ -2,6 +2,12 @@
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": ["**/.env"],
   "pipeline": {
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "test:watch": {
+      "cache": false
+    },
     "topo": {
       "dependsOn": ["^topo"]
     },
