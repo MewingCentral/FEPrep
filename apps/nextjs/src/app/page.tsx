@@ -20,11 +20,11 @@ export default function HomePage() {
           <h1 className="mb-2 flex flex-row items-center gap-4 text-left text-6xl font-semibold">
             FEPrep{" "}
             <motion.span
-              initial={{ opacity: 0, scale: 0.8, x: -35 }}
+              initial={{ opacity: 0, scale: 0.6, x: -45 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{
-                duration: 3,
-                delay: 0.5,
+                duration: 5,
+                delay: 0.25,
                 ease: [0, 0.71, 0.2, 1.01],
               }}
               className="flex flex-row items-center"
@@ -56,10 +56,10 @@ export default function HomePage() {
           </div>
         </div>
         <motion.span
-          initial={{ opacity: 0, scale: 0.8, y: 75 }}
+          initial={{ opacity: 0, scale: 0.5, y: 200 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
-            duration: 3,
+            duration: 7,
             delay: 2,
             ease: [0, 0.71, 0.2, 1.01],
           }}
