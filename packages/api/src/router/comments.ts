@@ -9,11 +9,14 @@ export const commentsRouter = createTRPCRouter({
   create: publicProcedure
     .input(CreateCommentSchema)
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(comments).values({
-        questionId: input.questionId,
-        userId: input.userId,
-        content: input.content,
-      }).returning();
+      await ctx.db
+        .insert(comments)
+        .values({
+          questionId: input.questionId,
+          userId: input.userId,
+          content: input.content,
+        })
+        .returning();
     }),
   allByQuestionId: publicProcedure.input(z.number()).query(({ ctx, input }) => {
     return ctx.db.query.comments.findMany({
