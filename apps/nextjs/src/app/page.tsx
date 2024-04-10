@@ -13,7 +13,7 @@ export const runtime = "edge";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="bg-gradient-to-b from-background from-50% to-border">
       <div className="flex min-h-screen flex-1 flex-col items-center justify-center">
         <div>
           <h1 className="mb-2 flex flex-row items-center gap-4 text-left text-6xl font-semibold">
@@ -55,7 +55,7 @@ export default function HomePage() {
           />
         </div>
       </div>
-      <div className="flex min-h-screen flex-1 flex-col items-center justify-center gap-2">
+      <div className="flex min-h-screen flex-1 flex-col items-center justify-center gap-2 ">
         <div className="flex flex-row content-center items-center justify-center gap-2 text-3xl font-normal leading-normal text-red-500">
           <h2 className="font-semibold">Made with</h2>
           <Link href="/about">
@@ -88,6 +88,6 @@ export default function HomePage() {
           alt="UCF Logo"
         />
       </div>
-    </>
+    </div>
   );
 }
