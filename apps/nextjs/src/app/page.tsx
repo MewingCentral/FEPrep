@@ -105,6 +105,13 @@ export default function HomePage() {
           Science are employed at top companies across the nation. With this
           app, we aim to help you on this journey as you reach for the stars.
         </p>
+        <Image
+          src="/penguin.gif"
+          className="mt-4 h-[50px] w-auto transition-all duration-500 ease-in-out hover:scale-110"
+          width={50}
+          height={50}
+          alt="dancing penguin"
+        />
       </div>
     </div>
   );
