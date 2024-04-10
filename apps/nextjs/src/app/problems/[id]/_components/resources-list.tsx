@@ -24,14 +24,13 @@ export function ResourcesList({
 
   return (
     <>
-      <h1 className="text-2xl font-semibold">Videos</h1>
-      {videos.length === 0 ? (
-        <p className="text-muted-foreground">
-          Looks like there are no videos for this question yet.
-        </p>
-      ) : (
-        <>
-          <h1 className="text-2xl font-semibold">Videos</h1>
+      <div>
+        <h1 className="text-2xl font-semibold">Videos</h1>
+        {videos.length === 0 ? (
+          <p className="text-muted-foreground">
+            Looks like there are no videos for this question yet.
+          </p>
+        ) : (
           <div className="grid grid-cols-2 gap-4">
             {videos.map((resource) => (
               <iframe
@@ -45,29 +44,31 @@ export function ResourcesList({
               ></iframe>
             ))}
           </div>
-        </>
-      )}
-      <h1 className="text-2xl font-semibold">Links</h1>
-      {links.length === 0 ? (
-        <p className="text-muted-foreground">
-          Looks like there are no links for this question yet.
-        </p>
-      ) : (
-        <ul>
-          {links.map((resource) => (
-            <div key={resource.id} className="flex justify-start ">
-              <Link
-                href={resource.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary underline"
-              >
-                {resource.title}
-              </Link>
-            </div>
-          ))}
-        </ul>
-      )}
+        )}
+      </div>
+      <div>
+        <h1 className="text-2xl font-semibold">Links</h1>
+        {links.length === 0 ? (
+          <p className="text-muted-foreground">
+            Looks like there are no links for this question yet.
+          </p>
+        ) : (
+          <ul>
+            {links.map((resource) => (
+              <div key={resource.id} className="flex justify-start ">
+                <Link
+                  href={resource.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary underline"
+                >
+                  {resource.title}
+                </Link>
+              </div>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 }

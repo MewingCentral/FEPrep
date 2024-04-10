@@ -11,7 +11,7 @@ export function ResourcesTab({
   const resources = api.resources.allByQuestionId(question.id);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <ResourcesList promise={resources} question={question} />
     </div>
   );

@@ -26,7 +26,7 @@ export async function Right({
   return (
     <div>
       <Tabs defaultValue="resources">
-        <div className="flex flex-row items-center justify-between gap-4 mb-4">
+        <div className="flex flex-row items-center justify-between gap-4 mb-6">
           <TabsList>
             <TabsTrigger value="discussion">
               <ChatBubbleIcon className="mr-2" />
