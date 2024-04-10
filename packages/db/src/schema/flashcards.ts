@@ -8,6 +8,7 @@ export const flashcardPacks = sqliteTable("flashcard_pack", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
+  isPublic: integer("is_public", { mode: "boolean" }).notNull(),
 });
 
 export const flashcards = sqliteTable("flashcard", {
