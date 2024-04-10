@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: ["*"]
   push:
-    branches: ["main", "no-merge/testing"]
+    branches: ["main"]
   merge_group:
 
 concurrency:
@@ -19,6 +19,42 @@ env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Copy env
+        shell: bash
+        run: cp .env.example .env
+
+      - name: Lint
+        run: pnpm lint && pnpm lint:ws
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Format
+        run: pnpm format
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Typecheck
+        run: pnpm typecheck
 
   test:
     runs-on: ubuntu-latest
@@ -27,18 +63,6 @@ jobs:
 
       - name: Setup
         uses: ./tooling/github/setup
-
-      - name: copy env
-        run: cp .env.example .env
-
-      - name: add database url
-        run: echo DATABASE_URL=http://localhost:3000 >> .env
-
-      - name: run server
-        run: pnpm dev -F nextjs
-
-      - name: run db
-        run: pnpm dev -F db
 
       - name: Test (Vitest)
         run: pnpm -F api test
