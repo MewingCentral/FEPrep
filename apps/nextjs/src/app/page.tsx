@@ -56,7 +56,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="flex min-h-screen flex-1 flex-col items-center justify-center gap-2 ">
-        <div className="flex flex-row content-center items-center justify-center gap-2 text-3xl font-normal leading-normal text-red-500">
+        <div className="flex flex-row content-center items-center justify-center gap-2 whitespace-nowrap text-xl font-normal leading-normal text-red-500 md:text-3xl">
           <h2 className="font-semibold">Made with</h2>
           <Link href="/about">
             <HeartFilledIcon className="h-[45px] w-auto transition-all duration-500 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-foreground" />
