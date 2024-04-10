@@ -32,19 +32,19 @@ export default async function AboutUs() {
 
   const developersSecond = [
     {
-      name: "Quan Nguyen",
-      role: "Database / Front End - Web",
-      image: `/photos/Quan.jpg`,
+      name: "Daniel Palma",
+      role: "API",
+      image: `/photos/Daniel.jpg`,
     },
     {
-      name: "Pharit Smitasin",
-      role: "Frontend Web - Web",
-      image: `/photos/Pharit.jpg`,
+      name: "Anna Macinnis",
+      role: "Frontend Web - Mobile",
+      image: `/photos/Anna.jpg`,
     },
     {
-      name: "Luis Infante",
-      role: "Front End - Web",
-      image: `/photos/Luis.png`,
+      name: "Annalisa Easton Vitulli",
+      role: "Front End - Mobile",
+      image: `/photos/Annalisa.PNG`,
     },
   ];
 
