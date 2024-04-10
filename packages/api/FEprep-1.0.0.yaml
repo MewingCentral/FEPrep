@@ -1,0 +1,41 @@
+openapi: 3.0.0
+servers:
+  - url: https://feprep.org
+  
+  
+info:
+  version: "1.0.0"
+  title: FEPrep
+  description: The API for the FEPrep project
+paths:
+  /api/trpc/auth.signUp:
+    post:
+      tags:
+        - Auth
+      operationId: signUp
+      
+      requestBody:
+        description: request description
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+    
+      responses:
+        '200':
+          description: ok
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        'json': 
+          type: object
+          properties:
+              nid:
+                type: string
+                example: "aa999999"
+              password:
+                type: string
+                example: "TEST1234!"
