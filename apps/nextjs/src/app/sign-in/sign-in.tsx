@@ -55,7 +55,10 @@ export function SignIn() {
               <Button className="mt-2" type="submit">
                 Submit
               </Button>
-              <p className="font-regular mt-2 text-center text-sm">
+              <p className="text-center text-sm font-light underline">
+                <Link href="/reset-password"> Forgot Password?</Link>
+              </p>
+              <p className="font-regular mt-8 text-center text-sm">
                 Don&apos;t have an account?
                 <Link href="/sign-up" className="font-semibold">
                   {" "}
