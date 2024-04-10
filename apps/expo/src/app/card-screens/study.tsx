@@ -4,8 +4,15 @@ import * as Progress from "react-native-progress";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
-import { api } from "~/utils/api";
+import { RouterOutputs, api } from "~/utils/api";
 import Colors from "~/utils/colors";
+
+function shuffleArray(array: NonNullable<RouterOutputs["flashcards"]["readCards"]>) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j]!, array[i]!];
+  }
+}
 
 export default function StudySet() {
   const { pId, pName } = useLocalSearchParams();
@@ -29,6 +36,7 @@ export default function StudySet() {
 
   const [curCard, setCurCard] = useState(0);
   const [showingDef, setShowingDef] = useState(true);
+
 
   // todo handle case where cards has no uhhhh members
 
@@ -67,9 +75,12 @@ export default function StudySet() {
                 color={Colors.dark_secondary_text}
               />
             </Pressable>
-            <Pressable style={[styles.shuffleContainer]}>
+            {/* <Pressable style={[styles.shuffleContainer]} onPress={() => {
+              alert("shuffled");
+
+            }}>
               <RadixIcon name="shuffle" color={Colors.dark_secondary_text} />
-            </Pressable>
+            </Pressable> */}
             <Pressable
               onPress={() => {
                 const nextCard = curCard + 1;
