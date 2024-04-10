@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@feprep/ui/button";
@@ -15,7 +16,16 @@ export default function HomePage() {
     <>
       <div className="flex min-h-screen flex-1 flex-col items-center justify-center">
         <div>
-          <h1 className="mb-4 text-left text-6xl font-semibold">FEPrep</h1>
+          <h1 className="mb-2 flex flex-row items-center gap-4 text-left text-6xl font-semibold">
+            FEPrep{" "}
+            <Image
+              src="/ellipse.svg"
+              className="h-[50px] w-auto"
+              width={50}
+              height={50}
+              alt="FEPrep Logo"
+            />
+          </h1>
           <h2 className="mb-4 text-left text-3xl font-normal leading-normal">
             A new way to prepare for the Foundation Exam.
           </h2>
