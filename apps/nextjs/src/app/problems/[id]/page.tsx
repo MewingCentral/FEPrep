@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
           <ScrollArea className="rounded-md border p-8 lg:basis-1/2">
-            <Right question={question} user={user} />
+            <Right question={question} />
             <ScrollBar orientation="vertical" />
           </ScrollArea>
         </main>
