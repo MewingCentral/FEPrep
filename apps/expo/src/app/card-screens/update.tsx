@@ -10,7 +10,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { router, useLocalSearchParams } from "expo-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RadixIcon } from "radix-ui-react-native-icons";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, Form, useForm } from "react-hook-form";
 
 import {
   CreateFlashcardSchema,
@@ -131,6 +131,7 @@ export function Card({
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(UpdateFlashcardSchema),
@@ -149,6 +150,7 @@ export function Card({
     onSuccess: async () => {
       await utils.flashcards.readCards.invalidate();
       setModalVisible(false);
+      reset();
     },
     onError: (error) => {
       console.error(error);
@@ -179,66 +181,81 @@ export function Card({
         {/* Update Card Modal */}
         <Modal
           isVisible={modalVisible}
-          style={[styles.modalContainer]}
+          // style={[styles.modalContainer]}
           hasBackdrop={true}
           backdropColor="black"
           backdropOpacity={0.7}
-          onBackdropPress={() => setModalVisible(false)}
+          onBackdropPress={() => {
+            setModalVisible(false);
+            reset();
+          }}
         >
-          <Pressable
-            onPress={() => {
-              setModalVisible(false);
-            }}
-          >
-            <RadixIcon name="cross-1" color={Colors.dark_secondary_text} />
-          </Pressable>
-          <View style={{ margin: 10 }}>
-            <Text>New Term</Text>
-            <Controller
-              control={control}
-              name="front"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="Enter term"
-                  keyboardType="default"
-                  onChangeText={(value) => onChange(value)}
-                  onBlur={onBlur}
-                  value={value}
-                />
-              )}
-            />
-            <Text>New Definition</Text>
-            <Controller
-              control={control}
-              name="back"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  placeholder="Enter definition"
-                  keyboardType="default"
-                  onChangeText={(value) => onChange(value)}
-                  onBlur={onBlur}
-                  value={value}
-                />
-              )}
-            />
-            <Pressable
-              style={{ borderWidth: 1, borderColor: "black" }}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text>Cancel</Text>
-            </Pressable>
-            <Pressable
-              style={{
-                borderWidth: 1,
-                borderColor: "black",
-                marginTop: 15,
-                height: 100,
-                width: 100,
-              }}
-              onPress={handleSubmit(onSubmit)}
-            >
-              <Text>Save</Text>
-            </Pressable>
+          <View style={[modalStyles.container]}>
+            <View style={[modalStyles.headerContainer]}>
+              <Text style={[modalStyles.headerText]}>Edit Card</Text>
+              <Pressable onPress={() => {
+                setModalVisible(false);
+                reset();
+                }}>
+                <RadixIcon name="cross-circled" size={25} color={Colors.dark_secondary_text} />
+              </Pressable>
+            </View>
+            <View style={[modalStyles.inputContainer]}>
+              <Text style={[modalStyles.inputLabel]}>Term</Text>
+              <Controller 
+                control={control}
+                name="front"
+                render={({field:{onChange,onBlur,value}}) => (
+                  <TextInput
+                    style={[modalStyles.inputField]}
+                    multiline = {true}
+                    placeholder="Enter term"
+                    placeholderTextColor={Colors.dark_secondary_text}
+                    underlineColorAndroid="transparent"
+                    cursorColor={Colors.dark_primary_text}
+                    keyboardType="default"
+                    onChangeText={(value) => onChange(value)}
+                    onBlur={onBlur}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+            </View>
+            <View style={[modalStyles.inputContainer]}>
+              <Text style={[modalStyles.inputLabel]}>Definition</Text>
+              <Controller 
+                control={control}
+                name="back"
+                render={({field:{onChange,onBlur,value}}) => (
+                  <TextInput
+                    style={[modalStyles.inputField]}
+                    multiline = {true}
+                    placeholder="Enter definition"
+                    placeholderTextColor={Colors.dark_secondary_text}
+                    underlineColorAndroid="transparent"
+                    cursorColor={Colors.dark_primary_text}
+                    keyboardType="default"
+                    onChangeText={(value) => onChange(value)}
+                    onBlur={onBlur}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+            </View>
+
+            <View style={[modalStyles.footerBtnsContainer]}>
+              <Pressable style={[modalStyles.footerBtn]} onPress={() => {
+                setModalVisible(false);
+                reset();
+                }}>
+                <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
+              </Pressable>
+              <Pressable style={[modalStyles.footerBtn]} onPress={handleSubmit(onSubmit)}>
+                <Text style={[modalStyles.footerBtnText]}>Save</Text>
+              </Pressable>
+            </View>          
           </View>
         </Modal>
       </View>
@@ -283,6 +300,7 @@ function AddCard({packId}:{packId:number}) {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(CreateFlashcardSchema),
@@ -302,6 +320,7 @@ function AddCard({packId}:{packId:number}) {
         console.log("created card data: ", data);
       }
       setModalVisible(false);
+      reset();
     },
     onError: (error) => {
       console.error(error);
@@ -326,52 +345,75 @@ function AddCard({packId}:{packId:number}) {
           hasBackdrop={true}
           backdropColor="black"
           backdropOpacity={0.7}
-          onBackdropPress={() => setModalVisible(false)}
+          onBackdropPress={() => {
+            setModalVisible(false);
+            reset();
+          }}
         >
           <View style={[modalStyles.container]}>
-            <View style={[modalStyles.closeBtnContainer]}>
-              <Pressable onPress={() => setModalVisible(false)}>
-                {/* Todo fix not working for some reason */}
-                <RadixIcon name="cross-1" color="#ffffff" />
+            <View style={[modalStyles.headerContainer]}>
+              <Text style={[modalStyles.headerText]}>New Card</Text>
+              <Pressable onPress={() => {
+                setModalVisible(false);
+                reset();
+                }}>
+                <RadixIcon name="cross-circled" size={25} color={Colors.dark_secondary_text} />
               </Pressable>
             </View>
-            <Text>Term</Text>
-            <Controller 
-              control={control}
-              name="front"
-              render={({field:{onChange,onBlur,value}}) => (
-                <TextInput
-                  placeholder="Enter term"
-                  keyboardType="default"
-                  onChangeText={(value) => onChange(value)}
-                  onBlur={onBlur}
-                  value={value}
-                />
-              )}
-            />
-            {errors.front?.message && <Text>{errors.front?.message}</Text>}
-            <Text>Definition</Text>
-            <Controller 
-              control={control}
-              name="back"
-              render={({field:{onChange,onBlur,value}}) => (
-                <TextInput
-                  placeholder="Enter term"
-                  keyboardType="default"
-                  onChangeText={(value) => onChange(value)}
-                  onBlur={onBlur}
-                  value={value}
-                />
-              )}
-            />
-            {errors.back?.message && <Text>{errors.back?.message}</Text>}
+            <View style={[modalStyles.inputContainer]}>
+              <Text style={[modalStyles.inputLabel]}>Term</Text>
+              <Controller 
+                control={control}
+                name="front"
+                render={({field:{onChange,onBlur,value}}) => (
+                  <TextInput
+                    style={[modalStyles.inputField]}
+                    multiline = {true}
+                    placeholder="Enter term"
+                    placeholderTextColor={Colors.dark_secondary_text}
+                    underlineColorAndroid="transparent"
+                    cursorColor={Colors.dark_primary_text}
+                    keyboardType="default"
+                    onChangeText={(value) => onChange(value)}
+                    onBlur={onBlur}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+            </View>
+            <View style={[modalStyles.inputContainer]}>
+              <Text style={[modalStyles.inputLabel]}>Definition</Text>
+              <Controller 
+                control={control}
+                name="back"
+                render={({field:{onChange,onBlur,value}}) => (
+                  <TextInput
+                    style={[modalStyles.inputField]}
+                    multiline = {true}
+                    placeholder="Enter definition"
+                    placeholderTextColor={Colors.dark_secondary_text}
+                    underlineColorAndroid="transparent"
+                    cursorColor={Colors.dark_primary_text}
+                    keyboardType="default"
+                    onChangeText={(value) => onChange(value)}
+                    onBlur={onBlur}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.front?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.front?.message}</Text>}
+            </View>
 
-            <View style={[styles.mainBtnContainer]}>
-              <Pressable style={[styles.mainBtn]} onPress={() => setModalVisible(false)}>
-                <Text style={[styles.mainBtnText]}>Cancel</Text>
+            <View style={[modalStyles.footerBtnsContainer]}>
+              <Pressable style={[modalStyles.footerBtn]} onPress={() => {
+                setModalVisible(false);
+                reset();
+                }}>
+                <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
               </Pressable>
-              <Pressable style={[styles.mainBtn]} onPress={handleSubmit(onSubmit)}>
-                <Text style={[styles.mainBtnText]}>Save</Text>
+              <Pressable style={[modalStyles.footerBtn]} onPress={handleSubmit(onSubmit)}>
+                <Text style={[modalStyles.footerBtnText]}>Save</Text>
               </Pressable>
             </View>          
           </View>
