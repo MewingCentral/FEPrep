@@ -71,7 +71,7 @@ export default function UpdateCards() {
   console.log(errors);
 
   return (
-    <KeyboardAwareScrollView style={[styles.screenContainer]}>
+    <KeyboardAwareScrollView style={[styles.screenContainer]} keyboardShouldPersistTaps="handled">
       {/* Save updates btn */}
       <View style={[styles.mainBtnContainer]}>
         <Pressable

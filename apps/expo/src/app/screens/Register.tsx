@@ -24,6 +24,7 @@ import {
   SignUpFormInput,
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function Register() {
   const { setSessionId } = useAuth();
@@ -61,77 +62,79 @@ export default function Register() {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={screenStyles.container}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={screenStyles.container}>
-          <View style={screenStyles.topContainer}>
-            <Text style={screenStyles.topContainerText}> FEPrep</Text>
-          </View>
+    <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={screenStyles.container}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <SafeAreaView style={screenStyles.container}>
+            <View style={screenStyles.topContainer}>
+              <Text style={screenStyles.topContainerText}> FEPrep</Text>
+            </View>
 
-          <View style={screenStyles.welcomeContainer}>
-            <Text style={screenStyles.header}>{"Create an Account"}</Text>
-            <Text style={screenStyles.subheaderText}>
-              {"Enter your NID to create your account. \n"}
-            </Text>
+            <View style={screenStyles.welcomeContainer}>
+              <Text style={screenStyles.header}>{"Create an Account"}</Text>
+              <Text style={screenStyles.subheaderText}>
+                {"Enter your NID to create your account. \n"}
+              </Text>
 
-            <Text style={screenStyles.inputIdentifierText}> NID </Text>
-            <Controller
-              control={control}
-              name="nid"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={screenStyles.nidTextField}
-                  placeholder=""
-                  keyboardType="default"
-                  onChangeText={(value) => onChange(value)}
-                  onBlur={onBlur}
-                  value={value}
-                />
+              <Text style={screenStyles.inputIdentifierText}> NID </Text>
+              <Controller
+                control={control}
+                name="nid"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={screenStyles.nidTextField}
+                    placeholder=""
+                    keyboardType="default"
+                    onChangeText={(value) => onChange(value)}
+                    onBlur={onBlur}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.nid?.message && <Text style={[errorStyles.errorText]}>{errors.nid?.message}</Text>}
+
+              <Text style={screenStyles.inputIdentifierText}> Password </Text>
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={screenStyles.pswdTextField}
+                    placeholder=""
+                    keyboardType="default"
+                    onChangeText={(value) => onChange(value)}
+                    onBlur={onBlur}
+                    value={value}
+                    secureTextEntry
+                  />
+                )}
+              />
+              {errors.password?.message && (
+                <Text style={[errorStyles.errorText]}>{errors.password?.message}</Text>
               )}
-            />
-            {errors.nid?.message && <Text style={[errorStyles.errorText]}>{errors.nid?.message}</Text>}
+            </View>
 
-            <Text style={screenStyles.inputIdentifierText}> Password </Text>
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={screenStyles.pswdTextField}
-                  placeholder=""
-                  keyboardType="default"
-                  onChangeText={(value) => onChange(value)}
-                  onBlur={onBlur}
-                  value={value}
-                  secureTextEntry
-                />
-              )}
-            />
-            {errors.password?.message && (
-              <Text style={[errorStyles.errorText]}>{errors.password?.message}</Text>
-            )}
-          </View>
-
-          <View style={screenStyles.bottomContainer}>
-            <Pressable
-              style={screenStyles.loginBtn}
-              onPress={handleSubmit(onSubmit)}
-            >
-              <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
-            </Pressable>
-            <Text style={screenStyles.contentText}>
-              {"Have an account already? "}
-              <Link style={screenStyles.hyperlinkText} href="/screens/Login">
-                {"Login"}
-              </Link>
-            </Text>
-          </View>
-          <StatusBar style="auto" />
-        </SafeAreaView>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+            <View style={screenStyles.bottomContainer}>
+              <Pressable
+                style={screenStyles.loginBtn}
+                onPress={handleSubmit(onSubmit)}
+              >
+                <Text style={screenStyles.loginBtnText}> {"Sign Up"} </Text>
+              </Pressable>
+              <Text style={screenStyles.contentText}>
+                {"Have an account already? "}
+                <Link style={screenStyles.hyperlinkText} href="/screens/Login">
+                  {"Login"}
+                </Link>
+              </Text>
+            </View>
+            <StatusBar style="auto" />
+          </SafeAreaView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 }

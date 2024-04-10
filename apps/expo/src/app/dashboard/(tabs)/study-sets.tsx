@@ -132,7 +132,7 @@ function SearchPacks({
 export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           <Packs />
         </View>

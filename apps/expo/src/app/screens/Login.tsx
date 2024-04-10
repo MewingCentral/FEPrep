@@ -67,7 +67,7 @@ export default function Login() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={screenStyles.container}>
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
             <View style={screenStyles.topContainer}>
               <Text style={screenStyles.topContainerText}> FEPrep</Text>
             </View>

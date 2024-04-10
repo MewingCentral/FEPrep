@@ -238,7 +238,7 @@ export default function Tab() {
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
         <View>
           <Modal
             isVisible={modalVisible}
