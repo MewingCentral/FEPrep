@@ -112,6 +112,13 @@ export async function Nav({
         {user ? (
           <div className="flex items-center gap-4">
             <span className="hidden lg:inline">Welcome, {user.email}</span>
+            {user.emailVerified ? null : (
+              <Link href="/verify-email" passHref>
+                <Button variant="secondary" size="sm">
+                  Verify Email
+                </Button>
+              </Link>
+            )}
             <form action={signOutAction}>
               <Button size="sm" type="submit">
                 Sign Out
