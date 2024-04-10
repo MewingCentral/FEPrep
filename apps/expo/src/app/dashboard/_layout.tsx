@@ -1,7 +1,6 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 import { TRPCProvider } from "~/utils/api";
 import headerDefault from "~/utils/header-default";
@@ -17,13 +16,7 @@ export default function DashboardLayout() {
             The Stack component displays the current page.
             It also allows you to configure your screens 
           */}
-      {/* <Stack screenOptions={headerDefault(colorScheme)}> */}
-      <Stack screenOptions={{
-        ...headerDefault(colorScheme),
-        // contentStyle: {
-        //   backgroundColor: Colors.dark_bg,
-        // },
-      }}>
+      <Stack screenOptions={headerDefault(colorScheme)}>
         <Stack.Screen
           name="(tabs)"
           options={{

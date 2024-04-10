@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+
 import Colors from "~/utils/colors";
 
 export default function Layout() {

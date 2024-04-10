@@ -58,24 +58,32 @@ function Pack({
       }}
     >
       <View style={[styles.setContentsContainer]}>
-
         {/* TODO test this */}
         <View style={[styles.setTextContainer]}>
           <Text style={[dashStyles.setText, dashStyles.titleText]}>
             {pack.name}
-          </Text> 
-          {
-            pack.isPublic ?
-            <Text style={[styles.setStatusText, dashStyles.setText]}>Public</Text> :
-            <Text style={[styles.setStatusText, dashStyles.setText]}>Private</Text>
-          }
+          </Text>
+          {pack.isPublic ? (
+            <Text style={[styles.setStatusText, dashStyles.setText]}>
+              Public
+            </Text>
+          ) : (
+            <Text style={[styles.setStatusText, dashStyles.setText]}>
+              Private
+            </Text>
+          )}
         </View>
         <View style={[styles.setBtnsContainer]}>
           <Pressable
             onPress={async () => {
               router.push({
                 pathname: "../../card-screens/update",
-                params: { pId: pack.id, pName: pack.name, uId: pack.userId, pStatus: pack.isPublic ? "true" : "false" },
+                params: {
+                  pId: pack.id,
+                  pName: pack.name,
+                  uId: pack.userId,
+                  pStatus: pack.isPublic ? "true" : "false",
+                },
               });
               await utils.flashcards.readPack.invalidate();
             }}
@@ -191,7 +199,7 @@ export default function Tab() {
 
   const [packIsPublic, setPackIsPublic] = useState(true);
   const togglePublicity = () => {
-    setPackIsPublic(previousState => !previousState);
+    setPackIsPublic((previousState) => !previousState);
   };
 
   console.log("public? ", packIsPublic);
@@ -238,7 +246,10 @@ export default function Tab() {
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
-      <KeyboardAwareScrollView style={[dashStyles.outer]} keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView
+        style={[dashStyles.outer]}
+        keyboardShouldPersistTaps="handled"
+      >
         <View>
           <Modal
             isVisible={modalVisible}
@@ -297,16 +308,30 @@ export default function Tab() {
               <View style={[styles.publicityContainer]}>
                 <View style={[styles.publicityItemsContainer]}>
                   <View style={[styles.publicityTextContainer]}>
-                    {
-                      packIsPublic ? 
-                      <Text style={[styles.publicityText, styles.publicityTextPublic]}>Public </Text> :
+                    {packIsPublic ? (
+                      <Text
+                        style={[
+                          styles.publicityText,
+                          styles.publicityTextPublic,
+                        ]}
+                      >
+                        Public{" "}
+                      </Text>
+                    ) : (
                       <Text style={[styles.publicityText]}>Private</Text>
-                    }
+                    )}
                   </View>
                   <View style={[styles.publicitySwitchContainer]}>
-                    <Switch 
-                      trackColor={{false: Colors.dark_bg, true: Colors.light_bg}}
-                      thumbColor={packIsPublic? Colors.dark_secondary_text : Colors.dark_secondary_text}
+                    <Switch
+                      trackColor={{
+                        false: Colors.dark_bg,
+                        true: Colors.light_bg,
+                      }}
+                      thumbColor={
+                        packIsPublic
+                          ? Colors.dark_secondary_text
+                          : Colors.dark_secondary_text
+                      }
                       onValueChange={togglePublicity}
                       value={packIsPublic}
                     />
