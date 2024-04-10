@@ -1,16 +1,16 @@
 import type { inferProcedureInput } from "@trpc/server";
     import { expect, suite, test } from "vitest";
-    import type { TESTINGAppRouter } from "../root";
-    import { TESTINGcreateCaller, TESTINGcreateTRPCContext } from "../index";
+    import type { AppRouter } from "../root";
+    import { createCaller, createTRPCContext } from "../index";
 
-suite("Flashcards testing", () => {
+suite("Flashcards testing", async () => {
 
-    const ctx = TESTINGcreateTRPCContext({ headers: new Headers() });
-    const caller = TESTINGcreateCaller(ctx);
+    const ctx = await createTRPCContext({ headers: new Headers() }, false);
+    const caller = createCaller(ctx);
 
     test("createPack", async () => {
 
-       const input: inferProcedureInput<TESTINGAppRouter["flashcards"]["createPack"]> = {
+       const input: inferProcedureInput<AppRouter["flashcards"]["createPack"]> = {
         name:"testing pack",
         userId:"wtroe4jemkmdjq4",
        };
@@ -28,7 +28,7 @@ suite("Flashcards testing", () => {
 
     test("createCard", async () => {
 
-       const input: inferProcedureInput<TESTINGAppRouter["flashcards"]["createCard"]> = {
+       const input: inferProcedureInput<AppRouter["flashcards"]["createCard"]> = {
         packId:1,
         front:"text front text",
         back:"text back text",
