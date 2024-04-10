@@ -21,8 +21,7 @@ export default function StudySet() {
     });
   }, []);
 
-  const cards =
-    packId !== -1 ? api.flashcards.readCards.useQuery(packId) : undefined;
+  const cards = api.flashcards.readCards.useQuery(packId);
 
   if (cards && !cards.isLoading && !cards.isError) {
     console.log(cards.data);
@@ -36,6 +35,7 @@ export default function StudySet() {
   return (
     <View style={[styles.screenContainer]}>
       {cards && cards.data && !cards.isLoading && !cards.isError ? (
+        (cards.data.length > 0) ?
         <>
           <Pressable
             style={[styles.cardContainer]}
@@ -102,11 +102,13 @@ export default function StudySet() {
               borderWidth={0}
             />
           </View>
-        </>
+        </> :
+        <Text style={[styles.noCardsText]}>This set has no cards!</Text>
       ) : (
         <Text>Error retrieving cards.</Text>
       )}
     </View>
+    // Todo error text above
   );
 }
 
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
   defText: {
     marginHorizontal: 25,
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 20,
     color: Colors.dark_primary_text,
   },
   progressText: {
@@ -158,6 +160,10 @@ const styles = StyleSheet.create({
   progressBar: {
     flexDirection: "column",
     alignContent: "flex-end",
+  },
+  noCardsText: {
+    fontSize: 30,
+    color: Colors.dark_primary_text,
   },
   delYellowBorder: {
     borderWidth: 1,
