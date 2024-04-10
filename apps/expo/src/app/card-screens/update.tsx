@@ -97,6 +97,7 @@ export default function UpdateCards() {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={[styles.input]}
+                  multiline={true}
                   defaultValue={packName}
                   placeholder="Enter title"
                   cursorColor={Colors.dark_primary_text}
