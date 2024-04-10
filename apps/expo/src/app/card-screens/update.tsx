@@ -341,7 +341,6 @@ function AddCard({packId}:{packId:number}) {
       <View>
         <Modal
           isVisible={modalVisible}
-          // style={[styles.modalContainer]}
           hasBackdrop={true}
           backdropColor="black"
           backdropOpacity={0.7}
@@ -458,7 +457,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     gap: 20,
-    // marginTop: 30,
   },
   mainBtnContentContainer: {
     flexDirection: "row",
@@ -511,8 +509,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light_secondary_text,
     width: 200,
     height: 50,
-    // borderWidth: 2,
-    // borderColor: Colors.dark_btn_border,
     borderRadius: 6,
   },
   mainBtnText: {
@@ -532,7 +528,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.dark_secondary_text,
     marginHorizontal: 10,
-    // marginVertical: 3,
     marginTop: 3,
     marginBottom: 15,
   },
