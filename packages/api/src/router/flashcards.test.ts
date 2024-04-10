@@ -3,9 +3,9 @@ import type { inferProcedureInput } from "@trpc/server";
     import type { AppRouter } from "../root";
     import { createCaller, createTRPCContext } from "../index";
 
-suite("Flashcards testing", async () => {
+suite("Flashcards testing", () => {
 
-    const ctx = await createTRPCContext({ headers: new Headers() }, false);
+    const ctx = createTRPCContext({ headers: new Headers() });
     const caller = createCaller(ctx);
 
     test("createPack", async () => {
