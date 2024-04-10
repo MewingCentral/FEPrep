@@ -5,8 +5,6 @@ import { use } from "react";
 import type { RouterOutputs } from "@feprep/api";
 import { AvatarIcon, Pencil1Icon, TrashIcon } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
-import { toast } from "@feprep/ui/toast";
-import { Textarea } from "@feprep/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -22,8 +20,11 @@ import {
   FormMessage,
   useForm,
 } from "@feprep/ui/form";
-import { api } from "~/trpc/react";
+import { Textarea } from "@feprep/ui/textarea";
+import { toast } from "@feprep/ui/toast";
 import { UpdateCommentSchema } from "@feprep/validators";
+
+import { api } from "~/trpc/react";
 
 export function CommentsList({
   promise,
@@ -92,53 +93,54 @@ function CommentCard({
         {comment.user.email} ({comment.user.type})
       </div>
       <p className="flex flex-1 flex-col gap-5 whitespace-normal p-2 lg:flex-row">
-        <div className='flex-1 w-8'>
-          {comment.content}
-        </div>
-      <Dialog>
-      <DialogTrigger asChild>
-        <Button className='right-0' 
-        variant="secondary" size="icon">
-          <Pencil1Icon width="15" height="15" />
-          </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[900px]">
-        <DialogHeader>
-          <DialogTitle>Edit Comment</DialogTitle>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="flex grid-cols-6 items-center gap-4">
-            <Form {...updateForm}>
-              <form className="w-full"
-                onSubmit={updateForm.handleSubmit(async(values) => {
-                  updateComment.mutate(values);
-                })}
-              >
-                <FormField 
-                  name="content"
-                  control={updateForm.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Textarea className="col-span-6" placeholder={comment.content} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button className="mt-3"type="submit">Save changes</Button>
-              </form>
-
-            </Form>
-          </div>
-        </div>
-      </DialogContent>
-      </Dialog>
+        <div className="w-8 flex-1">{comment.content}</div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="right-0" variant="secondary" size="icon">
+              <Pencil1Icon width="15" height="15" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[900px]">
+            <DialogHeader>
+              <DialogTitle>Edit Comment</DialogTitle>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="flex grid-cols-6 items-center gap-4">
+                <Form {...updateForm}>
+                  <form
+                    className="w-full"
+                    onSubmit={updateForm.handleSubmit(async (values) => {
+                      updateComment.mutate(values);
+                    })}
+                  >
+                    <FormField
+                      name="content"
+                      control={updateForm.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Textarea
+                              className="col-span-6"
+                              placeholder={comment.content}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button className="mt-3" type="submit">
+                      Save changes
+                    </Button>
+                  </form>
+                </Form>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         <div {...delComment}>
-          <Button className='right-0'
-            variant="destructive" size="icon"
-          >
+          <Button className="right-0" variant="destructive" size="icon">
             <TrashIcon width="15" height="15" />
           </Button>
         </div>
