@@ -110,7 +110,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
               </FormControl>
               <FormDescription>
                 Fill out if you&rsquo;d like to add a unique title to the
-                question
+                question.
               </FormDescription>
               <FormMessage />
             </FormItem>
