@@ -52,7 +52,7 @@ export async function Nav({
         <QuestionsSheet question={question} />
 
         <TooltipProvider>
-          <Tooltip>
+          <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
               <Link href={`/problems/${prevQuestionId}`} passHref>
                 <Button
@@ -69,7 +69,7 @@ export async function Nav({
         </TooltipProvider>
 
         <TooltipProvider>
-          <Tooltip>
+          <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
               <Link href={`/problems/${nextQuestionId}`} passHref>
                 <Button
@@ -86,7 +86,7 @@ export async function Nav({
         </TooltipProvider>
 
         <TooltipProvider>
-          <Tooltip>
+          <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
               <Link href={`/problems/${randomQuestionId}`} passHref>
                 <Button
