@@ -156,11 +156,13 @@ export default function UpdateCards() {
         )}
       />
 
-      {/* Cards */}
-      <View style={[styles.cardsContainer]}>{flashcards}</View>
+      <View style={{paddingBottom: 100,}}>
+        {/* Cards */}
+        <View style={[styles.cardsContainer]}>{flashcards}</View>
 
-      {/* Add Card */}
-      <AddCard packId={packId} />
+        {/* Add Card */}
+        <AddCard packId={packId} />
+      </View>
     </KeyboardAwareScrollView>
   );
 }
@@ -545,7 +547,6 @@ const styles = StyleSheet.create({
   },
   mainBtnContentContainer: {
     flexDirection: "row",
-    marginTop: 20,
     gap: 15,
   },
   cardsContainer: {
