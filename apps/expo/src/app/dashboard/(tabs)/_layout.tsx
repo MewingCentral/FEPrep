@@ -56,13 +56,7 @@ export default function TabLayout() {
             name="custom-sets"
             options={{
               title: "Custom Sets",
-              // href: null,
-            }}
-            listeners={{
-              tabPress: (e) => {
-                e.preventDefault();
-                // todo popup
-              },
+              href: null,
             }}
           />
         )
