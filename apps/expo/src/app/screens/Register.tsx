@@ -19,6 +19,7 @@ import { Controller, useForm } from "react-hook-form";
 import { api } from "~/utils/api";
 import { useAuth } from "~/utils/auth";
 import screenStyles from "~/utils/screen-styles";
+import errorStyles from "~/utils/error-styles";
 import {
   SignUpFormInput,
   SignUpFormSchema,
@@ -90,7 +91,7 @@ export default function Register() {
                 />
               )}
             />
-            {errors.nid?.message && <Text>{errors.nid?.message}</Text>}
+            {errors.nid?.message && <Text style={[errorStyles.errorText]}>{errors.nid?.message}</Text>}
 
             <Text style={screenStyles.inputIdentifierText}> Password </Text>
             <Controller
@@ -109,7 +110,7 @@ export default function Register() {
               )}
             />
             {errors.password?.message && (
-              <Text>{errors.password?.message}</Text>
+              <Text style={[errorStyles.errorText]}>{errors.password?.message}</Text>
             )}
           </View>
 

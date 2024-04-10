@@ -193,6 +193,8 @@ export default function Tab() {
     setPackIsPublic(previousState => !previousState);
   };
 
+  console.log("public? ", packIsPublic);
+
   const {
     control,
     handleSubmit,
@@ -290,13 +292,24 @@ export default function Tab() {
               </View>
 
               {/* TODO test this */}
-              <View>
-                <Switch 
-                  trackColor={{false: "#ffffff", true: "#000000"}}
-                  thumbColor={packIsPublic? "yellow" : "green"}
-                  onValueChange={togglePublicity}
-                  value={packIsPublic}
-                />
+              <View style={[styles.publicityContainer]}>
+                <View style={[styles.publicityItemsContainer]}>
+                  <View style={[styles.publicityTextContainer]}>
+                    {
+                      packIsPublic ? 
+                      <Text style={[styles.publicityText, styles.publicityTextPublic]}>Public </Text> :
+                      <Text style={[styles.publicityText]}>Private</Text>
+                    }
+                  </View>
+                  <View style={[styles.publicitySwitchContainer]}>
+                    <Switch 
+                      trackColor={{false: Colors.dark_bg, true: Colors.light_bg}}
+                      thumbColor={packIsPublic? Colors.dark_secondary_text : Colors.dark_secondary_text}
+                      onValueChange={togglePublicity}
+                      value={packIsPublic}
+                    />
+                  </View>
+                </View>
               </View>
 
               <View style={[modalStyles.footerBtnsContainer]}>
@@ -383,5 +396,35 @@ const styles = StyleSheet.create({
   deleteYellowBorder: {
     borderWidth: 1,
     borderColor: "yellow",
+  },
+
+  // Public vs private components
+  publicityContainer: {
+    flexDirection: "row",
+    paddingLeft: 10,
+  },
+  publicityItemsContainer: {
+    flexDirection: "row",
+    paddingLeft: 10,
+    gap: 10,
+    backgroundColor: Colors.dark_sec2,
+    borderColor: Colors.dark_secondary_text,
+    borderWidth: 1,
+    borderRadius: 50,
+  },
+  publicityTextContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  publicitySwitchContainer: {
+    paddingLeft: 3,
+    paddingRight: 6,
+  },
+  publicityText: {
+    fontSize: 18,
+    color: Colors.dark_primary_text,
+  },
+  publicityTextPublic: {
+    paddingRight: 1,
   },
 });

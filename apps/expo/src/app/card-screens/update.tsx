@@ -30,6 +30,8 @@ export default function UpdateCards() {
     setPackIsPublic(previousState => !previousState);
   }
 
+  console.log("public? ", packIsPublic);
+
   const packId = pId ? +pId : -1;
   const cards = api.flashcards.readCards.useQuery(packId);
   console.log(cards.data);
@@ -73,6 +75,21 @@ export default function UpdateCards() {
 
   return (
     <KeyboardAwareScrollView style={[styles.screenContainer]}>
+      {/* Save updates btn */}
+      <View style={[styles.mainBtnContainer]}>
+        <Pressable
+          style={[styles.mainBtn]}
+          onPress={handleSubmit((values) => {
+            updatePack.mutate({
+              ...values,
+              flashcardPackId: packId,
+            });
+          })}
+        >
+          <Text style={[styles.mainBtnText]}>Save changes</Text>
+        </Pressable>
+      </View>
+
       {/* Title input */}
       <View style={[styles.titleContainer]}>
         <View style={{ flexDirection: "row" }}>
@@ -94,33 +111,29 @@ export default function UpdateCards() {
               )}
             />
           </View>
+        </View>
+        <Text style={[styles.titleLabel]}>Title</Text>
+      </View>
 
-          {/* TODO test this */}
-          <View>
+      {/* TODO test this */}
+      <View style={[styles.publicityContainer]}>
+        <View style={[styles.publicityItemsContainer]}>
+          <View style={[styles.publicityTextContainer]}>
+            {
+              packIsPublic ? 
+              <Text style={[styles.publicityText, styles.publicityTextPublic]}>Public </Text> :
+              <Text style={[styles.publicityText]}>Private</Text>
+            }
+          </View>
+          <View style={[styles.publicitySwitchContainer]}>
             <Switch 
-              trackColor={{false: "#ffffff", true: "#000000"}}
-              thumbColor={packIsPublic? "green" : "yellow"}
+              trackColor={{false: Colors.dark_bg, true: Colors.light_bg}}
+              thumbColor={packIsPublic? Colors.dark_secondary_text : Colors.dark_secondary_text}
               onValueChange={togglePublicity}
               value={packIsPublic}
             />
           </View>
         </View>
-        <Text style={[styles.titleLabel]}>Title</Text>
-      </View>
-
-      {/* Save updates btn */}
-      <View style={[styles.mainBtnContainer]}>
-        <Pressable
-          style={[styles.mainBtn]}
-          onPress={handleSubmit((values) => {
-            updatePack.mutate({
-              ...values,
-              flashcardPackId: packId,
-            });
-          })}
-        >
-          <Text style={[styles.mainBtnText]}>Save changes</Text>
-        </Pressable>
       </View>
 
       {/* Cards */}
@@ -488,6 +501,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: "column",
     gap: 30,
+    paddingTop: 20,
     alignContent: "center",
   },
   titleContainer: {
@@ -512,6 +526,7 @@ const styles = StyleSheet.create({
   },
   mainBtnContentContainer: {
     flexDirection: "row",
+    marginTop: 20,
     gap: 15,
   },
   cardsContainer: {
@@ -607,4 +622,35 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "yellow",
   },
+
+    // Public vs private components
+    publicityContainer: {
+      flexDirection: "row",
+      paddingLeft: 10,
+      justifyContent: "center",
+    },
+    publicityItemsContainer: {
+      flexDirection: "row",
+      paddingLeft: 10,
+      gap: 10,
+      backgroundColor: Colors.dark_sec2,
+      borderColor: Colors.dark_secondary_text,
+      borderWidth: 1,
+      borderRadius: 50,
+    },
+    publicityTextContainer: {
+      flexDirection: "column",
+      justifyContent: "center",
+    },
+    publicitySwitchContainer: {
+      paddingLeft: 3,
+      paddingRight: 6,
+    },
+    publicityText: {
+      fontSize: 18,
+      color: Colors.dark_primary_text,
+    },
+    publicityTextPublic: {
+      paddingRight: 1,
+    },
 });
