@@ -1,8 +1,7 @@
 openapi: 3.0.0
 servers:
   - url: https://feprep.org
-  
-  
+
 info:
   version: "1.0.0"
   title: FEPrep
@@ -13,16 +12,16 @@ paths:
       tags:
         - Auth
       operationId: signUp
-      
+
       requestBody:
         description: request description
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
-    
+              $ref: "#/components/schemas/User"
+
       responses:
-        '200':
+        "200":
           description: ok
 
 components:
@@ -30,12 +29,12 @@ components:
     User:
       type: object
       properties:
-        'json': 
+        "json":
           type: object
           properties:
-              nid:
-                type: string
-                example: "aa999999"
-              password:
-                type: string
-                example: "TEST1234!"
+            nid:
+              type: string
+              example: "aa999999"
+            password:
+              type: string
+              example: "TEST1234!"
