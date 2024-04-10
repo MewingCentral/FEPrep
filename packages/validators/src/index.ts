@@ -134,8 +134,8 @@ export type UpdateCommentInput = z.infer<typeof UpdateCommentSchema>;
 
 export const CreateResourceSchema = z.object({
   questionId: z.number(),
-  link: z.string(),
-  title: z.string(),
+  link: z.string().url("Please enter a valid URL"),
+  title: z.string().min(1, "Please enter a title"),
   isVideo: z.boolean(),
 });
 
