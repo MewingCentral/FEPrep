@@ -18,6 +18,10 @@ export function PickRandomQuestionButton() {
     if (state?.error) {
       toast.error(state.error);
     }
+
+    if (state?.randomQuestionId) {
+      router.push(`/problems/${state.randomQuestionId}`);
+    }
   }, [state?.error, state?.randomQuestionId, router]);
 
   return (
