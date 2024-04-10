@@ -52,15 +52,19 @@
     "@feprep/prettier-config": "workspace:*",
     "@feprep/tailwind-config": "workspace:*",
     "@feprep/tsconfig": "workspace:*",
+    "@testing-library/react": "^14.3.0",
     "@types/node": "^20.11.13",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.57.0",
     "jiti": "^1.21.0",
+    "jsdom": "^24.0.0",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^1.4.0"
   },
   "eslintConfig": {
     "root": true,
