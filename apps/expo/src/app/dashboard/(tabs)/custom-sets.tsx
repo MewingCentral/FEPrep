@@ -66,17 +66,18 @@ function Pack({
           </Text> 
           {
             pack.isPublic ?
-            <Text style={[styles.setStatusText]}>Public</Text> :
-            <Text style={[styles.setStatusText]}>Private</Text>
+            <Text style={[styles.setStatusText, dashStyles.setText]}>Public</Text> :
+            <Text style={[styles.setStatusText, dashStyles.setText]}>Private</Text>
           }
         </View>
         <View style={[styles.setBtnsContainer]}>
           <Pressable
-            onPress={() => {
+            onPress={async () => {
               router.push({
                 pathname: "../../card-screens/update",
-                params: { pId: pack.id, pName: pack.name, uId: pack.userId, pStatus: pack.isPublic },
+                params: { pId: pack.id, pName: pack.name, uId: pack.userId, pStatus: pack.isPublic ? "true" : "false" },
               });
+              await utils.flashcards.readPack.invalidate();
             }}
           >
             <RadixIcon
@@ -372,7 +373,7 @@ const styles = StyleSheet.create({
   setContentsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    height: 150,
+    height: 130,
   },
   setTextContainer: {
     flexDirection: "column",
@@ -392,6 +393,7 @@ const styles = StyleSheet.create({
     color: Colors.dark_primary_text,
   },
   setStatusText: {
+    fontSize: 15,
     color: Colors.dark_secondary_text,
   },
   deleteYellowBorder: {
