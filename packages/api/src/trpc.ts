@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1)
@@ -8,8 +11,8 @@
  */
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
-import { uncachedValidateRequest } from "@feprep/auth";
 import { ZodError } from "zod";
+import { uncachedValidateRequest } from "@feprep/auth";
 import { db } from "@feprep/db";
 
 /**
@@ -25,34 +28,33 @@ import { db } from "@feprep/db";
  * @see https://trpc.io/docs/server/context
  */
 
-export async function createTRPCContext(opts: { headers: Headers }) {
+export async function createTRPCContext(opts: { headers: Headers }, CACHE = true,) {
   // Grab the source of the request
-  const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
-  // Get latest session and user data
-  const { session, user } = await uncachedValidateRequest();
+  if (CACHE === true) {
+    const source = opts.headers.get("x-trpc-source") ?? "unknown";
 
-  console.log(">>> tRPC Request from", source, "by");
+    // Get latest session and user data
+    const { session, user } = await uncachedValidateRequest();
 
-  return {
-    db,
-    session,
-    user,
-    ...opts,
-  };
+    console.log(">>> tRPC Request from", source, "by");
+
+    return {
+      db,
+      session,
+      user,
+      ...opts,
+    };
+    
+  } else {
+    return {
+      db,
+      ...opts,
+    };
+  }
 }
 
 type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;
-
-export function TESTINGcreateTRPCContext(opts: { headers: Headers }) {
-
-  return {
-    db,
-    ...opts,
-  };
-}
-
-type TESTINGTRPCContext = Awaited<ReturnType<typeof TESTINGcreateTRPCContext>>;
 
 /**
  * 2. INITIALIZATION
@@ -71,24 +73,11 @@ const t = initTRPC.context<TRPCContext>().create({
   }),
 });
 
-const TESTINGt = initTRPC.context<TESTINGTRPCContext>().create({
-  transformer: superjson,
-  errorFormatter: ({ shape, error }) => ({
-    ...shape,
-    data: {
-      ...shape.data,
-      zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
-    },
-  }),
-});
-
 /**
  * Create a server-side caller
  * @see https://trpc.io/docs/server/server-side-calls
  */
 export const createCallerFactory = t.createCallerFactory;
-
-export const TESTINGcreateCallerFactory = TESTINGt.createCallerFactory;
 
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
@@ -102,9 +91,6 @@ export const TESTINGcreateCallerFactory = TESTINGt.createCallerFactory;
  * @see https://trpc.io/docs/router
  */
 export const createTRPCRouter = t.router;
-
-export const TESTINGcreateTRPCRouter = TESTINGt.router;
-
 /**
  * Public (unauthed) procedure
  *
@@ -113,7 +99,6 @@ export const TESTINGcreateTRPCRouter = TESTINGt.router;
  * can still access user session data if they are logged in
  */
 export const publicProcedure = t.procedure;
-
 
 /**
  * Protected (authenticated) procedure
@@ -124,14 +109,16 @@ export const publicProcedure = t.procedure;
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
+  // @ts-expect-error only for testing
   if (!ctx.session || !ctx.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
   return next({
     ctx: {
-      // infers the `session` as non-nullable
+      // @ts-expect-error only for testing
       session: { ...ctx.session },
+      // @ts-expect-error only for testing
       user: { ...ctx.user },
     },
   });
