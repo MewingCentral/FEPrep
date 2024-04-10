@@ -20,7 +20,7 @@ export default async function AboutUs() {
     },
     {
       name: "Pharit Smitasin",
-      role: "Front End Web - Web",
+      role: "Front End - Web",
       image: `/photos/Pharit.jpg`,
     },
     {
@@ -38,7 +38,7 @@ export default async function AboutUs() {
     },
     {
       name: "Anna Macinnis",
-      role: "Frontend Web - Mobile",
+      role: "Front End - Mobile",
       image: `/photos/Anna.jpg`,
     },
     {
