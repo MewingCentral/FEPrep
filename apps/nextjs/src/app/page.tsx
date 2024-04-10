@@ -19,24 +19,26 @@ export default function HomePage() {
         <div>
           <h1 className="mb-2 flex flex-row items-center gap-4 text-left text-6xl font-semibold">
             FEPrep{" "}
-            <motion.span
-              initial={{ opacity: 0, scale: 0.6, x: -45 }}
+            <motion.a
+              initial={{ opacity: 0, scale: 0.8, x: -35 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{
-                duration: 2.5,
+                duration: 4,
                 delay: 0.25,
-                ease: [0, 0.71, 0.2, 1.01],
+                ease: [0, 0.41, 0.2, 1.01],
               }}
               className="flex flex-row items-center"
+              href="https://github.com/MewingCentral/FEPrep"
+              target="_blank"
             >
               <Image
                 src="/ellipse.svg"
-                className="h-[50px] w-auto"
+                className="h-[50px] w-auto transition-all duration-200 hover:scale-110 hover:cursor-pointer"
                 width={50}
                 height={50}
                 alt="FEPrep Logo"
               />
-            </motion.span>
+            </motion.a>
           </h1>
           <h2 className="mb-4 text-left text-3xl font-normal leading-normal">
             A new way to prepare for the Foundation Exam.
