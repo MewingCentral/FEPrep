@@ -11,7 +11,7 @@ export function QuestionToggleButton() {
   return (
     <Button
       variant="outline"
-      className="w-9 px-0 md:w-auto md:px-4"
+      className="w-9 px-0 lg:w-auto lg:px-4"
       onClick={() => {
         if (pageNumber === 1) {
           setPageNumber(2);
@@ -20,8 +20,8 @@ export function QuestionToggleButton() {
         }
       }}
     >
-      <RocketIcon className="md:mr-2" />
-      <span className="hidden md:flex">
+      <RocketIcon className="lg:mr-2" />
+      <span className="hidden lg:flex">
         {pageNumber === 1 ? "Solution" : "Question"}
       </span>
     </Button>
