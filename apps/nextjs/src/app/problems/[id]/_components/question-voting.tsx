@@ -40,6 +40,7 @@ export function QuestionVoting({
       <div className="flex gap-2">
         <Button
           size="sm"
+          className="bg-green-500 text-white hover:bg-green-600"
           onClick={() => {
             if (!user) return toast("You must be logged in to vote");
             if (!user.emailVerified)
@@ -51,6 +52,7 @@ export function QuestionVoting({
         </Button>
         <Button
           size="sm"
+          className="bg-yellow-500 text-white hover:bg-yellow-600"
           onClick={() => {
             if (!user) return toast("You must be logged in to vote");
             if (!user.emailVerified)
@@ -62,6 +64,7 @@ export function QuestionVoting({
         </Button>
         <Button
           size="sm"
+          className="bg-red-500 text-white hover:bg-red-600"
           onClick={() => {
             if (!user) return toast("You must be logged in to vote");
             if (!user.emailVerified)
