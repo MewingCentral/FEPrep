@@ -11,7 +11,8 @@ suite("Flashcards testing", () => {
   test("createPack", async () => {
     const input: inferProcedureInput<AppRouter["flashcards"]["createPack"]> = {
       name: "testing pack",
-      userId: "wtroe4jemkmdjq4",
+      userId: "wqjdiiwo",
+      isPublic:true
     };
 
     const res = await caller.flashcards.createPack(input);
@@ -39,7 +40,7 @@ suite("Flashcards testing", () => {
   });
 
     test("read packs", async () => {
-    const input: inferProcedureInput<AppRouter["flashcards"]["readPack"]> = "wtroe4jemkmdjq4"
+    const input: inferProcedureInput<AppRouter["flashcards"]["readPack"]> = "wqjdiiwo"
 
     const res = await caller.flashcards.readPack(input);
 
