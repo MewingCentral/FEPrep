@@ -75,6 +75,25 @@ export default async function AboutUs() {
         ))}
       </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {developersSecond.map((dev) => (
+          <div key={dev.name}>
+            <div className="rounded-full overflow-hidden w-[150px] h-[150px] mx-auto">
+              <Image
+                objectPosition=""
+                src={dev.image}
+                alt={`Image of ${dev.name}`}
+                width={150}
+                height={150}
+              />
+            </div>
+
+            <div className="text-center">{dev.name}</div>
+            <div className="text-center">{dev.role}</div>
+          </div>
+        ))}
+      </div>
+
     </section>
   );
 }
