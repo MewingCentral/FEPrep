@@ -28,7 +28,8 @@
     "./navigation-menu": "./src/navigation-menu.tsx",
     "./textarea": "./src/textarea.tsx",
     "./tooltip": "./src/tooltip.tsx",
-    "./checkbox": "./src/checkbox.tsx"
+    "./checkbox": "./src/checkbox.tsx",
+    "./dialog": "./src/dialog.tsx"
   },
   "license": "MIT",
   "scripts": {

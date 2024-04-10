@@ -3,11 +3,27 @@
 import { use } from "react";
 
 import type { RouterOutputs } from "@feprep/api";
-import { AvatarIcon } from "@feprep/ui";
+import { AvatarIcon, Pencil1Icon, TrashIcon } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
 import { toast } from "@feprep/ui/toast";
-
+import { Textarea } from "@feprep/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@feprep/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  useForm,
+} from "@feprep/ui/form";
 import { api } from "~/trpc/react";
+import { UpdateCommentSchema } from "@feprep/validators";
 
 export function CommentsList({
   promise,
@@ -53,8 +69,22 @@ function CommentCard({
       toast("failed to delete");
     },
   });
-  // function handleDelete(id) {
-  // }
+  const updateForm = useForm({
+    schema: UpdateCommentSchema,
+    defaultValues: {
+      content: comment.content,
+    },
+  });
+  const updateComment = api.comments.create.useMutation({
+    onSuccess: async () => {
+      await utils.comments.allByQuestionId.invalidate();
+      updateForm.reset();
+      toast("Comment Edited!");
+    },
+    onError: () => {
+      toast("Failed to create comment");
+    },
+  });
   return (
     <div className="rounded-md border p-2" id={comment.id.toString()}>
       <div className="flex items-center p-2 font-bold">
@@ -62,18 +92,54 @@ function CommentCard({
         {comment.user.email} ({comment.user.type})
       </div>
       <p className="flex flex-1 flex-col gap-5 whitespace-normal p-2 lg:flex-row">
-        {comment.content}
-        <div {...delComment}>
-          <Button
-            variant="destructive"
-            onClick={async () => {
-              delComment.mutate(comment.id);
+        <div className='flex-1 w-8'>
+          {comment.content}
+        </div>
+      <Dialog>
+      <DialogTrigger asChild>
+        <Button className='right-0' 
+        variant="secondary" size="icon">
+          <Pencil1Icon width="15" height="15" />
+          </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[900px]">
+        <DialogHeader>
+          <DialogTitle>Edit Comment</DialogTitle>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="flex grid-cols-6 items-center gap-4">
+            <Form {...updateForm}>
+              <form className="w-full"
+                onSubmit={updateForm.handleSubmit(async(values) => {
+                  updateComment.mutate(values);
+                })}
+              >
+                <FormField 
+                  name="content"
+                  control={updateForm.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Textarea className="col-span-6" placeholder={comment.content} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button className="mt-3"type="submit">Save changes</Button>
+              </form>
 
-              // const elem = document.getElementById(comment.id.toString());
-              // elem?.remove();
-            }}
+            </Form>
+          </div>
+        </div>
+      </DialogContent>
+      </Dialog>
+
+        <div {...delComment}>
+          <Button className='right-0'
+            variant="destructive" size="icon"
           >
-            bye
+            <TrashIcon width="15" height="15" />
           </Button>
         </div>
       </p>
