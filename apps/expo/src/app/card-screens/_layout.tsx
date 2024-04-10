@@ -25,9 +25,9 @@ export default function CardCreationLayout() {
       }}
     >
       <Stack.Screen
-        name="create"
+        name="update"
         options={{
-          title: "Custom set: Untitled",
+          title: "Editing set",
         }}
       />
     </Stack>
