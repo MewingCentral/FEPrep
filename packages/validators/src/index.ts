@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { DIFFICULTIES, SECTIONS, TOPICS } from "@feprep/consts";
+import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
 
 export const SignUpSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -67,7 +67,7 @@ export const CreateQuestionSchema = z.object({
   points: z.number({
     coerce: true,
   }),
-  semester: z.enum(DIFFICULTIES),
+  semester: z.enum(SEMESTERS),
   topic: z.enum(TOPICS),
   section: z.enum(SECTIONS),
   questionNumber: z.number(),
