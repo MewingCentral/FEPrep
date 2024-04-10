@@ -21,7 +21,6 @@ import {
   MagnifyingGlassIcon,
   PlusIcon,
   ReloadIcon,
-  ShuffleIcon,
 } from "@feprep/ui";
 import { Button } from "@feprep/ui/button";
 import {
@@ -52,6 +51,7 @@ import {
 
 import { api } from "~/trpc/react";
 import { CreateQuestionForm } from "./create-question-form";
+import { PickRandomQuestionButton } from "./pick-random-question-button.tsx";
 
 export function QuestionsTable({
   columns,
@@ -119,10 +119,7 @@ export function QuestionsTable({
             }}
           />
         </div>
-        <Button>
-          <ShuffleIcon className="mr-2 h-4 w-4" />
-          Pick One
-        </Button>
+        <PickRandomQuestionButton />
       </div>
 
       {/* List of questions */}
@@ -153,7 +150,7 @@ export function QuestionsTable({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   role="link"
-                  className="cursor-pointer"
+                  className="cursor-pointer whitespace-nowrap"
                   onClick={() => {
                     router.push(`/problems/${row.original.id}`);
                   }}
