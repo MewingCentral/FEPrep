@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import { Button } from "@feprep/ui/button";
 
@@ -18,13 +19,24 @@ export default function HomePage() {
         <div>
           <h1 className="mb-2 flex flex-row items-center gap-4 text-left text-6xl font-semibold">
             FEPrep{" "}
-            <Image
-              src="/ellipse.svg"
-              className="h-[50px] w-auto"
-              width={50}
-              height={50}
-              alt="FEPrep Logo"
-            />
+            <motion.span
+              initial={{ opacity: 0, scale: 0.8, x: -35 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{
+                duration: 3,
+                delay: 0.5,
+                ease: [0, 0.71, 0.2, 1.01],
+              }}
+              className="flex flex-row items-center"
+            >
+              <Image
+                src="/ellipse.svg"
+                className="h-[50px] w-auto"
+                width={50}
+                height={50}
+                alt="FEPrep Logo"
+              />
+            </motion.span>
           </h1>
           <h2 className="mb-4 text-left text-3xl font-normal leading-normal">
             A new way to prepare for the Foundation Exam.
@@ -43,17 +55,28 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="translate-y-60 transform">
-          <ChevronDownIcon
-            className="mt-14 h-auto w-[50px] animate-bounce hover:cursor-pointer"
-            onClick={() => {
-              window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth",
-              });
-            }}
-          />
-        </div>
+        <motion.span
+          initial={{ opacity: 0, scale: 0.8, y: 75 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{
+            duration: 3,
+            delay: 2,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
+          {" "}
+          <div className="translate-y-60 transform">
+            <ChevronDownIcon
+              className="mt-14 h-auto w-[50px] animate-bounce hover:cursor-pointer"
+              onClick={() => {
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth",
+                });
+              }}
+            />
+          </div>
+        </motion.span>
       </div>
       <div className="flex min-h-screen flex-1 flex-col items-center justify-center gap-2 ">
         <div className="flex flex-row content-center items-center justify-center gap-2 whitespace-nowrap text-xl font-normal leading-normal text-red-500 md:text-3xl">
