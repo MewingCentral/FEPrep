@@ -90,7 +90,7 @@ function SearchPacks({
   return (
     <View>
       <KeyboardAvoidingView
-        style={[{ flexDirection: "row", alignItems: "stretch" }]}
+        style={[styles.searchContainer]}
       >
         <View style={[dashStyles.container, dashStyles.inputContainer]}>
           <TextInput
@@ -132,7 +132,7 @@ function SearchPacks({
 export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
-      <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView style={[dashStyles.outer]} keyboardShouldPersistTaps="handled">
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           <Packs />
         </View>
@@ -142,6 +142,11 @@ export default function Tab() {
 }
 
 const styles = StyleSheet.create({
+  searchContainer: {
+    flexDirection: "row", 
+    alignItems: "stretch", 
+    marginTop: 20,
+  },
   setsContainer: {
     gap: 15,
   },

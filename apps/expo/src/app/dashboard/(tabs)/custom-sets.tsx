@@ -238,7 +238,7 @@ export default function Tab() {
 
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
-      <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView style={[dashStyles.outer]} keyboardShouldPersistTaps="handled">
         <View>
           <Modal
             isVisible={modalVisible}
@@ -275,7 +275,7 @@ export default function Tab() {
                     <TextInput
                       style={[modalStyles.inputField]}
                       multiline={true}
-                      placeholder="Enter term"
+                      placeholder="Enter title"
                       placeholderTextColor={Colors.dark_secondary_text}
                       underlineColorAndroid="transparent"
                       cursorColor={Colors.dark_primary_text}
@@ -360,6 +360,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: 300,
     paddingVertical: 10,
+    marginTop: 20,
     marginBottom: 10,
     justifyContent: "center",
     alignItems: "center",

@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import Colors from "~/utils/colors";
 
 export default function Layout() {
   return (
@@ -9,6 +10,7 @@ export default function Layout() {
           presentation: "modal",
           headerShown: false,
           headerBackTitleVisible: false,
+          statusBarColor: Colors.dark_secondary_text,
         }}
       />
       <Stack.Screen
@@ -17,27 +19,28 @@ export default function Layout() {
           presentation: "modal",
           headerShown: false,
           headerBackTitleVisible: false,
+          statusBarColor: Colors.dark_secondary_text,
         }}
       />
       <Stack.Screen
         name="Login"
         options={{
-          headerShown: false,
           headerBackTitleVisible: false,
+          statusBarColor: Colors.dark_secondary_text,
         }}
       />
       <Stack.Screen
         name="Register"
         options={{
-          headerShown: false,
           headerBackTitleVisible: false,
+          statusBarColor: Colors.dark_secondary_text,
         }}
       />
       <Stack.Screen
         name="ForgotPswd"
         options={{
-          headerShown: false,
           headerBackTitleVisible: false,
+          statusBarColor: Colors.dark_secondary_text,
         }}
       />
     </Stack>
