@@ -33,7 +33,7 @@ export default function HomePage() {
             >
               <Image
                 src="/ellipse.svg"
-                className="h-[50px] w-auto transition-all duration-200 hover:scale-110 hover:cursor-pointer"
+                className="h-[50px] w-auto transition-all duration-500 ease-in-out hover:scale-110 hover:cursor-pointer"
                 width={50}
                 height={50}
                 alt="FEPrep Logo"
