@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1)
@@ -9,10 +6,9 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { uncachedValidateRequest } from "@feprep/auth";
 import { db } from "@feprep/db";
 
 /**
@@ -28,30 +24,13 @@ import { db } from "@feprep/db";
  * @see https://trpc.io/docs/server/context
  */
 
-export async function createTRPCContext(opts: { headers: Headers }, CACHE = true,) {
+export function createTRPCContext(opts: { headers: Headers }) {
   // Grab the source of the request
-
-  if (CACHE === true) {
-    const source = opts.headers.get("x-trpc-source") ?? "unknown";
-
-    // Get latest session and user data
-    const { session, user } = await uncachedValidateRequest();
-
-    console.log(">>> tRPC Request from", source, "by");
-
-    return {
-      db,
-      session,
-      user,
-      ...opts,
-    };
-    
-  } else {
     return {
       db,
       ...opts,
     };
-  }
+
 }
 
 type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;
@@ -99,35 +78,3 @@ export const createTRPCRouter = t.router;
  * can still access user session data if they are logged in
  */
 export const publicProcedure = t.procedure;
-
-/**
- * Protected (authenticated) procedure
- *
- * If you want a query or mutation to ONLY be accessible to logged in users, use this. It verifies
- * the session is valid and guarantees `ctx.session.user` is not null.
- *
- * @see https://trpc.io/docs/procedures
- */
-export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
-  // @ts-expect-error only for testing
-  if (!ctx.session || !ctx.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
-  }
-
-  return next({
-    ctx: {
-      // @ts-expect-error only for testing
-      session: { ...ctx.session },
-      // @ts-expect-error only for testing
-      user: { ...ctx.user },
-    },
-  });
-});
-
-export const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
-  if (ctx.user.type !== "Teacher") {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
-  }
-
-  return next({ ctx });
-});
