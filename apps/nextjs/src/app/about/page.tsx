@@ -9,34 +9,24 @@ export default async function AboutUs() {
 
   const developers = [
     {
-      name: "Caleb",
+      name: "Caleb Rivera",
       role: "Project Manager",
       image: `/photos/Caleb.jpg`,
     },
     {
-      name: "Anna",
-      role: "Mobile",
-      image: `/photos/Anna.jpg`,
+      name: "Quan Nguyen",
+      role: "Database / Front End - Web",
+      image: `/photos/Quan.jpg`,
     },
     {
-      name: "Pharit",
-      role: "Frontend Web",
-      image: `/photos/Pharit.jpeg`,
+      name: "Pharit Smitasin",
+      role: "Frontend Web - Web",
+      image: `/photos/Pharit.jpg`,
     },
     {
-      name: "Pharit",
-      role: "Frontend Web",
-      image: `/photos/Pharit.jpeg`,
-    },
-    {
-      name: "Pharit",
-      role: "Frontend Web",
-      image: `/photos/Pharit.jpeg`,
-    },
-    {
-      name: "Pharit",
-      role: "Frontend Web",
-      image: `/photos/Pharit.jpeg`,
+      name: "Luis Infante",
+      role: "Front End - Web",
+      image: `/photos/Luis.png`,
     },
   ];
 
@@ -48,7 +38,7 @@ export default async function AboutUs() {
           {"Meet the Developers"}
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-rows-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {developers.map((dev) => (
           <div key={dev.name}>
             <div className="rounded-full overflow-hidden w-[150px] h-[150px] mx-auto">
@@ -62,17 +52,11 @@ export default async function AboutUs() {
             </div>
 
             <div className="text-center">{dev.name}</div>
-
             <div className="text-center">{dev.role}</div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 grid-flow-row md:grid-cols-3 gap-4">
-        <div className="bg-indigo-500"></div>
-        <div className="bg-green-700"></div>
-        <div className="bg-red-600"></div>
-      </div>
     </section>
   );
 }
