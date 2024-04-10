@@ -45,65 +45,112 @@ function Pack({
 
   const onDelete = () => {
     deletePack.mutate(pack.id);
+    setModalVisible(false);
   };
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <Pressable
-      style={[dashStyles.container, dashStyles.setContainer]}
-      onPress={() => {
-        router.push({
-          pathname: "../../card-screens/study",
-          params: { pId: pack.id, pName: pack.name },
-        });
-      }}
-    >
-      <View style={[styles.setContentsContainer]}>
-        {/* TODO test this */}
-        <View style={[styles.setTextContainer]}>
-          <Text style={[dashStyles.setText, dashStyles.titleText]}>
-            {pack.name}
-          </Text>
-          {pack.isPublic ? (
-            <Text style={[styles.setStatusText, dashStyles.setText]}>
-              Public
-            </Text>
-          ) : (
-            <Text style={[styles.setStatusText, dashStyles.setText]}>
-              Private
-            </Text>
-          )}
-        </View>
-        <View style={[styles.setBtnsContainer]}>
-          <Pressable
-            onPress={async () => {
-              router.push({
-                pathname: "../../card-screens/update",
-                params: {
-                  pId: pack.id,
-                  pName: pack.name,
-                  uId: pack.userId,
-                  pStatus: pack.isPublic ? "true" : "false",
-                },
-              });
-              await utils.flashcards.readPack.invalidate();
-            }}
-          >
-            <RadixIcon
-              name="pencil-2"
-              color={Colors.dark_secondary_text}
-              size={30}
-            />
-          </Pressable>
-          <Pressable onPress={onDelete}>
-            <RadixIcon
-              name="trash"
-              color={Colors.dark_secondary_text}
-              size={33}
-            />
-          </Pressable>
-        </View>
+    <View>
+      <View>
+        <Modal
+          isVisible={modalVisible}
+          hasBackdrop={true}
+          backdropColor="black"
+          backdropOpacity={0.7}
+          onBackdropPress={() => {
+            setModalVisible(false);
+          }}
+        >
+          <View style={[modalStyles.container]}>
+            <View style={[modalStyles.headerContainer, styles.deleteModalHeader]}>
+              <Pressable onPress={() => {
+                setModalVisible(false);
+              }}>
+                <RadixIcon
+                  name="cross-circled"
+                  size={25}
+                  color={Colors.dark_secondary_text}
+                />
+              </Pressable>
+            </View>
+            <View style={[modalStyles.inputContainer]}>
+              <Text style={[modalStyles.inputLabel]}>Are you sure you want to delete {pack.name}?</Text>
+            </View>
+            <View style={[modalStyles.footerBtnsContainer]}>
+              <Pressable style={[modalStyles.footerBtn]} onPress={() => {
+                setModalVisible(false);
+              }}>
+                <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
+              </Pressable>
+              <Pressable
+                style={[modalStyles.footerBtn]}
+                onPress={onDelete}
+              >
+                <Text style={[modalStyles.footerBtnText]}>Confirm</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
       </View>
-    </Pressable>
+      <Pressable
+        style={[dashStyles.container, dashStyles.setContainer]}
+        onPress={() => {
+          router.push({
+            pathname: "../../card-screens/study",
+            params: { pId: pack.id, pName: pack.name },
+          });
+        }}
+      >
+        <View style={[styles.setContentsContainer]}>
+          <View style={[styles.setTextContainer]}>
+            <Text style={[dashStyles.setText, dashStyles.titleText]}>
+              {pack.name}
+            </Text>
+            {pack.isPublic ? (
+              <Text style={[styles.setStatusText, dashStyles.setText]}>
+                Public
+              </Text>
+            ) : (
+              <Text style={[styles.setStatusText, dashStyles.setText]}>
+                Private
+              </Text>
+            )}
+          </View>
+          <View style={[styles.setBtnsContainer]}>
+            <Pressable
+              onPress={async () => {
+                router.push({
+                  pathname: "../../card-screens/update",
+                  params: {
+                    pId: pack.id,
+                    pName: pack.name,
+                    uId: pack.userId,
+                    pStatus: pack.isPublic ? "true" : "false",
+                  },
+                });
+                await utils.flashcards.readPack.invalidate();
+              }}
+            >
+              <RadixIcon
+                name="pencil-2"
+                color={Colors.dark_secondary_text}
+                size={30}
+              />
+            </Pressable>
+            <Pressable onPress={() => {
+              setModalVisible(true);
+            }}>
+              <RadixIcon
+                name="trash"
+                color={Colors.dark_secondary_text}
+                size={33}
+              />
+            </Pressable>
+          </View>
+        </View>
+      </Pressable>
+    </View>
   );
 }
 
@@ -455,5 +502,10 @@ const styles = StyleSheet.create({
   },
   publicityTextPublic: {
     paddingRight: 1,
+  },
+
+  // Delete modal styling
+  deleteModalHeader: {
+    alignItems: "flex-end",
   },
 });

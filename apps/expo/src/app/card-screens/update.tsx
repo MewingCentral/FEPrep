@@ -225,7 +225,6 @@ export function Card({
         {/* Update Card Modal */}
         <Modal
           isVisible={modalVisible}
-          // style={[styles.modalContainer]}
           hasBackdrop={true}
           backdropColor="black"
           backdropOpacity={0.7}
