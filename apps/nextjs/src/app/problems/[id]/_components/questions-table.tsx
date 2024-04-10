@@ -77,10 +77,13 @@ export function QuestionsTable({
               <TableCell>{question.points}</TableCell>
               <TableCell
                 className={cn({
-                  "text-accent": questionDifficulty === "Easy",
-                  "text-primary": questionDifficulty === "Medium",
-                  "text-error": questionDifficulty === "Hard",
-                  "text-gray-500": questionDifficulty === "Unknown",
+                  "text-green-500  hover:text-green-500":
+                    questionDifficulty === "Easy",
+                  " text-yellow-500 hover:text-yellow-500":
+                    questionDifficulty === "Medium",
+                  "text-red-500  hover:text-red-500":
+                    questionDifficulty === "Hard",
+                  "text-foreground": questionDifficulty === "Unknown",
                 })}
               >
                 {questionDifficulty}
