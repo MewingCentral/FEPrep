@@ -108,6 +108,7 @@ function Packs() {
     void packs.refetch();
   });
 
+  // TODO error text
   if (packs.isLoading) {
     return <Text>Loading...</Text>;
   }
@@ -132,7 +133,6 @@ function SearchPacks({
 }: {
   packs: RouterOutputs["flashcards"]["readPack"];
 }) {
-  console.log("packs: ", packs);
   const [searchInput, setSearchInput] = useState("");
   console.log("search input: ", searchInput);
 
