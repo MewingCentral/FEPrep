@@ -103,13 +103,6 @@ export default function HomePage() {
           Science are employed at top companies across the nation. With this
           app, we aim to help you on this journey as you reach for the stars.
         </p>
-        <Image
-          src="/ucf.svg"
-          className="mt-4 h-[200px] w-auto text-foreground dark:invert"
-          width={50}
-          height={50}
-          alt="UCF Logo"
-        />
       </div>
     </div>
   );
