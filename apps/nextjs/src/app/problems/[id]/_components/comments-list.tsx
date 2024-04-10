@@ -9,10 +9,10 @@ import { Button } from "@feprep/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter,
 } from "@feprep/ui/dialog";
 import {
   Form,
@@ -53,7 +53,12 @@ export function CommentsList({
   return (
     <div className="flex flex-col gap-2">
       {comments.data.map((comment) => (
-        <CommentCard key={comment.id} comment={comment} user={user} question={question}/>
+        <CommentCard
+          key={comment.id}
+          comment={comment}
+          user={user}
+          question={question}
+        />
       ))}
     </div>
   );
@@ -62,11 +67,11 @@ export function CommentsList({
 function CommentCard({
   user,
   comment,
-  question
+  question,
 }: {
   user: User | null;
   comment: RouterOutputs["comments"]["allByQuestionId"][number];
-  question: NonNullable<RouterOutputs["questions"]["byId"]>
+  question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
   const utils = api.useUtils();
   const delComment = api.comments.delete.useMutation({
@@ -144,7 +149,7 @@ function CommentCard({
                       <DialogFooter>
                         <Button className="mt-3" type="submit">
                           Save changes
-                        </Button>                    
+                        </Button>
                       </DialogFooter>
                     </form>
                   </Form>
@@ -155,16 +160,18 @@ function CommentCard({
         )}
         {user?.id === comment.userId && (
           <div>
-            <Button 
-            onClick={() => {
-              delComment.mutate(comment.id)
-            }}
-            className="right-0" variant="destructive" size="icon">
+            <Button
+              onClick={() => {
+                delComment.mutate(comment.id);
+              }}
+              className="right-0"
+              variant="destructive"
+              size="icon"
+            >
               <TrashIcon width="15" height="15" />
             </Button>
           </div>
         )}
-
       </p>
     </div>
   );
