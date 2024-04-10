@@ -3,6 +3,10 @@ import { StyleSheet } from "react-native";
 import Colors from "./colors";
 
 const dashStyles = StyleSheet.create({
+  outer: {
+    flex: 1,
+    backgroundColor: Colors.dark_bg,
+  },
   container: {
     flexDirection: "column",
   },

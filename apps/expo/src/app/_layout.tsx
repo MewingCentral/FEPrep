@@ -30,11 +30,24 @@ export default function RootLayout() {
           It also allows you to configure your screens 
         */}
 
-        <Stack screenOptions={headerDefault(colorScheme)}>
+        {/* <Stack screenOptions={headerDefault(colorScheme)}> */}
+        <Stack screenOptions={{
+          ...headerDefault(colorScheme),
+          statusBarColor: Colors.dark_bg,
+        }} >
+          <Stack.Screen
+            name="screens"
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen
             name="dashboard"
             options={{
               ...headerDefault(colorScheme),
+              contentStyle: {
+                backgroundColor: Colors.dark_bg,
+              },
               headerLeft: () => {
                 // eslint-disable-next-line
                 const { sessionId } = useAuth();

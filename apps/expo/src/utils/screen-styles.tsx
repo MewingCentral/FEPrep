@@ -3,8 +3,12 @@ import { StyleSheet } from "react-native";
 import Colors from "./colors";
 
 const screenStyles = StyleSheet.create({
+  outer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
     backgroundColor: Colors.light_bg,
   },

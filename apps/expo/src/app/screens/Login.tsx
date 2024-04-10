@@ -21,6 +21,7 @@ import { Controller, useForm } from "react-hook-form";
 import { api } from "~/utils/api";
 import { useAuth } from "~/utils/auth";
 import screenStyles from "~/utils/screen-styles";
+import Colors from "~/utils/colors";
 import {
   SignInInput,
   SignInSchema,
@@ -61,13 +62,13 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={screenStyles.container}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={screenStyles.container}>
-          <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
+    <KeyboardAwareScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={screenStyles.outer}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={screenStyles.container}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <SafeAreaView style={screenStyles.container}>
             <View style={screenStyles.topContainer}>
               <Text style={screenStyles.topContainerText}> FEPrep</Text>
             </View>
@@ -87,6 +88,7 @@ export default function Login() {
                     style={screenStyles.nidTextField}
                     placeholder=""
                     keyboardType="default"
+                    cursorColor={Colors.light_primary_text}
                     onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                     value={value}
@@ -104,6 +106,7 @@ export default function Login() {
                     style={screenStyles.pswdTextField}
                     placeholder=""
                     keyboardType="default"
+                    cursorColor={Colors.light_primary_text}
                     onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                     value={value}
@@ -141,9 +144,9 @@ export default function Login() {
               </Text>
             </View>
             <StatusBar style="auto" />
-          </KeyboardAwareScrollView>
-        </SafeAreaView>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+          </SafeAreaView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 }

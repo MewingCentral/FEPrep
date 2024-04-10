@@ -25,6 +25,7 @@ import {
   SignUpFormSchema,
 } from "../../../../../packages/validators/src";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Colors from "~/utils/colors";
 
 export default function Register() {
   const { setSessionId } = useAuth();
@@ -62,7 +63,7 @@ export default function Register() {
   };
 
   return (
-    <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
+    <KeyboardAwareScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={screenStyles.outer}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={screenStyles.container}
@@ -88,6 +89,7 @@ export default function Register() {
                     style={screenStyles.nidTextField}
                     placeholder=""
                     keyboardType="default"
+                    cursorColor={Colors.light_primary_text}
                     onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                     value={value}
@@ -105,6 +107,7 @@ export default function Register() {
                     style={screenStyles.pswdTextField}
                     placeholder=""
                     keyboardType="default"
+                    cursorColor={Colors.light_primary_text}
                     onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                     value={value}
