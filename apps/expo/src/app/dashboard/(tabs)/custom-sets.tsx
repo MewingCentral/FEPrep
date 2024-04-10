@@ -1,6 +1,5 @@
 import {
   KeyboardAvoidingView,
-  Modal,
   Pressable,
   StyleSheet,
   Text,
@@ -20,6 +19,9 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateFlashcardPackInput, CreateFlashcardPackSchema } from "@feprep/validators";
+
+import Modal from "react-native-modal";
+import modalStyles from "~/utils/modal-styles";
 
 function Pack({
   pack,
@@ -126,6 +128,7 @@ export default function Tab() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(CreateFlashcardPackSchema),
@@ -184,22 +187,38 @@ export default function Tab() {
 
         <View>
           <Modal
-            visible={modalVisible}
-            animationType="slide"
-            onRequestClose={() => (setModalVisible(false))}
+            isVisible={modalVisible}
+            hasBackdrop={true}
+            backdropColor="black"
+            backdropOpacity={0.7}
+            onBackdropPress={() => {
+              setModalVisible(false);
+              reset();
+            }}
           >
-            <Pressable onPress={() => setModalVisible(false)}>
-              <RadixIcon name="cross-1" color={Colors.dark_secondary_text} />
-            </Pressable>
-              <View>
-                <Text style={[styles.modalTitle]}>New Set Title</Text>
+            <View style={[modalStyles.container]}>
+              <View style={[modalStyles.headerContainer]}>
+                <Text style={[modalStyles.headerText]}>New Set</Text>
+                <Pressable onPress={() => {
+                  setModalVisible(false);
+                  reset();
+                  }}>
+                  <RadixIcon name="cross-circled" size={25} color={Colors.dark_secondary_text} />
+                </Pressable>
+              </View>
+              <View style={[modalStyles.inputContainer]}>
+                <Text style={[modalStyles.inputLabel]}>Title</Text>
                 <Controller 
                   control={control}
                   name="name"
-                  render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput 
-                      style={[styles.modalInput]}
-                      placeholder="New Set"
+                  render={({field:{onChange,onBlur,value}}) => (
+                    <TextInput
+                      style={[modalStyles.inputField]}
+                      multiline = {true}
+                      placeholder="Enter term"
+                      placeholderTextColor={Colors.dark_secondary_text}
+                      underlineColorAndroid="transparent"
+                      cursorColor={Colors.dark_primary_text}
                       keyboardType="default"
                       onChangeText={(value) => onChange(value)}
                       onBlur={onBlur}
@@ -207,10 +226,21 @@ export default function Tab() {
                     />
                   )}
                 />
-                <Pressable onPress={handleSubmit(onSubmit)}>
-                  <Text>Create</Text>
-                </Pressable>
+                {errors.name?.message && <Text style={[modalStyles.inputErrorMsg]}>{errors.name?.message}</Text>}
               </View>
+
+              <View style={[modalStyles.footerBtnsContainer]}>
+                <Pressable style={[modalStyles.footerBtn]} onPress={() => {
+                  setModalVisible(false);
+                  reset();
+                  }}>
+                  <Text style={[modalStyles.footerBtnText]}>Cancel</Text>
+                </Pressable>
+                <Pressable style={[modalStyles.footerBtn]} onPress={handleSubmit(onSubmit)}>
+                  <Text style={[modalStyles.footerBtnText]}>Create</Text>
+                </Pressable>
+              </View>          
+            </View>
           </Modal>
         </View>
 
