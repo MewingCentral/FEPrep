@@ -4,7 +4,7 @@ import Colors from "./colors";
 
 const modalStyles = StyleSheet.create({
     container: {
-        height: "80%",
+        flexDirection: "column",
         width: "95%",
         alignSelf: "center",
         // margin: "auto",
@@ -14,15 +14,65 @@ const modalStyles = StyleSheet.create({
         borderWidth: 2,
         borderColor: Colors.dark_secondary_text,
         borderRadius: 6,
+        gap: 20,
     },
-    closeBtnContainer: {
+    headerContainer: {
         flexDirection: "row",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
+        alignItems: "center",
         marginTop: 10,
-        paddingEnd: 10,
+        paddingHorizontal: 10,
+        paddingBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.dark_secondary_text,
+    },
+    headerText: {
+        fontSize: 30,
+        color: Colors.dark_primary_text,
+    },
+    inputContainer: {
+        flexDirection: "column",
+        alignItems: "stretch",
+        gap: 5,
+        marginHorizontal: 10,
+    },
+    inputLabel: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: Colors.dark_primary_text,
+    },
+    inputField: {
+        color: Colors.dark_primary_text,
+        padding: 8,
         borderWidth: 1,
-        borderColor: "yellow",
-    }
+        borderColor: Colors.dark_primary_text,
+        borderRadius: 6,
+    },
+    inputErrorMsg: {
+        marginTop: 8,
+        color: Colors.dark_primary_text,
+    },
+    footerBtnsContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignSelf: "stretch",
+        paddingHorizontal: 15,
+        marginVertical: 30,
+    },
+    footerBtn: {
+        flexDirection: "column",
+        justifyContent: "center",
+        height: 50,
+        width: 90,
+        backgroundColor: Colors.light_secondary_text,
+        marginHorizontal: 10,
+        borderRadius: 6,
+    },
+    footerBtnText: {
+        color: Colors.dark_primary_text,
+        fontSize: 25,
+        textAlign: "center",
+    },
 });
 
 export default modalStyles;
