@@ -110,12 +110,58 @@ function Packs() {
   }
 
   return (
-    <View style={[styles.setsContainer]}>
-      {packs.data.map((pack) => (
-        <View style={[styles.setContentsContainer]} key={pack.id}>
-          <Pack pack={pack} />
+    <View>
+      <SearchPacks packs={packs.data} />
+    </View>
+  );
+}
+
+function SearchPacks({packs}:{packs:RouterOutputs["flashcards"]["readPack"]}) {
+  console.log("packs: ", packs);
+  const [searchInput, setSearchInput] = useState("");
+  console.log("search input: ", searchInput);
+
+  const filteredPacks = packs.filter((pack) => {
+    return pack.name.toLowerCase().includes(searchInput.toLowerCase());
+  });
+
+  console.log("filtered packs: ", filteredPacks);
+
+  return (
+    <View>
+      <KeyboardAvoidingView
+          style={[{ flexDirection: "row", alignItems: "stretch" }]}>
+        <View style={[dashStyles.container, dashStyles.inputContainer]}>
+          <TextInput
+            style={[dashStyles.input]}
+            placeholder={"Enter set"}
+            placeholderTextColor={Colors.dark_secondary_text}
+            cursorColor={Colors.dark_primary_text}
+            keyboardType="default"
+            onChangeText={(value) => {
+              console.log("Typing something");
+              setSearchInput(value);
+            }}
+            value={searchInput}
+          />
+          <Pressable onPress={() => {
+            console.log(searchInput)
+          }}>
+            <RadixIcon
+              name="magnifying-glass"
+              color={Colors.dark_primary_text}
+              size={35}
+            />
+          </Pressable>
         </View>
-      ))}
+      </KeyboardAvoidingView>
+      <View style={[styles.setsContainer]}>
+        {filteredPacks.map((pack) => (
+          <View style={[styles.setContentsContainer]} key={pack.id}>
+            <Pack pack={pack} />
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
@@ -165,24 +211,6 @@ export default function Tab() {
   return (
     <SafeAreaView style={[dashStyles.container, dashStyles.screenContainer]}>
       <KeyboardAwareScrollView>
-        {/* Search input */}
-        <KeyboardAvoidingView
-          style={[{ flexDirection: "row", alignItems: "stretch" }]}
-        >
-          <View style={[dashStyles.container, dashStyles.inputContainer]}>
-            <TextInput
-              style={[dashStyles.input]}
-              placeholder={"Enter set"}
-              placeholderTextColor={Colors.dark_secondary_text}
-              cursorColor={Colors.dark_primary_text}
-            />
-            <RadixIcon
-              name="magnifying-glass"
-              color={Colors.dark_primary_text}
-              size={35}
-            />
-          </View>
-        </KeyboardAvoidingView>
 
         <View>
           <Modal
