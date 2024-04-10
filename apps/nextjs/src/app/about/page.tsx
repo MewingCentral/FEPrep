@@ -7,7 +7,7 @@ import { Nav } from "./nav";
 export default async function AboutUs() {
   const { user } = await validateRequest();
 
-  const developers = [
+  const developersFirst = [
     {
       name: "Caleb Rivera",
       role: "Project Manager",
@@ -20,7 +20,7 @@ export default async function AboutUs() {
     },
     {
       name: "Pharit Smitasin",
-      role: "Frontend Web - Web",
+      role: "Front End Web - Web",
       image: `/photos/Pharit.jpg`,
     },
     {
@@ -55,9 +55,12 @@ export default async function AboutUs() {
         <h2 className="font-heading text-center text-4xl font-semibold text-black text-foreground">
           {"Meet the Developers"} <br />
         </h2>
+        <p className="font-heading text-center text-2xl font-semibold text-black text-foreground">
+          {"Spring 2024"} <br />
+        </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {developers.map((dev) => (
+        {developersFirst.map((dev) => (
           <div key={dev.name}>
             <div className="rounded-full overflow-hidden w-[150px] h-[150px] mx-auto">
               <Image
@@ -70,12 +73,12 @@ export default async function AboutUs() {
             </div>
 
             <div className="text-center">{dev.name}</div>
-            <div className="text-center">{dev.role}</div>
+            <div className="text-center mb-12">{dev.role}</div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         {developersSecond.map((dev) => (
           <div key={dev.name}>
             <div className="rounded-full overflow-hidden w-[150px] h-[150px] mx-auto">
