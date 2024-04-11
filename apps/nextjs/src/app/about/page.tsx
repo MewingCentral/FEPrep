@@ -59,10 +59,10 @@ export default async function AboutUs() {
           {"Spring 2024"} <br />
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         {developersFirst.map((dev) => (
           <div key={dev.name}>
-            <div className="rounded-full overflow-hidden w-[150px] h-[150px] mx-auto">
+            <div className="mx-auto h-[150px] w-[150px] overflow-hidden rounded-full">
               <Image
                 objectPosition=""
                 src={dev.image}
@@ -73,15 +73,15 @@ export default async function AboutUs() {
             </div>
 
             <div className="text-center">{dev.name}</div>
-            <div className="text-center mb-12">{dev.role}</div>
+            <div className="mb-12 text-center">{dev.role}</div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
         {developersSecond.map((dev) => (
           <div key={dev.name}>
-            <div className="rounded-full overflow-hidden w-[150px] h-[150px] mx-auto">
+            <div className="mx-auto h-[150px] w-[150px] overflow-hidden rounded-full">
               <Image
                 objectPosition=""
                 src={dev.image}
@@ -96,7 +96,6 @@ export default async function AboutUs() {
           </div>
         ))}
       </div>
-
     </section>
   );
 }
