@@ -225,7 +225,6 @@ function SearchPacks({
             cursorColor={Colors.dark_primary_text}
             keyboardType="default"
             onChangeText={(value) => {
-              console.log("Typing something");
               setSearchInput(value);
             }}
             value={searchInput}

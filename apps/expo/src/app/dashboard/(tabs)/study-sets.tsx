@@ -68,10 +68,13 @@ function Packs() {
   }
 
   if (!packs.data?.length) {
+    console.log("length is baddddd");
     return (
-      <Text style={[errorStyles.darkModeErrorText]}>You have no packs</Text>
+      <Text style={[errorStyles.darkModeErrorText]}>No public packs exist yet!</Text>
     );
   }
+
+  console.log("made it here!!! THIS SHOULD ALWAYS HAPPEN");
 
   return (
     <View style={{ paddingBottom: 50 }}>
@@ -92,6 +95,10 @@ function SearchPacks({
     return pack.name.toLowerCase().includes(searchInput.toLowerCase());
   });
 
+  console.log(packs.filter((pack) => {
+    return pack.name.toLowerCase().includes(searchInput.toLowerCase());
+  }));
+
   console.log("filtered packs: ", filteredPacks);
 
   return (
@@ -105,7 +112,6 @@ function SearchPacks({
             cursorColor={Colors.dark_primary_text}
             keyboardType="default"
             onChangeText={(value) => {
-              console.log("Typing something");
               setSearchInput(value);
             }}
             value={searchInput}
@@ -123,6 +129,19 @@ function SearchPacks({
           </Pressable>
         </View>
       </KeyboardAvoidingView>
+      {/* {filteredPacks.length === 0 ? (
+      <View style={[styles.setsContainer]}>
+        <Text style={{color: "white"}}>No results found</Text>
+      </View>
+    ) : (
+      <View style={[styles.setsContainer]}>
+        {filteredPacks.map((pack) => (
+          <View style={[styles.setContentsContainer]} key={pack.id}>
+            <Pack pack={pack} />
+          </View>
+        ))}
+      </View>
+    )} */}
       <View style={[styles.setsContainer]}>
         {filteredPacks.map((pack) => (
           <View style={[styles.setContentsContainer]} key={pack.id}>
@@ -173,6 +192,7 @@ export default function Tab() {
         )}
 
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
+        <View style={{height: 0, width: 300}}></View>
           <Packs />
         </View>
       </KeyboardAwareScrollView>
