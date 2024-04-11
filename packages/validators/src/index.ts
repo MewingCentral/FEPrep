@@ -1,6 +1,12 @@
 import { z } from "zod";
 
+import {
+  POINTS,
   QUESTION_NUMBERS,
+  SECTIONS,
+  SEMESTERS,
+  TOPICS,
+} from "@feprep/consts";
 
 export const SignUpSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -34,8 +40,13 @@ export const SignInSchema = z.object({
 export type SignInInput = z.infer<typeof SignInSchema>;
 
 export const ResetPasswordSchema = z.object({
-  token: z.string(),
-  password: z.string(),
+  token: z.string().min(1, "Invalid token provided"),
+  password: z
+    .string()
+    .regex(
+      /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,}$/,
+      "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special symbol.",
+    ),
 });
 
 export type ResetPasswordInput = z.infer<typeof ResetPasswordSchema>;
