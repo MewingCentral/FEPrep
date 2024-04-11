@@ -17,7 +17,7 @@ export default function HomePage() {
   const secondSectionRef = useRef<HTMLDivElement>(null);
   return (
     <div className="h-screen snap-y snap-mandatory overflow-y-scroll bg-gradient-to-b from-background from-50% to-border">
-      <div className="flex min-h-screen flex-1 snap-start flex-col items-center justify-center">
+      <div className="flex min-h-screen flex-1 snap-start flex-col items-center justify-center p-10">
         <div>
           <h1 className="mb-2 flex flex-row items-center gap-4 text-left text-6xl font-semibold">
             FEPrep{" "}
@@ -69,7 +69,7 @@ export default function HomePage() {
           }}
         >
           {" "}
-          <div className="translate-y-60 transform">
+          <div className="translate-y-36 transform md:translate-y-60">
             <ChevronDownIcon
               className="mt-14 h-auto w-[50px] animate-bounce hover:cursor-pointer"
               onClick={() => {
