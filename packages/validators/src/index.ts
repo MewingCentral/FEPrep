@@ -33,7 +33,7 @@ export const SignUpFormSchema = z.object({
 export type SignUpFormInput = z.infer<typeof SignUpFormSchema>;
 
 export const SignInSchema = z.object({
-  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),
+  nid: z.string().regex(/^[a-z]{2}[0-9]{6}$/, "Please enter a valid NID"),
   password: z.string().min(1, "Please enter a password"),
 });
 
@@ -52,7 +52,7 @@ export const ResetPasswordSchema = z.object({
 export type ResetPasswordInput = z.infer<typeof ResetPasswordSchema>;
 
 export const SendResetPasswordEmailSchema = z.object({
-  nid: z.string().regex(/[a-z]{2}[0-9]{6}/, "Please enter a valid NID"),
+  nid: z.string().regex(/^[a-z]{2}[0-9]{6}$/, "Please enter a valid NID"),
 });
 
 export type SendResetPasswordEmailInput = z.infer<
