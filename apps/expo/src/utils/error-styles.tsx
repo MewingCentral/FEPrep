@@ -20,6 +20,11 @@ const errorStyles = StyleSheet.create({
     fontSize: 20,
     color: Colors.dark_error_text,
   },
+  loadingText: {
+    margin: 10,
+    fontSize: 20,
+    color: Colors.dark_primary_text,
+  },
 });
 
 export default errorStyles;
