@@ -44,7 +44,7 @@ export function QuestionsTable({
       </TableHeader>
       <TableBody>
         {questionsByTopic.data.map((question) => {
-          let questionDifficulty = "Unknown";
+          let questionDifficulty = "Unrated";
 
           if (
             question.easyVotes > question.mediumVotes &&
@@ -83,7 +83,7 @@ export function QuestionsTable({
                     questionDifficulty === "Medium",
                   "text-red-500  hover:text-red-500":
                     questionDifficulty === "Hard",
-                  "text-foreground": questionDifficulty === "Unknown",
+                  "text-foreground": questionDifficulty === "Unrated",
                 })}
               >
                 {questionDifficulty}
