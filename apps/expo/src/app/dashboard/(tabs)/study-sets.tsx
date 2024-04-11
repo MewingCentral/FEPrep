@@ -70,7 +70,9 @@ function Packs() {
   if (!packs.data?.length) {
     console.log("length is baddddd");
     return (
-      <Text style={[errorStyles.darkModeErrorText]}>No public packs exist yet!</Text>
+      <Text style={[errorStyles.darkModeErrorText]}>
+        No public packs exist yet!
+      </Text>
     );
   }
 
@@ -95,9 +97,11 @@ function SearchPacks({
     return pack.name.toLowerCase().includes(searchInput.toLowerCase());
   });
 
-  console.log(packs.filter((pack) => {
-    return pack.name.toLowerCase().includes(searchInput.toLowerCase());
-  }));
+  console.log(
+    packs.filter((pack) => {
+      return pack.name.toLowerCase().includes(searchInput.toLowerCase());
+    }),
+  );
 
   console.log("filtered packs: ", filteredPacks);
 
@@ -192,7 +196,7 @@ export default function Tab() {
         )}
 
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
-        <View style={{height: 0, width: 300}}></View>
+          <View style={{ height: 0, width: 300 }}></View>
           <Packs />
         </View>
       </KeyboardAwareScrollView>
