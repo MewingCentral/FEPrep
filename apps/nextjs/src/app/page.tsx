@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -80,7 +81,10 @@ export default function HomePage() {
           </div>
         </motion.span>
       </div>
-      <div ref ={secondSectionRef} className="flex min-h-screen flex-1 snap-start flex-col items-center justify-center gap-2 ">
+      <div
+        ref={secondSectionRef}
+        className="flex min-h-screen flex-1 snap-start flex-col items-center justify-center gap-2 "
+      >
         <div className="flex flex-row content-center items-center justify-center gap-2 whitespace-nowrap text-xl font-normal leading-normal text-red-500 md:text-3xl">
           <h2 className="font-semibold">Made with</h2>
           <Link href="/about">
