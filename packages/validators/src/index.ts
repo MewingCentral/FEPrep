@@ -67,17 +67,18 @@ export type VerifyEmailInput = z.infer<typeof VerifyEmailSchema>;
 
 export const CreateQuestionSchema = z.object({
   userId: z.string(),
-  title: z.string().optional(),
+  title: z.string().min(1, "Please enter a title"),
   pdf: z.string(),
-  averageScore: z.number({
-    coerce: true,
-  }),
+  averageScore: z
+    .number({
+      coerce: true,
+    })
+    .min(0, "Average score must be greater than or equal to 0")
+    .max(100, "Average score must be less than or equal to 100"),
   easyVotes: z.number().optional(),
   mediumVotes: z.number().optional(),
   hardVotes: z.number().optional(),
-  points: z.number({
-    coerce: true,
-  }),
+  points: z.enum(POINTS),
   semester: z.enum(SEMESTERS),
   topic: z.enum(TOPICS),
   section: z.enum(SECTIONS),
@@ -96,10 +97,10 @@ export const UpdateQuestionSchema = CreateQuestionSchema.extend({
     .number({
       coerce: true,
     })
+    .min(0, "Average score must be greater than or equal to 0")
+    .max(100, "Average score must be less than or equal to 100")
     .optional(),
-  points: z.number({
-    coerce: true,
-  }).optional(),
+  points: z.enum(POINTS).optional(),
   semester: z.enum(SEMESTERS).optional(),
   topic: z.enum(TOPICS).optional(),
   section: z.enum(SECTIONS).optional(),
