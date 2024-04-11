@@ -138,7 +138,7 @@ const parseExamBuffer = (
     const averageScore = percentages[feQuestions.length]!;
     const title = `${semester} ${section} ${topic} ${
       (feQuestions.length % 3) + 1
-    }.pdf`;
+    }`;
 
     feQuestions.push({
       title,
@@ -228,7 +228,7 @@ const questionsToInsert = await parseExamBuffer(examBuffer, percentages);
 for (const question of questionsToInsert) {
   const numbers = [2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 16];
   const url = await mergeQuestionWithSolution({
-    pdfName: question.title,
+    pdfName: `${question.title}.pdf`,
     questionsURL,
     solutionsURL,
     pageNumber: numbers[Number(question.questionNumber) - 1]!,
