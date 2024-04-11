@@ -26,7 +26,7 @@ export async function ResourcesTab({
   return (
     <div className="flex flex-col gap-4">
       <ResourcesList promise={resources} question={question} />
-      {user && <AddResourceButton question={question} />}
+      {user?.type === "Teacher" && <AddResourceButton question={question} />}
     </div>
   );
 }
