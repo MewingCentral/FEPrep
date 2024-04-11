@@ -24,7 +24,7 @@ export const questions = sqliteTable("question", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
-  title: text("title"),
+  title: text("title").notNull(),
   pdf: text("pdf").notNull(),
   averageScore: real("average_score").default(0),
   easyVotes: integer("easy_votes").notNull().default(0),
