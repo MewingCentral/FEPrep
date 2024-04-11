@@ -29,12 +29,14 @@ export const TOPICS = [
   "Stacks",
   "Summations",
   "Tries",
+  "Tries and AVL Trees",
 ] as const;
 
 export const SECTIONS = [
   "Section A: Basic Data Structures",
   "Section B: Advanced Data Structures",
   "Section C: Algorithm Analysis",
+  "Section D: Algorithms",
 ] as const;
 
 export const POINTS = ["5", "10"] as const;
