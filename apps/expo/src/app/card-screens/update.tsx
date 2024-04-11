@@ -121,6 +121,7 @@ export default function UpdateCards() {
           </View>
         </View>
         <Text style={[styles.titleLabel]}>Title</Text>
+        {errors.name?.message && <Text style={[errorStyles.darkModeErrorText]}>{errors.name?.message}</Text>}
       </View>
 
       <Controller

@@ -54,6 +54,7 @@ const modalStyles = StyleSheet.create({
   },
   inputErrorMsg: {
     marginTop: 8,
+    fontSize: 18,
     color: Colors.dark_primary_text,
   },
   footerBtnsContainer: {
