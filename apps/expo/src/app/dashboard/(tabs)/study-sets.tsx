@@ -56,7 +56,7 @@ function Packs() {
 
   // TODO error text
   if (packs.isLoading) {
-    return <Text style={[errorStyles.darkModeErrorText]}>Loading...</Text>;
+    return <Text style={[errorStyles.loadingText]}>Loading...</Text>;
   }
 
   if (packs.isError) {

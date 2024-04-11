@@ -28,6 +28,7 @@ const screenStyles = StyleSheet.create({
     flex: 1.25,
     backgroundColor: Colors.light_bg,
     padding: 20,
+    marginBottom: 30,
   },
   topContainerText: {
     fontSize: 22,
