@@ -23,6 +23,7 @@ import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 import modalStyles from "~/utils/modal-styles";
+import errorStyles from "~/utils/error-styles";
 
 function Pack({
   pack,
@@ -173,15 +174,15 @@ function Packs() {
 
   // TODO error text
   if (packs.isLoading) {
-    return <Text>Loading...</Text>;
+    return <Text style={[errorStyles.darkModeErrorText]}>Loading...</Text>;
   }
 
   if (packs.isError) {
-    return <Text>Oops... There was an issue loading your packs</Text>;
+    return <Text style={[errorStyles.darkModeErrorText]}>Oops... There was an issue loading your packs</Text>;
   }
 
   if (!packs.data?.length) {
-    return <Text>You have no packs</Text>;
+    return <Text style={[errorStyles.darkModeErrorText]}>You have no packs</Text>;
   }
 
   return (
