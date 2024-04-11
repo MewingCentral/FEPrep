@@ -13,7 +13,7 @@ import type {
 import { db, questions } from "@feprep/db";
 
 interface FEQuestion {
-  pdf: string;
+  title: string;
   section: (typeof SECTIONS)[number];
   topic: (typeof TOPICS)[number];
   semester: (typeof SEMESTERS)[number];
@@ -136,12 +136,12 @@ const parseExamBuffer = (
     );
 
     const averageScore = percentages[feQuestions.length]!;
-    const pdfTitle = `${semester} ${section} ${topic} ${
+    const title = `${semester} ${section} ${topic} ${
       (feQuestions.length % 3) + 1
     }.pdf`;
 
     feQuestions.push({
-      pdf: pdfTitle,
+      title,
       section,
       topic,
       semester,
@@ -212,7 +212,7 @@ const parseExamResultsBuffer = (buffer: Buffer): Promise<number[]> => {
   });
 };
 
-const teacherId = "2o52nelux2rdx8d";
+const teacherId = "qhsxxd0hvkyybkl";
 const questionsURL =
   "https://www.cs.ucf.edu/registration/exm/spr2023/FE-Jan23.pdf";
 const solutionsURL =
@@ -228,7 +228,7 @@ const questionsToInsert = await parseExamBuffer(examBuffer, percentages);
 for (const question of questionsToInsert) {
   const numbers = [2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 16];
   const url = await mergeQuestionWithSolution({
-    pdfName: question.pdf,
+    pdfName: question.title,
     questionsURL,
     solutionsURL,
     pageNumber: numbers[Number(question.questionNumber) - 1]!,
