@@ -3,7 +3,13 @@ import PDFMerger from "pdf-merger-js";
 import { PdfReader } from "pdfreader";
 import { UTApi } from "uploadthing/server";
 
-import type { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+import type {
+  POINTS,
+  QUESTION_NUMBERS,
+  SECTIONS,
+  SEMESTERS,
+  TOPICS,
+} from "@feprep/consts";
 import { db, questions } from "@feprep/db";
 
 interface FEQuestion {
@@ -12,8 +18,8 @@ interface FEQuestion {
   topic: (typeof TOPICS)[number];
   semester: (typeof SEMESTERS)[number];
   averageScore: number;
-  points: number;
-  questionNumber: number;
+  points: (typeof POINTS)[number];
+  questionNumber: (typeof QUESTION_NUMBERS)[number];
   userId: string;
 }
 
@@ -45,13 +51,13 @@ function addTextToLines(textLines: TextLine[], item: TextLine): void {
 
 function getPointsAndTopicFromLine(
   line: string,
-): [number, (typeof TOPICS)[number]] {
+): [(typeof POINTS)[number], (typeof TOPICS)[number]] {
   const match = line.match(/(\d+)\)\((\d+)pts\)([A-Z]{3})\(([^)]+)\)/);
   if (!match) {
     throw new Error(`Could not parse line: ${line}`);
   }
 
-  const points = parseInt(match[2]!);
+  const points = match[2]! as (typeof POINTS)[number];
 
   let topic = match[4]!.split(/(?=[A-Z])/).join(" ");
 
@@ -141,7 +147,9 @@ const parseExamBuffer = (
       semester,
       averageScore,
       points,
-      questionNumber: (feQuestions.length % 3) + 1,
+      questionNumber: String(
+        (feQuestions.length % 3) + 1,
+      ) as (typeof QUESTION_NUMBERS)[number],
       userId: teacherId,
     });
   };
@@ -223,7 +231,7 @@ for (const question of questionsToInsert) {
     pdfName: question.pdf,
     questionsURL,
     solutionsURL,
-    pageNumber: numbers[question.questionNumber - 1]!,
+    pageNumber: numbers[Number(question.questionNumber) - 1]!,
   });
 
   if (!url) {
