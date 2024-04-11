@@ -21,12 +21,12 @@ import { Controller, useForm } from "react-hook-form";
 import { api } from "~/utils/api";
 import { useAuth } from "~/utils/auth";
 import Colors from "~/utils/colors";
+import errorStyles from "~/utils/error-styles";
 import screenStyles from "~/utils/screen-styles";
 import {
   SignInInput,
   SignInSchema,
 } from "../../../../../packages/validators/src";
-import errorStyles from "~/utils/error-styles";
 
 export default function Login() {
   const { setSessionId } = useAuth();
@@ -99,7 +99,11 @@ export default function Login() {
                   />
                 )}
               />
-              {errors.nid?.message && <Text style={[errorStyles.screensErrorText]}>{errors.nid?.message}</Text>}
+              {errors.nid?.message && (
+                <Text style={[errorStyles.screensErrorText]}>
+                  {errors.nid?.message}
+                </Text>
+              )}
 
               <Text style={screenStyles.inputIdentifierText}> Password </Text>
               <Controller
@@ -119,7 +123,9 @@ export default function Login() {
                 )}
               />
               {errors.password?.message && (
-                <Text style={[errorStyles.screensErrorText]}>{errors.password?.message}</Text>
+                <Text style={[errorStyles.screensErrorText]}>
+                  {errors.password?.message}
+                </Text>
               )}
 
               <Link

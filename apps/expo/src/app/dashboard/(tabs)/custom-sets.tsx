@@ -22,8 +22,8 @@ import { CreateFlashcardPackSchema } from "@feprep/validators";
 import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
-import modalStyles from "~/utils/modal-styles";
 import errorStyles from "~/utils/error-styles";
+import modalStyles from "~/utils/modal-styles";
 
 function Pack({
   pack,
@@ -178,15 +178,21 @@ function Packs() {
   }
 
   if (packs.isError) {
-    return <Text style={[errorStyles.darkModeErrorText]}>Oops... There was an issue loading your packs</Text>;
+    return (
+      <Text style={[errorStyles.darkModeErrorText]}>
+        Oops... There was an issue loading your packs
+      </Text>
+    );
   }
 
   if (!packs.data?.length) {
-    return <Text style={[errorStyles.darkModeErrorText]}>You have no packs</Text>;
+    return (
+      <Text style={[errorStyles.darkModeErrorText]}>You have no packs</Text>
+    );
   }
 
   return (
-    <View style={{paddingBottom: 50}}>
+    <View style={{ paddingBottom: 50 }}>
       <SearchPacks packs={packs.data} />
     </View>
   );

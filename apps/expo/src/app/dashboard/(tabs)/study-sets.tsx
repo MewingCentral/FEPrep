@@ -10,13 +10,13 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { RadixIcon } from "radix-ui-react-native-icons";
 
 import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
 import dashStyles from "~/utils/dash-styles";
 import errorStyles from "~/utils/error-styles";
-import * as SecureStore from "expo-secure-store";
 
 function Pack({
   pack,
@@ -60,15 +60,21 @@ function Packs() {
   }
 
   if (packs.isError) {
-    return <Text style={[errorStyles.darkModeErrorText]}>Oops... There was an issue loading your packs</Text>;
+    return (
+      <Text style={[errorStyles.darkModeErrorText]}>
+        Oops... There was an issue loading your packs
+      </Text>
+    );
   }
 
   if (!packs.data?.length) {
-    return <Text style={[errorStyles.darkModeErrorText]}>You have no packs</Text>;
+    return (
+      <Text style={[errorStyles.darkModeErrorText]}>You have no packs</Text>
+    );
   }
 
   return (
-    <View style={{paddingBottom: 50}}>
+    <View style={{ paddingBottom: 50 }}>
       <SearchPacks packs={packs.data} />
     </View>
   );
@@ -143,23 +149,28 @@ export default function Tab() {
         style={[dashStyles.outer]}
         keyboardShouldPersistTaps="handled"
       >
-
         {/* Make an account to create sets popup */}
-        {
-          (popupVisible) &&
-          (<View style={[styles.popupContainer]}>
+        {popupVisible && (
+          <View style={[styles.popupContainer]}>
             <View style={[styles.popupCloseBtnContainer]}>
-              <Pressable onPress={() => {
-                setPopupVisible(false);
-              }}>
-                <RadixIcon name="cross-circled" color={Colors.dark_secondary_text} />
+              <Pressable
+                onPress={() => {
+                  setPopupVisible(false);
+                }}
+              >
+                <RadixIcon
+                  name="cross-circled"
+                  color={Colors.dark_secondary_text}
+                />
               </Pressable>
             </View>
             <View style={[styles.popupTextContainer]}>
-              <Text style={[styles.popupText]}>Create an account to make your own study sets!</Text>
+              <Text style={[styles.popupText]}>
+                Create an account to make your own study sets!
+              </Text>
             </View>
-          </View>)          
-        }
+          </View>
+        )}
 
         <View style={[dashStyles.container, dashStyles.allSetsContainer]}>
           <Packs />
