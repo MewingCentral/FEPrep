@@ -187,7 +187,8 @@ function Packs() {
 
   if (!packs.data?.length) {
     return (
-      <Text style={[errorStyles.darkModeErrorText]}>You have no packs</Text>
+      // <Text style={[errorStyles.loadingText]}>You have no packs</Text>
+      <View></View>
     );
   }
 
