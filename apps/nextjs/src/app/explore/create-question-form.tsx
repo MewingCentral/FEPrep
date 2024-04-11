@@ -4,12 +4,17 @@ import PDFMerger from "pdf-merger-js/browser";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
 import type { User } from "@feprep/auth";
+import {
+  POINTS,
   QUESTION_NUMBERS,
+  SECTIONS,
+  SEMESTERS,
+  TOPICS,
+} from "@feprep/consts";
 import { Button } from "@feprep/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -44,7 +49,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
       section: SECTIONS[0],
       topic: TOPICS[0],
       averageScore: 0,
-      points: 0,
+      points: "5",
       questionNumber: "1",
     },
   });
@@ -108,10 +113,6 @@ export function CreateQuestionForm({ user }: { user: User }) {
               <FormControl>
                 <Input placeholder="Title" {...field} />
               </FormControl>
-              <FormDescription>
-                Fill out if you&rsquo;d like to add a unique title to the
-                question.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -125,7 +126,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select a semester to display" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -149,7 +150,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select a topic to display" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -173,7 +174,7 @@ export function CreateQuestionForm({ user }: { user: User }) {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select a section" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -237,9 +238,23 @@ export function CreateQuestionForm({ user }: { user: User }) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Points</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={String(field.value)}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="5" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {POINTS.map((pointNum) => (
+                    <SelectItem key={pointNum} value={String(pointNum)}>
+                      {pointNum}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

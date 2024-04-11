@@ -6,7 +6,13 @@ import PDFMerger from "pdf-merger-js/browser";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
 import type { RouterOutputs } from "@feprep/api";
+import {
+  POINTS,
   QUESTION_NUMBERS,
+  SECTIONS,
+  SEMESTERS,
+  TOPICS,
+} from "@feprep/consts";
 import { Button } from "@feprep/ui/button";
 import {
   Form,
@@ -51,7 +57,7 @@ export function UpdateQuestionForm({
       section: question.section,
       topic: question.topic,
       averageScore: question.averageScore ?? 0,
-      points: question.points ?? 0,
+      points: question.points ?? "5",
       questionNumber: question.questionNumber ?? "1",
     },
   });
@@ -136,7 +142,7 @@ export function UpdateQuestionForm({
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select a semester to display" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -160,7 +166,7 @@ export function UpdateQuestionForm({
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select a topic to display" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -184,7 +190,7 @@ export function UpdateQuestionForm({
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select a section to display" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -248,9 +254,23 @@ export function UpdateQuestionForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Points</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={String(field.value)}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="5" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {POINTS.map((pointNum) => (
+                    <SelectItem key={pointNum} value={String(pointNum)}>
+                      {pointNum}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
