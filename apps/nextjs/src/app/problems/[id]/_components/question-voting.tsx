@@ -6,7 +6,6 @@ import { Button } from "@feprep/ui/button";
 import { toast } from "@feprep/ui/toast";
 
 import { api } from "~/trpc/react";
-import { useQuestion } from "./question-context";
 
 export function QuestionVoting({
   user,
@@ -15,12 +14,6 @@ export function QuestionVoting({
   user: User;
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
-  const { pageNumber } = useQuestion();
-
-  if (pageNumber !== 1) {
-    return null;
-  }
-
   const vote = api.questions.vote.useMutation({
     onSuccess: ({ isNewVote }) => {
       if (isNewVote) {
