@@ -86,7 +86,7 @@ function CommentCard({
   const updateForm = useForm({
     schema: UpdateCommentSchema,
     defaultValues: {
-      userId: user!.id,
+      userId: user?.id,
       content: comment.content,
       commentId: comment.id,
       questionId: question.id,
