@@ -26,10 +26,7 @@ export const questionsColumns: ColumnDef<
   },
   {
     accessorKey: "Title",
-    accessorFn: (row) =>
-      row.title
-        ? row.title
-        : `${row.semester} ${row.section} Question ${row.questionNumber}`,
+    accessorFn: (row) => row.title,
     header: ({ column }) => {
       return (
         <Button

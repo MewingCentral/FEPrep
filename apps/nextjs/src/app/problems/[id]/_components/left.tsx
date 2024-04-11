@@ -46,9 +46,7 @@ export async function Left({
   return (
     <div>
       <h1 className="mb-2 flex items-center text-pretty text-3xl font-bold">
-        {question.title
-          ? question.title
-          : `${question.section} ${question.semester}`}
+        {question.title}
       </h1>
       <div className="mb-4 flex gap-2">
         <Badge
