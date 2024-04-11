@@ -85,7 +85,7 @@ export const questionsColumns: ColumnDef<
       ) {
         return "Hard";
       } else {
-        return "Unknown";
+        return "Unrated";
       }
     },
     header: ({ column }) => {

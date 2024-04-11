@@ -24,7 +24,7 @@ export async function Left({
   question: NonNullable<RouterOutputs["questions"]["byId"]>;
 }) {
   const { user } = await validateRequest();
-  let questionDifficulty = "Unknown";
+  let questionDifficulty = "Unrated";
 
   if (
     question.easyVotes > question.mediumVotes &&
