@@ -6,7 +6,7 @@ import PDFMerger from "pdf-merger-js/browser";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
 import type { RouterOutputs } from "@feprep/api";
-import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+  QUESTION_NUMBERS,
 import { Button } from "@feprep/ui/button";
 import {
   Form,
@@ -52,7 +52,7 @@ export function UpdateQuestionForm({
       topic: question.topic,
       averageScore: question.averageScore ?? 0,
       points: question.points ?? 0,
-      questionNumber: question.questionNumber,
+      questionNumber: question.questionNumber ?? "1",
     },
   });
 
@@ -191,6 +191,36 @@ export function UpdateQuestionForm({
                   {SECTIONS.map((section) => (
                     <SelectItem key={section} value={section}>
                       {section}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="questionNumber"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Question Number</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={String(field.value)}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a question number to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {QUESTION_NUMBERS.map((questionNumber) => (
+                    <SelectItem
+                      key={questionNumber}
+                      value={String(questionNumber)}
+                    >
+                      {questionNumber}
                     </SelectItem>
                   ))}
                 </SelectContent>

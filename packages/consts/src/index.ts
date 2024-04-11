@@ -36,5 +36,6 @@ export const SECTIONS = [
   "Section B: Advanced Data Structures",
   "Section C: Algorithm Analysis",
 ] as const;
+export const QUESTION_NUMBERS = ["1", "2", "3"] as const;
 
 export const USER_TYPES = ["Student", "Teacher", "Teacher Assistant"] as const;

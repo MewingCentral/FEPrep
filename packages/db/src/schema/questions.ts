@@ -7,7 +7,7 @@ import {
   unique,
 } from "drizzle-orm/sqlite-core";
 
-import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+  QUESTION_NUMBERS,
 
 import { users } from "./users";
 
@@ -28,7 +28,7 @@ export const questions = sqliteTable("question", {
   semester: text("semester", { enum: SEMESTERS }).notNull(),
   topic: text("topic", { enum: TOPICS }).notNull(),
   section: text("section", { enum: SECTIONS }).notNull(),
-  questionNumber: integer("question_number").notNull(),
+  questionNumber: text("question_number", { enum: QUESTION_NUMBERS }).notNull(),
 });
 
 export const resources = sqliteTable("resource", {

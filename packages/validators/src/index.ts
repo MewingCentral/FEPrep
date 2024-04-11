@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { SECTIONS, SEMESTERS, TOPICS } from "@feprep/consts";
+  QUESTION_NUMBERS,
 
 export const SignUpSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -70,7 +70,7 @@ export const CreateQuestionSchema = z.object({
   semester: z.enum(SEMESTERS),
   topic: z.enum(TOPICS),
   section: z.enum(SECTIONS),
-  questionNumber: z.number(),
+  questionNumber: z.enum(QUESTION_NUMBERS),
 });
 
 export const CreateQuestionFormSchema = CreateQuestionSchema.omit({
@@ -92,7 +92,7 @@ export const UpdateQuestionSchema = CreateQuestionSchema.extend({
   semester: z.enum(SEMESTERS).optional(),
   topic: z.enum(TOPICS).optional(),
   section: z.enum(SECTIONS).optional(),
-  questionNumber: z.number().optional(),
+  questionNumber: z.enum(QUESTION_NUMBERS).optional(),
 });
 
 export const UpdateQuestionFormSchema = UpdateQuestionSchema.extend({
