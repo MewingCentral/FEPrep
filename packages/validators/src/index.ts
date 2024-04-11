@@ -79,6 +79,20 @@ export const CreateQuestionFormSchema = CreateQuestionSchema.omit({
 
 export const UpdateQuestionSchema = CreateQuestionSchema.extend({
   questionId: z.number(),
+  title: z.string().optional(),
+  pdf: z.string().optional(),
+  averageScore: z
+    .number({
+      coerce: true,
+    })
+    .optional(),
+  points: z.number({
+    coerce: true,
+  }).optional(),
+  semester: z.enum(SEMESTERS).optional(),
+  topic: z.enum(TOPICS).optional(),
+  section: z.enum(SECTIONS).optional(),
+  questionNumber: z.number().optional(),
 });
 
 export const UpdateQuestionFormSchema = UpdateQuestionSchema.extend({

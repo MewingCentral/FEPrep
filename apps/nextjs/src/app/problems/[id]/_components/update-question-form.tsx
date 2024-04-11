@@ -74,34 +74,34 @@ export function UpdateQuestionForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (values) => {
-          if (!questionPDF || !solutionPDF) {
-            toast("Please upload both question and solution PDFs");
-            return;
-          }
+          let pdf: string | undefined = undefined;
+          if (questionPDF && solutionPDF) {
+            const merger = new PDFMerger();
 
-          const merger = new PDFMerger();
+            await merger.add(questionPDF);
+            await merger.add(solutionPDF);
 
-          await merger.add(questionPDF);
-          await merger.add(solutionPDF);
+            const blob = await merger.saveAsBlob();
+            const file = new File(
+              [blob],
+              `${values.title ?? `${values.semester} ${values.section} Question ${values.questionNumber}`}.pdf`,
+              {
+                type: "application/pdf",
+              },
+            );
 
-          const blob = await merger.saveAsBlob();
-          const file = new File(
-            [blob],
-            `${values.title ?? `${values.semester} ${values.section} Question ${values.questionNumber}`}.pdf`,
-            {
-              type: "application/pdf",
-            },
-          );
+            const uploadPDF = await startUpload([file]);
+            if (!uploadPDF?.[0]?.serverData.fileUrl) {
+              console.error("Failed to start upload for question");
+              return;
+            }
 
-          const uploadPDF = await startUpload([file]);
-          if (!uploadPDF?.[0]?.serverData.fileUrl) {
-            console.error("Failed to start upload for question");
-            return;
+            pdf = uploadPDF[0].url;
           }
 
           updateQuestion.mutate({
             ...values,
-            pdf: uploadPDF[0].url,
+            pdf,
           });
 
           form.reset();
