@@ -1,0 +1,43 @@
+{
+  "name": "@feprep/pdf",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "with-env": "dotenv -e ../../.env --",
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "parse:exam": "pnpm with-env tsx src/parse-exam.ts"
+  },
+  "devDependencies": {
+    "@feprep/eslint-config": "workspace:*",
+    "@feprep/prettier-config": "workspace:*",
+    "@feprep/tsconfig": "workspace:*",
+    "@types/pdf-parse": "^1.1.4",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@feprep/eslint-config/base"
+    ]
+  },
+  "prettier": "@feprep/prettier-config",
+  "dependencies": {
+    "@feprep/db": "workspace:*",
+    "@feprep/consts": "workspace:*",
+    "pdf-merger-js": "^5.1.1",
+    "pdf-parse": "^1.1.1",
+    "pdfreader": "^3.0.2",
+    "tsx": "^4.7.2",
+    "uploadthing": "^6.7.0"
+  }
+}

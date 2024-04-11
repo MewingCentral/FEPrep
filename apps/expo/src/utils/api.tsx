@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import Constants from "expo-constants";
 import * as SecureStore from "expo-secure-store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, loggerLink } from "@trpc/client";
@@ -60,7 +59,7 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         httpBatchLink({
           transformer: superjson,
           // url: `${getBaseUrl()}/api/trpc`,
-          url: `http://localhost:3000/api/trpc`,
+          url: `https://feprep.org/api/trpc`,
           headers() {
             const headers = new Map<string, string>();
             headers.set("x-trpc-source", "expo-react");
