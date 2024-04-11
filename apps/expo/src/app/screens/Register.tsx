@@ -100,7 +100,7 @@ export default function Register() {
                 )}
               />
               {errors.nid?.message && (
-                <Text style={[errorStyles.errorText]}>
+                <Text style={[errorStyles.screensErrorText]}>
                   {errors.nid?.message}
                 </Text>
               )}
@@ -123,7 +123,7 @@ export default function Register() {
                 )}
               />
               {errors.password?.message && (
-                <Text style={[errorStyles.errorText]}>
+                <Text style={[errorStyles.screensErrorText]}>
                   {errors.password?.message}
                 </Text>
               )}

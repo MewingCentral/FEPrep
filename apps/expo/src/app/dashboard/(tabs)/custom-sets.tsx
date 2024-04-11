@@ -354,7 +354,7 @@ export default function Tab() {
                   )}
                 />
                 {errors.name?.message && (
-                  <Text style={[modalStyles.inputErrorMsg]}>
+                  <Text style={[errorStyles.darkModeErrorText]}>
                     {errors.name?.message}
                   </Text>
                 )}

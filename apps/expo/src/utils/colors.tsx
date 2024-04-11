@@ -20,6 +20,7 @@ const Colors = {
   light_btn_text: "#FFFFFF",
 
   error_text: "#a83232",
+  dark_error_text: "#ff4242",
 };
 
 export default Colors;

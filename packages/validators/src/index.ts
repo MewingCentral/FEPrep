@@ -88,7 +88,7 @@ export const UpdateQuestionFormSchema = UpdateQuestionSchema.extend({
 });
 
 export const CreateFlashcardPackSchema = z.object({
-  name: z.string(),
+  name: z.string().min(1, "Please enter a set title"),
   userId: z.string(),
   isPublic: z.boolean(),
 });
