@@ -138,7 +138,7 @@ export default function Login() {
               </Link>
             </View>
 
-            <View style={[screenStyles.bottomContainer, {marginBottom: 20,}]}>
+            <View style={[screenStyles.bottomContainer, { marginBottom: 20 }]}>
               <Pressable
                 style={screenStyles.loginBtn}
                 onPress={handleSubmit(onSubmit)}

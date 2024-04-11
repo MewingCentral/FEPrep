@@ -1,14 +1,30 @@
-import { SendResetPasswordEmailInput, SendResetPasswordEmailSchema } from "@feprep/validators";
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Keyboard, KeyboardAvoidingView, Platform, Pressable, SafeAreaView, StyleSheet, Text, View, TextInput, TouchableWithoutFeedback } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { StatusBar } from "expo-status-bar";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+
+import {
+  SendResetPasswordEmailInput,
+  SendResetPasswordEmailSchema,
+} from "@feprep/validators";
+
 import { api } from "~/utils/api";
 import Colors from "~/utils/colors";
 import errorStyles from "~/utils/error-styles";
 import screenStyles from "~/utils/screen-styles";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ForgotPswd() {
   const [emailSent, setEmailSent] = useState(false);
@@ -55,7 +71,9 @@ export default function ForgotPswd() {
               </View>
 
               <View style={screenStyles.welcomeContainer}>
-                <Text style={screenStyles.header}>Enter your NID to reset your password</Text>
+                <Text style={screenStyles.header}>
+                  Enter your NID to reset your password
+                </Text>
 
                 <Text style={screenStyles.inputIdentifierText}> NID </Text>
                 <Controller
@@ -80,9 +98,7 @@ export default function ForgotPswd() {
                   </Text>
                 )}
 
-                {emailSent && (
-                  <Text>Check your UCF email!</Text>
-                )}
+                {emailSent && <Text>Check your UCF email!</Text>}
               </View>
 
               <View style={screenStyles.bottomContainer}>
@@ -90,14 +106,17 @@ export default function ForgotPswd() {
                   style={screenStyles.loginBtn}
                   onPress={handleSubmit(onSubmit)}
                 >
-                  <Text style={screenStyles.loginBtnText}> {"Send email"} </Text>
+                  <Text style={screenStyles.loginBtnText}>
+                    {" "}
+                    {"Send email"}{" "}
+                  </Text>
                 </Pressable>
               </View>
               <StatusBar style="auto" />
             </SafeAreaView>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
-      </KeyboardAwareScrollView>    
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
