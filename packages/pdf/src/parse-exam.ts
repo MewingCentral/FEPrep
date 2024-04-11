@@ -212,26 +212,31 @@ const parseExamResultsBuffer = (buffer: Buffer): Promise<number[]> => {
   });
 };
 
-const teacherId = "qhsxxd0hvkyybkl";
+const teacherId = "2o52nelux2rdx8d";
 const questionsURL =
-  "https://www.cs.ucf.edu/registration/exm/spr2023/FE-Jan23.pdf";
+  "https://www.cs.ucf.edu/registration/exm/sum2023/FE-May23.pdf";
 const solutionsURL =
-  "https://www.cs.ucf.edu/registration/exm/spr2023/FE-Jan23-Sol.pdf";
+  "https://www.cs.ucf.edu/registration/exm/sum2023/FE-May23-Sol.pdf";
 const resultsURL =
-  "https://www.cs.ucf.edu/registration/exm/spr2023/Info-Jan23.pdf";
+  "https://www.cs.ucf.edu/registration/exm/sum2023/Info-May23.pdf";
 
 const examResultsBuffer = await getPDFBufferFromURL(new URL(resultsURL));
 const percentages = await parseExamResultsBuffer(examResultsBuffer);
 const examBuffer = await getPDFBufferFromURL(new URL(questionsURL));
 const questionsToInsert = await parseExamBuffer(examBuffer, percentages);
 
-for (const question of questionsToInsert) {
+if (questionsToInsert.length !== 12) {
+  throw new Error("Failed to parse exam buffer");
+}
+
+for (const [index, question] of questionsToInsert.entries()) {
   const numbers = [2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 16];
+
   const url = await mergeQuestionWithSolution({
     pdfName: `${question.title}.pdf`,
     questionsURL,
     solutionsURL,
-    pageNumber: numbers[Number(question.questionNumber) - 1]!,
+    pageNumber: numbers[index]!,
   });
 
   if (!url) {
