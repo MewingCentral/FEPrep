@@ -78,7 +78,7 @@ export async function Left({
         <QuestionPDF file={question.pdf} />
       </div>
       <QuestionVoting question={question} user={user!} />
-      {user!.type === "Teacher" && (
+      {user?.type === "Teacher" && (
         <Sheet>
           <SheetTrigger asChild>
             <Button>
