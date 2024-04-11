@@ -24,8 +24,8 @@ import {
 
 import { api, RouterOutputs } from "~/utils/api";
 import Colors from "~/utils/colors";
-import modalStyles from "~/utils/modal-styles";
 import errorStyles from "~/utils/error-styles";
+import modalStyles from "~/utils/modal-styles";
 
 export default function UpdateCards() {
   const { pId, pName, uId, pStatus } = useLocalSearchParams();
@@ -45,7 +45,9 @@ export default function UpdateCards() {
       cards.data.map((item) => <Card card={item} key={item.id} />)
     ) : (
       <View>
-        <Text style={[errorStyles.darkModeErrorText]}>Encountered an error loading cards...</Text>
+        <Text style={[errorStyles.darkModeErrorText]}>
+          Encountered an error loading cards...
+        </Text>
       </View>
     );
 
@@ -121,7 +123,11 @@ export default function UpdateCards() {
           </View>
         </View>
         <Text style={[styles.titleLabel]}>Title</Text>
-        {errors.name?.message && <Text style={[errorStyles.darkModeErrorText]}>{errors.name?.message}</Text>}
+        {errors.name?.message && (
+          <Text style={[errorStyles.darkModeErrorText]}>
+            {errors.name?.message}
+          </Text>
+        )}
       </View>
 
       <Controller
@@ -158,7 +164,7 @@ export default function UpdateCards() {
         )}
       />
 
-      <View style={{paddingBottom: 100,}}>
+      <View style={{ paddingBottom: 100 }}>
         {/* Cards */}
         <View style={[styles.cardsContainer]}>{flashcards}</View>
 
