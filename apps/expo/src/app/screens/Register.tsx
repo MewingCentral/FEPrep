@@ -92,6 +92,7 @@ export default function Register() {
                     style={screenStyles.nidTextField}
                     placeholder=""
                     keyboardType="default"
+                    autoCapitalize="none"
                     cursorColor={Colors.light_primary_text}
                     onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
@@ -114,6 +115,7 @@ export default function Register() {
                     style={screenStyles.pswdTextField}
                     placeholder=""
                     keyboardType="default"
+                    autoCapitalize="none"
                     cursorColor={Colors.light_primary_text}
                     onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
