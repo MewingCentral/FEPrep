@@ -16,6 +16,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@excalidraw/excalidraw": "^0.17.6",
     "@feprep/api": "workspace:*",
     "@feprep/auth": "workspace:*",
     "@feprep/consts": "workspace:*",
