@@ -2,12 +2,10 @@
 
 import { Excalidraw } from "@excalidraw/excalidraw";
 
-const ExcalidrawWrapper: React.FC = () => {
+export default function ExcalidrawWrapper() {
   return (
     <div className="h-full w-full">
       <Excalidraw />
     </div>
   );
-};
-
-export default ExcalidrawWrapper;
+}
